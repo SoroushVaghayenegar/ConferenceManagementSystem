@@ -1,27 +1,98 @@
-# Laravel PHP Framework
+# Conference Management System for Gobind Sarvar Schools
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## Setting up local environment
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+You need a local PHP and MySQL environment to run the Laravel application that supports PHP version >= 5.5.9, OpenSSL, PDO, Mbstring and Tokenizer PHP Extension. The easiest way to get this up is to use MAMP, which bundles all the necessary stack application on your local machine.
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## Coding Guidelines
 
-## Official Documentation
+All elements of the project that is written in PHP should follow the PSR-1 coding standards.
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+- Code MUST follow a "coding style guide" PSR [PSR-1].
+- Code MUST use 4 spaces for indenting, not tabs.
+- There MUST NOT be a hard limit on line length; the soft limit MUST be 120 characters; lines SHOULD be 80 characters or less.
+- There MUST be one blank line after the namespace declaration, and there MUST be one blank line after the block of use declarations.
+- Opening braces for classes MUST go on the next line, and closing braces MUST go on the next line after the body.
+- Opening braces for methods MUST go on the next line, and closing braces MUST go on the next line after the body.
+- Visibility MUST be declared on all properties and methods; abstract and final MUST be declared before the visibility; static MUST be declared after the visibility.
+- Control structure keywords MUST have one space after them; method and function calls MUST NOT.
+- Opening braces for control structures MUST go on the same line, and closing braces MUST go on the next line after the body.
+- Opening parentheses for control structures MUST NOT have a space after them, and closing parentheses for control structures MUST NOT have a space before.
 
-## Contributing
+#### Example
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+```php
+<?php
+namespace Vendor\Package;
 
-## Security Vulnerabilities
+use FooInterface;
+use BarClass as Bar;
+use OtherVendor\OtherPackage\BazClass;
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+class Foo extends Bar implements FooInterface
+{
+    public function sampleFunction($a, $b = null)
+    {
+        if ($a === $b) {
+            bar();
+        } elseif ($a > $b) {
+            $foo->bar($arg1);
+        } else {
+            BazClass::bar($arg2, $arg3);
+        }
+    }
 
-## License
+    final public static function bar()
+    {
+        // method body
+    }
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Contribution Guidelines
+
+To introduce a new feature or bug fixes, make sure you adhere to the following committing/pushing guideline.
+
+#### Branching off the `master` branch
+
+First, do a `git pull` to get the latest commits on the master branch.
+
+```shell
+$  git checkout -b 'name_of_branch'
+```
+
+Follow the convention of branch naming. E.g. 7_user-accounts
+
+The number is the issue ID for your feature/bug-fix, followed by an `_` and a short description of the changes introduced, with `-` separating each word.
+
+#### Commit and push changes to your branch
+
+To add all files changed to your commit, do
+
+```shell
+$  git add .
+```
+
+from the home of the repository's root directory
+
+```shell
+$  git commit -m 'Implement user authentication'
+```
+
+Make sure you give a meaningful commit message so everyone else knows what your commit is about when it gets merged into master
+
+#### Create a pull request
+
+From BitBucket, create a pull request of your feature/bug-fix branch. Make sure you cc everybody in the team (or at least people that needs to review the changes) about the PR when it is ready to be merged. Ask other members of the team to review your code and run automatic tests against their local deployment.
+
+The comments in the PR should include a reference to the original issue that motivated the pull request. 
+
+#### Merge into master
+
+If there's a merge conflict as flagged by BitBucket, do a `git merge master` to incorporate the latest changes from master into your own branch, resolving any merge conflicts if there are any. At this point, your PR should be able to merge into `master` automatically. Merge into `master` from BitBucket and close the issue that motivated the pull request.
+
+If needs be, notify other members of the team about the merge.
+
+## Automatic deployment (Continuous Integration)
+
+[Deploybot](http://deploybot.com) is a great tool to automatically deploy an application to an FTP server (in our project, it would be the GoDaddy hosting) on every push to the `master` branch. 
