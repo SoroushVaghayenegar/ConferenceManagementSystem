@@ -12,7 +12,13 @@ Click on the phpMyAdmin link on the line "MySQL can be administered with phpMyAd
 
 #### Configure the Laravel app to connect to the MySQL database
 
-From the root folder of your cloned repository, you should have a `.env` file. Any files or directories with the prefix `.` means its hidden from the File System, you will have to access it from the shell. To edit it from the shell using nano (a small UNIX text editor), do the following from your root folder:
+From the root folder of your cloned repository, you should have a `.env.example` file. Any files or directories with the prefix `.` means its hidden from the File System, you will have to access it from the shell. Make a copy of this file and rename it to `.env`: You can use the unix command:
+
+```shell
+$  cp .env.example .env
+```
+
+Now to edit `.env` from the shell using nano (a small UNIX text editor), do the following from your root folder:
 
 ```shell
 $  nano .env
