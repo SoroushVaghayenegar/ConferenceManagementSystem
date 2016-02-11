@@ -13,7 +13,7 @@
                     @include('common.errors')
 
                     <!-- New Conference Form -->
-                    <form action="/conference" method="POST" class="form-horizontal">
+                    <form action="conference" method="POST" class="form-horizontal">
                         {{ csrf_field() }}
 
                         <!-- Conference Name -->
@@ -57,7 +57,7 @@
 
                                         <!-- Conference Delete Button -->
                                         <td>
-                                            <form action="/conference/{{ $conference->id }}" method="POST">
+                                            <form action="conference/{{ $conference->id }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
 
