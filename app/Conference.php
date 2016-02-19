@@ -12,4 +12,9 @@ class Conference extends Model
     {
       return $this->belongsToMany('App\User', 'conference_managers');
     }
+
+    public function attendees()
+    {
+      return $this->belongsToMany('App\User', 'conference_attendees');
+    }
 }
