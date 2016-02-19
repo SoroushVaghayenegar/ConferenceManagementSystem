@@ -28,6 +28,10 @@ class ConferenceManagers extends Migration
      */
     public function down()
     {
+        Schema::table('conference_managers', function (Blueprint $table) {
+            $table->dropForeign('conference_managers_conference_id_foreign');
+        });
+        
         Schema::drop('conference_managers');
     }
 }
