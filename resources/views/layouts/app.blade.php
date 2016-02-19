@@ -52,7 +52,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" >Gobind Sarvar</a>
+                    <a class="navbar-brand" href="{{ URL::to('welcome') }}">Gobind Sarvar</a>
                     
                 </div>
 
