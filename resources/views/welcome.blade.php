@@ -16,6 +16,7 @@
                 </div>
 
                 <div class="panel-body">
+                    <img src="GobindSarvar.jpg" alt="Gobind Sarvar Logo" style="position:relative;width:30%;left:35%;" align="center">
                     <h2 style="text-align: center;">Don't have an account?</h2>
                     <a href="{{ URL::to('register') }}" class="btn btn-success" style="position:relative;left: 40%;font-size: 200%;">Sign Up Here!</a>
                 </div>
