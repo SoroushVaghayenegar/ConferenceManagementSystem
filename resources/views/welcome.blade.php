@@ -2,6 +2,10 @@
 
 @section('title', 'Gobind Sarvar Conference')
 
+@section('loginButton')
+<li><a href="{{ URL::to('login') }}" class="btn btn-primary" style="color:white;">Login!</a></li>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">

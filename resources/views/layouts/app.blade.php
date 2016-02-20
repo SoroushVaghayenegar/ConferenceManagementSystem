@@ -15,14 +15,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     
-
-    
-
+    <!-- for background use numbers 1-26 for different patters -->
     <style>
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-image: url('dark_embroidery.png');
+            background-image: url('background_patterns/2.png'); 
         }
 
         button .fa {
@@ -62,7 +60,9 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">About Us</a></li>
-                        <li><a href="{{ URL::to('login') }}" class="btn btn-primary" style="color:white;">Login!</a></li>
+                        @yield('loginButton')
+                        
+                        
                     </ul>
                 </div>
             </div>
