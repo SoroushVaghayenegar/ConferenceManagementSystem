@@ -30,8 +30,9 @@ class CreateConferenceAttendees extends Migration
     {
         Schema::table('conference_attendees', function (Blueprint $table) {
             $table->dropForeign('conference_attendees_conference_id_foreign');
+            $table->dropForeign('conference_attendees_user_id_foreign');
         });
-        
+
         Schema::drop('conference_attendees');
     }
 }
