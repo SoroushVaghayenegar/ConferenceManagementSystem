@@ -25,9 +25,11 @@ class CreateConferencesTable extends Migration
             $table->integer('conference_id')->unsigned()->default(0);
             $table->foreign('conference_id')->references('id')->on('conferences')->onDelete('cascade');
             $table->string('name')->default('');
-            $table->string('type')->default('');
-            $table->boolean('completed')->default(false);
-            $table->text('description')->default('');
+            $table->string('location')->default('');
+            $table->text('topic')->default('');
+            $table->string('capacity')->default('');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->timestamps();
         });
 
