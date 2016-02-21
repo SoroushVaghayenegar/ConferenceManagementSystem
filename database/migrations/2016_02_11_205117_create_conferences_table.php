@@ -16,6 +16,11 @@ class CreateConferencesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
+            $table->text('description');
+            $table->integer('capacity');
+            $table->dateTime('start');
+            $table->dateTime('end');
+            $table->text('location');
             $table->timestamps();
         });
 
