@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Conference extends Model
+class Event extends Model
 {
-    public $fillable = ['name', 'description', 'capacity', 'start', 'end', 'location'];
+    public $fillable = ['name', 'topic', 'capacity', 'start', 'end', 'location'];
 
-    public function events()
+    public function conference()
     {
-      return $this->hasMany('App\Event');
+      return $this->belongsTo('App\Conference');
     }
 
     public function managers()
