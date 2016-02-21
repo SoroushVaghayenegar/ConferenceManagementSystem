@@ -41,6 +41,8 @@ use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'web'], function () {
 
+	Route::get('/directory', 'DirectoryController@index');
+	
     /**
      * Show Conference Dashboard
      */
