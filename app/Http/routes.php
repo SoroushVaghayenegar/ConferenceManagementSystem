@@ -11,8 +11,11 @@
 |
 */
 
+use App\Conference;
+use Illuminate\Http\Request;
+
 Route::get('/welcome', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 /*
@@ -27,60 +30,65 @@ Route::get('/welcome', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+  //
 });
 
 Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+  Route::auth();
 
-    Route::get('/home', 'HomeController@index');
+  Route::get('/home', 'HomeController@index');
 });
-
-use App\Conference;
-use Illuminate\Http\Request;
 
 Route::group(['middleware' => 'web'], function () {
 
-	Route::get('/directory', 'DirectoryController@index');
-	
-    /**
-     * Show Conference Dashboard
-     */
-    Route::get('/', function () {
-    	$conferences = Conference::orderBy('created_at', 'asc')->get();
+  Route::get('/directory', 'DirectoryController@index');
 
-    	return view('conferences', [
-        'conferences' => $conferences
+  /**
+  * Show Conference Dashboard
+  */
+  Route::get('/', function () {
+    $conferences = Conference::orderBy('created_at', 'asc')->get();
+
+    return view('conferences', [
+      'conferences' => $conferences
     ]);
-        //
-    });
+    //
+  });
 
-    /**
-     * Add New Conference
-     */
-    Route::post('/conference', function (Request $request) {
+  /**
+  * Add New Conference
+  */
+  Route::post('/conference', function (Request $request) {
     $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
+      'name' => 'required|max:255',
+      'description' => 'required',
+      'capacity' => 'integer|min:0',
+      'start' => 'date|date_format:Y/m/d G:i:s',
+      'end' => 'date|date_format:Y/m/d G:i:s'
     ]);
 
     if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
+      return redirect('/')
+      ->withInput()
+      ->withErrors($validator);
     }
 
     $conference = new Conference;
     $conference->name = $request->name;
+    $conference->description = $request->description;
+    $conference->capacity = $request->capacity;
+    $conference->start = $request->start;
+    $conference->end = $request->end;
     $conference->save();
 
     return redirect('/');
     // Create conference
-});
+  });
 
-    Route::delete('/conference/{conference}', function (Conference $conference) {
+  Route::delete('/conference/{conference}', function (Conference $conference) {
     $conference->delete();
 
     return redirect('/');
-});
+  });
 
 });
