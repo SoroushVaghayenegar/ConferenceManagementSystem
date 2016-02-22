@@ -20,7 +20,8 @@ class Conference extends Model
 
     public function attendees()
     {
-        return $this->belongsToMany('App\User', 'conference_attendees');
+        return $this->belongsToMany('App\User', 'conference_attendees')
+        ->withPivot('flight_carrier', 'flight_number');
     }
 
     public function hotels()
