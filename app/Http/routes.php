@@ -58,37 +58,8 @@ Route::group(['middleware' => 'web'], function () {
   /**
   * Add New Conference
   */
-  Route::post('/conference', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-      'name' => 'required|max:255',
-      'description' => 'required',
-      'capacity' => 'integer|min:0',
-      'start' => 'date|date_format:Y/m/d G:i:s',
-      'end' => 'date|date_format:Y/m/d G:i:s'
-    ]);
+  Route::post('/conference', 'ConferenceController@create');
 
-    if ($validator->fails()) {
-      return redirect('/')
-      ->withInput()
-      ->withErrors($validator);
-    }
-
-    $conference = new Conference;
-    $conference->name = $request->name;
-    $conference->description = $request->description;
-    $conference->capacity = $request->capacity;
-    $conference->start = $request->start;
-    $conference->end = $request->end;
-    $conference->save();
-
-    return redirect('/');
-    // Create conference
-  });
-
-  Route::delete('/conference/{conference}', function (Conference $conference) {
-    $conference->delete();
-
-    return redirect('/');
-  });
+  Route::delete('/conference/{id}', 'ConferenceController@delete');
 
 });
