@@ -16,6 +16,11 @@ class CreateConferencesTable extends Migration
             $table->increments('id');
 
             $table->string('name');
+            $table->text('description');
+            $table->integer('capacity')->nullable();
+            $table->dateTime('start')->nullable();
+            $table->dateTime('end')->nullable();
+            $table->text('location')->nullable();
             $table->timestamps();
         });
 
@@ -25,9 +30,11 @@ class CreateConferencesTable extends Migration
             $table->integer('conference_id')->unsigned()->default(0);
             $table->foreign('conference_id')->references('id')->on('conferences')->onDelete('cascade');
             $table->string('name')->default('');
-            $table->string('type')->default('');
-            $table->boolean('completed')->default(false);
-            $table->text('description')->default('');
+            $table->string('location')->default('');
+            $table->text('topic')->default('');
+            $table->string('capacity')->default('');
+            $table->dateTime('start');
+            $table->dateTime('end');
             $table->timestamps();
         });
 
@@ -35,8 +42,9 @@ class CreateConferencesTable extends Migration
             $table->increments('id');
             $table->integer('conference_id')->unsigned()->default(0);
             $table->foreign('conference_id')->references('id')->on('conferences')->onDelete('cascade');
-            $table->string('name')->default('');
-            $table->string('type')->default('');
+            $table->string('name');
+            $table->string('type');
+            $table->integer('capacity');
             $table->timestamps();
         });
 
@@ -44,8 +52,8 @@ class CreateConferencesTable extends Migration
             $table->increments('id');
             $table->integer('hotel_id')->unsigned()->default(0);
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
-            $table->string('name')->default('');
-            $table->string('type')->default('');
+            $table->string('name');
+            $table->string('type');
             $table->integer('quantity')->default(0);
             $table->timestamps();
         });

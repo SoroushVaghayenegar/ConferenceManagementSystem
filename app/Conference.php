@@ -8,13 +8,24 @@ class Conference extends Model
 {
     public $fillable = ['name', 'description', 'capacity', 'start', 'end', 'location'];
 
+    public function events()
+    {
+        return $this->hasMany('App\Event');
+    }
+
     public function managers()
     {
-      return $this->belongsToMany('App\User', 'conference_managers');
+        return $this->belongsToMany('App\User', 'conference_managers');
     }
 
     public function attendees()
     {
-      return $this->belongsToMany('App\User', 'conference_attendees');
+        return $this->belongsToMany('App\User', 'conference_attendees')
+        ->withPivot('flight_carrier', 'flight_number');
+    }
+
+    public function hotels()
+    {
+        return $this->hasMany('App\Hotel');
     }
 }

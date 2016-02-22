@@ -11,11 +11,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-    <?php 
-    
+    <?php
+
     $i = rand(1, 28);
     ?>
 
@@ -24,7 +24,7 @@
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-image: url('background_patterns/<?php echo $i; ?>.png'); 
+            background-image: url('background_patterns/<?php echo $i; ?>.png');
         }
 
         button .fa {
@@ -55,7 +55,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{ URL::to('welcome') }}">Gobind Sarvar</a>
-                    
+
                 </div>
 
                 <div id="navbar" class="navbar-collapse collapse">
@@ -65,8 +65,8 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">About Us</a></li>
                         @yield('loginButton')
-                        
-                        
+
+
                     </ul>
                 </div>
             </div>
