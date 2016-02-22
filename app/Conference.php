@@ -10,16 +10,21 @@ class Conference extends Model
 
     public function events()
     {
-      return $this->hasMany('App\Event');
+        return $this->hasMany('App\Event');
     }
 
     public function managers()
     {
-      return $this->belongsToMany('App\User', 'conference_managers');
+        return $this->belongsToMany('App\User', 'conference_managers');
     }
 
     public function attendees()
     {
-      return $this->belongsToMany('App\User', 'conference_attendees');
+        return $this->belongsToMany('App\User', 'conference_attendees');
+    }
+
+    public function hotels()
+    {
+        return $this->hasMany('App\Hotel');
     }
 }

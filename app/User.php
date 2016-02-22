@@ -23,4 +23,29 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function attendConferences()
+    {
+        return $this->belongsToMany('App\Conference', 'conference_attendees');
+    }
+
+    public function manageConferences()
+    {
+        return $this->belongsToMany('App\Conference', 'conference_managers');
+    }
+
+    public function attendEvents()
+    {
+        return $this->belongsToMany('App\Conference', 'event_attendees');
+    }
+
+    public function facilitateEvents()
+    {
+        return $this->belongsToMany('App\Conference', 'event_facilitators');
+    }
+
+    public function hotels()
+    {
+        return $this->belongsToMany('App\Hotel', 'hotel_users');
+    }
 }
