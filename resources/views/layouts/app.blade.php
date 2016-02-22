@@ -24,7 +24,7 @@
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-image: url('background_patterns/<?php echo $i; ?>.png');
+            background-image: url('background_patterns/23.png');
         }
 
         button .fa {
