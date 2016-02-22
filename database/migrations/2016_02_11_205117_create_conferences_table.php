@@ -42,8 +42,9 @@ class CreateConferencesTable extends Migration
             $table->increments('id');
             $table->integer('conference_id')->unsigned()->default(0);
             $table->foreign('conference_id')->references('id')->on('conferences')->onDelete('cascade');
-            $table->string('name')->default('');
-            $table->string('type')->default('');
+            $table->string('name');
+            $table->string('type');
+            $table->integer('capacity');
             $table->timestamps();
         });
 
@@ -51,8 +52,8 @@ class CreateConferencesTable extends Migration
             $table->increments('id');
             $table->integer('hotel_id')->unsigned()->default(0);
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
-            $table->string('name')->default('');
-            $table->string('type')->default('');
+            $table->string('name');
+            $table->string('type');
             $table->integer('quantity')->default(0);
             $table->timestamps();
         });
