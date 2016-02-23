@@ -63,8 +63,14 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">About Us</a></li>
-                        @yield('loginButton')
+                        <li><a href="#">About Us</a></li>                                               
+                        <!-- @yield('loginButton')-->
+                        @if(Auth::check())
+                        <li><a href="{{ URL::to('login') }}" class="btn btn-danger" style="color:white;">Logout</a></li>
+                        @else
+                        <li><a href="{{ URL::to('login') }}" class="btn btn-primary" style="color:white;">Login!</a></li>
+                        @endif          
+
 
 
                     </ul>

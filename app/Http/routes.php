@@ -14,9 +14,11 @@
 use App\Conference;
 use Illuminate\Http\Request;
 
+/*
 Route::get('/welcome', function () {
   return view('welcome');
 });
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,10 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => 'web'], function () {
   Route::auth();
 
+  Route::get('/welcome', function () {
+  return view('welcome');
+});
+  
   Route::get('/home', 'HomeController@index');
 });
 
