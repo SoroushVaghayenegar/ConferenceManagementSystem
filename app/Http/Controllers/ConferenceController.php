@@ -34,6 +34,8 @@ class ConferenceController extends Controller
         $conference->end = $request->end;
         $conference->save();
 
+        $conference->managers()->attach($request->managers);
+
         return redirect('/');
     }
 

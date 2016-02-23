@@ -1,8 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Bootstrap Datepicker plugin-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+<!-- Bootstrap Typeahead plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.0/bootstrap3-typeahead.js"></script>
+
+<!-- Bootstrap Tags input plugin-->
+<link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+<script src="js/bootstrap-tagsinput.js"></script>
+
 
 <div class="container">
   <div class="col-sm-offset-2 col-sm-8">
@@ -64,6 +73,13 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label class="col-md-4 control-label" class="control-label"> Managers</label>
+            <div class="col-md-6">
+              <select multiple id="managers" name="managers[]" data-role="tagsinput"></select>
+            </div>
+          </div>
+
           <!-- Add Conference Button -->
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-6">
@@ -120,5 +136,16 @@
 <script>
 $('#start-datepicker input').datepicker({ format: "yyyy/mm/dd" });
 $('#end-datepicker input').datepicker({ format: "yyyy/mm/dd" });
+
+$('#managers').tagsinput({
+  itemValue: 'id',
+  itemText: 'name',
+  typeahead: {
+    displayKey: 'name',
+    afterSelect: function(val) { this.$element.val(""); },
+    source: function (query) { return $.get('user/autocomplete') }
+  }
+});
+
 </script>
 @endsection

@@ -12,6 +12,7 @@
 */
 
 use App\Conference;
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -41,7 +42,7 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/welcome', function () {
   return view('welcome');
 });
-  
+
   Route::get('/home', 'HomeController@index');
 });
 
@@ -68,4 +69,14 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::delete('/conference/{id}', 'ConferenceController@delete');
 
+  Route::get('/user/autocomplete', function (Request $request) {
+    $users = User::get();
+    $res = [];
+    foreach ($users as $user) {
+      $entry = ['id' => $user->id, 'name' => $user->name];
+      $res[] = $entry;
+    }
+
+    return response()->json($res);
+  });
 });
