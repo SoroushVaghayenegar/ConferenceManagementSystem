@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -63,13 +64,13 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">About Us</a></li>                                               
+                        <li><a href="#">About Us</a></li>
                         <!-- @yield('loginButton')-->
                         @if(Auth::check())
                         <li><a href="{{ URL::to('login') }}" class="btn btn-danger" style="color:white;">Logout</a></li>
                         @else
                         <li><a href="{{ URL::to('login') }}" class="btn btn-primary" style="color:white;">Login!</a></li>
-                        @endif          
+                        @endif
 
 
 
