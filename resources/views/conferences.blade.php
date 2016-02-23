@@ -5,9 +5,13 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 
+<!-- Bootstrap Typeahead plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.0/bootstrap3-typeahead.js"></script>
+
 <!-- Bootstrap Tags input plugin-->
 <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+<script src="js/bootstrap-tagsinput.js"></script>
+
 
 <div class="container">
   <div class="col-sm-offset-2 col-sm-8">
@@ -69,19 +73,10 @@
             </div>
           </div>
 
-          <!-- Start Date -->
-          <div class="form-group">
-            <label class="col-md-4 control-label" class="control-label"> End Date</label>
-
-            <div class="col-md-6" id="end-datepicker">
-              <input type="text" name="end" id="conference-end" class="form-control" value="{{ old('end') }}">
-            </div>
-          </div>
-
           <div class="form-group">
             <label class="col-md-4 control-label" class="control-label"> Managers</label>
             <div class="col-md-6">
-              <input type="text" data-role="tagsinput" class="form-control">
+              <input type="text" id="managers" data-role="tagsinput">
             </div>
           </div>
 
@@ -141,5 +136,16 @@
 <script>
 $('#start-datepicker input').datepicker({ format: "yyyy/mm/dd" });
 $('#end-datepicker input').datepicker({ format: "yyyy/mm/dd" });
+
+$('#managers').tagsinput({
+  itemValue: 'id',
+  itemText: 'name',
+  typeahead: {
+    displayKey: 'name',
+    afterSelect: function(val) { this.$element.val(""); },
+    source: function (query) { return $.get('user/autocomplete') }
+  }
+});
+
 </script>
 @endsection
