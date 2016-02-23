@@ -76,7 +76,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" class="control-label"> Managers</label>
             <div class="col-md-6">
-              <input type="text" id="managers" data-role="tagsinput">
+              <select multiple id="managers" name="managers[]" data-role="tagsinput"></select>
             </div>
           </div>
 
