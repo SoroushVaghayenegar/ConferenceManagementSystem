@@ -33,7 +33,7 @@
             <label class="col-md-4 control-label" class="control-label"> Description</label>
 
             <div class="col-md-6">
-              <input type="text" name="description" id="conference-description" class="form-control" value="{{ old('description') }}">
+              <textarea rows="4" name="description" id="conference-description" class="form-control" value="{{ old('description') }}"></textarea>
             </div>
           </div>
 
