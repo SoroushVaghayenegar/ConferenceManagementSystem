@@ -72,13 +72,13 @@ class CreateConferencesTable extends Migration
         Schema::table('hotels', function (Blueprint $table) {
             $table->dropForeign('hotels_conference_id_foreign');
         });
-        Schema::table('inventory', function (Blueprint $table) {
-            $table->dropForeign('inventory_hotel_id_foreign');
+        Schema::table('inventories', function (Blueprint $table) {
+            $table->dropForeign('inventories_hotel_id_foreign');
         });
         Schema::drop('conferences');
         Schema::drop('events');
         Schema::drop('hotels');
-        Schema::drop('inventory');
+        Schema::drop('inventories');
 
     }
 }
