@@ -48,7 +48,7 @@ class CreateConferencesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('inventory', function(Blueprint $table) {
+        Schema::create('inventories', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('hotel_id')->unsigned()->default(0);
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
