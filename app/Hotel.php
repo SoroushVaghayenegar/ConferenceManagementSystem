@@ -15,6 +15,6 @@ class Hotel extends Model
 
     public function residents()
     {
-        return $this->belongsToMany('App\User', 'hotel_users');
+        return $this->belongsToMany('App\Participant', 'hotel_users');
     }
 }
