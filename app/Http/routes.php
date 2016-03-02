@@ -46,6 +46,11 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/directory', 'DirectoryController@index');
 
+  Route::get('/profile', function () {
+    return view('profile');
+  });
+
+
   /**
   * Show Conference Dashboard
   */
