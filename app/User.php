@@ -24,19 +24,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function attendConferences()
-    {
-        return $this->belongsToMany('App\Conference', 'conference_attendees');
-    }
-
     public function manageConferences()
     {
         return $this->belongsToMany('App\Conference', 'conference_managers');
-    }
-
-    public function attendEvents()
-    {
-        return $this->belongsToMany('App\Conference', 'event_attendees');
     }
 
     public function facilitateEvents()
@@ -44,8 +34,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Conference', 'event_facilitators');
     }
 
-    public function hotels()
+    public function participants()
     {
-        return $this->belongsToMany('App\Hotel', 'hotel_users');
+        return $this->hasMany('App\Participant');
     }
 }
