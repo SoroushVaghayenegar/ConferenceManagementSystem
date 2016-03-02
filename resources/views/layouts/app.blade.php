@@ -15,6 +15,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <!-- Bootstrap CSS -->    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />    
+    <!-- full calendar css-->
+    <link href="assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+    <link href="assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    <!-- easy pie chart-->
+    <link href="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
+    <link href="css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/fullcalendar.css">
+    <link href="css/widgets.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style-responsive.css" rel="stylesheet" />
+    <link href="css/xcharts.min.css" rel=" stylesheet"> 
+    <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+
     <?php
 
     $i = rand(1, 28);
@@ -45,41 +69,105 @@
 </head>
 
 <body>
-    <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header" align="left">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ URL::to('welcome') }}">Gobind Sarvar</a>
+<section id="container" class="">
+    <header class="header dark-bg">
+        @if(Auth::check())
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+        </div>
+        @endif
+        <!--logo start-->
+        <a href="{{ URL::to('') }}" class="logo">Gobind <span class="lite">Sarvar</span></a>
+        <!--logo end-->
+        <div class="top-nav notification-row">
+            <ul class="nav pull-right top-menu">
+                @if(Auth::check())
+                    <!-- user  dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar.png">
+                            </span>
+                            <span class="username">{{{ Auth::user()->name }}}</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li class="eborder-top">
+                                <a href="#"><i class="icon_profile"></i> My Profile</a>
+                            </li>
 
-                </div>
-
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                    </ul>
-
+                            <li>
+                                <a href="{{ URL::to('logout') }}"><i class="icon_key_alt"></i> Log Out</a>
+                            </li>  
+                        </ul>
+                    </li>
+                    <!-- user dropdown end -->
+                @else
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">About Us</a></li>
-                        <!-- @yield('loginButton')-->
-                        @if(Auth::check())
-                        <li><a href="{{ URL::to('logout') }}" class="btn btn-danger" style="color:white;">Logout</a></li>
-                        @else
-                        <li><a href="{{ URL::to('login') }}" class="btn btn-primary" style="color:white;">Login!</a></li>
-                        @endif
-
-
-
+                      <li><a href="{{ URL::to('login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+                @endif
+            </ul>
+        </div>    
+    </header>
 
-    @yield('content')
+    @if(Auth::check())
+    <!--sidebar start-->
+          <aside>
+              <div id="sidebar"  class="nav-collapse collapse">
+                  <!-- sidebar menu start-->
+                  <ul class="sidebar-menu">                
+                      <li class="active">
+                          <a class="" href="{{ URL::to('') }}">
+                              <i class="icon_house_alt"></i>
+                              <span>Home</span>
+                          </a>
+                      </li>
+                      <li class="">
+                          <a class="" href="{{ URL::to('/directory') }}">
+                              <i class="icon_globe_alt"></i>
+                              <span>Conferences</span>
+                          </a>
+                      </li>
+                      <li>                     
+                          <a class="" href="">
+                              <i class="icon_piechart"></i>
+                              <span>Reports</span>
+                              
+                          </a>
+                                             
+                      </li>
+                                 
+                      <li class="">
+                          <a class="" href="">
+                              <i class="glyphicon glyphicon-plane"></i>
+                              <span>flights</span>
+                          </a>
+                      </li>
+                      <li class="">
+                          <a class="" href="">
+                              <i class="glyphicon glyphicon-bed"></i>
+                              <span>Rooms</span>
+                          </a>
+                      </li>
+                  </ul>
+                  <!-- sidebar menu end-->
+              </div>
+          </aside>
+          <!--sidebar end-->
+
+        <section id="main-content">
+            <section class="wrapper"> 
+                @yield('content')
+            </section>
+        <section>
+    @else
+        <section class="wrapper"> 
+            @yield('content')
+        </section>
+    
+    @endif
+</section>
 </body>
 </html>

@@ -32,28 +32,24 @@ Route::get('/welcome', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-  //
-});
+
 
 Route::group(['middleware' => 'web'], function () {
+
   Route::auth();
 
-  Route::get('/welcome', function () {
+  Route::get('/', function () {
   return view('welcome');
 });
 
   Route::get('/home', 'HomeController@index');
-});
-
-Route::group(['middleware' => 'web'], function () {
 
   Route::get('/directory', 'DirectoryController@index');
 
   /**
   * Show Conference Dashboard
   */
-  Route::get('/', function () {
+  Route::get('/create_conference', function () {
     $conferences = Conference::orderBy('created_at', 'asc')->get();
 
     return view('conferences', [

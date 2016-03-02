@@ -3,6 +3,10 @@
 @section('title', 'Gobind Sarvar Conference')
 
 @section('content')
+<!-- SHOW IF ONLY USER IS ADMIN -->
+<a href="{{ URL::to('create_conference') }}" class="btn btn-danger"><i class="icon_plus_alt"></i>  Create a new conference</a>
+</br>
+</br>
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
