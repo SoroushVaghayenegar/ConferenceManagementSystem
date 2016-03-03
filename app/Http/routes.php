@@ -38,9 +38,9 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::auth();
 
-  Route::get('/profile', function () {
-    return view('profile');
-  });
+  Route::get('/profile', 'ProfileController@index');
+  Route::post('/profile', 'ProfileController@update');
+
 
   Route::get('/', function () {
     return view('welcome');

@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+<?php 
+
+$name = Auth::user()->name;
+$email = Auth::user()->email;
+
+
+
+?>
+
 @section('content')
           <div class="row">
                 <div class="col-lg-12">
@@ -17,7 +26,7 @@
                     <div class="profile-widget profile-widget-info">
                           <div class="panel-body">
                             <div class="col-lg-2 col-sm-2">
-                              <span class="username">{{{ Auth::user()->name }}}</span>               
+                              <span class="username">{{{ $name }}}</span>               
                               <div class="follow-ava">
                                 <img alt="" src="img/avatar.png">
                               </div>
@@ -209,7 +218,7 @@
                                           <h1>Biography</h1>
                                           <div class="row">
                                               <div class="bio-row">
-                                                  <p><span>Name </span>: </p>
+                                                  <p><span>Name </span>:&nbsp; {{{$name}}}</p>
                                               </div>                                           
                                               <div class="bio-row">
                                                   <p><span>Birthday</span>:</p>
@@ -221,7 +230,7 @@
                                                   <p><span>Occupation </span>:</p>
                                               </div>
                                               <div class="bio-row">
-                                                  <p><span>Email </span>:</p>
+                                                  <p><span>Email </span>:&nbsp; {{{$email}}}</p>
                                               </div>
                                               <div class="bio-row">
                                                   <p><span>Mobile </span>:</p>
@@ -242,17 +251,13 @@
                                     <section class="panel">                                          
                                           <div class="panel-body bio-graph-info">
                                               <h1> Profile Info</h1>
-                                              <form class="form-horizontal" role="form">                                                  
+                                              <form class="form-horizontal" action="{{ url('/profile') }}" method="post" role="form">
+                                                <!-- added for csrf -->
+                                              <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                                 
                                                   <div class="form-group">
-                                                      <label class="col-lg-2 control-label">First Name</label>
+                                                      <label for="uname" class="col-lg-2 control-label">Name</label>
                                                       <div class="col-lg-6">
-                                                          <input type="text" class="form-control" id="f-name" placeholder=" ">
-                                                      </div>
-                                                  </div>
-                                                  <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Last Name</label>
-                                                      <div class="col-lg-6">
-                                                          <input type="text" class="form-control" id="l-name" placeholder=" ">
+                                                          <input type="text" class="form-control" id="name" name="name" placeholder=" " value={{{$name}}}>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
@@ -280,9 +285,9 @@
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
-                                                      <label class="col-lg-2 control-label">Email</label>
+                                                      <label class="col-lg-2 control-label" for="email">Email</label>
                                                       <div class="col-lg-6">
-                                                          <input type="text" class="form-control" id="email" placeholder=" ">
+                                                          <input type="email" class="form-control" id="email" name="email" placeholder=" " value={{{$email}}}>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
@@ -300,7 +305,7 @@
 
                                                   <div class="form-group">
                                                       <div class="col-lg-offset-2 col-lg-10">
-                                                          <button type="submit" class="btn btn-primary">Save</button>
+                                                          <button type="submit" name="submit" type="submit" class="btn btn-primary">Save</button>
                                                           <button type="button" class="btn btn-danger">Cancel</button>
                                                       </div>
                                                   </div>
@@ -314,5 +319,21 @@
                  </div>
               </div>
 
-              <!-- page end-->
+<!--
+<?php 
+
+if (isset($_POST["submit"])) {
+/* Auth::user()->name = $_POST['name'];
+Auth::user()->email = $_POST['email'];*/
+
+$name = $_POST['name'];
+$email = $_POST['email'];
+} 
+
+$email = Auth::user()->email;
+
+?>
+-->
+
+             <!-- page end-->
 @endsection
