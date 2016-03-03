@@ -42,9 +42,25 @@ Route::group(['middleware' => 'web'], function () {
   return view('welcome');
 });
 
+  Route::get('/manage_users', function () {
+    $users = User::orderBy('created_at', 'asc')->get();
+
+    return view('manage_users', [
+      'users' => $users
+    ]);
+  });
+
   Route::get('/home', 'HomeController@index');
 
   Route::get('/directory', 'DirectoryController@index');
+
+  Route::get('/directory', function () {
+    $conferences = Conference::orderBy('created_at', 'asc')->get();
+
+    return view('directory', [
+      'conferences' => $conferences
+    ]);
+  });
 
   /**
   * Show Conference Dashboard
@@ -55,6 +71,7 @@ Route::group(['middleware' => 'web'], function () {
     return view('conferences', [
       'conferences' => $conferences
     ]);
+
     //
   });
 
@@ -62,6 +79,8 @@ Route::group(['middleware' => 'web'], function () {
   * Add New Conference
   */
   Route::post('/conference', 'ConferenceController@create');
+
+  Route::get('/conference/{id}', 'ConferenceController@show');
 
   Route::delete('/conference/{id}', 'ConferenceController@delete');
 

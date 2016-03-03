@@ -55,6 +55,9 @@
                                 </button>
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                            </br>
+                            </br>
+                                <a href="{{ URL::to('register') }}" class="btn btn-success" >Create a new account</a>
                             </div>
                         </div>
                     </form>

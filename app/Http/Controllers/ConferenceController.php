@@ -39,6 +39,11 @@ class ConferenceController extends Controller
         return redirect('/');
     }
 
+    public function show($id)
+    {
+        return view('conference.profile', ['conference' => Conference::findOrFail($id)]);
+    }
+
     public function delete(Conference $id)
     {
         $id->delete();

@@ -39,6 +39,9 @@
     <link href="css/xcharts.min.css" rel=" stylesheet"> 
     <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
     <?php
 
     $i = rand(1, 28);
@@ -126,31 +129,44 @@
                       </li>
                       <li class="">
                           <a class="" href="{{ URL::to('/directory') }}">
-                              <i class="icon_globe_alt"></i>
+                              <i class="fa fa-globe"></i>
                               <span>Conferences</span>
                           </a>
                       </li>
-                      <li>                     
-                          <a class="" href="">
-                              <i class="icon_piechart"></i>
-                              <span>Reports</span>
-                              
-                          </a>
-                                             
-                      </li>
-                                 
-                      <li class="">
-                          <a class="" href="">
-                              <i class="glyphicon glyphicon-plane"></i>
-                              <span>flights</span>
-                          </a>
-                      </li>
-                      <li class="">
-                          <a class="" href="">
-                              <i class="glyphicon glyphicon-bed"></i>
-                              <span>Rooms</span>
-                          </a>
-                      </li>
+                      @if(Auth::user()->is_admin)
+                          <li class="">
+                              <a class="" href="{{ URL::to('/create_conference') }}">
+                                  <span>Manage conference</span>
+                              </a>
+                          </li>
+                          <li class="">
+                              <a class="" href="{{ URL::to('/manage_users') }}">
+                                    <i class="fa fa-plus"></i> 
+                                  <span>Manage Users</span>
+                              </a>
+                          </li>
+                          <li>                     
+                              <a class="" href="">
+                                  <i class="icon_piechart"></i>
+                                  <span>Reports</span>
+                                  
+                              </a>
+                                                 
+                          </li>
+                                     
+                          <li class="">
+                              <a class="" href="">
+                                  <i class="glyphicon glyphicon-plane"></i>
+                                  <span>flights</span>
+                              </a>
+                          </li>
+                          <li class="">
+                              <a class="" href="">
+                                  <i class="glyphicon glyphicon-bed"></i>
+                                  <span>Rooms</span>
+                              </a>
+                          </li>
+                      @endif
                   </ul>
                   <!-- sidebar menu end-->
               </div>
@@ -169,5 +185,16 @@
     
     @endif
 </section>
+
+<!-- javascripts -->
+    <!-- bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!--custome script for all page-->
+    <script src="js/scripts.js"></script>
+    
+
 </body>
 </html>

@@ -12,6 +12,11 @@
 <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
 <script src="js/bootstrap-tagsinput.js"></script>
 
+<div class="row">
+        <div class="col-lg-12">
+          <h3 class="page-header"><i class="fa fa-plus"></i> Manage Conferences</h3>
+        </div>
+</div>
 
 <div class="container">
   <div class="col-sm-offset-2 col-sm-8">
