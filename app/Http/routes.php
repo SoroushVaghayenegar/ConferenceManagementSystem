@@ -38,17 +38,18 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::auth();
 
+  Route::get('/profile', function () {
+    return view('profile');
+  });
+
   Route::get('/', function () {
-  return view('welcome');
-});
+    return view('welcome');
+  });
 
   Route::get('/home', 'HomeController@index');
 
   Route::get('/directory', 'DirectoryController@index');
 
-  Route::get('/profile', function () {
-    return view('profile');
-  });
 
 
   /**

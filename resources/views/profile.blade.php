@@ -4,11 +4,11 @@
           <div class="row">
                 <div class="col-lg-12">
                     <h3 class="page-header"><i class="fa fa-user-md"></i> Profile</h3>
-                    <ol class="breadcrumb">
+                    <!-- <ol class="breadcrumb">
                         <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
                         <li><i class="icon_documents_alt"></i>Pages</li>
                         <li><i class="fa fa-user-md"></i>Profile</li>
-                    </ol>
+                    </ol> -->
                 </div>
             </div>
               <div class="row">
@@ -17,23 +17,23 @@
                     <div class="profile-widget profile-widget-info">
                           <div class="panel-body">
                             <div class="col-lg-2 col-sm-2">
-                              <h4>Jenifer Smith</h4>               
+                              <span class="username">{{{ Auth::user()->name }}}</span>               
                               <div class="follow-ava">
-                                  <img src="img/profile-widget-avatar.jpg" alt="">
+                                <img alt="" src="img/avatar.png">
                               </div>
-                              <h6>Administrator</h6>
+                              <!-- <h6>Administrator</h6>  -->                             
                             </div>
                             <div class="col-lg-4 col-sm-4 follow-info">
-                                <p>Hello I’m Jenifer Smith, a leading expert in interactive and creative design.</p>
-                                <p>@jenifersmith</p>
-                                <p><i class="fa fa-twitter">jenifertweet</i></p>
+                              <!-- Can edit information here later-->
+                                <p></p>
+                                <p></p>
+                                <!-- <p><i class="fa fa-twitter"></i></p> -->
                                 <h6>
-                                    <span><i class="icon_clock_alt"></i>11:05 AM</span>
-                                    <span><i class="icon_calendar"></i>25.10.13</span>
-                                    <span><i class="icon_pin_alt"></i>NY</span>
+                                    <span><i class="icon_calendar"></i>Joined:</span>
+                                    {{{Auth::user()->created_at}}}
                                 </h6>
                             </div>
-                            <div class="col-lg-2 col-sm-6 follow-info weather-category">
+                            <!-- <div class="col-lg-2 col-sm-6 follow-info weather-category">
                                       <ul>
                                           <li class="active">
                                               
@@ -65,7 +65,7 @@
                                           </li>
                                            
                                       </ul>
-                            </div>
+                            </div> -->
                           </div>
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                     <section class="panel">
                           <header class="panel-heading tab-bg-info">
                               <ul class="nav nav-tabs">
-                                  <li class="active">
+                                  <!-- <li class="active">
                                       <a data-toggle="tab" href="#recent-activity">
                                           <i class="icon-home"></i>
                                           Daily Activity
                                       </a>
-                                  </li>
-                                  <li>
+                                  </li> -->
+                                  <li class="active">
                                       <a data-toggle="tab" href="#profile">
                                           <i class="icon-user"></i>
                                           Profile
@@ -94,11 +94,17 @@
                                           Edit Profile
                                       </a>
                                   </li>
+                                  <li class="">
+                                      <a data-toggle="tab" href="#">
+                                          <i class="icon-envelope"></i>
+                                          Group
+                                      </a>
+                                  </li>
                               </ul>
                           </header>
                           <div class="panel-body">
                               <div class="tab-content">
-                                  <div id="recent-activity" class="tab-pane active">
+<!--                                   <div id="recent-activity" class="tab-pane active">
                                       <div class="profile-activity">                                          
                                           <div class="act-time">                                      
                                               <div class="activity-body act-in">
@@ -192,39 +198,36 @@
                                           </div>
 
                                       </div>
-                                  </div>
+                                  </div> -->
                                   <!-- profile -->
-                                  <div id="profile" class="tab-pane">
+                                  <div id="profile" class="tab-pane active">
                                     <section class="panel">
                                       <div class="bio-graph-heading">
-                                                Hello I’m Jenifer Smith, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication.
+                                               <!--  Hello I’m Jenifer Smith, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication. -->
                                       </div>
                                       <div class="panel-body bio-graph-info">
-                                          <h1>Bio Graph</h1>
+                                          <h1>Biography</h1>
                                           <div class="row">
                                               <div class="bio-row">
-                                                  <p><span>First Name </span>: Jenifer </p>
+                                                  <p><span>Name </span>: </p>
+                                              </div>                                           
+                                              <div class="bio-row">
+                                                  <p><span>Birthday</span>:</p>
                                               </div>
                                               <div class="bio-row">
-                                                  <p><span>Last Name </span>: Smith</p>
-                                              </div>                                              
-                                              <div class="bio-row">
-                                                  <p><span>Birthday</span>: 27 August 1987</p>
+                                                  <p><span>Country </span>:</p>
                                               </div>
                                               <div class="bio-row">
-                                                  <p><span>Country </span>: United</p>
+                                                  <p><span>Occupation </span>:</p>
                                               </div>
                                               <div class="bio-row">
-                                                  <p><span>Occupation </span>: UI Designer</p>
+                                                  <p><span>Email </span>:</p>
                                               </div>
                                               <div class="bio-row">
-                                                  <p><span>Email </span>:jenifer@mailname.com</p>
+                                                  <p><span>Mobile </span>:</p>
                                               </div>
                                               <div class="bio-row">
-                                                  <p><span>Mobile </span>: (+6283) 456 789</p>
-                                              </div>
-                                              <div class="bio-row">
-                                                  <p><span>Phone </span>:  (+021) 956 789123</p>
+                                                  <p><span>Phone </span>: </p>
                                               </div>
                                           </div>
                                       </div>
