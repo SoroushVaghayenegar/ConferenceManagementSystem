@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Bootstrap Datepicker plugin-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
+<link href="css/flags.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.flagstrap.js"></script>
+<script src="js/jquery.flagstrap.min.js"></script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -65,7 +73,49 @@
                                 @endif
                             </div>
                         </div>
+						
+						<div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Date of Birth</label>
 
+                            <div class="col-md-6" id="date_of_birth-datepicker">
+                                <input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}">
+
+                                @if ($errors->has('date_of_birth'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('date_of_birth') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+						
+						<div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">City</label>
+
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="city" value="{{ old('city') }}">
+
+                                @if ($errors->has('city'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+						
+						<div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Country</label>
+
+                            <div class="col-md-6">
+								<div id="countrypicker" name="country" data-input-name="country"></div>
+
+                                @if ($errors->has('country'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+					
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
@@ -79,4 +129,9 @@
         </div>
     </div>
 </div>
+
+<script>
+$('#date_of_birth-datepicker input').datepicker({ format: "yyyy/mm/dd" });
+$('#countrypicker').flagStrap();
+</script>
 @endsection

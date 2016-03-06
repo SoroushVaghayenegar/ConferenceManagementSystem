@@ -52,6 +52,9 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+			'date_of_birth' => 'date|date_format:Y/m/d',
+			'city' => 'required|max:255',
+			'country' => 'required|max:255'
         ]);
     }
 
@@ -67,6 +70,9 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+			'date_of_birth' => 'date|date_format:Y/m/d',
+			'city' => $data['city'],
+			'country' => $data['country']
         ]);
     }
 }
