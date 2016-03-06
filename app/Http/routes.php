@@ -54,13 +54,6 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/directory', 'DirectoryController@index');
 
-  Route::get('/directory', function () {
-    $conferences = Conference::orderBy('created_at', 'asc')->get();
-
-    return view('directory', [
-      'conferences' => $conferences
-    ]);
-  });
 
   /**
   * Show Conference Dashboard
