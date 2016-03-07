@@ -78,7 +78,10 @@
                             <label class="col-md-4 control-label">Date of Birth</label>
 
                             <div class="col-md-6" id="date_of_birth-datepicker">
-                                <input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}">
+							
+								<div class="input-group date">
+								  <input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+								</div>
 
                                 @if ($errors->has('date_of_birth'))
                                     <span class="help-block">
@@ -131,7 +134,7 @@
 </div>
 
 <script>
-$('#date_of_birth-datepicker input').datepicker({ format: "yyyy/mm/dd" });
+$('#date_of_birth-datepicker input').datepicker({ startView: 2 });
 $('#countrypicker').flagStrap();
 </script>
 @endsection
