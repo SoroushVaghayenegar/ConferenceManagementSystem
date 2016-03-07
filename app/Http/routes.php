@@ -54,13 +54,9 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/directory', 'DirectoryController@index');
 
-  Route::get('/directory', function () {
-    $conferences = Conference::orderBy('created_at', 'asc')->get();
+  Route::get('/hotel', 'HotelController@index');
 
-    return view('directory', [
-      'conferences' => $conferences
-    ]);
-  });
+  Route::get('/flights', 'FlightController@index');
 
   /**
   * Show Conference Dashboard
@@ -80,7 +76,7 @@ Route::group(['middleware' => 'web'], function () {
   */
   Route::post('/conference', 'ConferenceController@create');
 
-  Route::get('/conference/{id}', 'ConferenceController@show');
+  Route::get('/conference/{id}', 'ConferenceController@show')->where('id', '[0-9]+');;
 
   Route::delete('/conference/{id}', 'ConferenceController@delete');
 

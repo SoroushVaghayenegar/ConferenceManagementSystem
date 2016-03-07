@@ -169,15 +169,15 @@
                           </li>
                                      
                           <li class="">
-                              <a class="" href="">
-                                  <i class="glyphicon glyphicon-plane"></i>
+                              <a class="" href="{{ URL::to('/flights')}}">
+                                  <i class="fa fa-plane"></i>
                                   <span>flights</span>
                               </a>
                           </li>
                           <li class="">
-                              <a class="" href="">
-                                  <i class="glyphicon glyphicon-bed"></i>
-                                  <span>Rooms</span>
+                              <a class="" href="{{ URL::to('/hotel') }}">
+                                  <i class="fa fa-bed"></i>
+                                  <span>Hotel</span>
                               </a>
                           </li>
                       @endif

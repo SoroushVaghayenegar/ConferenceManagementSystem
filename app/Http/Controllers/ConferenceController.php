@@ -47,6 +47,6 @@ class ConferenceController extends Controller
     public function delete(Conference $id)
     {
         $id->delete();
-        return redirect('/');
+        return redirect('/create_conference');
     }
 }
