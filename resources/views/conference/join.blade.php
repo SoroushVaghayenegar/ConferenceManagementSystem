@@ -23,20 +23,61 @@
             <p class="text-center">
               <strong>Register</strong>
             </p>
+
+            <p class="text-left"><strong>Enter your information:</strong></p>
+
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Phone number</th>
+                  <th>Flight number</th>
+                  <th>Hotel needed</th>
+                  <th>Taxi needed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="text" value="{{Auth::user()->name}}" disabled="true"></input>
+                  </td>
+                  <th>
+                    <input type="text" name="primary[phone]"></input>
+                  </td>
+                  <td>
+                    <input type="text" name="primary[flight]"></input>
+                  </td>
+                  <th>
+                    <input type="checkbox" name="primary[hotel]"></input>
+                  </td>
+                  <td>
+                    <input type="checkbox" name="primary[taxi]"></input>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <p class="text-left">
-              <input type="checkbox" name="same_flight"></input>
-              All participants are travelling on the same flight
+              <i class="fa fa-info-circle" style="margin-right: 5px"></i>
+              Leave <strong>Flight number</strong> blank if it is unknown
+            </p>
+            <p class="text-left">
+              <label>
+                <input type="checkbox" name="same_flight" style="margin-right: 5px"></input>
+                All participants are travelling on the same flight with me
+              </label>
             </p>
 
             <p class="text-left">
-              <input type="checkbox" name="same_hotel"></input>
-              All participants are staying in the same hotel room
+              <label>
+                <input type="checkbox" name="same_hotel" style="margin-right: 5px"></input>
+                All participants are staying in the same hotel room with me
+              </label>
             </p>
 
-            <p class="text-left"><strong>For each participant joining in your group, enter their information:</strong></p>
+            <p class="text-left"><strong>For each additional participant in your group, enter their information:</strong></p>
 
             <div class="form-group" style="margin: 0">
-              <table class="join-table table-bordered">
+              <table class="join-table table">
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -66,9 +107,10 @@
                   </tr>
                 </tbody>
               </table>
+              <button type="button" class="btn btn-default" onclick="addParticipant()">Add more participant</button>
+              <button type="submit" class="btn btn-default pull-right">Submit</button>
             </div>
           </form>
-          <button class="btn btn-default" onclick="addParticipant()">Add 1 participant</button>
         </div>
       </div>
     </div>

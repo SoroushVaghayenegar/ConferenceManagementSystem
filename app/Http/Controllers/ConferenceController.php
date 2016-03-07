@@ -8,6 +8,7 @@ use Illuminate\Validation\Validator as Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Conference;
+use App\Participant;
 
 class ConferenceController extends Controller
 {
@@ -50,8 +51,9 @@ class ConferenceController extends Controller
         return redirect('/create_conference');
     }
 
-    public function join($id)
+    public function join(Conference $id, Request $request)
     {
-        return view('conference.join', ['conference' => Conference::findOrFail($id)]);
+        return response()->json([]);
     }
+
 }
