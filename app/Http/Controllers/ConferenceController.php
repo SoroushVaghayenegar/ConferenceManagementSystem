@@ -7,8 +7,10 @@ use Illuminate\Validation\Validator as Validator;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
 use App\Conference;
 use App\Participant;
+use Auth;
 
 class ConferenceController extends Controller
 {
@@ -42,7 +44,18 @@ class ConferenceController extends Controller
 
     public function show($id)
     {
-        return view('conference.profile', ['conference' => Conference::findOrFail($id)]);
+        $conference = Conference::findOrFail($id);
+        $user = User::find(Auth::user()->id);
+
+        // get registration details if user has joined
+        $registration = $this->getRegistration($conference, $user);
+        if (count($registration) > 0) {
+          // TODO: display registration information
+        }
+
+        return view('conference.profile', [
+          'conference' => $conference
+        ]);
     }
 
     public function delete(Conference $id)
@@ -51,9 +64,84 @@ class ConferenceController extends Controller
         return redirect('/create_conference');
     }
 
-    public function join(Conference $id, Request $request)
+    public function join($id, Request $request)
     {
-        return response()->json([]);
+        // create participant for primary user
+        $conference = Conference::findOrFail($id);
+        $hotel = isset($request->primary['hotel']) && $request->primary['hotel'] == 'on';
+        $taxi = isset($request->primary['taxi']) && $request->primary['taxi'] == 'on';
+
+        $same_flight = isset($request->primary['same_flight']) && $request->primary['same_flight'] == 'on';
+        $same_hotel = isset($request->primary['same_hotel']) && $request->primary['same_hotel'] == 'on';
+
+        $this->createAttachedParticipant([
+          'user_id' => Auth::user()->id,
+          'phone' => $request->primary['phone'],
+          'flight' => $request->primary['flight'],
+          'hotel_requested' => $hotel,
+          'taxi_requested' => $taxi
+        ], $conference, true);
+
+        // create participants for other users in group
+        foreach ($request->participant as $participant) {
+          $hotel = isset($participant['hotel']) && $participant['hotel'] == 'on';
+          $taxi = isset($participant['taxi']) && $participant['taxi'] == 'on';
+          if ($same_flight)
+            $flight = $request->primary['flight'];
+          else if (isset($participant['flight']))
+            $flight = $participant['flight'];
+          else
+            $flight = null;
+
+          $this->createAttachedParticipant([
+            'name' => $participant['name'],
+            'phone' => $participant['phone'],
+            'flight' => $flight,
+            'user_id' => Auth::user()->id,
+            'hotel_requested' => $hotel,
+            'taxi_requested' => $taxi
+          ], $conference, false);
+        }
+        return redirect("/conference/$id")->with('joined', true);
     }
 
+    /*
+    * function createAttachedParticipant()
+    *
+    * creates an instance of Participant from $fields and attach it to the
+    * attendees list of $conference
+    */
+    public function createAttachedParticipant($fields, $conference, $primary = false)
+    {
+        $participant = new Participant;
+        $participant->primary_user = $primary;
+        if (!$primary)
+          $participant->name = $fields['name'];
+        $participant->phone = $fields['phone'];
+        $participant->user_id = $fields['user_id'];
+        $participant->save();
+
+        $conference->attendees()->attach($participant, [
+          "hotel_requested" => $fields['hotel_requested'],
+          "taxi_requested" => $fields['taxi_requested'],
+          "flight" => $fields['flight'],
+        ]);
+        return $participant;
+    }
+
+    /*
+    * function getRegistration()
+    *
+    * return null if user is not registered to this conference
+    * return registration informations if the user is registered
+    */
+    public function getRegistration($conference, $user)
+    {
+        $participants = $user->participants;
+        $participant_id = [];
+        foreach ($participants as $participant)
+          $participant_id[] = $participant->id;
+
+        return $conference->attendees()->find($participant_id);
+    }
 }

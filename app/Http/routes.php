@@ -76,7 +76,7 @@ Route::group(['middleware' => 'web'], function () {
   */
   Route::post('/conference', 'ConferenceController@create');
 
-  Route::get('/conference/{id}', 'ConferenceController@show')->where('id', '[0-9]+');;
+  Route::get('/conference/{id}', 'ConferenceController@show')->where('id', '[0-9]+');
 
   Route::delete('/conference/{id}', 'ConferenceController@delete');
 

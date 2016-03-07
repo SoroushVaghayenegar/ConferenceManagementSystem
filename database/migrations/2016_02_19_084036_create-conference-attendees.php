@@ -17,8 +17,7 @@ class CreateConferenceAttendees extends Migration
             $table->foreign('conference_id')->references('id')->on('conferences')->onDelete('cascade');
             $table->integer('participant_id')->unsigned();
             $table->foreign('participant_id')->references('id')->on('participants')->onDelete('cascade');
-            $table->string('flight_carrier')->default(null);
-            $table->string('flight_number')->default(null);
+            $table->string('flight')->default(null);
             $table->boolean('hotel_requested')->default(false);
             $table->boolean('taxi_requested')->default(false);
             $table->timestamps();
