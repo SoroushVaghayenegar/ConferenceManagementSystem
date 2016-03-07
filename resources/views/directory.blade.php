@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Gobind Sarvar Conference')
+@section('title', 'Conferences')
 
 @section('content')
 
@@ -15,6 +15,7 @@
   </br>
   </br>
 @endif
+<div class="container">
   <ul class="nav nav-tabs nav-justified">
     <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
     <li><a data-toggle="tab" href="#pastConferences"><strong>Past Conferences</strong></a></li>
@@ -84,4 +85,5 @@
         @endif
     </div>
   </div>
+</div>
 @endsection
