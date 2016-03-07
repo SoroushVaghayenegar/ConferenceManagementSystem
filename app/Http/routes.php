@@ -80,6 +80,8 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::delete('/conference/{id}', 'ConferenceController@delete');
 
+  Route::get('/conference/{id}/join', 'ConferenceController@join');
+
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();
     $res = [];

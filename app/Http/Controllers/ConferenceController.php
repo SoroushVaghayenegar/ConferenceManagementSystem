@@ -49,4 +49,9 @@ class ConferenceController extends Controller
         $id->delete();
         return redirect('/create_conference');
     }
+
+    public function join($id)
+    {
+        return view('conference.join', ['conference' => Conference::findOrFail($id)]);
+    }
 }
