@@ -57,7 +57,7 @@ class AuthController extends Controller
             'password' => 'required|confirmed|min:6',
 			'date_of_birth' => 'date|date_format:Y/m/d',
 			'city' => 'required|max:255',
-			'country' => 'required|max:255'
+			'country' => 'required|max:255',
         ]);
     }
 
@@ -70,8 +70,7 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         $verification_code = str_random(20);
-        //$user = $this->Auth->getUser();
-        Mail::send('auth.emails.verification', [$verification_code,"test"], function($message) {
+        Mail::send('auth.emails.verification', ['verification_code' => $verification_code], function($message) {
             $message->to(Input::get('email'), Input::get('name'))
             ->subject('Gobind Sarver verification');
         });
