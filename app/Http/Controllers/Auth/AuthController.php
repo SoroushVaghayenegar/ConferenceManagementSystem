@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AuthController extends Controller
 {
@@ -70,22 +71,20 @@ class AuthController extends Controller
     {
         $verification_code = str_random(20);
         //$user = $this->Auth->getUser();
-         User::create([
+        Mail::send('auth.emails.verification', [$verification_code,"test"], function($message) {
+            $message->to(Input::get('email'), Input::get('name'))
+            ->subject('Gobind Sarver verification');
+        });
+       return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-			'date_of_birth' => 'date|date_format:Y/m/d',
-			'city' => $data['city'],
-			'country' => $data['country'],
+            'date_of_birth' => 'date|date_format:Y/m/d',
+            'city' => $data['city'],
+            'country' => $data['country'],
             'verification_code' => $verification_code
-        ]);
-
-        Mail::send('auth.emails.verification', [$verification_code,"test"], function($message) {
-            $message->to(Input::get('email'), Input::get('name'))
-                ->subject('Verify your email address');
-        });
+            ]);
 
 
-        return redirect('/');
     }
 }

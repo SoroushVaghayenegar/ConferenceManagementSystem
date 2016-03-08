@@ -4,7 +4,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h2>Verify Your Email Address</h2>
+        <h2>Welcome to Gobind Sarver!</h2>
 
         <div>
             Thank you for signing up with Gobind Sarver
