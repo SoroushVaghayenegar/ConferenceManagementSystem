@@ -38,9 +38,13 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::auth();
 
+  Route::get('/profile', 'ProfileController@index');
+  Route::post('/profile', 'ProfileController@update');
+
+
   Route::get('/', function () {
-  return view('welcome');
-});
+    return view('welcome');
+  });
 
   Route::get('/manage_users', function () {
     $users = User::orderBy('created_at', 'asc')->get();
@@ -54,9 +58,11 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/directory', 'DirectoryController@index');
 
+
   Route::get('/hotel', 'HotelController@index');
 
   Route::get('/flights', 'FlightController@index');
+
 
   /**
   * Show Conference Dashboard
