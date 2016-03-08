@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
@@ -66,13 +68,24 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $verification_code = str_random(20);
+        //$user = $this->Auth->getUser();
+         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
 			'date_of_birth' => 'date|date_format:Y/m/d',
 			'city' => $data['city'],
-			'country' => $data['country']
+			'country' => $data['country'],
+            'verification_code' => $verification_code
         ]);
+
+        Mail::send('auth.emails.verification', [$verification_code,"test"], function($message) {
+            $message->to(Input::get('email'), Input::get('name'))
+                ->subject('Verify your email address');
+        });
+
+
+        return redirect('/');
     }
 }
