@@ -51,7 +51,7 @@ Route::group(['middleware' => 'web'], function () {
 
     return view('manage_users', [
       'users' => $users
-    ]);
+      ]);
   });
 
   Route::get('/home', 'HomeController@index');
@@ -63,7 +63,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/flights', 'FlightController@index');
 
-
+  Route::get('/verify/{verificationCode}','VerificationController@confirm');
   /**
   * Show Conference Dashboard
   */
@@ -72,7 +72,7 @@ Route::group(['middleware' => 'web'], function () {
 
     return view('conferences', [
       'conferences' => $conferences
-    ]);
+      ]);
 
     //
   });

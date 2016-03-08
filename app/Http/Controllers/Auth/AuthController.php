@@ -55,10 +55,10 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
-			'date_of_birth' => 'date|date_format:Y/m/d',
-			'city' => 'required|max:255',
-			'country' => 'required|max:255',
-        ]);
+            'date_of_birth' => 'date|date_format:Y/m/d',
+            'city' => 'required|max:255',
+            'country' => 'required|max:255',
+            ]);
     }
 
     /**
@@ -74,7 +74,7 @@ class AuthController extends Controller
             $message->to(Input::get('email'), Input::get('name'))
             ->subject('Gobind Sarver verification');
         });
-       return User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -85,5 +85,27 @@ class AuthController extends Controller
             ]);
 
 
+    }
+
+
+    public function confirm($verification_code)
+    {
+
+     //User::whereConfirmationCode($verification_code)->first()->update(['verified' => 1]);
+
+      User::where('verification_code',$verification_code)->update(['verified' => 1]);
+     Flash::message({{$verification_code}});
+     
+
+       //  if($verification_code)
+       //  {
+
+       //      $user->verified = 1;
+       //      $user->verification_code = null;
+       //      $user->save();
+
+       //      Flash::message('Your email is verified, you are now eligible to recieve updates!.');
+       //  }
+       // return redirect('/profile');
     }
 }
