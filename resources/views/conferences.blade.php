@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Manage Conferences')
+
 @section('content')
 <!-- Bootstrap Datepicker plugin-->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />

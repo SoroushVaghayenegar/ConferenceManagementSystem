@@ -12,7 +12,7 @@ use App\Conference;
 class ConferenceController extends Controller
 {
     public function __construct()
-    {
+    {   
         //$this->middleware('auth');
     }
 
@@ -41,7 +41,7 @@ class ConferenceController extends Controller
 
     public function show($id)
     {
-        return view('conference.profile', ['conference' => Conference::findOrFail($id)]);
+        return view('conference.info', ['conference' => Conference::findOrFail($id)]);
     }
 
     public function delete(Conference $id)

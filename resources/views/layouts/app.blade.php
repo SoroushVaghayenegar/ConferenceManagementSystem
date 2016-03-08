@@ -38,7 +38,7 @@
     <!-- Custom styles -->
     <link rel="stylesheet" href="css/fullcalendar.css">
     <link href="css/widgets.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    
     <link href="css/style-responsive.css" rel="stylesheet" />
     <link href="css/xcharts.min.css" rel=" stylesheet"> 
     <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
@@ -55,7 +55,7 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
-
+    <link href="css/style.css" rel="stylesheet">
     <?php
 
     $i = rand(1, 28);
@@ -150,7 +150,7 @@
                       @if(Auth::user()->is_admin)
                           <li class="">
                               <a class="" href="{{ URL::to('/create_conference') }}">
-                                  <span>Manage conference</span>
+                                  <span>Manage conferences</span>
                               </a>
                           </li>
                           <li class="">

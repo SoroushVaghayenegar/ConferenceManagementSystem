@@ -13,7 +13,7 @@ $emailError="";
 @section('content')
 <div class="row">
   <div class="col-lg-12">
-    <h3 class="page-header"><i class="fa fa-user-md"></i> Profile</h3>
+    <h3 class="page-header"><i class="fa fa-user"></i> Profile</h3>
                     <!-- <ol class="breadcrumb">
                         <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
                         <li><i class="icon_documents_alt"></i>Pages</li>
@@ -40,7 +40,7 @@ $emailError="";
                             <!-- <p><i class="fa fa-twitter"></i></p> -->
                             <h6>
                               <span><i class="icon_calendar"></i>Joined:</span>
-                              {{{Auth::user()->created_at}}}
+                              {{ date('F d, Y', strtotime(Auth::user()->created_at)) }}
                             </h6>
                           </div>
                         </div>

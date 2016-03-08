@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Conferences')
+@section('title', 'Hotel')
 
 @section('content')
 
@@ -10,9 +10,9 @@
         </div>
 </div>
 <div class="container">
-  <div class="panel panel-default" style='opacity:0.9'>
+  <div class="panel panel-dark" style='opacity:0.9'>
         
-        <h1 align="center">Hotel Rooms</h1>
+        <h1 align="center" style="color:white">Hotel Rooms</h1>
 
         <div class="panel-body">
 
