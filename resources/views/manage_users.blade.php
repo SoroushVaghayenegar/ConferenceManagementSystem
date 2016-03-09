@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Gobind Sarvar Conference')
+@section('title', 'Manage Users')
 
 
 
@@ -13,9 +13,9 @@
 </div>
 
 <div class="container">
-    <div class="panel panel-default" style='opacity:0.9'>
+    <div class="panel panel-dark" style='opacity:0.9'>
 
-        <h1 align='center'>Users</h1>
+        <h1 align='center' style="color:white">Users</h1>
 
         <div class="panel-body">
             <table id="users_table" class="display" cellspacing="0">

@@ -875,9 +875,10 @@ div[data-role="editor-toolbar"] {
   border-bottom: none;
   opacity: 0.7;
   text-transform: uppercase;
+  color: white;
 }
 .page-header i {
-  color: #acb1b8;
+  color: white;
   margin-right: 10px;
   float: left;
   font-size: 30px;
@@ -4938,3 +4939,42 @@ span.customSelect.changed {
 .customSelectInner {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
+
+.nav-tabs{
+  background-color:#161616;
+}
+.tab-content{
+    background-color:#303136;
+    color:#fff;
+    padding:5px
+}
+.nav-tabs > li > a{
+  border: medium none;
+  color: grey;
+}
+.nav-tabs > li > a:hover{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover{
+    background-color: #303136 !important;
+    color: white;
+}
+
+.panel-dark{
+    background-color: #303136;
+}
+
+
+
+
+/*.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
+   background-color: #e4e4e7;
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: #bfbfbf;
+}*/

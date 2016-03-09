@@ -26,11 +26,11 @@
         <div class="panel-heading">Conference details</div>
 
         <div class="panel-body">
-          <h1 class="text-capitalize">{{$conference->name}} Conference</h1> </br>
-          <p class="text-left"><strong>Description:</strong> {{$conference->description}}</p>
-          <p class="text-left"><strong>Capacity:</strong>    {{$conference->capacity}}</p>
-          <p class="text-left"><strong>Start Time:</strong>  {{$conference->start}}</p>
-          <p class="text-left"><strong>End Time:</strong>    {{$conference->end}}</p>
+            <h1 class="text-capitalize">{{$conference->name}} Conference</h1> </br>
+            <p class="text-left"><strong>Description:</strong> {{$conference->description}}</p>
+            <p class="text-left"><strong>Capacity:</strong>    {{$conference->capacity}}</p>
+            <p class="text-left"><strong>Start Time:</strong>  {{ date('F d, Y', strtotime($conference->start)) }}</p>
+            <p class="text-left"><strong>End Time:</strong>    {{ date('F d, Y', strtotime($conference->end)) }}</p>
         </div>
       </div>
     </div>
