@@ -50,10 +50,9 @@ class ConferenceController extends Controller
         // get registration details if user has joined
         $registration = $this->getRegistration($conference, $user);
         if (count($registration) > 0) {
-          // TODO: display registration information
         }
 
-        return view('conference.profile', [
+        return view('conference.info', [
           'conference' => $conference
         ]);
     }
@@ -84,6 +83,10 @@ class ConferenceController extends Controller
 
         // create participants for other users in group
         foreach ($request->participant as $participant) {
+          // skip participant if name is empty
+          if (!isset($participant['name']) || strlen(trim($participant['name'])) == 0)
+            continue;
+
           $hotel = isset($participant['hotel']) && $participant['hotel'] == 'on';
           $taxi = isset($participant['taxi']) && $participant['taxi'] == 'on';
           if ($same_flight)
@@ -141,6 +144,7 @@ class ConferenceController extends Controller
         $participant_id = [];
         foreach ($participants as $participant)
           $participant_id[] = $participant->id;
+        // print_r($participant_id);
 
         return $conference->attendees()->find($participant_id);
     }
