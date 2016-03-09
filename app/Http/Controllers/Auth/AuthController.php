@@ -69,7 +69,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        $verification_code = str_random(20);
+        $verification_code = str_random(40);
         Mail::send('auth.emails.verification', ['verification_code' => $verification_code], function($message) {
             $message->to(Input::get('email'), Input::get('name'))
             ->subject('Gobind Sarver verification');
@@ -85,27 +85,5 @@ class AuthController extends Controller
             ]);
 
 
-    }
-
-
-    public function confirm($verification_code)
-    {
-
-     //User::whereConfirmationCode($verification_code)->first()->update(['verified' => 1]);
-
-      User::where('verification_code',$verification_code)->update(['verified' => 1]);
-     Flash::message({{$verification_code}});
-     
-
-       //  if($verification_code)
-       //  {
-
-       //      $user->verified = 1;
-       //      $user->verification_code = null;
-       //      $user->save();
-
-       //      Flash::message('Your email is verified, you are now eligible to recieve updates!.');
-       //  }
-       // return redirect('/profile');
     }
 }
