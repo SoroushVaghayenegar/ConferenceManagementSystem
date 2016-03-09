@@ -13,7 +13,10 @@
         <div class="panel-body">
           <h3 class="text-center">
             <strong><i class="fa fa-check"></i></strong>
-            Congratulations! You're registered to <strong>{{$conference->name}}</strong>
+            Thank you! You're registered to <strong>{{$conference->name}}</strong>
+          </h3>
+          <p class="text-center">
+            Your request is pending approval from an administrator. You will be notified via email.
           </p>
         </div>
       </div>
@@ -31,6 +34,27 @@
             <p class="text-left"><strong>Capacity:</strong>    {{$conference->capacity}}</p>
             <p class="text-left"><strong>Start Time:</strong>  {{ date('F d, Y', strtotime($conference->start)) }}</p>
             <p class="text-left"><strong>End Time:</strong>    {{ date('F d, Y', strtotime($conference->end)) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="panel panel-default">
+        <div class="panel-heading">Your registration</div>
+
+        <div class="panel-body">
+          @foreach ($registration as $index => $participant)
+          <p><strong>Participant {{$index+1}}</strong></p>
+            @if($participant['primary_user'])
+            <p>Name: {{Auth::user()->name}}</p>
+            @else
+            <p>Name: {{$participant['name']}}</p>
+            @endif
+            <p>Flight: {{$participant['flight']}}</p>
+            <p>Hotel requested: {{$participant['hotel']?'Yes':'No'}}</p>
+            <p>Taxi requested: {{$participant['taxi']?'Yes':'No'}}</p>
+          @endforeach
         </div>
       </div>
     </div>

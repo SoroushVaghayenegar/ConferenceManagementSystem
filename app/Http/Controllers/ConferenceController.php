@@ -49,12 +49,14 @@ class ConferenceController extends Controller
 
         // get registration details if user has joined
         $registration = $this->getRegistration($conference, $user);
+        $res = [
+          'conference' => $conference
+        ];
         if (count($registration) > 0) {
+          $res['registration'] = $registration;
         }
 
-        return view('conference.info', [
-          'conference' => $conference
-        ]);
+        return view('conference.info', $res);
     }
 
     public function delete(Conference $id)
@@ -144,7 +146,6 @@ class ConferenceController extends Controller
         $participant_id = [];
         foreach ($participants as $participant)
           $participant_id[] = $participant->id;
-        // print_r($participant_id);
 
         return $conference->attendees()->find($participant_id);
     }
