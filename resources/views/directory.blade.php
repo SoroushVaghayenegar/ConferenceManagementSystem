@@ -11,7 +11,7 @@
 </div>
 <!-- SHOW IF ONLY USER IS ADMIN -->
 @if(Auth::user()->is_admin)
-  <a href="{{ URL::to('create_conference') }}" class="btn btn-danger"><i class="icon_plus_alt"></i>  Create a new conference</a>
+  <a href="{{ URL::to('create_conference') }}" class="btn btn-primary"><i class="fa fa-plus"></i>  Create a new conference</a>
   </br>
   </br>
 @endif
@@ -24,7 +24,7 @@
       </ul>
       <div class="tab-content">
         <div id="currentConferences" class="tab-pane fade in active">
-          @if (count($past_conferences) > 0)
+          @if (count($current_conferences) > 0)
             <div class="panel-body" >
                 <table width="100%" class="table">
                             <thead>
@@ -51,11 +51,11 @@
                                 </tr>
                               @endforeach
                             </tbody>
-                          </table>
+                </table>
                         
               </div>
             @else
-              <h2 align="center" style="color:#ff4d4d">No Past Conferences!</h2>
+              <h2 align="center" style="color:#ff4d4d">No Current Conferences!</h2>
             @endif
         </div>
         <div id="pastConferences" class="tab-pane fade">
@@ -96,4 +96,11 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.sidebar-menu > li').attr('class','');
+    $('#sidebar-conferences').attr('class','active');
+  })
+</script>
 @endsection

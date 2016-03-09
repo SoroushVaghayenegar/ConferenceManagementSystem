@@ -21,6 +21,12 @@
         </div>    
   </div>  
 </div>
-         
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.sidebar-menu > li').attr('class','');
+    $('#sidebar-flights').attr('class','active');
+  })
+</script>  
 
 @endsection

@@ -58,6 +58,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/directory', 'DirectoryController@index');
 
+  Route::get('/manage_participants', 'ParticipantController@index');
 
   Route::get('/hotel', 'HotelController@index');
 

@@ -59,7 +59,10 @@
           $(document).ready(function(){
             $("#hotel_table").dataTable();
           });
-
+          $(document).ready(function(){
+            $('.sidebar-menu > li').attr('class','');
+            $('#sidebar-hotel').attr('class','active');
+          })
           
         </script>
 @endsection
