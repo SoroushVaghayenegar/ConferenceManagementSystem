@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading">Join Conference</div>
 
@@ -85,10 +85,11 @@
                     <th>Flight number</th>
                     <th>Hotel needed</th>
                     <th>Taxi needed</th>
+                    <th>Remove</th>
                   </tr>
                 </thead>
                 <tbody id="participants">
-                  <tr>
+                  <tr id="participants_row0">
                     <td>
                       <input type="text" name="participant[0][name]"></input>
                     </td>
@@ -104,6 +105,7 @@
                     <td>
                       <input type="checkbox" name="participant[0][taxi]"></input>
                     </td>
+                    <td></td>
                   </tr>
                 </tbody>
               </table>
@@ -120,12 +122,16 @@
 <script>
 var count = 1;
 function participantTemplate(i) {
-  return "<tr><td><input type='text' name='participant["+1+"][name]'></input></td><th><input type='text' name='participant["+1+"][phone]'></input></td><td><input type='text' name='participant["+1+"][flight]'></input></td><th><input type='checkbox' name='participant["+1+"][hotel]'></input></td><td><input type='checkbox' name='participant["+1+"][taxi]'></input></td></tr>";
+  return "<tr id='participants_row"+i+"'><td><input type='text' name='participant["+i+"][name]'></input></td><th><input type='text' name='participant["+i+"][phone]'></input></td><td><input type='text' name='participant["+i+"][flight]'></input></td><th><input type='checkbox' name='participant["+i+"][hotel]'></input></td><td><input type='checkbox' name='participant["+i+"][taxi]'></input></td><td><a onclick='removeParticipant("+i+")'><i class='fa fa-times'></i></a></td></tr>";
 }
 
 function addParticipant() {
   $('#participants').append(participantTemplate(count));
   count++;
+}
+
+function removeParticipant(index) {
+  $('#participants_row'+index).remove();
 }
 
 </script>
