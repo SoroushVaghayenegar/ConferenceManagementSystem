@@ -13,7 +13,8 @@ class Participant extends Model
 
     public function conferences()
     {
-      return $this->belongsToMany('App\Conference');
+      return $this->belongsToMany('App\Conference')
+      ->withTimestamps();
     }
 
     public function events()

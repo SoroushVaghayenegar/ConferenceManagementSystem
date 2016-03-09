@@ -83,9 +83,15 @@ Route::group(['middleware' => 'web'], function () {
   */
   Route::post('/conference', 'ConferenceController@create');
 
-  Route::get('/conference/{id}', 'ConferenceController@show')->where('id', '[0-9]+');;
+  Route::get('/conference/{id}', 'ConferenceController@show')->where('id', '[0-9]+');
 
   Route::delete('/conference/{id}', 'ConferenceController@delete');
+
+  Route::get('/conference/{id}/join', function (Conference $id) {
+    return view('conference.join', ['conference' => $id]);
+  });
+
+  Route::post('/conference/{id}/join', 'ConferenceController@join');
 
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();

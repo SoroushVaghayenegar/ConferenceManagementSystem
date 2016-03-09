@@ -18,8 +18,9 @@ class CreateParticipantsTable extends Migration
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
           $table->boolean('primary_user')->default(false);
           $table->string('name');
-          $table->string('email');
+          $table->string('phone');
           $table->string('age');
+          $table->timestamps();
         });
     }
 
