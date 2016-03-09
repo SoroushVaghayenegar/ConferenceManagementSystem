@@ -8,9 +8,10 @@
 <!--overview start-->
 <div class="row">
     <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa-plus"></i> Manage Users</h3>
+        <h3 class="page-header"><i class="fa fa-user"></i> Manage Users</h3>
     </div>
 </div>
+
 
 <div class="container">
     <div class="panel panel-dark" style='opacity:0.9'>
@@ -26,7 +27,6 @@
                         <th>Phone Number</th>
                         <th>Admin</th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +40,6 @@
                                 @else
                                     False
                                 @endif</td>
-                            <td><a href="" class="btn btn-success">Change Role</a></td>
                             <td><a href="" class="btn btn-danger">Remove</a></td>
                         </tr>
                     @endforeach
@@ -54,6 +53,10 @@
         <script>
           $(function(){
             $("#users_table").dataTable();
+          })
+          $(document).ready(function(){
+            $('.sidebar-menu > li').attr('class','');
+            $('#sidebar-manageUsers').attr('class','active');
           })
         </script>
 @endsection

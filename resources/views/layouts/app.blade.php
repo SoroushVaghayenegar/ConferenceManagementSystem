@@ -95,7 +95,7 @@
         </div>
         @endif
         <!--logo start-->
-        <a href="{{ URL::to('') }}" class="logo">Gobind <span class="lite">Sarvar</span></a>
+        <a href="{{ URL::to('') }}" class="logo">Gobind Sarvar<span class="lite">  Conference Management System</span></a>
         <!--logo end-->
         <div class="top-nav notification-row">
             <ul class="nav pull-right top-menu">
@@ -136,32 +136,37 @@
               <div id="sidebar"  class="nav-collapse collapse">
                   <!-- sidebar menu start-->
                   <ul class="sidebar-menu">
-                      <li class="active">
+                      <li class="active" id='sidebar-home'>
                           <a class="" href="{{ URL::to('') }}">
                               <i class="icon_house_alt"></i>
                               <span>Home</span>
                           </a>
                       </li>
-                      <li class="">
+                      <li class="" id='sidebar-conferences'>
                           <a class="" href="{{ URL::to('/directory') }}">
                               <i class="fa fa-globe"></i>
                               <span>Conferences</span>
                           </a>
                       </li>
                       @if(Auth::user()->is_admin)
-                          <li class="">
+                          <li class="" id='sidebar-manageConferences'>
                               <a class="" href="{{ URL::to('/create_conference') }}">
                                   <span>Manage conferences</span>
                               </a>
                           </li>
-                          <li class="">
+                          <li class="" id='sidebar-manageParticipants'>
+                              <a class="" href="{{ URL::to('/manage_participants') }}">
+                                  <span>Manage Participants</span>
+                              </a>
+                          </li>
+                          <li class="" id='sidebar-manageUsers'>
                               <a class="" href="{{ URL::to('/manage_users') }}">
-                                    <i class="fa fa-plus"></i>
+                                    <i class="fa fa-user"></i>
                                   <span>Manage Users</span>
                               </a>
                           </li>
                           <li>
-                              <a class="" href="">
+                              <a class="" href="" id='sidebar-reports'>
                                   <i class="icon_piechart"></i>
                                   <span>Reports</span>
 
@@ -169,13 +174,13 @@
 
                           </li>
 
-                          <li class="">
+                          <li class="" id='sidebar-flights'>
                               <a class="" href="{{ URL::to('/flights')}}">
                                   <i class="fa fa-plane"></i>
                                   <span>flights</span>
                               </a>
                           </li>
-                          <li class="">
+                          <li class="" id='sidebar-hotel'>
                               <a class="" href="{{ URL::to('/hotel') }}">
                                   <i class="fa fa-bed"></i>
                                   <span>Hotel</span>

@@ -154,5 +154,10 @@ $('#managers').tagsinput({
   }
 });
 
+  $(document).ready(function(){
+    $('.sidebar-menu > li').attr('class','');
+    $('#sidebar-manageConferences').attr('class','active');
+  })
+
 </script>
 @endsection
