@@ -14,15 +14,13 @@ class VerificationController extends Controller{
 
 	public function confirm($verification_code)
 	{
-		$current_code = User::where('verification_code',$verification_code)->pluck('verification_code');
-		$current_status = User::where('verification_code',$verification_code)->pluck('verified');
+		$current_code = User::where('verification_code',$verification_code)->value('verification_code');
+		$current_status = User::where('verification_code',$verification_code)->value('verified');
 		if($verification_code == $current_code){
-			User::where('verification_code',$verification_code)->update(['verified' => 1,'verification_code'=> NULL]);
+			User::where('verification_code',$verification_code)->update(['verified' => true,'verification_code'=> NULL]);
 			\Session::flash('flash_message','Email successfully verified!.');
-		}else if($current_status != NULL){
+		}else {
 			\Session::flash('flash_message','Email has already been verified!.');	
-		}else{
-			\Session::flash('flash_message','Account not found');
 		}
 
 
