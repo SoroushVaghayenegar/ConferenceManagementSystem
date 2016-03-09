@@ -34,10 +34,15 @@
             <p class="text-left"><strong>Capacity:</strong>    {{$conference->capacity}}</p>
             <p class="text-left"><strong>Start Time:</strong>  {{ date('F d, Y', strtotime($conference->start)) }}</p>
             <p class="text-left"><strong>End Time:</strong>    {{ date('F d, Y', strtotime($conference->end)) }}</p>
+            <a class="btn btn-default" href="javascript:window.history.back()">Back</a>
+            @if(!isset($registration))
+            <a class="btn btn-primary pull-right" href="/conference/{{$conference->id}}/join">Register</a>
+            @endif
         </div>
       </div>
     </div>
   </div>
+  @if(isset($registration))
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
@@ -59,5 +64,6 @@
       </div>
     </div>
   </div>
+  @endif
 </div>
 @endsection
