@@ -36,7 +36,7 @@
             <p class="text-left"><strong>End Time:</strong>    {{ date('F d, Y', strtotime($conference->end)) }}</p>
             <a class="btn btn-default" href="javascript:window.history.back()">Back</a>
             @if(!isset($registration))
-            <a class="btn btn-primary pull-right" href="/conference/{{$conference->id}}/join">Register</a>
+            <a class="btn btn-danger pull-right" href="/conference/{{$conference->id}}/join">Register</a>
             @endif
         </div>
       </div>

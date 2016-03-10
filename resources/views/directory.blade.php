@@ -46,7 +46,7 @@
                                     <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-info">Details</a> 
                                   </td>
                                   <td> 
-                                    <button type="submit" class="btn btn-info"><i class=""></i>Register</button>
+                                    <a href="/conference/{{$current_conference->id}}/join" class="btn btn-danger">Register</a> 
                                   </td>
                                 </tr>
                               @endforeach
@@ -81,7 +81,7 @@
                                     <a href="{{ URL::to('conference/'.$past_conference->id) }}" class="btn btn-info">Details</a> 
                                   </td>
                                   <td> 
-                                    <button type="submit" class="btn btn-info"><i class=""></i>Register</button>
+                                    <a href="/conference/{{$past_conference->id}}/join" class="btn btn-danger">Register</a>
                                   </td>
                                 </tr>
                               @endforeach

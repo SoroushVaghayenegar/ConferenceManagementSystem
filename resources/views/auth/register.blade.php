@@ -134,7 +134,7 @@
 </div>
 
 <script>
-$('#date_of_birth-datepicker input').datepicker({ startView: 2 });
+$('#date_of_birth-datepicker input').datepicker({ startView: 2, format: "yyyy/mm/dd"});
 $('#countrypicker').flagStrap();
 </script>
 @endsection
