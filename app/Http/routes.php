@@ -42,10 +42,6 @@ Route::group(['middleware' => 'web'], function () {
   Route::post('/profile', 'ProfileController@update');
 
 
-  Route::get('/', function () {
-    return view('welcome');
-  });
-
   Route::get('/manage_users', function () {
     $users = User::orderBy('created_at', 'asc')->get();
 
@@ -54,7 +50,7 @@ Route::group(['middleware' => 'web'], function () {
     ]);
   });
 
-  Route::get('/home', 'HomeController@index');
+  Route::get('/', 'HomeController@index');
 
   Route::get('/directory', 'DirectoryController@index');
 

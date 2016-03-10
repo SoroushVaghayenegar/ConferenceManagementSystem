@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class ParticipantController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {	
     	$current_conferences = DB::table('conferences')->where('end', '>=', date('Y-m-d').' 00:00:00')->get();

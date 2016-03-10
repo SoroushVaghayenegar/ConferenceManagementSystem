@@ -14,6 +14,11 @@ use App\Conference;
 class ProfileController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function update(Request $request)
     {    session_start();
         $id = Auth::user()->id;

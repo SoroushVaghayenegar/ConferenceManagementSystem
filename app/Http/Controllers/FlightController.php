@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class FlightController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $flights = DB::table('conference_attendees')->get();

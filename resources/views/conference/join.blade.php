@@ -16,7 +16,7 @@
 
           <h1 class="text-capitalize">{{$conference->name}} Conference</h1> </br>
           <p class="text-left"><strong>Description:</strong>  {{$conference->description}} <strong>Capacity:</strong>  {{$conference->capacity}}</p>
-          <p class="text-left"><strong>Start:</strong>   {{$conference->start}} <strong>End:</strong>    {{$conference->end}}</p>
+          <p class="text-left"><strong>Start:</strong>   {{date('F d, Y', strtotime($conference->start))}} <strong>End:</strong>    {{date('F d, Y', strtotime($conference->end))}}</p>
 
           <form action="/conference/{{$conference->id}}/join" method="POST" class="form-horizontal">
             {{ csrf_field() }}
