@@ -29,7 +29,7 @@
                                 <th>Flight Number</th>
                                 <th>Hotel Room Address & Phone Number</th>
                             </thead>
-                            <tbody style='color:white'>
+                            <tbody style='color:#ffa366'>
                                 <tr>
                                     <td>Brain Health Conference</td>
                                     <td>March 23, 2016</td>
@@ -40,7 +40,7 @@
                                         Jon    </br>
                                         Yuwei
                                     </td>
-                                    <td style='color:#0088cc'> AT0421</td>
+                                    <td style='color:#00bfff'> AT0421</td>
                                     <td>
                                         <address>
                                           <strong>Holiday Inn</strong><br>

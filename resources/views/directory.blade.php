@@ -32,6 +32,7 @@
                                 <th>Capacity</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Location</th>
                                 <th></th>
                                 <th></th>
                             </thead>
@@ -42,6 +43,7 @@
                                   <td class="table-text">{{ $current_conference->capacity }}</td>
                                   <td class="table-text">{{ date('F d, Y', strtotime($current_conference->start)) }}</td>
                                   <td class="table-text">{{ date('F d, Y', strtotime($current_conference->end)) }}</td>
+                                  <td class="table-text">{{ $current_conference->location }}</td>
                                   <td>
                                     <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-info">Details</a> 
                                   </td>
@@ -67,6 +69,7 @@
                                 <th>Capacity</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
+                                <th>Location</th>
                                 <th></th>
                                 <th></th>
                             </thead>
@@ -77,6 +80,7 @@
                                   <td class="table-text">{{ $past_conference->capacity }}</td>
                                   <td class="table-text">{{ date('F d, Y', strtotime($past_conference->start)) }}</td>
                                   <td class="table-text">{{ date('F d, Y', strtotime($past_conference->end)) }}</td>
+                                  <td class="table-text">{{ $past_conference->location }}</td>
                                   <td>
                                     <a href="{{ URL::to('conference/'.$past_conference->id) }}" class="btn btn-info">Details</a> 
                                   </td>
