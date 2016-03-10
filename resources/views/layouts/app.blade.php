@@ -56,7 +56,7 @@
     <!--custome script for all page-->
     <script src="/js/scripts.js"></script>
 
-    <link href="/css/style.css" rel="stylesheet">
+    
     <?php
 
     $i = rand(1, 28);
@@ -95,7 +95,7 @@
         </div>
         @endif
         <!--logo start-->
-        <a href="{{ URL::to('') }}" class="logo">Gobind Sarvar<span class="lite">  Conference Management System</span></a>
+        <a href="{{ URL::to('') }}" class="logo">Gobind Sarvar<span class="lite">  CMS</span></a>
         <!--logo end-->
         <div class="top-nav notification-row">
             <ul class="nav pull-right top-menu">
