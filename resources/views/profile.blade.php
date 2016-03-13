@@ -11,6 +11,10 @@ $emailError="";
 ?>
 
 @section('content')
+<!-- Bootstrap Datepicker plugin-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+
 <div class="row">
   <div class="col-lg-12">
     <h3 class="page-header"><i class="fa fa-user"></i> Profile</h3>
@@ -94,7 +98,7 @@ $emailError="";
                                             <p><span>Name </span>:&nbsp; {{{$currentName}}}</p>
                                           </div>                                           
                                           <div class="bio-row">
-                                            <p><span>Birthday</span>:</p>
+                                            <p><span>Birthday </span>:</p>
                                           </div>
                                           <div class="bio-row">
                                             <p><span>Country </span>:</p>
@@ -145,12 +149,19 @@ $emailError="";
                                               <input type="text" class="form-control" id="c-name" placeholder=" ">
                                             </div>
                                           </div>
-                                          <div class="form-group">
-                                            <label class="col-lg-2 control-label">Birthday</label>
-                                            <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="b-day" placeholder=" ">
-                                            </div>
-                                          </div>
+										  
+										<div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
+											<label class="col-lg-2 control-label">Date of Birth</label>
+											<div class="col-lg-6" id="date_of_birth-datepicker">
+												  <input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}">
+													@if ($errors->has('date_of_birth'))
+													<span class="help-block">
+														<strong>{{ $errors->first('date_of_birth') }}</strong>
+													</span>
+													@endif
+											</div>
+										</div>
+										
                                           <div class="form-group">
                                             <label class="col-lg-2 control-label">Occupation</label>
                                             <div class="col-lg-6">
@@ -222,7 +233,9 @@ $emailError="";
                           </div>
                         </div>
 
-
+<script>
+$('#date_of_birth-datepicker input').datepicker({ startView: 2, format: "yyyy/mm/dd"});
+</script>
 <!--
 
 -->
