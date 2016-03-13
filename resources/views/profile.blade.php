@@ -98,7 +98,7 @@ $emailError="";
                                             <p><span>Name </span>:&nbsp; {{{$currentName}}}</p>
                                           </div>                                           
                                           <div class="bio-row">
-                                            <p><span>Birthday </span>:</p>
+                                            <p><span>Date of Birth </span>:</p>
                                           </div>
                                           <div class="bio-row">
                                             <p><span>Country </span>:</p>
@@ -192,6 +192,7 @@ $emailError="";
                                             <div class="col-lg-offset-2 col-lg-10">
                                               <button type="submit" name="submit" type="submit" class="btn btn-primary">Save</button>
                                               <button type="button" class="btn btn-danger">Cancel</button>
+											  <button onClick="window.print()">Print this page</button>
                                             </div>
                                           </div>
                                         </form>
