@@ -21,6 +21,7 @@ class CreateConferencesTable extends Migration
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->text('location')->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
         });
 
@@ -45,6 +46,7 @@ class CreateConferencesTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->integer('capacity');
+            $table->text('address');
             $table->timestamps();
         });
 

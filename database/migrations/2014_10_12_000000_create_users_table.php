@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
       			$table->string('date_of_birth');
       			$table->string('city');
       			$table->string('country');
+            $table->enum('gender', ['male', 'female'])->nullable();
             $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
