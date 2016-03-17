@@ -25,6 +25,6 @@ class VerificationController extends Controller{
 
 
 
-		return redirect('/');
+		return redirect('/login');
 	}
 }

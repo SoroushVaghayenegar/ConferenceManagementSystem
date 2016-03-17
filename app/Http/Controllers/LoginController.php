@@ -81,7 +81,7 @@ class LoginController extends Controller
 
         protected function getFailedVerificationMessage()
         {
-        	return 'You have not verified your email address!.';
+        	return 'You have not verified your email address.';
         }
 
 
