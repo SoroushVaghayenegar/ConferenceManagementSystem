@@ -47,13 +47,13 @@ class LoginController extends Controller
 
 		if (!Auth::attempt($confirmedID))
 		{
-			return redirect()->back()->withInput()->withErrors([
+			return redirect()->back()->withInput($request->only($this->loginUsername(), 'remember'))->withErrors([
 				$this->loginUsername() => $this->getFailedVerificationMessage(),
 				]);
 		}
 
 
-		return redirect("/");
+		return redirect('/');
 	}
 
 
@@ -76,16 +76,12 @@ class LoginController extends Controller
      */
         protected function getFailedLoginMessage()
         {
-        	return Lang::has('auth.failed')
-        	? Lang::get('auth.failed')
-        	: 'These credentials do not match our records.';
+        	return 'These credentials do not match our records.';
         }
 
         protected function getFailedVerificationMessage()
         {
-        	return Lang::has('auth.failed')
-        	? Lang::get('auth.failed')
-        	: 'You have not verified your email address!.';
+        	return 'You have not verified your email address!.';
         }
 
 
