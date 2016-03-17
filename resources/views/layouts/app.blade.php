@@ -189,9 +189,6 @@
 
     <section id="main-content">
       <section class="wrapper"> 
-        @if(Session::has('flash_message'))
-        <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
-        @endif
         @yield('content')
       </section>
       <section>

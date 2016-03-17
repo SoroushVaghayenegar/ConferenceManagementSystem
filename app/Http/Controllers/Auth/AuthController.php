@@ -74,6 +74,7 @@ class AuthController extends Controller
             $message->to(Input::get('email'), Input::get('name'))
             ->subject('Gobind Sarver verification');
         });
+        \Session::flash('flash_message','Account created! Please verify your email address.');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
