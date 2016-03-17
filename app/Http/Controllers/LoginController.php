@@ -39,7 +39,21 @@ class LoginController extends Controller
 				]);
 		}
 
+		$confirmedID = [
+		'email' => Input::get('email'),
+		'password' => Input::get('password'),
+		'verified' => 1
+		];
 
+		if (!Auth::attempt($confirmedID))
+		{
+			return redirect()->back()->withInput()->withErrors([
+				$this->loginUsername() => $this->getFailedVerificationMessage(),
+				]);
+		}
+
+
+		return redirect("/");
 	}
 
 
@@ -65,6 +79,13 @@ class LoginController extends Controller
         	return Lang::has('auth.failed')
         	? Lang::get('auth.failed')
         	: 'These credentials do not match our records.';
+        }
+
+        protected function getFailedVerificationMessage()
+        {
+        	return Lang::has('auth.failed')
+        	? Lang::get('auth.failed')
+        	: 'You have not verified your email address!.';
         }
 
 
