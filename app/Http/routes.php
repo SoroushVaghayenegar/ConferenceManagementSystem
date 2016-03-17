@@ -33,11 +33,9 @@ Route::get('/welcome', function () {
 */
 
 
-
 Route::group(['middleware' => 'web'], function () {
 
   Route::auth();
-
   Route::get('/profile', 'ProfileController@index');
   Route::post('/profile', 'ProfileController@update');
 
@@ -53,6 +51,17 @@ Route::group(['middleware' => 'web'], function () {
       'users' => $users
       ]);
   });
+
+    /**
+  * Manages login
+  */
+
+  Route::get('/login', 'LoginController@index');
+
+  Route::post('/login', 'LoginController@login');
+
+
+  /*************************************************/
 
   Route::get('/home', 'HomeController@index');
 
