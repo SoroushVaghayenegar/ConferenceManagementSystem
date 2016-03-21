@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Mail;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class AuthController extends Controller
 {
@@ -52,6 +55,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+
 			'date_of_birth' => 'date|date_format:m/d/Y',
 			'city' => 'required|max:255',
 			'country' => 'required|max:255'
@@ -66,13 +70,21 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        $verification_code = str_random(40);
+        Mail::send('auth.emails.verification', ['verification_code' => $verification_code], function($message) {
+            $message->to(Input::get('email'), Input::get('name'))
+            ->subject('Gobind Sarver verification');
+        });
+        \Session::flash('flash_message','Account created! Please verify your email address.');
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-			'date_of_birth' => 'date|date_format:m/d/Y',
-			'city' => $data['city'],
-			'country' => $data['country']
+			'date_of_birth' => 'date|date_format:Y/m/d',
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'verification_code' => $verification_code
         ]);
+
     }
 }

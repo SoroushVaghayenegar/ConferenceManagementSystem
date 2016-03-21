@@ -33,11 +33,9 @@ Route::get('/welcome', function () {
 */
 
 
-
 Route::group(['middleware' => 'web'], function () {
 
   Route::auth();
-
   Route::get('/profile', 'ProfileController@index');
   Route::post('/profile', 'ProfileController@update');
 
@@ -47,8 +45,9 @@ Route::group(['middleware' => 'web'], function () {
 
     return view('manage_users', [
       'users' => $users
-    ]);
+      ]);
   });
+
 
   Route::get('/register/verify', function(){
 
@@ -56,6 +55,19 @@ Route::group(['middleware' => 'web'], function () {
   });
 
   Route::get('/', 'HomeController@index');
+
+    /**
+  * Manages login
+  */
+
+  Route::get('/login', 'LoginController@index');
+
+  Route::post('/login', 'LoginController@login');
+
+
+  /*************************************************/
+
+  Route::get('/home', 'HomeController@index');
 
   Route::get('/directory', 'DirectoryController@index');
 
@@ -67,6 +79,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/reports', 'ReportController@index');
 
+  Route::get('/verify/{verificationCode}','VerificationController@confirm');
 
   /**
   * Show Conference Dashboard
@@ -76,7 +89,7 @@ Route::group(['middleware' => 'web'], function () {
 
     return view('conferences', [
       'conferences' => $conferences
-    ]);
+      ]);
 
     //
   });

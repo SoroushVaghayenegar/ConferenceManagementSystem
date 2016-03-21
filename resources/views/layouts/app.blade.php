@@ -87,7 +87,7 @@
 </head>
 
 <body>
-<section id="container" class="">
+  <section id="container" class="">
     <header class="header dark-bg">
         @if(Auth::check())
         <div class="toggle-nav">
@@ -206,8 +206,5 @@
     @endif
 </section>
 
-
-
-
-</body>
-</html>
+    </body>
+    </html>
