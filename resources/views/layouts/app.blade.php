@@ -165,8 +165,8 @@
                                   <span>Manage Users</span>
                               </a>
                           </li>
-                          <li>
-                              <a class="" href="" id='sidebar-reports'>
+                          <li class="" id='sidebar-reports'>
+                              <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>
                                   <span>Reports</span>
 

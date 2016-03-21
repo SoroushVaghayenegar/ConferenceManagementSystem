@@ -50,6 +50,11 @@ Route::group(['middleware' => 'web'], function () {
     ]);
   });
 
+  Route::get('/register/verify', function(){
+
+    return view('auth.verify');
+  });
+
   Route::get('/', 'HomeController@index');
 
   Route::get('/directory', 'DirectoryController@index');
@@ -59,6 +64,8 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/hotel', 'HotelController@index');
 
   Route::get('/flights', 'FlightController@index');
+
+  Route::get('/reports', 'ReportController@index');
 
 
   /**
