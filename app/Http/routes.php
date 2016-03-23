@@ -69,6 +69,10 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/home', 'HomeController@index');
 
+  Route::get('/verify', function(){
+    return view('auth/verify');
+  });
+
   Route::get('/directory', 'DirectoryController@index');
 
   Route::get('/manage_participants', 'ParticipantController@index');

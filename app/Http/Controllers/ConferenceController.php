@@ -26,7 +26,8 @@ class ConferenceController extends Controller
           'description' => 'required',
           'capacity' => 'integer|min:0',
           'start' => 'date|date_format:Y/m/d',
-          'end' => 'date|date_format:Y/m/d|after:start'
+          'end' => 'date|date_format:Y/m/d|after:start',
+          'location' => 'required|max:255'
         ]);
 
         $conference = new Conference;
@@ -35,6 +36,7 @@ class ConferenceController extends Controller
         $conference->capacity = $request->capacity;
         $conference->start = $request->start;
         $conference->end = $request->end;
+        $conference->location= $request->location;
         $conference->save();
 
         $conference->managers()->attach($request->managers);

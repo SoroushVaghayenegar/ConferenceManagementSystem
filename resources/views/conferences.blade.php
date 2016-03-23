@@ -15,9 +15,9 @@
 <script src="js/bootstrap-tagsinput.js"></script>
 
 <div class="row">
-        <div class="col-lg-12">
-          <h3 class="page-header"><i class="fa fa-plus"></i> Manage Conferences</h3>
-        </div>
+  <div class="col-lg-12">
+    <h3 class="page-header"><i class="fa fa-plus"></i> Manage Conferences</h3>
+  </div>
 </div>
 
 <div class="container">
@@ -71,12 +71,20 @@
             </div>
           </div>
 
-          <!-- Start Date -->
+          <!-- End Date -->
           <div class="form-group">
             <label class="col-md-4 control-label" class="control-label"> End Date</label>
 
             <div class="col-md-6" id="end-datepicker">
               <input type="text" name="end" id="conference-end" class="form-control" value="{{ old('end') }}">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" class="control-label"> Location</label>
+
+            <div class="col-md-6">
+              <input type="text" name="location" id="conference-location" class="form-control" value="{{ old('location') }}">
             </div>
           </div>
 
@@ -154,10 +162,10 @@ $('#managers').tagsinput({
   }
 });
 
-  $(document).ready(function(){
-    $('.sidebar-menu > li').attr('class','');
-    $('#sidebar-manageConferences').attr('class','active');
-  })
+$(document).ready(function(){
+  $('.sidebar-menu > li').attr('class','');
+  $('#sidebar-manageConferences').attr('class','active');
+})
 
 </script>
 @endsection

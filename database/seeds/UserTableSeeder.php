@@ -18,7 +18,8 @@ class UserTableSeeder extends Seeder
           'city' => 'Vancouver',
           'country' => 'Canada',
           'password' => bcrypt('password'),
-          'is_admin' => true
+          'is_admin' => true,
+          'verified' => true
         ]);
         DB::table('users')->insert([
           'name' => 'Gobind Sarvar',
