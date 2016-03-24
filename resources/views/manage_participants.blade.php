@@ -4,7 +4,7 @@
 
 
 
-@section('content')           
+@section('content')
 <!--overview start-->
 <div class="row">
     <div class="col-lg-12">
@@ -20,7 +20,7 @@
             <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
             <li><a data-toggle="tab" href="#pastConferences"><strong>Past Conferences</strong></a></li>
         </ul>
-        
+
         <div class="tab-content">
             <div id="currentConferences" class="tab-pane fade in active">
                 <div class="panel-body">
@@ -43,24 +43,26 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Email</th>
+                                <th>Age</th>
                                 <th>Phone Number</th>
-                                <th>Admin</th>
-                                <th></th>
-                                <th></th>
+                                <th>Flight #</th>
+                                <th>Taxi requested</th>
+                                <th>Hotel requested</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- 
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            -->
+                        @if (isset($attendees))
+                        @foreach ($attendees as $attendee)
+                            <tr>
+                                <td>{{$attendee->name}}</td>
+                                <td>{{$attendee->age}}</td>
+                                <td>{{$attendee->phone}}</td>
+                                <td>{{$attendee->flight ? $attendee->flight : "N/A"}}</td>
+                                <td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
+                                <td>{{$attendee->hotel_requested ? "Yes": "No"}}</td>
+                            </tr>
+                        @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>
@@ -94,7 +96,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- 
+                            <!--
                                 <tr>
                                     <td></td>
                                     <td></td>
@@ -111,7 +113,7 @@
         </div>
     </div>
 </div>
-        
+
 
         <script>
         //  Script for running DataTable -->
@@ -121,7 +123,7 @@
           $(function(){
             $("#participants_table_past").dataTable();
           })
-          
+
           // Make the sidebar active
           $(document).ready(function(){
             $('.sidebar-menu > li').attr('class','');
@@ -133,7 +135,7 @@
           });
 
           $('#option_past').click(function(){
-            
+
           });
 
         </script>

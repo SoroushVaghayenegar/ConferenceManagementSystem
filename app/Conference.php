@@ -25,6 +25,23 @@ class Conference extends Model
         ->withTimestamps();
     }
 
+    public function getAttendees()
+    {
+      $participants = $this->attendees()->get();
+
+      foreach ($participants as $participant) {
+        if ($participant->primary_user) {
+          $participant->name = User::findOrFail($participant->user_id)->name;
+
+          $participant->flight = $participant->pivot->flight;
+          $participant->hotel_requested = $participant->pivot->hotel_requested;
+          $participant->taxi_requested = $participant->pivot->taxi_requested;
+        }
+      }
+
+      return $participants;
+    }
+
     public function hotels()
     {
         return $this->hasMany('App\Hotel');

@@ -39,7 +39,7 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/profile', 'ProfileController@index');
   Route::post('/profile', 'ProfileController@update');
 
-  
+
   //only authenticated users can access
   Route::get('manage_users', ['middleware' => 'auth', function() {
     $users = User::orderBy('created_at', 'asc')->get();
@@ -48,7 +48,7 @@ Route::group(['middleware' => 'web'], function () {
       'users' => $users
       ]);
   }]);
-  
+
 
 
   Route::get('/register/verify', function(){
@@ -110,6 +110,8 @@ Route::group(['middleware' => 'web'], function () {
   });
 
   Route::post('/conference/{id}/join', 'ConferenceController@join');
+
+  Route::get('/conference/{id}/participants', 'ParticipantController@show');
 
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();
