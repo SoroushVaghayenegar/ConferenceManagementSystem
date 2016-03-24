@@ -130,51 +130,29 @@
                 <div>{{ $conference->name }}</div>
               </td>
 
+              <!-- Edit button -->
+              <td>
+                 <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a> 
+              </td>
               <!-- Delete Button -->
               <td>
                 <form action="{{ url('conference/'.$conference->id) }}" method="POST">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit">Edit</button>
+                  {!! csrf_field() !!}
+                  {!! method_field('DELETE') !!}
+
+                  <button type="submit" class="btn btn-danger">
+                    <i class="fa fa-trash"></i> Delete
+                  </button>
                 </form>
-
-                <div id="edit" class="modal fade" role="dialog" data-backdrop="static" tabindex="-1"
-                role="dialog" aria-labelledby="edit" aria-hidden="true">
-                <div class="modal-dialog">
-
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title"><div>{{$conference->name}}</div></h4>
-                    </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-info" data-dismiss="modal">Save Changes</button>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </td>
-            <td>
-              <form action="{{ url('conference/'.$conference->id) }}" method="POST">
-                {!! csrf_field() !!}
-                {!! method_field('DELETE') !!}
-
-                <button type="submit" class="btn btn-danger">
-                  <i class="fa fa-trash"></i> Delete
-                </button>
-              </form>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
+    @endif
   </div>
-  @endif
-</div>
 </div>
 <script>
 $('#start-datepicker input').datepicker({ format: "yyyy/mm/dd" });
