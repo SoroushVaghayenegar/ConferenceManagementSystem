@@ -26,6 +26,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        //
+        $gate->define('conf-manager-or-admin', function ($user, $conference) {
+          // An admin can edit any conferences
+          if ($user->is_admin)
+            return true;
+
+          // check to see if current user is a conference manage for this conference
+          $managers = (array) $conference->managers()->find($user->id);
+
+          return count($managers) > 0;
+        });
     }
 }
