@@ -19,6 +19,10 @@
 	</div>
 </div>
 
+@if(Session::has('flash_message'))
+<div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+@endif
+
 <div class="container">
 	<div class="col-sm-offset-2 col-sm-8">
 		<div class="panel panel-default">
@@ -31,7 +35,7 @@
 				@include('common.errors')
 
 				<!-- New Conference Form -->
-				<form action="/conference" method="POST" class="form-horizontal">
+				<form action="{{ url('conference/'.$conference->id) }}/edit" method="POST" class="form-horizontal">
 					{{ csrf_field() }}
 
 					<!-- Name -->
@@ -97,7 +101,7 @@
 					<!-- Add Conference Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-6">
-<a href="{{ URL::to('create_conference') }}" class="btn btn-default">Back</a> 
+							<a href="{{ URL::to('create_conference') }}" class="btn btn-default">Back</a> 
 							<button type="submit" class="btn btn-info">
 								Save Changes
 							</button>

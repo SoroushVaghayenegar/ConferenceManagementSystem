@@ -44,6 +44,26 @@ class ConferenceController extends Controller
     return redirect('/');
   }
 
+  public function edit($id,Request $request)
+  {
+    Conference::where('id', $id)
+    ->update(
+      ['name' => $request->name,
+      'description' => $request->description,
+      'capacity' => $request->capacity,
+      'start' => $request->start,
+      'end' => $request->end,
+      'location' => $request->location
+      ]);
+    \Session::flash('flash_message','Conference updated.');
+    return redirect()->back();
+
+
+
+
+  }
+
+
   public function show($id)
   {
     $conference = Conference::findOrFail($id);

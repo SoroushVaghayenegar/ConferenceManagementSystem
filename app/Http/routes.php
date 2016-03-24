@@ -60,30 +60,30 @@ Route::group(['middleware' => 'web'], function () {
   * Manages login
   */
 
-  Route::get('/login', 'LoginController@index');
+    Route::get('/login', 'LoginController@index');
 
-  Route::post('/login', 'LoginController@login');
+    Route::post('/login', 'LoginController@login');
 
 
-  /*************************************************/
+    /*************************************************/
 
-  Route::get('/home', 'HomeController@index');
+    Route::get('/home', 'HomeController@index');
 
-  Route::get('/verify', function(){
-    return view('auth/verify');
-  });
+    Route::get('/verify', function(){
+      return view('auth/verify');
+    });
 
-  Route::get('/directory', 'DirectoryController@index');
+    Route::get('/directory', 'DirectoryController@index');
 
-  Route::get('/manage_participants', 'ParticipantController@index');
+    Route::get('/manage_participants', 'ParticipantController@index');
 
-  Route::get('/hotel', 'HotelController@index');
+    Route::get('/hotel', 'HotelController@index');
 
-  Route::get('/flights', 'FlightController@index');
+    Route::get('/flights', 'FlightController@index');
 
-  Route::get('/reports', 'ReportController@index');
+    Route::get('/reports', 'ReportController@index');
 
-  Route::get('/verify/{verificationCode}','VerificationController@confirm');
+    Route::get('/verify/{verificationCode}','VerificationController@confirm');
 
   /**
   * Show Conference Dashboard
@@ -113,9 +113,11 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::post('/conference/{id}/join', 'ConferenceController@join');
 
-    Route::get('/conference/{id}/edit', function (Conference $id) {
+  Route::get('/conference/{id}/edit', function (Conference $id) {
     return view('conference.edit', ['conference' => $id]);
   });
+
+  Route::post('/conference/{id}/edit', 'ConferenceController@edit');
 
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();
