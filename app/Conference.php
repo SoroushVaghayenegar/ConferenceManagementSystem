@@ -36,6 +36,7 @@ class Conference extends Model
           $participant->flight = $participant->pivot->flight;
           $participant->hotel_requested = $participant->pivot->hotel_requested;
           $participant->taxi_requested = $participant->pivot->taxi_requested;
+          $participant->approved = $participant->pivot->approved;
         }
       }
 

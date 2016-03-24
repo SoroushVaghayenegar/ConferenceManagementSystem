@@ -20,6 +20,7 @@ class CreateConferenceAttendees extends Migration
             $table->string('flight')->default(null);
             $table->boolean('hotel_requested')->default(false);
             $table->boolean('taxi_requested')->default(false);
+            $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }
