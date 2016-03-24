@@ -16,7 +16,7 @@
   </br>
 @endif
 <div class="container">
-  <div class="panel panel-default" style='opacity:0.9'>
+  <div class="panel panel-default" >
     
       <ul class="nav nav-tabs nav-justified">
         <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
@@ -36,7 +36,7 @@
                                 <th></th>
                                 <th></th>
                             </thead>
-                            <tbody style="position: relative; center: 40%;">
+                            <tbody style="position: relative; center: 40%; color:white">
                               @foreach ($current_conferences as $current_conference)
                                 <tr>
                                   <td class="table-text">{{ $current_conference->name }}</td>
@@ -73,7 +73,7 @@
                                 <th></th>
                                 <th></th>
                             </thead>
-                            <tbody style="position: relative; center: 40%;">
+                            <tbody style="position: relative; center: 40%; color:white">
                               @foreach ($past_conferences as $past_conference)
                                 <tr>
                                   <td class="table-text">{{ $past_conference->name }}</td>

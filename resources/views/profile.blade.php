@@ -1,14 +1,6 @@
 @extends('layouts.app')
 
-<?php 
-
-$currentName = Auth::user()->name;
-$currentEmail = Auth::user()->email;
-$emailError="";
-
-
-
-?>
+@section('title', 'Profile')
 
 @section('content')
 <!-- Bootstrap Datepicker plugin-->
@@ -31,9 +23,10 @@ $emailError="";
                       <div class="profile-widget profile-widget-info">
                         <div class="panel-body">
                           <div class="col-lg-2 col-sm-2">
-                            <span class="username">{{{ $currentName }}}</span>               
-                            <div class="follow-ava">
-                              <img alt="" src="img/avatar.png">
+                            <strong><span class="username">{{Auth::user()->name}}</span></strong>
+                            <input id="profile-image-upload" class="hidden" type="file">               
+                            <div  class="follow-ava" >
+                              <img  id="profile_picture" alt="Change Image" src="img/1.jpg" class="img-circle" style="cursor: pointer;">
                             </div>
                             <!-- <h6>Administrator</h6>  -->                             
                           </div>
@@ -43,7 +36,7 @@ $emailError="";
                             <p></p>
                             <!-- <p><i class="fa fa-twitter"></i></p> -->
                             <h6>
-                              <span><i class="icon_calendar"></i>Joined:</span>
+                              <span><i class="icon_calendar"></i><strong>Joined:</strong></span>
                               {{ date('F d, Y', strtotime(Auth::user()->created_at)) }}
                             </h6>
                           </div>
@@ -66,21 +59,16 @@ $emailError="";
                                     <li class="active">
                                       <a data-toggle="tab" href="#profile">
                                         <i class="icon-user"></i>
-                                        Profile
+                                        <strong>Profile</strong>
                                       </a>
                                     </li>
                                     <li class="">
                                       <a data-toggle="tab" href="#edit-profile">
                                         <i class="icon-envelope"></i>
-                                        Edit Profile
+                                        <strong>Edit Profile</strong>
                                       </a>
                                     </li>
-                                    <li class="">
-                                      <a data-toggle="tab" href="#edit-group">
-                                        <i class="icon-envelope"></i>
-                                        Group
-                                      </a>
-                                    </li>
+                                    
                                   </ul>
                                 </header>
                                 <div class="panel-body">
@@ -92,28 +80,28 @@ $emailError="";
                                          <!--  Hello I’m Jenifer Smith, a leading expert in interactive and creative design specializing in the mobile medium. My graduation from Massey University with a Bachelor of Design majoring in visual communication. -->
                                        </div>
                                        <div class="panel-body bio-graph-info">
-                                        <h1>Biography</h1>
+                                        <h1><strong>Biography</strong></h1>
                                         <div class="row">
                                           <div class="bio-row">
-                                            <p><span>Name </span>:&nbsp; {{{$currentName}}}</p>
+                                            <p><span><strong>Name </span>:</strong>&nbsp; {{Auth::user()->name}}</p>
+                                          </div>
+                                          <div class="bio-row">
+                                            <p><span><strong>Gender </span>:</strong>&nbsp; {{Auth::user()->gender}}</p>
                                           </div>                                           
                                           <div class="bio-row">
-                                            <p><span>Date of Birth </span>:</p>
+                                            <p><span><strong>Date of Birth </span>:</strong>&nbsp; {{Auth::user()->date_of_birth}}</p>
                                           </div>
                                           <div class="bio-row">
-                                            <p><span>Country </span>:</p>
+                                            <p><span><strong>City </span>:</strong>&nbsp; {{Auth::user()->city}}</p>
                                           </div>
                                           <div class="bio-row">
-                                            <p><span>Occupation </span>:</p>
+                                            <p><span><strong>Country </span>:</strong>&nbsp; {{Auth::user()->country}}</p>
                                           </div>
                                           <div class="bio-row">
-                                            <p><span>Email </span>:&nbsp; {{{$currentEmail}}}</p>
+                                            <p><span><strong>Email </span>:</strong>&nbsp; {{Auth::user()->email}}</p>
                                           </div>
                                           <div class="bio-row">
-                                            <p><span>Mobile </span>:</p>
-                                          </div>
-                                          <div class="bio-row">
-                                            <p><span>Phone </span>: </p>
+                                            <p><span><strong>Phone </span>:</strong> </p>
                                           </div>
                                         </div>
                                       </div>
@@ -127,107 +115,72 @@ $emailError="";
                                   <div id="edit-profile" class="tab-pane">
                                     <section class="panel">                                          
                                       <div class="panel-body bio-graph-info">
-                                        <h1> Profile Info</h1>
+                                        <h1> <strong>Profile Info</strong></h1>
                                         <form class="form-horizontal" action="{{ url('/profile') }}" method="post" role="form">
                                           <!-- added for csrf -->
                                           <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                                 
                                           <div class="form-group">
-                                            <label for="name" class="col-lg-2 control-label">Name</label>
+                                            <label for="name" class="col-lg-2 control-label"><strong>Name</strong></label>
                                             <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="name" name="name" placeholder=" " value={{{$currentName}}}>
+                                              <input type="text" class="form-control" id="name" name="name" placeholder=" " value="{{Auth::user()->name}}">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label"><strong>Gender</strong></label>
+                                            <div class="col-lg-6" id="gender">
+                                                <input type="text" class="form-control" name="gender" value="{{Auth::user()->gender}}" disabled>
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label"><strong>Date of Birth</strong></label>
+                                            <div class="col-lg-6" id="date_of_birth-datepicker">
+                                                <input type="text" class="form-control" name="date_of_birth" value="{{Auth::user()->date_of_birth}}">
+                                            </div>
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label class="col-lg-2 control-label"><strong>City</strong></label>
+                                            <div class="col-lg-6">
+                                              <input type="text" class="form-control"  name="city" placeholder="" value="{{Auth::user()->city}}">
                                             </div>
                                           </div>
                                           <div class="form-group">
-                                            <label class="col-lg-2 control-label">About Me</label>
-                                            <div class="col-lg-10">
-                                              <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="col-lg-2 control-label">Country</label>
+                                            <label class="col-lg-2 control-label"><strong>Country</strong></label>
                                             <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="c-name" placeholder=" ">
+                                              <input type="text" class="form-control" id="c-name" name="country" placeholder="" value="{{Auth::user()->country}}">
                                             </div>
                                           </div>
 										  
-										<div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
-											<label class="col-lg-2 control-label">Date of Birth</label>
-											<div class="col-lg-6" id="date_of_birth-datepicker">
-												  <input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}">
-													@if ($errors->has('date_of_birth'))
-													<span class="help-block">
-														<strong>{{ $errors->first('date_of_birth') }}</strong>
-													</span>
-													@endif
-											</div>
-										</div>
-										
+                                          
                                           <div class="form-group">
-                                            <label class="col-lg-2 control-label">Occupation</label>
+                                            <label class="col-lg-2 control-label" for="email"><strong>Email</strong></label>
                                             <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="occupation" placeholder=" ">
+                                              <input type="email" class="form-control" id="email" name="email" placeholder=" "  value="{{Auth::user()->email}}" disabled>
+                                              
                                             </div>
                                           </div>
                                           <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="email">Email</label>
-                                            <div class="col-lg-6">
-                                              <input type="email" class="form-control" id="email" name="email" placeholder=" " value={{{$currentEmail}}}>
-                                              <?php echo "<p class='text-danger'>$emailError</p>";?>
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="col-lg-2 control-label">Mobile</label>
+                                            <label class="col-lg-2 control-label"><strong>phone</strong></label>
                                             <div class="col-lg-6">
                                               <input type="text" class="form-control" id="mobile" placeholder=" ">
                                             </div>
                                           </div>
-                                          <div class="form-group">
-                                            <label class="col-lg-2 control-label">Website URL</label>
-                                            <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="url" placeholder="http://www.demowebsite.com ">
-                                            </div>
-                                          </div>
+              
 
                                           <div class="form-group">
                                             <div class="col-lg-offset-2 col-lg-10">
                                               <button type="submit" name="submit" type="submit" class="btn btn-primary">Save</button>
                                               <button type="button" class="btn btn-danger">Cancel</button>
-											  <button onClick="window.print()">Print this page</button>
+											  
                                             </div>
                                           </div>
                                         </form>
                                       </div>
                                     </section>
                                   </div>
-                                  <div id="edit-group" class="tab-pane">
-                                    <section class="panel">                                          
-                                      <div class="panel-body bio-graph-info">
-                                        <h1> Group Info</h1>
-                                        <form class="form-horizontal" action="{{ url('/profile') }}" method="post" role="form">
-                                          <!-- added for csrf -->
-                                          <input type="hidden" name="_token" value="{{ csrf_token() }}" />                                                 
-                                          <div class="form-group">
-                                            <label for="member-name" class="col-lg-2 control-label">Name</label>
-                                            <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="member-name" name="member-name" placeholder=" " >
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <label class="col-lg-2 control-label" for="member-email">Email</label>
-                                            <div class="col-lg-6">
-                                              <input type="email" class="form-control" id="member-email" name="member-email" placeholder=" " >
-                                            </div>
-                                          </div>
-                                          <div class="form-group">
-                                            <div class="col-lg-offset-2 col-lg-10">
-                                              <button type="submit" name="submit" type="submit" class="btn btn-primary">Add member</button>
-                                              <button type="button" class="btn btn-danger">Cancel</button>
-                                            </div>
-                                          </div>
-                                        </form>
-                                      </div>
-                                    </section>
-                                  </div>
+                                  
                                 </div>
                               </div>
                             </section>
@@ -235,7 +188,15 @@ $emailError="";
                         </div>
 
 <script>
-$('#date_of_birth-datepicker input').datepicker({ startView: 2, format: "yyyy/mm/dd"});
+$('#date_of_birth-datepicker input').datepicker({ startView: 2});
+
+$(function() {
+    $('#profile_picture').on('click', function() {
+        $('#profile-image-upload').click();
+    });
+
+});
+
 </script>
 <!--
 

@@ -14,78 +14,127 @@
 
 
 <div class="container">
-    <div>
-        <i class="fa fa-info" style="color:red"></i> <strong style="color:#0088cc"> Pick a conference first !</strong>
-        <div class="radio">
-          <label>
-            <input type="radio" name="optionsRadios" id="option_current" value="current" checked>
-                Current Conference
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="optionsRadios" id="option_past" value="past">
-                Past Conference
-          </label>
-        </div>
 
+    <div class="panel panel-dark" >
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
+            <li><a data-toggle="tab" href="#pastConferences"><strong>Past Conferences</strong></a></li>
+        </ul>
+        
+        <div class="tab-content">
+            <div id="currentConferences" class="tab-pane fade in active">
+                <div class="panel-body">
 
-    </div>
-    <select class="form-control" style="background-color: #808080; color:white">
-        @if (count($current_conferences) > 0)
-            @foreach ($current_conferences as $current_conference)
-                <option>{{$current_conference->name}}</option>
-            @endforeach
-        @else
-            <option>No conferences available!</option>
-        @endif
+                    <h3 style="color:#ff4d4d">Choose conference:</h3>
+                    <strong>
+                        <select class="form-control" style="background-color: #006bb3; color:#d9d9d9">
+                            @if (count($current_conferences) > 0)
+                                @foreach ($current_conferences as $current_conference)
+                                    <option value="{{$current_conference->id}}">{{$current_conference->name}}</option>
+                                @endforeach
+                            @else
+                                <option>No conferences available!</option>
+                            @endif
 
-    </select>
-    <div class="panel panel-dark" style='opacity:0.9'>
+                        </select>
+                    </strong>
+                    <h3 align="center" style="color:white"><strong>Participants</strong></h3>
+                    <table id="participants_table_current" class="display" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Admin</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="pastConferences" class="tab-pane fade">
+                <div class="panel-body">
 
-        <h1 align='center' style="color:white">Participants</h1>
+                    <h3 style="color:#ff4d4d">Choose conference:</h3>
+                    <strong>
+                        <select class="form-control" style="background-color: #006bb3; color:#d9d9d9">
+                            @if (count($past_conferences) > 0)
+                                @foreach ($past_conferences as $past_conference)
+                                    <option>{{$past_conference->name}}</option>
+                                @endforeach
+                            @else
+                                <option>No conferences available!</option>
+                            @endif
 
-        <div class="panel-body">
-            <table id="participants_table" class="display" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Admin</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    -->
-                </tbody>
-            </table>
+                        </select>
+                    </strong>
+                    <h3 align="center" style="color:white"><strong>Participants</strong></h3>
+                    <table id="participants_table_past" class="display" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Admin</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- 
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
         
-<!-- Script for running DataTable -->
+
         <script>
+        //  Script for running DataTable -->
           $(function(){
-            $("#participants_table").dataTable();
+            $("#participants_table_current").dataTable();
           })
+          $(function(){
+            $("#participants_table_past").dataTable();
+          })
+          
+          // Make the sidebar active
           $(document).ready(function(){
             $('.sidebar-menu > li').attr('class','');
             $('#sidebar-manageParticipants').attr('class','active');
           })
 
-          $('#option_current').click(function() {
-               
-            });
+          $('#option_current').click(function(){
+
+          });
+
+          $('#option_past').click(function(){
+            
+          });
+
         </script>
 @endsection

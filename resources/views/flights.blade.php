@@ -10,9 +10,9 @@
         </div>
 </div>
 <div class="container">
-  <div class="panel panel-dark" style='opacity:0.9'>
+  <div class="panel panel-dark" >
         
-        <h1 align="center" style="color:white">Flights</h1>
+        <h1 align="center" style="color:white"><strong>Flights</strong></h1>
 
         <div class="panel-body">
 

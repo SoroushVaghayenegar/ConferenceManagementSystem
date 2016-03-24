@@ -24,9 +24,20 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         if (isset($request->submit)) {
             $name = $request->name;
-            $email = $request->email;
+            $aboutMe = $request->aboutMe;
+            $city = $request->city;
+            $country = $request->country;
+            $date_of_birth = $request->date_of_birth;
+            $gender = $request->gender;
+            $phone = $request->phone;
+            
+
             User::where('id', $id)
-            ->update(['name' => $name,'email' => $email]);
+            ->update(['name' => $name,
+                      'date_of_birth' => $date_of_birth,
+                      'city' => $city,
+                      'country' => $country,
+                      'gender' => $gender]);
 
          } 
      

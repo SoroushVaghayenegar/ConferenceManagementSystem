@@ -10,6 +10,11 @@ use App\Http\Controllers\Controller;
 
 class HotelController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         $hotels = DB::table('hotels')->get();

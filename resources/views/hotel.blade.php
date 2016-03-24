@@ -10,9 +10,9 @@
         </div>
 </div>
 <div class="container">
-  <div class="panel panel-dark" style='opacity:0.9'>
+  <div class="panel panel-dark" >
         
-        <h1 align="center" style="color:white">Hotel Rooms</h1>
+        <h1 align="center" style="color:white"><strong>Hotel Rooms</strong></h1>
 
         <div class="panel-body">
 
@@ -32,12 +32,11 @@
                       <tbody>
                           @foreach ($hotels as $hotel)
                               <tr>
-                                  <td>{{$hotel->name}}</td>
+                                  <td>ROOM NUMBER</td>
                                   <td>
                                     <address>
-                                      <strong>Hotel's name</strong><br>
-                                      1355 Market Street, Suite 900<br>
-                                      San Francisco, CA 94103<br>
+                                      <strong>{{$hotel->name}}</strong><br>
+                                      {{$hotel->address}}
                                       <abbr title="Phone">P:</abbr> (123) 456-7890
                                     </address>
                                   </td>

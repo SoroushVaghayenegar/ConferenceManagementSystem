@@ -73,7 +73,27 @@
                                 @endif
                             </div>
                         </div>
-						
+
+						<div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
+                            <label class="col-md-4 control-label">Gender</label>
+
+                            <div class="col-md-6" id="">
+                            
+                                <div class="input-group date">
+                                    <select class="form-control" name="gender">
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+
+                                @if ($errors->has('gender'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('gender') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
 						<div class="form-group{{ $errors->has('date_of_birth') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Date of Birth</label>
 

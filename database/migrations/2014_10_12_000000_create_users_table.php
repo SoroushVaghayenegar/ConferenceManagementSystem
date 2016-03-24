@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
       		$table->string('date_of_birth');
       		$table->string('city');
       		$table->string('country');
-            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->enum('gender', ['Male', 'Female']);
             $table->boolean('verified')->default(false);
             $table->string('verification_code')->nullable();
             $table->boolean('is_admin')->default(false);

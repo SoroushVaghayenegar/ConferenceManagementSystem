@@ -4,273 +4,389 @@
 <script src="/js/d3.min.js"></script>
 
 
+
 @section('title', 'Reports')
 
 
 
 @section('content')
-
-<style>
-body{
-    width:1060px;
-    margin:50px auto;
-    color: white;
-    
-}
-
-path {  stroke: #fff; }
-path:hover {  opacity:0.9; }
-rect:hover {  fill:blue; }
-.axis {  font: 10px sans-serif; }
-.legend tr{    border-bottom:1px solid grey; }
-.legend tr:first-child{    border-top:1px solid grey; }
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-
-}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 
-.x.axis path {  display: none; }
-.legend{
-    margin-bottom:76px;
-    display:inline-block;
-    border-collapse: collapse;
-    border-spacing: 0px;
-
-}
-.legend td{
-    padding:4px 5px;
-    vertical-align:bottom;
-}
-.legendFreq, .legendPerc{
-    align:right;
-    width:50px;
-}
-
-</style>
-<body>
-<div id='dashboard'>
+<div class="row">
+        <div class="col-lg-12">
+          <h3 class="page-header"><i class="icon_piechart"></i> Reports</h3>
+        </div>
 </div>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script>
-function dashboard(id, fData){
-    var barColor = 'steelblue';
-    function segColor(c){ return {low:"#807dba", mid:"#e08214",high:"#41ab5d"}[c]; }
+
+<div class="container">
+    <div class="panel panel-dark" >
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
+            <li><a data-toggle="tab" href="#pastConferences"><strong>Past Conferences</strong></a></li>
+        </ul>
+        
+        <div class="tab-content">
+            <div id="currentConferences" class="tab-pane fade in active">
+                <div class="panel-body">
+                <h3 style="color:#ff4d4d">Choose conference:</h3>
+                    <strong>
+                        <select class="form-control" style="background-color: #006bb3; color:#d9d9d9">
+                            @if (count($current_conferences) > 0)
+                                @foreach ($current_conferences as $current_conference)
+                                    <option value="{{$current_conference->id}}">{{$current_conference->name}}</option>
+                                @endforeach
+                            @else
+                                <option>No conferences available!</option>
+                            @endif
+
+                        </select>
+                    </strong>
+                    <br/>
+                    <div class="current-graph"></div>
+                </div>
+            </div>
+            <div id="pastConferences" class="tab-pane fade">
+                <div class="panel-body">
+                    <h3 style="color:#ff4d4d">Choose conference:</h3>
+                    <button id="alo">aasdasd</button>
+                    <strong>
+                        <select class="form-control" style="background-color: #006bb3; color:#d9d9d9">
+                            @if (count($past_conferences) > 0)
+                                @foreach ($past_conferences as $past_conference)
+                                    <option>{{$past_conference->name}}</option>
+                                @endforeach
+                            @else
+                                <option>No conferences available!</option>
+                            @endif
+
+                        </select>
+                    </strong>
+                    <br/>
+                    <div class="past-graph"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+
+if(window.screen.availWidth > 640)
+    var size = '20px'
+else
+    var size = '100%'
+
+$(function () {
+    $('.current-graph').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Gender PieChart'
+        },
+        tooltip: {
+            pointFormat: 'Percentage: <b>{point.percentage:.1f}%</b> <br/>Number: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name} <b>{point.percentage:.1f}%</b> ',
+                    style:{
+                        fontSize: size
+                    }
+                   
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Gender',
+            data: [
+                ['Men', 50],
+                ['Women', 50]
+            ]
+        }]
+    });
+});
+
+$(function () {
+    $('.past-graph').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Gender PieChart'
+        },
+        tooltip: {
+            pointFormat: 'Percentage: <b>{point.percentage:.1f}%</b> <br/>Number: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name} <b>{point.percentage:.1f}%</b> ',
+                    style:{
+                        fontSize: size
+                    }
+                   
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Gender',
+            data: [
+                ['Men', 45.0],
+                ['Women', 118.5]
+            ]
+        }]
+    });
+
     
-    // compute total for each state.
-    fData.forEach(function(d){d.total=d.freq.low+d.freq.mid+d.freq.high;});
-    
-    // function to handle histogram.
-    function histoGram(fD){
-        var hG={},    hGDim = {t: 60, r: 0, b: 30, l: 0};
-        hGDim.w = 500 - hGDim.l - hGDim.r, 
-        hGDim.h = 300 - hGDim.t - hGDim.b;
-            
-        //create svg for histogram.
-        var hGsvg = d3.select(id).append("svg")
-            .attr("width", hGDim.w + hGDim.l + hGDim.r)
-            .attr("height", hGDim.h + hGDim.t + hGDim.b).append("g")
-            .attr("transform", "translate(" + hGDim.l + "," + hGDim.t + ")");
+});
 
-        // create function for x-axis mapping.
-        var x = d3.scale.ordinal().rangeRoundBands([0, hGDim.w], 0.1)
-                .domain(fD.map(function(d) { return d[0]; }));
+/**
+ * Dark theme for Highcharts JS
+ * 
+ */
 
-        // Add x-axis to the histogram svg.
-        hGsvg.append("g").attr("class", "x axis")
-            .attr("transform", "translate(0," + hGDim.h + ")")
-            .call(d3.svg.axis().scale(x).orient("bottom"));
+// Load the fonts
+Highcharts.createElement('link', {
+   href: '//fonts.googleapis.com/css?family=Unica+One',
+   rel: 'stylesheet',
+   type: 'text/css'
+}, null, document.getElementsByTagName('head')[0]);
 
-        // Create function for y-axis map.
-        var y = d3.scale.linear().range([hGDim.h, 0])
-                .domain([0, d3.max(fD, function(d) { return d[1]; })]);
+Highcharts.theme = {
+   colors: ["#0099ff", "#ff66cc", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
+      "#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+   chart: {
+      backgroundColor: {
+         linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+         stops: [
+            [0, '#303136'],
+            [1, '#303136']
+         ]
+      },
+      style: {
+         fontFamily: "'Unica One', sans-serif",
+      },
+      plotBorderColor: '#606063'
+   },
+   title: {
+      style: {
+         color: '#E0E0E3',
+         textTransform: 'uppercase',
+         fontSize: '30px'
+      }
+   },
+   subtitle: {
+      style: {
+         color: '#E0E0E3',
+         textTransform: 'uppercase',
+      }
+   },
+   xAxis: {
+      gridLineColor: '#707073',
+      labels: {
+         style: {
+            color: '#E0E0E3',
 
-        // Create bars for histogram to contain rectangles and freq labels.
-        var bars = hGsvg.selectAll(".bar").data(fD).enter()
-                .append("g").attr("class", "bar");
-        
-        //create the rectangles.
-        bars.append("rect")
-            .attr("x", function(d) { return x(d[0]); })
-            .attr("y", function(d) { return y(d[1]); })
-            .attr("width", x.rangeBand())
-            .attr("height", function(d) { return hGDim.h - y(d[1]); })
-            .attr('fill',barColor)
-            .on("mouseover",mouseover)// mouseover is defined below.
-            .on("mouseout",mouseout);// mouseout is defined below.
-            
-        //Create the frequency labels above the rectangles.
-        bars.append("text").text(function(d){ return d3.format(",")(d[1])})
-            .attr("x", function(d) { return x(d[0])+x.rangeBand()/2; })
-            .attr("y", function(d) { return y(d[1])-5; })
-            .attr("text-anchor", "middle");
-        
-        function mouseover(d){  // utility function to be called on mouseover.
-            // filter for selected state.
-            var st = fData.filter(function(s){ return s.State == d[0];})[0],
-                nD = d3.keys(st.freq).map(function(s){ return {type:s, freq:st.freq[s]};});
-               
-            // call update functions of pie-chart and legend.    
-            pC.update(nD);
-            leg.update(nD);
-        }
-        
-        function mouseout(d){    // utility function to be called on mouseout.
-            // reset the pie-chart and legend.    
-            pC.update(tF);
-            leg.update(tF);
-        }
-        
-        // create function to update the bars. This will be used by pie-chart.
-        hG.update = function(nD, color){
-            // update the domain of the y-axis map to reflect change in frequencies.
-            y.domain([0, d3.max(nD, function(d) { return d[1]; })]);
-            
-            // Attach the new data to the bars.
-            var bars = hGsvg.selectAll(".bar").data(nD);
-            
-            // transition the height and color of rectangles.
-            bars.select("rect").transition().duration(500)
-                .attr("y", function(d) {return y(d[1]); })
-                .attr("height", function(d) { return hGDim.h - y(d[1]); })
-                .attr("fill", color);
+         }
+      },
+      lineColor: '#707073',
+      minorGridLineColor: '#505053',
+      tickColor: '#707073',
+      title: {
+         style: {
+            color: '#A0A0A3',
 
-            // transition the frequency labels location and change value.
-            bars.select("text").transition().duration(500)
-                .text(function(d){ return d3.format(",")(d[1])})
-                .attr("y", function(d) {return y(d[1])-5; });            
-        }        
-        return hG;
-    }
-    
-    // function to handle pieChart.
-    function pieChart(pD){
-        var pC ={},    pieDim ={w:250, h: 250};
-        pieDim.r = Math.min(pieDim.w, pieDim.h) / 2;
-                
-        // create svg for pie chart.
-        var piesvg = d3.select(id).append("svg")
-            .attr("width", pieDim.w).attr("height", pieDim.h).append("g")
-            .attr("transform", "translate("+pieDim.w/2+","+pieDim.h/2+")");
-        
-        // create function to draw the arcs of the pie slices.
-        var arc = d3.svg.arc().outerRadius(pieDim.r - 10).innerRadius(0);
 
-        // create a function to compute the pie slice angles.
-        var pie = d3.layout.pie().sort(null).value(function(d) { return d.freq; });
+         }
+      }
+   },
+   yAxis: {
+      gridLineColor: '#707073',
+      labels: {
+         style: {
+            color: '#E0E0E3',
 
-        // Draw the pie slices.
-        piesvg.selectAll("path").data(pie(pD)).enter().append("path").attr("d", arc)
-            .each(function(d) { this._current = d; })
-            .style("fill", function(d) { return segColor(d.data.type); })
-            .on("mouseover",mouseover).on("mouseout",mouseout);
+         }
+      },
+      lineColor: '#707073',
+      minorGridLineColor: '#505053',
+      tickColor: '#707073',
+      tickWidth: 1,
+      title: {
+         style: {
+            color: '#A0A0A3',
+         }
+      }
+   },
+   tooltip: {
+      backgroundColor: 'rgba(0, 0, 0, 0.85)',
+      style: {
+         color: '#F0F0F0',
 
-        // create function to update pie-chart. This will be used by histogram.
-        pC.update = function(nD){
-            piesvg.selectAll("path").data(pie(nD)).transition().duration(500)
-                .attrTween("d", arcTween);
-        }        
-        // Utility function to be called on mouseover a pie slice.
-        function mouseover(d){
-            // call the update function of histogram with new data.
-            hG.update(fData.map(function(v){ 
-                return [v.State,v.freq[d.data.type]];}),segColor(d.data.type));
-        }
-        //Utility function to be called on mouseout a pie slice.
-        function mouseout(d){
-            // call the update function of histogram with all data.
-            hG.update(fData.map(function(v){
-                return [v.State,v.total];}), barColor);
-        }
-        // Animating the pie-slice requiring a custom function which specifies
-        // how the intermediate paths should be drawn.
-        function arcTween(a) {
-            var i = d3.interpolate(this._current, a);
-            this._current = i(0);
-            return function(t) { return arc(i(t));    };
-        }    
-        return pC;
-    }
-    
-    // function to handle legend.
-    function legend(lD){
-        var leg = {};
-            
-        // create table for legend.
-        var legend = d3.select(id).append("table").attr('class','legend');
-        
-        // create one row per segment.
-        var tr = legend.append("tbody").selectAll("tr").data(lD).enter().append("tr");
-            
-        // create the first column for each segment.
-        tr.append("td").append("svg").attr("width", '16').attr("height", '16').append("rect")
-            .attr("width", '16').attr("height", '16')
-            .attr("fill",function(d){ return segColor(d.type); });
-            
-        // create the second column for each segment.
-        tr.append("td").text(function(d){ return d.type;});
+      }
+   },
+   plotOptions: {
+      series: {
+         dataLabels: {
+            color: '#B0B0B3'
 
-        // create the third column for each segment.
-        tr.append("td").attr("class",'legendFreq')
-            .text(function(d){ return d3.format(",")(d.freq);});
+         },
+         marker: {
+            lineColor: '#333'
+         }
+      },
+      boxplot: {
+         fillColor: '#505053'
+      },
+      candlestick: {
+         lineColor: 'white'
+      },
+      errorbar: {
+         color: 'white'
+      }
+   },
+   legend: {
+      itemStyle: {
+         color: '#E0E0E3'
+      },
+      itemHoverStyle: {
+         color: '#FFF'
+      },
+      itemHiddenStyle: {
+         color: '#606063'
+      }
+   },
+   credits: {
+      style: {
+         color: '#666',
 
-        // create the fourth column for each segment.
-        tr.append("td").attr("class",'legendPerc')
-            .text(function(d){ return getLegend(d,lD);});
+      }
+   },
+   labels: {
+      style: {
+         color: '#707073'
+      }
+   },
 
-        // Utility function to be used to update the legend.
-        leg.update = function(nD){
-            // update the data attached to the row elements.
-            var l = legend.select("tbody").selectAll("tr").data(nD);
+   drilldown: {
+      activeAxisLabelStyle: {
+         color: '#F0F0F3'
+      },
+      activeDataLabelStyle: {
+         color: '#F0F0F3'
+      }
+   },
 
-            // update the frequencies.
-            l.select(".legendFreq").text(function(d){ return d3.format(",")(d.freq);});
+   navigation: {
+      buttonOptions: {
+         symbolStroke: '#DDDDDD',
+         theme: {
+            fill: '#505053'
+         }
+      }
+   },
 
-            // update the percentage column.
-            l.select(".legendPerc").text(function(d){ return getLegend(d,nD);});        
-        }
-        
-        function getLegend(d,aD){ // Utility function to compute percentage.
-            return d3.format("%")(d.freq/d3.sum(aD.map(function(v){ return v.freq; })));
-        }
+   // scroll charts
+   rangeSelector: {
+      buttonTheme: {
+         fill: '#505053',
+         stroke: '#000000',
+         style: {
+            color: '#CCC'
+         },
+         states: {
+            hover: {
+               fill: '#707073',
+               stroke: '#000000',
+               style: {
+                  color: 'white'
+               }
+            },
+            select: {
+               fill: '#000003',
+               stroke: '#000000',
+               style: {
+                  color: 'white'
+               }
+            }
+         }
+      },
+      inputBoxBorderColor: '#505053',
+      inputStyle: {
+         backgroundColor: '#333',
+         color: 'silver'
+      },
+      labelStyle: {
+         color: 'silver'
+      }
+   },
 
-        return leg;
-    }
-    
-    // calculate total frequency by segment for all state.
-    var tF = ['low','mid','high'].map(function(d){ 
-        return {type:d, freq: d3.sum(fData.map(function(t){ return t.freq[d];}))}; 
-    });    
-    
-    // calculate total frequency by state for all segment.
-    var sF = fData.map(function(d){return [d.State,d.total];});
+   navigator: {
+      handles: {
+         backgroundColor: '#666',
+         borderColor: '#AAA'
+      },
+      outlineColor: '#CCC',
+      maskFill: 'rgba(255,255,255,0.1)',
+      series: {
+         color: '#7798BF',
+         lineColor: '#A6C7ED'
+      },
+      xAxis: {
+         gridLineColor: '#505053'
+      }
+   },
 
-    var hG = histoGram(sF), // create the histogram.
-        pC = pieChart(tF), // create the pie-chart.
-        leg= legend(tF);  // create the legend.
-}
-</script>
+   scrollbar: {
+      barBackgroundColor: '#808083',
+      barBorderColor: '#808083',
+      buttonArrowColor: '#CCC',
+      buttonBackgroundColor: '#606063',
+      buttonBorderColor: '#606063',
+      rifleColor: '#FFF',
+      trackBackgroundColor: '#404043',
+      trackBorderColor: '#404043'
+   },
 
-<script>
-var freqData=[
-{State:'AL',freq:{low:4786, mid:1319, high:249}}
-,{State:'AZ',freq:{low:1101, mid:412, high:674}}
-,{State:'CT',freq:{low:932, mid:2149, high:418}}
-,{State:'DE',freq:{low:832, mid:1152, high:1862}}
-,{State:'FL',freq:{low:4481, mid:3304, high:948}}
-,{State:'GA',freq:{low:1619, mid:167, high:1063}}
-,{State:'IA',freq:{low:1819, mid:247, high:1203}}
-,{State:'IL',freq:{low:4498, mid:3852, high:942}}
-,{State:'IN',freq:{low:797, mid:1849, high:1534}}
-,{State:'KS',freq:{low:162, mid:379, high:471}}
-];
+   // special colors for some of the
+   legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+   background2: '#505053',
+   dataLabelsColor: '#B0B0B3',
+   textColor: '#C0C0C0',
+   contrastTextColor: '#F0F0F3',
+   maskColor: 'rgba(255,255,255,0.3)'
+};
 
-dashboard('#dashboard',freqData);
+// Apply the theme
+Highcharts.setOptions(Highcharts.theme);
 </script>
 
 @endsection
- 

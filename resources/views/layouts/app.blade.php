@@ -106,7 +106,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="/img/avatar.png">
                             </span>
-                            <span class="username">{{{Auth::user()->name}}}</span>
+                            <strong><span class="username">{{{Auth::user()->name}}}</span></strong>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">

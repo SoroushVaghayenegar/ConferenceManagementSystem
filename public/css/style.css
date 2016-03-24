@@ -4945,7 +4945,7 @@ span.customSelect.changed {
 }
 .tab-content{
     background-color:#303136;
-    color:#fff;
+    
     padding:5px
 }
 .nav-tabs > li > a{
@@ -4969,8 +4969,15 @@ span.customSelect.changed {
     background-color: #303136;
 }
 
-
-
+@media screen and (max-width: 640px) {
+    table {
+        overflow-x: auto;
+        display: block;
+    }
+}
+/*.table-responsive{
+    background-color:#303136;
+}*/
 
 /*.table-striped > tbody > tr:nth-child(2n) > td, .table-striped > tbody > tr:nth-child(2n) > th {
    background-color: #e4e4e7;
@@ -4978,3 +4985,4 @@ span.customSelect.changed {
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
    background-color: #bfbfbf;
 }*/
+

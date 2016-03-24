@@ -39,14 +39,16 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/profile', 'ProfileController@index');
   Route::post('/profile', 'ProfileController@update');
 
-
-  Route::get('/manage_users', function () {
+  
+  //only authenticated users can access
+  Route::get('manage_users', ['middleware' => 'auth', function() {
     $users = User::orderBy('created_at', 'asc')->get();
 
     return view('manage_users', [
       'users' => $users
       ]);
-  });
+  }]);
+  
 
 
   Route::get('/register/verify', function(){
@@ -84,7 +86,7 @@ Route::group(['middleware' => 'web'], function () {
   /**
   * Show Conference Dashboard
   */
-  Route::get('/create_conference', function () {
+  Route::get('create_conference', ['middleware' => 'auth', function() {
     $conferences = Conference::orderBy('created_at', 'asc')->get();
 
     return view('conferences', [
@@ -92,7 +94,7 @@ Route::group(['middleware' => 'web'], function () {
       ]);
 
     //
-  });
+  }]);
 
   /**
   * Add New Conference

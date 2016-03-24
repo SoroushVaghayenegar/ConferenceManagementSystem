@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -16,14 +16,18 @@ class ReportController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function index()
     {
         
 
-        return view('reports');
+        $current_conferences = DB::table('conferences')->where('end', '>=', date('Y-m-d').' 00:00:00')->get();
+
+        $past_conferences = DB::table('conferences')->where('end', '<=', date('Y-m-d').' 00:00:00')->get();
+
+        return view('reports', ['current_conferences' => $current_conferences , 'past_conferences' => $past_conferences]);
         
     }
 }

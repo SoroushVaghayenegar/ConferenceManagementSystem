@@ -66,7 +66,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default" style='opacity:0.9'>
                     <div class="panel-heading">
-                        <h1 style="text-align: center;">Welcome to Gobind Sarvar Conferences!</h1>
+                        <h1 style="text-align: center;"><strong>Welcome to Gobind Sarvar Conference Management System!</strong></h1>
                     </div>
 
                     <div class="panel-body" >
