@@ -10,10 +10,12 @@
         </div>
 </div>
 <!-- SHOW IF ONLY USER IS ADMIN -->
+@if(Auth::user())
 @if(Auth::user()->is_admin)
   <a href="{{ URL::to('create_conference') }}" class="btn btn-primary"><i class="fa fa-plus"></i>  Create a new conference</a>
   </br>
   </br>
+@endif
 @endif
 <div class="container">
   <div class="panel panel-default" >
@@ -48,7 +50,11 @@
                                     <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-info">Details</a> 
                                   </td>
                                   <td> 
+                                    @if(Auth::user())
                                     <a href="/conference/{{$current_conference->id}}/join" class="btn btn-danger">Register</a> 
+                                    @else
+                                    <a href="/login" class="btn btn-danger">Register</a> 
+                                    @endif
                                   </td>
                                 </tr>
                               @endforeach
