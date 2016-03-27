@@ -65,7 +65,7 @@ trait RegistersUsers
         $this->create($request->all());
 
         //return redirect($this->redirectPath());
-        return redirect('/login');
+        return redirect('/verify');
     }
 
     /**
