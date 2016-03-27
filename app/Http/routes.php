@@ -21,6 +21,11 @@ Route::get('/welcome', function () {
 });
 */
 
+//Route::get('/directory', 'DirectoryController@index');
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -10,10 +10,12 @@
         </div>
 </div>
 <!-- SHOW IF ONLY USER IS ADMIN -->
+@if(Auth::user())
 @if(Auth::user()->is_admin)
   <a href="{{ URL::to('create_conference') }}" class="btn btn-primary"><i class="fa fa-plus"></i>  Create a new conference</a>
   </br>
   </br>
+@endif
 @endif
 <div class="container">
   <div class="panel panel-default" style='opacity:0.9'>
