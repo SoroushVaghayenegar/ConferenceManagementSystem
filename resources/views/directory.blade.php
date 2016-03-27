@@ -50,7 +50,11 @@
                                     <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-info">Details</a> 
                                   </td>
                                   <td> 
+                                    @if(Auth::user())
                                     <a href="/conference/{{$current_conference->id}}/join" class="btn btn-danger">Register</a> 
+                                    @else
+                                    <a href="/login" class="btn btn-danger">Register</a> 
+                                    @endif
                                   </td>
                                 </tr>
                               @endforeach
