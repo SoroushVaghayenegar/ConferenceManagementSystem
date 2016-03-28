@@ -78,11 +78,11 @@
                             <label class="col-md-4 control-label">Gender</label>
 
                             <div class="col-md-6" id="">
-                            
+
                                 <div class="input-group date">
                                     <select class="form-control" name="gender">
-                                        <option>Male</option>
-                                        <option>Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
 
@@ -98,7 +98,7 @@
                             <label class="col-md-4 control-label">Date of Birth</label>
 
                             <div class="col-md-6" id="date_of_birth-datepicker">
-							
+
 								<div class="input-group date">
 								  <input type="text" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
 								</div>
@@ -110,7 +110,7 @@
                                 @endif
                             </div>
                         </div>
-						
+
 						<div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">City</label>
 
@@ -124,7 +124,7 @@
                                 @endif
                             </div>
                         </div>
-						
+
 						<div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Country</label>
 
@@ -138,7 +138,7 @@
                                 @endif
                             </div>
                         </div>
-					
+
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
