@@ -16,7 +16,7 @@ class ConferenceController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('auth');
+        $this->middleware('auth');
     }
 
     public function create(Request $request)
@@ -43,8 +43,7 @@ class ConferenceController extends Controller
     }
 
     public function show($id)
-    {   
-        if(Auth::user()){
+    {
         $conference = Conference::findOrFail($id);
         $user = User::find(Auth::user()->id);
 
@@ -58,13 +57,6 @@ class ConferenceController extends Controller
         }
 
         return view('conference.info', $res);
-      }else{
-        $conference = Conference::findOrFail($id);
-        $res = [
-          'conference' => $conference
-        ];
-        return view('conference.info', $res);
-      }
     }
 
     public function delete(Conference $id)
