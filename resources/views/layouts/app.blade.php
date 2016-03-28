@@ -66,8 +66,7 @@
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-color: white;
-            /*background-image: url('/background_patterns/9.png');*/
+            background-image: url('/background_patterns/23.png');
         }
 
         button .fa {
