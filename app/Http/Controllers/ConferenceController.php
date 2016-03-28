@@ -35,6 +35,9 @@ class ConferenceController extends Controller
         $conference->capacity = $request->capacity;
         $conference->start = $request->start;
         $conference->end = $request->end;
+        $conference->location = $request->location;
+        $conference->address = $request->address;
+
         $conference->save();
 
         $conference->managers()->attach($request->managers);
@@ -51,7 +54,8 @@ class ConferenceController extends Controller
       'capacity' => $request->capacity,
       'start' => $request->start,
       'end' => $request->end,
-      'location' => $request->location
+      'location' => $request->location,
+      'address' => $request->address
       ]);
     \Session::flash('flash_message','Conference updated.');
     return redirect()->back();
