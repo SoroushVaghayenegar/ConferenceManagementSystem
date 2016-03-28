@@ -51,7 +51,11 @@
                                   </td>
                                   <td> 
                                     @if(Auth::user())
-                                    <a href="/conference/{{$current_conference->id}}/join" class="btn btn-register">Register</a> 
+                                      @if (session('joined'))
+                                        <a href="/conference/{{$current_conference->id}}/join" class="btn btn-success">You are registered!</a>
+                                      @else
+                                        <a href="/conference/{{$current_conference->id}}/join" class="btn btn-register">Register</a>
+                                      @endif  
                                     @else
                                     <a href="/login" class="btn btn-register">Register</a> 
                                     @endif
@@ -89,7 +93,7 @@
                                   <td class="table-text">{{ date('F d, Y', strtotime($past_conference->end)) }}</td>
                                   <td class="table-text">{{ $past_conference->location }}</td>
                                   <td>
-                                    <a href="{{ URL::to('conference/'.$past_conference->id) }}" class="btn btn-info">Details</a> 
+                                    <a href="{{ URL::to('conference/'.$past_conference->id) }}" class="btn btn-details">Details</a> 
                                   </td>
                                   <td> 
                                     <a href="/conference/{{$past_conference->id}}/join" class="btn btn-default" disabled>Register</a>

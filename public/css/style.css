@@ -1,4 +1,9 @@
-
+/*
+Template Name: Creative Bootstrap 3 Responsive Admin Template
+Template Version: 1.0
+Author: GeeksLabs
+Website: http://geekslabs.com/
+*/
 
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
@@ -59,7 +64,7 @@ table tr th { color: #688a7e;}
     padding-top: 10px;
 }
 .lite{
-    color: #d9d9d9 !important;
+    color: #00a0df !important;
 }
 
 /*login page*/
@@ -256,12 +261,7 @@ table tr th { color: #688a7e;}
     width: 180px;
     height: 100%;
     position: fixed;
-    color:black;
-    background: #007acc; /* For browsers that do not support gradients */
-  background: -webkit-radial-gradient(circle, #00cc99 , #007acc); /* Safari */
-  background: -o-radial-gradient(circle, #00cc99 , #007acc); /* Opera 11.6 to 12.0 */
-  background: -moz-radial-gradient(circle, #00cc99 , #007acc); /* Firefox 3.6 to 15 */
-  background: radial-gradient(circle, #00cc99 , #007acc); /* Standard syntax */
+    background: #394a59;
 }
 
 .nav-collapse.collapse {
@@ -341,7 +341,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: white;
+    color: #d0d8df;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -361,7 +361,7 @@ ul.sidebar-menu li a{
     top: 2px;
 }*/
 ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #004d80;
+    background: #2e3b46;
     color: #fff;
     display: block;
     /*border-radius: 4px;
@@ -530,7 +530,7 @@ ul.sidebar-menu li.active a i {
 a.logo {
     font-size: 22px;
     font-weight: 300;
-    color: white;
+    color: #fed189;
     float: left;
     margin-top: 15px;
     text-transform: uppercase;
@@ -875,9 +875,10 @@ div[data-role="editor-toolbar"] {
   border-bottom: none;
   opacity: 0.7;
   text-transform: uppercase;
+  color: white;
 }
 .page-header i {
-  color: #acb1b8;
+  color: white;
   margin-right: 10px;
   float: left;
   font-size: 30px;
@@ -1041,14 +1042,24 @@ div[data-role="editor-toolbar"] {
 }
 .dark-bg {
   color : #fff;
-  background: #007acc; /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, #007acc , #00cc99); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #007acc, #00cc99); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #007acc, #00cc99); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #007acc , #00cc99); /* Standard syntax */
-  
+  background : #1a2732;
+  background-color : #1a2732;
 }
-
+.facebook-bg {
+  color: #fff;
+  background: #3b5998;
+  background-color : #3b5998;
+}
+.twitter-bg {
+  color: #fff;
+  background: #00aced;
+  background-color : #00aced; 
+}
+.linkedin-bg {
+  color: #fff;
+  background: #4875b4;
+  background-color : #4875b4;  
+}
 /*----------------------    panel-----------------*/
 .panel {
   border:none;
@@ -4929,12 +4940,11 @@ span.customSelect.changed {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
 
-
 .nav-tabs{
-  /*background-color:#161616;*/
+  background-color:#161616;
 }
 .tab-content{
-    /*background-color:#303136;*/
+    background-color:#303136;
     
     padding:5px
 }
@@ -4943,26 +4953,20 @@ span.customSelect.changed {
   color: grey;
 }
 .nav-tabs > li > a:hover{
-  background-color: #e6e6e6 !important;
+  background-color: #303136 !important;
     border: medium none;
     border-radius: 0;
-    color:black;
+    color:#fff;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:hover{
-    background-color: #e6e6e6 !important;
-    color:black;
-}
-
-.btn-register{
-    background-color: #0099ff;
+    background-color: #303136 !important;
     color: white;
 }
 
-.btn-details{
-    background-color: #ff8c1a;
-    color: white;
+.panel-dark{
+    background-color: #303136;
 }
 
 @media screen and (max-width: 640px) {
@@ -4982,3 +4986,12 @@ span.customSelect.changed {
    background-color: #bfbfbf;
 }*/
 
+.btn-register{
+    background-color: #0099ff;
+    color: white;
+}
+
+.btn-details{
+    background-color: #ff8c1a;
+    color: white;
+}

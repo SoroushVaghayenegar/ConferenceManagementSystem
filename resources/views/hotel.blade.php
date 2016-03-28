@@ -10,7 +10,7 @@
         </div>
 </div>
 <div class="container">
-  <div class="panel panel-dark" >
+  <div class="panel panel-default" >
         
         <h1 align="center" style="color:white"><strong>Hotel Rooms</strong></h1>
 
