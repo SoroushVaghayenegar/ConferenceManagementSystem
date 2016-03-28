@@ -5,63 +5,72 @@
 
 
 @if(Auth::check())
-    @section('content')           
-            <!-- USER IS LOGGED IN-->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h3 class="page-header"><i class="fa fa-home"></i> Home</h3>
-                </div>
-            </div>    
+    @section('content')  
+ <!-- USER IS LOGGED IN-->
 
-            <div class="container">
-                <div class="panel panel-dark" style='opacity:0.9'>
-                    <div class="panel-heading">
-                        <h1 align='center' style='color:black'><strong>Currently registered conferences</strong></h1>
-                    </div>
-
-                    <div class="panel-body">
-                        <table width="100%" class="table">
-                            <thead>
-                                <th>Conference Name</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Companions</th>
-                                <th>Flight No</th>
-								<th>Arrival date</th>
-								<th>Arrival time</th>
-                                <th>Hotel Room Address & Phone Number</th>
-                            </thead>
-                            <tbody style='color:#ffa366'>
-                                <tr>
-                                    <td>Brain Health Conference</td>
-                                    <td>March 23, 2016</td>
-                                    <td>March 27, 2016</td>
-                                    <td>
-                                        Graham </br>
-                                        Sherry </br>
-                                        Jon    </br>
-                                        Yuwei
-                                    </td>
-                                    <td style='color:#00bfff'> AT0421</td>
-									<td>March 22, 2016</td>
-									<td>12:00::00</td>
-                                    <td>
-                                        <address>
-                                          <strong>Holiday Inn</strong><br>
-                                          1355 Market Street, Suite 900<br>
-                                          San Francisco, CA 94103<br>
-                                          <abbr title="Phone">P:</abbr> (123) 456-7890
-                                        </address>
-                                  </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        
-                    </div>
-                </div>
+    @if (count($conferences) > 0)         
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header"><i class="fa fa-home"></i> Home</h3>
             </div>
+        </div>    
 
+        <div class="container">
+            <div class="panel panel-dark" style='opacity:0.9'>
+                <div class="panel-heading">
+                    <h1 align='center' style='color:black'><strong>Currently registered conferences</strong></h1>
+                </div>
+
+                <div class="panel-body">
+                    <table width="100%" class="table">
+                        <thead>
+                            <th>{{count($participants)}}</th> 
+                            <!--<th>Conference Name</th>-->
+                            <!--<th>Start Date</th>-->
+                            <th>{{count($conferences)}}</th> 
+                            <th>End Date</th>
+                            <th>Companions</th>
+                            <th>Flight No</th>
+                            <th>Arrival date</th>
+                            <th>Arrival time</th>
+                            <th>Hotel Room Address & Phone Number</th>
+                        </thead>
+                        @foreach ($conferences as $conference)
+                        <tbody style='color:#ffa366'>
+                            <tr>
+                                <td>{{ $conference->name }}</td>
+                                <td>{{ $conference->start }}</td>
+                                <td>{{ $conference->end }}</td>
+                                <td>
+                                    Graham </br>
+                                    Sherry </br>
+                                    Jon    </br>
+                                    Yuwei
+                                </td>
+                                <td style='color:#00bfff'> AT0421</td>
+                                <td>March 22, 2016</td>
+                                <td>12:00::00</td>
+                                <td>
+                                    <address>
+                                      <strong>Hotel Name not implemented</strong><br>
+                                      {{ $conference->address }}<br>
+                                      {{ $conference->location }}<br>
+                                      <abbr title="Phone">P:</abbr> (123) 456-7890
+                                  </address>
+                              </td>
+                          </tr>
+                      </tbody>
+                      @endforeach
+                  </table>
+
+
+
+              </div>
+          </div>
+      </div>
+    @else
+        <h2 align="center" style="color:#ff4d4d">No Current Conferences!</h2>
+    @endif
     @endsection
 @else
     @section('content')
