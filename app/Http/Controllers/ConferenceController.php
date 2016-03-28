@@ -79,6 +79,8 @@ class ConferenceController extends Controller
           'user_id' => Auth::user()->id,
           'phone' => $request->primary['phone'],
           'flight' => $request->primary['flight'],
+		  'arrival_date' => $request->primary['arrival_date'],
+		  'arrival_time' => $request->primary['arrival_time'],
           'hotel_requested' => $hotel,
           'taxi_requested' => $taxi
         ], $conference, true);
@@ -91,17 +93,28 @@ class ConferenceController extends Controller
 
           $hotel = isset($participant['hotel']) && $participant['hotel'] == 'on';
           $taxi = isset($participant['taxi']) && $participant['taxi'] == 'on';
-          if ($same_flight)
+          if ($same_flight) {
             $flight = $request->primary['flight'];
-          else if (isset($participant['flight']))
+			$arrival_date = $request->primary['arrival_date'];
+			$arrival_time = $request->primary['arrival_time'];
+		  }
+          else if (isset($participant['flight'])) {
             $flight = $participant['flight'];
-          else
+			$arrival_date = $participant['arrival_date'];
+			$arrival_time = $participant['arrival_time'];
+		  }
+          else {
             $flight = null;
-
+			$arrival_date = null;
+			$arrival_time = null;
+		  }
+		
           $this->createAttachedParticipant([
             'name' => $participant['name'],
             'phone' => $participant['phone'],
             'flight' => $flight,
+			'arrival_date' => $arrival_date,
+			'arrival_time' => $arrival_time,
             'user_id' => Auth::user()->id,
             'hotel_requested' => $hotel,
             'taxi_requested' => $taxi
@@ -130,6 +143,8 @@ class ConferenceController extends Controller
           "hotel_requested" => $fields['hotel_requested'],
           "taxi_requested" => $fields['taxi_requested'],
           "flight" => $fields['flight'],
+		  "arrival_date" => $fields['arrival_date'],
+		  "arrival_time" => $fields['arrival_time']
         ]);
         return $participant;
     }

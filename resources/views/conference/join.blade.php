@@ -3,6 +3,9 @@
 @section('title', $conference->name )
 
 @section('content')
+<!-- Bootstrap Datepicker plugin-->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
 
 <div class="container">
   <div class="row">
@@ -32,6 +35,8 @@
                   <th>Name</th>
                   <th>Phone number</th>
                   <th>Flight number</th>
+				  <th>Arrival date</th>
+				  <th>Arrival time</th>
                   <th>Hotel needed</th>
                   <th>Taxi needed</th>
                 </tr>
@@ -39,14 +44,22 @@
               <tbody>
                 <tr>
                   <td>
-                    <input type="text" value="{{Auth::user()->name}}" disabled="true"></input>
+                    <input type="text" class="form-control" value="{{Auth::user()->name}}" disabled="true"></input>
                   </td>
                   <th>
-                    <input type="text" name="primary[phone]"></input>
+                    <input type="text" class="form-control" name="primary[phone]"></input>
                   </td>
                   <td>
-                    <input type="text" name="primary[flight]"></input>
+                    <input type="text" class="form-control" name="primary[flight]"></input>
                   </td>
+                  <td>
+					<div id="arrival_date-datepicker">
+						<input type="text" class="form-control" name="primary[arrival_date]"></input>
+					</div>
+				  </td>
+                  <td>
+				     <input type="text" class="form-control" name="primary[arrival_time]"></input>
+				  </td>
                   <th>
                     <input type="checkbox" name="primary[hotel]"></input>
                   </td>
@@ -58,8 +71,9 @@
             </table>
             <p class="text-left">
               <i class="fa fa-info-circle" style="margin-right: 5px"></i>
-              Leave <strong>Flight number</strong> blank if it is unknown
+              Leave <strong>Flight number</strong> and <strong>arrival info</strong> blank if it is unknown
             </p>
+
             <p class="text-left">
               <label>
                 <input type="checkbox" name="same_flight" style="margin-right: 5px"></input>
@@ -83,6 +97,8 @@
                     <th>Name</th>
                     <th>Phone number</th>
                     <th>Flight number</th>
+					<th>Arrival date</th>
+					<th>Arrival time</th>
                     <th>Hotel needed</th>
                     <th>Taxi needed</th>
                     <th>Remove</th>
@@ -91,13 +107,21 @@
                 <tbody id="participants">
                   <tr id="participants_row0">
                     <td>
-                      <input type="text" name="participant[0][name]"></input>
+                      <input type="text" class="form-control" name="participant[0][name]"></input>
                     </td>
                     <th>
-                      <input type="text" name="participant[0][phone]"></input>
+                      <input type="text" class="form-control" name="participant[0][phone]"></input>
                     </td>
                     <td>
-                      <input type="text" name="participant[0][flight]"></input>
+                      <input type="text" class="form-control" name="participant[0][flight]"></input>
+                    </td>
+				    <td>
+					  <div id="arrival_date-datepicker">
+					  	<input type="text" class="form-control" name="participant[0][arrival_date]"></input>
+					  </div>
+				    </td>
+                    <td>
+                      <input type="text" class="form-control" name="participant[0][arrival_time]"></input>
                     </td>
                     <th>
                       <input type="checkbox" name="participant[0][hotel]"></input>
@@ -120,9 +144,19 @@
 </div>
 
 <script>
+$('#arrival_date-datepicker input').datepicker({ startView: 2 });
+
 var count = 1;
 function participantTemplate(i) {
-  return "<tr id='participants_row"+i+"'><td><input type='text' name='participant["+i+"][name]'></input></td><th><input type='text' name='participant["+i+"][phone]'></input></td><td><input type='text' name='participant["+i+"][flight]'></input></td><th><input type='checkbox' name='participant["+i+"][hotel]'></input></td><td><input type='checkbox' name='participant["+i+"][taxi]'></input></td><td><a onclick='removeParticipant("+i+")'><i class='fa fa-times'></i></a></td></tr>";
+  return "<tr id='participants_row"+i+"'>\
+  <td><input type='text' class='form-control' name='participant["+i+"][name]'></input></td>\
+  <th><input type='text' class='form-control' name='participant["+i+"][phone]'></input></td> \
+  <td><input type='text' class='form-control' name='participant["+i+"][flight]'></input></td> \
+  <td><div id='arrival_date-datepicker'><input type='text' class='form-control' name='participant["+i+"][arrival_date]'></input></div></td> \
+  <td><input type='text' class='form-control' name='participant["+i+"][arrival_time]'></input></td> \
+  <th><input type='checkbox' name='participant["+i+"][hotel]'></input></td> \
+  <td><input type='checkbox' name='participant["+i+"][taxi]'></input></td> \
+  <td><a onclick='removeParticipant("+i+")'><i class='fa fa-times'></i></a></td></tr>";
 }
 
 function addParticipant() {
@@ -133,6 +167,10 @@ function addParticipant() {
 function removeParticipant(index) {
   $('#participants_row'+index).remove();
 }
+
+
+
+
 
 </script>
 @endsection

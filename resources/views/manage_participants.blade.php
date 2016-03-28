@@ -2,8 +2,6 @@
 
 @section('title', 'Manage Participants')
 
-
-
 @section('content')
 <!--overview start-->
 <div class="row">
@@ -12,19 +10,15 @@
     </div>
 </div>
 
-
 <div class="container">
-
     <div class="panel panel-dark" >
         <ul class="nav nav-tabs nav-justified">
             <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
             <li><a data-toggle="tab" href="#pastConferences"><strong>Past Conferences</strong></a></li>
         </ul>
-
         <div class="tab-content">
             <div id="currentConferences" class="tab-pane fade in active">
                 <div class="panel-body">
-
                     <h3 style="color:#ff4d4d">Choose conference:</h3>
                     <strong>
                         <select class="form-control" style="background-color: #006bb3; color:#d9d9d9">
@@ -44,10 +38,12 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Age</th>
-                                <th>Phone Number</th>
-                                <th>Flight #</th>
-                                <th>Taxi requested</th>
+                                <th>Phone No</th>
+                                <th>Flight No</th>
+								<th>Arrival date</th>
+								<th>Arrival time</th>
                                 <th>Hotel requested</th>
+                                <th>Taxi requested</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,8 +54,10 @@
                                 <td>{{$attendee->age}}</td>
                                 <td>{{$attendee->phone}}</td>
                                 <td>{{$attendee->flight ? $attendee->flight : "N/A"}}</td>
-                                <td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
+								<td>{{$attendee->arrival_date ? $attendee->arrival_date : "N/A"}}</td>
+								<td>{{$attendee->arrival_time ? $attendee->arrival_time : "N/A"}}</td>
                                 <td>{{$attendee->hotel_requested ? "Yes": "No"}}</td>
+                                <td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
                             </tr>
                         @endforeach
                         @endif
@@ -89,7 +87,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone Number</th>
+                                <th>Phone No</th>
                                 <th>Admin</th>
                                 <th></th>
                                 <th></th>
@@ -114,29 +112,28 @@
     </div>
 </div>
 
+<script>
+//  Script for running DataTable -->
+  $(function(){
+	$("#participants_table_current").dataTable();
+  })
+  $(function(){
+	$("#participants_table_past").dataTable();
+  })
 
-        <script>
-        //  Script for running DataTable -->
-          $(function(){
-            $("#participants_table_current").dataTable();
-          })
-          $(function(){
-            $("#participants_table_past").dataTable();
-          })
+  // Make the sidebar active
+  $(document).ready(function(){
+	$('.sidebar-menu > li').attr('class','');
+	$('#sidebar-manageParticipants').attr('class','active');
+  })
 
-          // Make the sidebar active
-          $(document).ready(function(){
-            $('.sidebar-menu > li').attr('class','');
-            $('#sidebar-manageParticipants').attr('class','active');
-          })
+  $('#option_current').click(function(){
 
-          $('#option_current').click(function(){
+  });
 
-          });
+  $('#option_past').click(function(){
 
-          $('#option_past').click(function(){
+  });
 
-          });
-
-        </script>
+</script>
 @endsection

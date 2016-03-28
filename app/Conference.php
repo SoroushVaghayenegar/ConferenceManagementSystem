@@ -21,7 +21,7 @@ class Conference extends Model
     public function attendees()
     {
         return $this->belongsToMany('App\Participant', 'conference_attendees', 'conference_id', 'participant_id')
-        ->withPivot('flight', 'hotel_requested', 'taxi_requested')
+        ->withPivot('flight', 'arrival_date', 'arrival_time', 'hotel_requested', 'taxi_requested')
         ->withTimestamps();
     }
 
@@ -34,6 +34,8 @@ class Conference extends Model
           $participant->name = User::findOrFail($participant->user_id)->name;
 
           $participant->flight = $participant->pivot->flight;
+		  $participant->arrival_date = $participant->pivot->arrival_date;
+		  $participant->arrival_time = $participant->pivot->arrival_time;
           $participant->hotel_requested = $participant->pivot->hotel_requested;
           $participant->taxi_requested = $participant->pivot->taxi_requested;
           $participant->approved = $participant->pivot->approved;

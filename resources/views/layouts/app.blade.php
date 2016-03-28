@@ -8,9 +8,6 @@
     <title>@yield('title')</title>
 
 
-
-
-
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -169,21 +166,18 @@
                               <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>
                                   <span>Reports</span>
-
                               </a>
-
                           </li>
-
                           <li class="" id='sidebar-flights'>
                               <a class="" href="{{ URL::to('/flights')}}">
                                   <i class="fa fa-plane"></i>
-                                  <span>flights</span>
+                                  <span>Flights</span>
                               </a>
                           </li>
                           <li class="" id='sidebar-hotel'>
                               <a class="" href="{{ URL::to('/hotel') }}">
                                   <i class="fa fa-bed"></i>
-                                  <span>Hotel</span>
+                                  <span>Hotels</span>
                               </a>
                           </li>
                       @endif
@@ -204,7 +198,7 @@
         </section>
 
     @endif
-</section>
+	</section>
 
-    </body>
-    </html>
+</body>
+</html>

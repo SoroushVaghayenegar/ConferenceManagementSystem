@@ -26,7 +26,9 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Companions</th>
-                                <th>Flight Number</th>
+                                <th>Flight No</th>
+								<th>Arrival date</th>
+								<th>Arrival time</th>
                                 <th>Hotel Room Address & Phone Number</th>
                             </thead>
                             <tbody style='color:#ffa366'>
@@ -41,6 +43,8 @@
                                         Yuwei
                                     </td>
                                     <td style='color:#00bfff'> AT0421</td>
+									<td>March 22, 2016</td>
+									<td>12:00::00</td>
                                     <td>
                                         <address>
                                           <strong>Holiday Inn</strong><br>

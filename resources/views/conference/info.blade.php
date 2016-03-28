@@ -57,6 +57,8 @@
             <p>Name: {{$participant['name']}}</p>
             @endif
             <p>Flight: {{$participant['flight']}}</p>
+			<p>Arrival date: {{$participant['arrival_date']}}</p>
+			<p>Arrival time: {{$participant['arrival_time']}}</p>
             <p>Hotel requested: {{$participant['hotel']?'Yes':'No'}}</p>
             <p>Taxi requested: {{$participant['taxi']?'Yes':'No'}}</p>
           @endforeach
