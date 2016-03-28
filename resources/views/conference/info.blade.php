@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="container">
+  @if(Auth::user())
   @if (session('joined'))
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -23,6 +24,7 @@
     </div>
   </div>
   @endif
+  @endif
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="panel panel-default">
@@ -35,13 +37,16 @@
             <p class="text-left"><strong>Start Time:</strong>  {{ date('F d, Y', strtotime($conference->start)) }}</p>
             <p class="text-left"><strong>End Time:</strong>    {{ date('F d, Y', strtotime($conference->end)) }}</p>
             <a class="btn btn-default" href="javascript:window.history.back()">Back</a>
+            @if(Auth::user())
             @if(!isset($registration))
             <a class="btn btn-danger pull-right" href="/conference/{{$conference->id}}/join">Register</a>
+            @endif
             @endif
         </div>
       </div>
     </div>
   </div>
+  @if(Auth::user())
   @if(isset($registration))
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -66,6 +71,7 @@
       </div>
     </div>
   </div>
+  @endif
   @endif
 </div>
 @endsection
