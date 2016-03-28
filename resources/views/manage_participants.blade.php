@@ -33,7 +33,7 @@
                         </select>
                     </strong>
                     <h3 align="center" style="color:white"><strong>Participants</strong></h3>
-                    <table id="participants_table_current" class="display" cellspacing="0">
+                    <table id="participants_table_current" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -82,7 +82,7 @@
                         </select>
                     </strong>
                     <h3 align="center" style="color:white"><strong>Participants</strong></h3>
-                    <table id="participants_table_past" class="display" cellspacing="0">
+                    <table id="participants_table_past" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Name</th>

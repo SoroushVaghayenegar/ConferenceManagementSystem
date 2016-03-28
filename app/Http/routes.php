@@ -46,19 +46,17 @@ Route::group(['middleware' => 'web'], function () {
 
 
   //only authenticated users can access
-  Route::get('manage_users', ['middleware' => 'auth', function() {
-    $users = User::orderBy('created_at', 'asc')->get();
-
-    return view('manage_users', [
-      'users' => $users
-      ]);
-  }]);
+  Route::get('manage_users', 'UsersController@index');
+  Route::get('manage_users/{id}', 'UsersController@destroy');
 
 
 
   Route::get('/register/verify', function(){
 
-    return view('auth.verify');
+    if(Auth::check())
+     return view('errors.404');
+    else
+      return view('auth.verify');
   });
 
   Route::get('/', 'HomeController@index');

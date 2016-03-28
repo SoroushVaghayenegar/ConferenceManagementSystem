@@ -38,7 +38,7 @@
                                 <th></th>
                                 <th></th>
                             </thead>
-                            <tbody style="position: relative; center: 40%; color:white">
+                            <tbody style="position: relative; center: 40%; ">
                               @foreach ($current_conferences as $current_conference)
                                 <tr>
                                   <td class="table-text">{{ $current_conference->name }}</td>
@@ -47,14 +47,15 @@
                                   <td class="table-text">{{ date('F d, Y', strtotime($current_conference->end)) }}</td>
                                   <td class="table-text">{{ $current_conference->location }}</td>
                                   <td>
-                                    <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-info">Details</a> 
+                                    <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-details">Details</a> 
                                   </td>
                                   <td> 
                                     @if(Auth::user())
-                                    <a href="/conference/{{$current_conference->id}}/join" class="btn btn-danger">Register</a> 
+                                    <a href="/conference/{{$current_conference->id}}/join" class="btn btn-register">Register</a> 
                                     @else
-                                    <a href="/login" class="btn btn-danger">Register</a> 
+                                    <a href="/login" class="btn btn-register">Register</a> 
                                     @endif
+
                                   </td>
                                 </tr>
                               @endforeach
@@ -79,7 +80,7 @@
                                 <th></th>
                                 <th></th>
                             </thead>
-                            <tbody style="position: relative; center: 40%; color:white">
+                            <tbody style="position: relative; center: 40%; ">
                               @foreach ($past_conferences as $past_conference)
                                 <tr>
                                   <td class="table-text">{{ $past_conference->name }}</td>
@@ -99,7 +100,9 @@
                           </table>         
               </div>
             @else
+            <br/>
               <h2 align="center" style="color:#ff4d4d">No Past Conferences!</h2>
+            <br/>
             @endif
         </div>
       </div>

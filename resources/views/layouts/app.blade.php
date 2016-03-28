@@ -40,9 +40,7 @@
     <link href="/css/xcharts.min.css" rel=" stylesheet">
     <link href="/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+    
 
     <!-- javascripts -->
     <!-- bootstrap -->
@@ -54,17 +52,22 @@
     <script src="/js/scripts.js"></script>
 
     
-    <?php
+<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
 
-    $i = rand(1, 28);
-    ?>
 
-    <!-- for background use numbers 1-28 for different patters -->
+<link href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+    
+    
+
+    
     <style>
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-image: url('/background_patterns/23.png');
+            background-color: white;
+            /*background-image: url('/background_patterns/9.png');*/
         }
 
         button .fa {
@@ -92,7 +95,7 @@
         </div>
         @endif
         <!--logo start-->
-        <a href="{{ URL::to('') }}" class="logo">Gobind Sarvar<span class="lite">  CMS</span></a>
+        <a href="{{ URL::to('') }}" class="logo"> Gobind Sarvar<span class="lite">  <strong>CMS<strong> </span></a>
         <!--logo end-->
         <div class="top-nav notification-row">
             <ul class="nav pull-right top-menu">

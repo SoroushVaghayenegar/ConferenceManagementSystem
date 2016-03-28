@@ -32,9 +32,9 @@ class ParticipantController extends Controller
     */
     public function getConferences()
     {
-        $current = DB::table('conferences')->where('end', '>=', date('Y-m-d').' 00:00:00')->get();
+        $current = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
 
-        $past = DB::table('conferences')->where('end', '<=', date('Y-m-d').' 00:00:00')->get();
+        $past = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
 
         return ['current' => $current, 'past' => $past];
     }

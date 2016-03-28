@@ -14,18 +14,22 @@
 
 
 <div class="container">
-    <div class="panel panel-dark" >
+    <div class="panel panel-default" >
 
-        <h1 align='center' style="color:white"><strong>Users</strong></h1>
+        <h1 align='center' ><strong>Users</strong></h1>
 
         <div class="panel-body">
-            <table id="users_table" class="display" cellspacing="0">
+            <table id="users_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Birthday</th>
+                        <th>City</th>
+                        <th>Country</th>
+                        <th>Gender</th>
                         <th>Phone Number</th>
-                        <th>Admin</th>
+                        <th>User Type</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -34,13 +38,13 @@
                         <tr>
                             <td>{{$user->name}}</td>
                             <td>{{$user->email}}</td>
+                            <td>{{$user->date_of_birth}}</td>
+                            <td>{{$user->city}}</td>
+                            <td>{{$user->country}}</td>
+                            <td>{{$user->gender}}</td>
                             <td>{{$user->id}}</td>
-                            <td>@if($user->is_admin) 
-                                    True
-                                @else
-                                    False
-                                @endif</td>
-                            <td><a href="" class="btn btn-danger">Remove</a></td>
+                            <td>{{$user->is_admin ? "Admin": "Normal User"}}</td>
+                            <td><a href="{{ URL::to('manage_users/'.$user->id) }}" class="btn btn-danger" style="width:100%">Remove</a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -51,9 +55,13 @@
         
 <!-- Script for running DataTable -->
         <script>
-          $(function(){
-            $("#users_table").dataTable();
-          })
+
+        $(document).ready(function() {
+            $("#users_table").DataTable({
+
+            });
+        } );
+          
           $(document).ready(function(){
             $('.sidebar-menu > li').attr('class','');
             $('#sidebar-manageUsers').attr('class','active');

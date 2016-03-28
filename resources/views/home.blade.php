@@ -14,7 +14,7 @@
             </div>    
 
             <div class="container">
-                <div class="panel panel-dark" style='opacity:0.9'>
+                <div class="panel panel-default" style='opacity:0.9'>
                     <div class="panel-heading">
                         <h1 align='center' style='color:black'><strong>Currently registered conferences</strong></h1>
                     </div>

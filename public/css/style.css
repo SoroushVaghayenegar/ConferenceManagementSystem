@@ -1,9 +1,4 @@
-/*
-Template Name: Creative Bootstrap 3 Responsive Admin Template
-Template Version: 1.0
-Author: GeeksLabs
-Website: http://geekslabs.com/
-*/
+
 
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
@@ -64,7 +59,7 @@ table tr th { color: #688a7e;}
     padding-top: 10px;
 }
 .lite{
-    color: #00a0df !important;
+    color: #d9d9d9 !important;
 }
 
 /*login page*/
@@ -237,13 +232,13 @@ table tr th { color: #688a7e;}
     background: #5193ea;
     margin-right: 22px;
     box-shadow: 0 4px #2775e2;
-	float:left;
+    float:left;
 }
 
 .login-social-link a.twitter {
     background: #44ccfe;
     box-shadow: 0 4px #2bb4e8;
-	float:left;
+    float:left;
 }
 /*Modal Content*/
 .modal-content{
@@ -261,7 +256,12 @@ table tr th { color: #688a7e;}
     width: 180px;
     height: 100%;
     position: fixed;
-    background: #394a59;
+    color:black;
+    background: #007acc; /* For browsers that do not support gradients */
+  background: -webkit-radial-gradient(circle, #00cc99 , #007acc); /* Safari */
+  background: -o-radial-gradient(circle, #00cc99 , #007acc); /* Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(circle, #00cc99 , #007acc); /* Firefox 3.6 to 15 */
+  background: radial-gradient(circle, #00cc99 , #007acc); /* Standard syntax */
 }
 
 .nav-collapse.collapse {
@@ -341,7 +341,7 @@ ul.sidebar-menu li a span{
 }
 
 ul.sidebar-menu li a{
-    color: #d0d8df;
+    color: white;
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
@@ -361,7 +361,7 @@ ul.sidebar-menu li a{
     top: 2px;
 }*/
 ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #2e3b46;
+    background: #004d80;
     color: #fff;
     display: block;
     /*border-radius: 4px;
@@ -530,7 +530,7 @@ ul.sidebar-menu li.active a i {
 a.logo {
     font-size: 22px;
     font-weight: 300;
-    color: #fed189;
+    color: white;
     float: left;
     margin-top: 15px;
     text-transform: uppercase;
@@ -755,7 +755,7 @@ div[data-role="editor-toolbar"] {
 .dropdown-menu.inbox li a .message {
     display: block !important;
     font-size: 11px;
-	
+    
 }
 
 .top-nav  {
@@ -875,10 +875,9 @@ div[data-role="editor-toolbar"] {
   border-bottom: none;
   opacity: 0.7;
   text-transform: uppercase;
-  color: white;
 }
 .page-header i {
-  color: white;
+  color: #acb1b8;
   margin-right: 10px;
   float: left;
   font-size: 30px;
@@ -962,7 +961,7 @@ div[data-role="editor-toolbar"] {
   background: #79c447;
   border: 1px solid #61a434;
 }
-/*----------------	color------------------------*/
+/*----------------  color------------------------*/
 .dark-heading-bg {
   background: #4c4f53;
   border: 1px solid #4c4f53;
@@ -1042,25 +1041,15 @@ div[data-role="editor-toolbar"] {
 }
 .dark-bg {
   color : #fff;
-  background : #1a2732;
-  background-color : #1a2732;
+  background: #007acc; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #007acc , #00cc99); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #007acc, #00cc99); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right, #007acc, #00cc99); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #007acc , #00cc99); /* Standard syntax */
+  
 }
-.facebook-bg {
-  color: #fff;
-  background: #3b5998;
-  background-color : #3b5998;
-}
-.twitter-bg {
-  color: #fff;
-  background: #00aced;
-  background-color : #00aced; 
-}
-.linkedin-bg {
-  color: #fff;
-  background: #4875b4;
-  background-color : #4875b4;  
-}
-/*----------------------	panel-----------------*/
+
+/*----------------------    panel-----------------*/
 .panel {
   border:none;
   -webkit-border-radius: 0px;
@@ -1254,111 +1243,111 @@ div[data-role="editor-toolbar"] {
 /* Chat Widget starts */
 
 .chats{
-	list-style-type: none;
-	margin: 0px;
+    list-style-type: none;
+    margin: 0px;
 }
 
 .chats li{
-	margin-bottom: 8px;
-	padding-bottom: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
 }
 
 .chats .by-me img{
-	margin-top: 5px;
-	margin-right:10px;
-	padding: 1px;
-	background:#fff;
-	border: 1px solid #ccc;
+    margin-top: 5px;
+    margin-right:10px;
+    padding: 1px;
+    background:#fff;
+    border: 1px solid #ccc;
 }
 
 .chats .by-me .chat-meta{
-	font-size: 11px;
-	color: #999;
+    font-size: 11px;
+    color: #999;
 }
 
 .chats .by-me .chat-content{
-	margin-left: 60px;
-	position: relative; 
-	background: #fff; 
-	border: 1px solid #ddd;
-	padding: 7px 10px;
-	border-radius: 5px;
-	font-size: 13px;
+    margin-left: 60px;
+    position: relative; 
+    background: #fff; 
+    border: 1px solid #ddd;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 13px;
 }
 
 .chats .by-me .chat-content:after, .chats .by-me .chat-content:before { 
-	right: 100%; 
-	border: solid transparent; 
-	content: " "; 
-	height: 0; 
-	width: 0; 
-	position: absolute; 
-	pointer-events: none; 
+    right: 100%; 
+    border: solid transparent; 
+    content: " "; 
+    height: 0; 
+    width: 0; 
+    position: absolute; 
+    pointer-events: none; 
 } 
 
 .chats .by-me .chat-content:after { 
-	border-color: rgba(255, 255, 255, 0); 
-	border-right-color: #fff; 
-	border-width: 10px; 
-	top: 30%; 
-	margin-top: -10px; 
+    border-color: rgba(255, 255, 255, 0); 
+    border-right-color: #fff; 
+    border-width: 10px; 
+    top: 30%; 
+    margin-top: -10px; 
 } 
 
 .chats .by-me .chat-content:before { 
-	border-color: rgba(238, 238, 238, 0); 
-	border-right-color: #ccc; 
-	border-width: 11px; 
-	top: 30%; 
-	margin-top: -11px; 
+    border-color: rgba(238, 238, 238, 0); 
+    border-right-color: #ccc; 
+    border-width: 11px; 
+    top: 30%; 
+    margin-top: -11px; 
 }
 
 .chats .by-other img{
-	margin-top: 5px;
-	margin-left:10px;
-	padding: 1px;
-	background:#fff;
-	border: 1px solid #ccc;
+    margin-top: 5px;
+    margin-left:10px;
+    padding: 1px;
+    background:#fff;
+    border: 1px solid #ccc;
 }
 
 .chats .by-other .chat-meta{
-	font-size: 11px;
-	color: #999;
+    font-size: 11px;
+    color: #999;
 }
 
 .chats .by-other .chat-content{
-	margin-right: 60px;
-	position: relative; 
-	background: #fff; 
-	border: 1px solid #ddd;
-	padding: 7px 10px;
-	border-radius: 5px;
-	font-size: 13px;
+    margin-right: 60px;
+    position: relative; 
+    background: #fff; 
+    border: 1px solid #ddd;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 13px;
 }
 
 .chats .by-other .chat-content:after, .chats .by-other .chat-content:before { 
-	left: 100%; 
-	border: solid transparent; 
-	content: " "; 
-	height: 0; 
-	width: 0; 
-	position: absolute; 
-	pointer-events: none; 
+    left: 100%; 
+    border: solid transparent; 
+    content: " "; 
+    height: 0; 
+    width: 0; 
+    position: absolute; 
+    pointer-events: none; 
 } 
 
 .chats .by-other .chat-content:after { 
-	border-color: rgba(255, 255, 255, 0); 
-	border-left-color: #fff; 
-	border-width: 10px; 
-	top: 30%; 
-	margin-top: -10px; 
+    border-color: rgba(255, 255, 255, 0); 
+    border-left-color: #fff; 
+    border-width: 10px; 
+    top: 30%; 
+    margin-top: -10px; 
 } 
 
 .chats .by-other .chat-content:before { 
-	border-color: rgba(238, 238, 238, 0); 
-	border-left-color: #ccc; 
-	border-width: 11px; 
-	top: 30%; 
-	margin-top: -11px; 
+    border-color: rgba(238, 238, 238, 0); 
+    border-left-color: #ccc; 
+    border-width: 11px; 
+    top: 30%; 
+    margin-top: -11px; 
 }
 
 /* Chat widget ends */
@@ -1509,36 +1498,36 @@ div[data-role="editor-toolbar"] {
 * /Widget-Content */
 
 .widget-content .error .form-inline button{
-	margin-left:-2px;
-	padding:8px 12px;
+    margin-left:-2px;
+    padding:8px 12px;
 }
 
 .chats{
-	padding-left:0px;
-	margin-left:0px;
+    padding-left:0px;
+    margin-left:0px;
 }
 
 .recent{
-	padding-left:0px;
-	margin-left:0px;
+    padding-left:0px;
+    margin-left:0px;
 }
 
 .widget-foot .form-inline button {
-	margin-left: -3px;
-	padding:7px 12px;
+    margin-left: -3px;
+    padding:7px 12px;
 }
 
 .widget-content .form-inline button {
-	margin-left: 0px;
-	padding:7px 12px;
+    margin-left: 0px;
+    padding:7px 12px;
 }
 
 .buttons button{
-	margin-top:10px;
+    margin-top:10px;
 }
 
 .widget-content ol#slist{
-	padding:0px;
+    padding:0px;
 }
 .widget .widget-head,.modal-header{
   background-color: #f8f8f8;
@@ -1547,15 +1536,15 @@ div[data-role="editor-toolbar"] {
   background: -moz-linear-gradient(top, #f8f8f8, #f2f2f2);
   background: -ms-linear-gradient(top, #f8f8f8, #f2f2f2);
   background: -o-linear-gradient(top, #f8f8f8, #f2f2f2);
-  background: linear-gradient(top, #f8f8f8, #f2f2f2);	
+  background: linear-gradient(top, #f8f8f8, #f2f2f2);   
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
   text-shadow:0px 1px #fff;
   border-bottom: 1px solid #ccc;
   border-top: 1px solid #fff;
-	color: #666;
-	font-size: 14px;
-	font-weight: bold;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
     padding: 8px 15px;
 }
 
@@ -1571,25 +1560,25 @@ div[data-role="editor-toolbar"] {
   border-bottom: 1px solid #555;
   border-top: 1px solid #666;
   box-shadow: inset 0px 1px 1px #444;
-	color: #ccc;
+    color: #ccc;
 }
 
 .widget .widget-head .widget-icons i{
-	font-size: 14px;
-	margin: 0px 4px;
+    font-size: 14px;
+    margin: 0px 4px;
 }
 
 .widget .widget-head .widget-icons a{
-	color: #aaa;
+    color: #aaa;
 }
 
 .widget .widget-head .widget-icons a:hover{
-	color: #999;
+    color: #999;
 }
 
 .widget.wblack .widget-head .widget-icons i{
-	font-size: 14px;
-	margin: 0px 4px;
+    font-size: 14px;
+    margin: 0px 4px;
 }
 
 .widget .widget-foot, .modal-footer{
@@ -1599,7 +1588,7 @@ div[data-role="editor-toolbar"] {
   background: -moz-linear-gradient(top, #f8f8f8, #f2f2f2);
   background: -ms-linear-gradient(top, #f8f8f8, #f2f2f2);
   background: -o-linear-gradient(top, #f8f8f8, #f2f2f2);
-  background: linear-gradient(top, #f8f8f8, #f2f2f2);	
+  background: linear-gradient(top, #f8f8f8, #f2f2f2);   
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   text-shadow:0px 1px #fff;
@@ -1611,54 +1600,54 @@ div[data-role="editor-toolbar"] {
   box-shadow: inset 0px 1px 1px #fff;
 }
 .widget-content .error .form-inline button{
-	margin-left:-2px;
-	padding:8px 12px;
+    margin-left:-2px;
+    padding:8px 12px;
 }
 
 .chats{
-	padding-left:0px;
-	margin-left:0px;
+    padding-left:0px;
+    margin-left:0px;
 }
 
 .recent{
-	padding-left:0px;
-	margin-left:0px;
+    padding-left:0px;
+    margin-left:0px;
 }
 
 .widget-foot .form-inline button {
-	margin-left: -3px;
-	padding:7px 12px;
+    margin-left: -3px;
+    padding:7px 12px;
 }
 
 .widget-content .form-inline button {
-	margin-left: 0px;
-	padding:7px 12px;
+    margin-left: 0px;
+    padding:7px 12px;
 }
 .widget .padd .modal-body{
-	padding: 13px 15px;
+    padding: 13px 15px;
 }
 
 .buttons button{
-	margin-top:10px;
+    margin-top:10px;
 }
 
 .widget-content ol#slist{
-	padding:0px;
+    padding:0px;
 }
 
 .task i {
-	display:inline-block;
-	width: 30px;
-	height: 17px;
-	background: #ccc;
-	text-align: center;
-	border-radius: 50px;
-	font-size: 10px;
-	line-height: 17px;
+    display:inline-block;
+    width: 30px;
+    height: 17px;
+    background: #ccc;
+    text-align: center;
+    border-radius: 50px;
+    font-size: 10px;
+    line-height: 17px;
 }
 
 .pagination li a{
-	color:#777;
+    color:#777;
 }
 /* Widget white extras */
 
@@ -1667,14 +1656,14 @@ div[data-role="editor-toolbar"] {
 }
 
 .widget .nav-tabs {
-	margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 .widget .tab-content{
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .widget .padd, .modal-body{
-	padding: 13px 15px;
+    padding: 13px 15px;
 }
 .portlets{
   min-height:50px;
@@ -1683,28 +1672,28 @@ div[data-role="editor-toolbar"] {
 .portlets .widget-head{
   cursor:move;
 }
-/*-----	map-----*/
+/*----- map-----*/
 * Google maps */
 
 .gmap iframe{
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
 }
 
 /* Google maps ends */
 /* Today datas */
 
 .today-datas{
-	list-style-type: none;
-	padding: 0px;
-	margin: 10px 0px;
+    list-style-type: none;
+    padding: 0px;
+    margin: 10px 0px;
 }
 
 .today-datas li{
-	display: inline-block;
-	margin-bottom: 5px;
-	margin-right: 10px;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 10px;
   padding: 10px 10px;
   text-shadow:0px 1px 0px #fff;
   max-width: 100%;
@@ -1712,9 +1701,9 @@ div[data-role="editor-toolbar"] {
 }
 
 .today-datas li .datas-text{
-	font-size: 13px;
-	padding: 7px 0px 0px 0px;
-	font-weight: normal;
+    font-size: 13px;
+    padding: 7px 0px 0px 0px;
+    font-weight: normal;
 }
 
 /*----*/
@@ -2522,9 +2511,9 @@ ul.ft-link li a i {
 .follow-info{
     text-align: left;
     padding-top: 20px;
-	padding-bottom: 10px;
+    padding-bottom: 10px;
 
-	
+    
 }
 .profile-widget h4 {
     margin: 5px;
@@ -2690,23 +2679,23 @@ ul.ft-link li a i {
 .weather-category ul   {
     display: inline-block;
     width: 100%;
-	padding-bottom: 10px;
+    padding-bottom: 10px;
     text-align: center;
-	border-top:1px solid #e6e6e6 ;
-	border-left:1px solid #e6e6e6 ;
+    border-top:1px solid #e6e6e6 ;
+    border-left:1px solid #e6e6e6 ;
     border-right:1px solid #e6e6e6 ;
-	border-bottom:1px solid #e6e6e6 ;
+    border-bottom:1px solid #e6e6e6 ;
     display: inline-block;
 }
 .weather-category ul  li {
     display: inline-block;
     width: 70%;
-	padding-top: 10px;
-	padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
-	
+    
    
-	
+    
     display: inline-block;
 }
 .weather-category ul li i  {
@@ -3866,7 +3855,7 @@ ul.amounts li {
 
 .tab-bg-info {
     background: #324c57; 
-	
+    
     border-bottom: none;
 }
 .tab-bg-info.panel-heading .nav > li.active > a, .tab-bg-info.panel-heading .nav > li > a:hover{
@@ -4034,7 +4023,7 @@ ul.amounts li {
 
 .form-horizontal .checkbox-inline > input {
     margin-top: 1px;
-	border:none;
+    border:none;
 }
 
 
@@ -4059,7 +4048,7 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 }
 
 .checkbox, .checkbox:hover, .checkbox:focus  {
-	border:none;
+    border:none;
 }
 
 
@@ -4940,11 +4929,12 @@ span.customSelect.changed {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
 
+
 .nav-tabs{
-  background-color:#161616;
+  /*background-color:#161616;*/
 }
 .tab-content{
-    background-color:#303136;
+    /*background-color:#303136;*/
     
     padding:5px
 }
@@ -4953,20 +4943,26 @@ span.customSelect.changed {
   color: grey;
 }
 .nav-tabs > li > a:hover{
-  background-color: #303136 !important;
+  background-color: #e6e6e6 !important;
     border: medium none;
     border-radius: 0;
-    color:#fff;
+    color:black;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:hover{
-    background-color: #303136 !important;
+    background-color: #e6e6e6 !important;
+    color:black;
+}
+
+.btn-register{
+    background-color: #0099ff;
     color: white;
 }
 
-.panel-dark{
-    background-color: #303136;
+.btn-details{
+    background-color: #ff8c1a;
+    color: white;
 }
 
 @media screen and (max-width: 640px) {

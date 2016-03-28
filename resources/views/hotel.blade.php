@@ -17,7 +17,7 @@
         <div class="panel-body">
 
           
-                  <table id="hotel_table" class="display" cellspacing="0">
+                  <table id="hotel_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                           <tr>
                               <th>Room</th>
@@ -44,7 +44,7 @@
                                   <td>{{$hotel->capacity}}</td>
                                   <td>{{$hotel->conference_id}}</td>
                                   <td>Full</td>
-                                  <td><a href="" class="btn btn-danger">Remove</a></td>
+                                  <td><a href="" class="btn btn-danger" style="width:100%">Remove</a></td>
                               </tr>
                           @endforeach
                       </tbody>
@@ -56,7 +56,7 @@
 <!-- Script for running DataTable -->
         <script>
           $(document).ready(function(){
-            $("#hotel_table").dataTable();
+            $("#hotel_table").DataTable();
           });
           $(document).ready(function(){
             $('.sidebar-menu > li').attr('class','');
