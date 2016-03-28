@@ -26,8 +26,7 @@
                         <thead>
                             <th>{{count($participants)}}</th> 
                             <!--<th>Conference Name</th>-->
-                            <!--<th>Start Date</th>-->
-                            <th>{{count($conferences)}}</th> 
+                            <th>Start Date</th>
                             <th>End Date</th>
                             <th>Companions</th>
                             <th>Flight No</th>
@@ -42,10 +41,11 @@
                                 <td>{{ $conference->start }}</td>
                                 <td>{{ $conference->end }}</td>
                                 <td>
-                                    Graham </br>
-                                    Sherry </br>
-                                    Jon    </br>
-                                    Yuwei
+                                    @foreach($participants as $participant)
+                                        @if($conference->attendees()->find($participant->id) && !$participant->primary_user)
+                                            {{$participant->name}}</br>
+                                        @endif
+                                    @endforeach
                                 </td>
                                 <td style='color:#00bfff'> AT0421</td>
                                 <td>March 22, 2016</td>
