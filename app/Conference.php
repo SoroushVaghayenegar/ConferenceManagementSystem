@@ -8,6 +8,24 @@ class Conference extends Model
 {
     public $fillable = ['name', 'description', 'capacity', 'start', 'end', 'location'];
 
+    public static function getCurrentConferences()
+    {
+        return Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
+    }
+
+    public static function getPastConferences()
+    {
+        return Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
+    }
+
+    /*
+    *  return true if User with $user_id is registered to the conference
+    */
+    public function isRegistered($user_id)
+    {
+        return $this->attendees()->where('user_id', $user_id)->count() > 0;
+    }
+
     public function events()
     {
         return $this->hasMany('App\Event');
