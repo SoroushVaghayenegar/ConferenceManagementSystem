@@ -24,8 +24,7 @@
                 <div class="panel-body">
                     <table width="100%" class="table">
                         <thead>
-                            <th>{{count($participants)}}</th> 
-                            <!--<th>Conference Name</th>-->
+                            <th>Conference Name</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Companions</th>
@@ -42,20 +41,29 @@
                                 <td>{{ $conference->end }}</td>
                                 <td>
                                     @foreach($participants as $participant)
-                                        @if($conference->attendees()->find($participant->id) && !$participant->primary_user)
+                                        @if($conference->attendees()->find($participant->id))
+                                            @if($participant->primary_user)
+                                            <?php 
+                                            $primaryId = $participant->id;
+                                            ?>
+                                            @else
                                             {{$participant->name}}</br>
+                                            @endif
                                         @endif
                                     @endforeach
                                 </td>
-                                <td style='color:#00bfff'> AT0421</td>
-                                <td>March 22, 2016</td>
-                                <td>12:00::00</td>
+                                <?php 
+                                     $primaryUser = DB::table('conference_attendees')->where('participant_id', $primaryId )->first();
+                                 ?>
+                                <td style='color:#00bfff'> {{$primaryUser->flight}}</td>
+                                <td>{{$primaryUser->arrival_date}}</td>
+                                <td>{{$primaryUser->arrival_time}}</td>
                                 <td>
                                     <address>
                                       <strong>Hotel Name not implemented</strong><br>
                                       {{ $conference->address }}<br>
                                       {{ $conference->location }}<br>
-                                      <abbr title="Phone">P:</abbr> (123) 456-7890
+                                      <abbr title="Phone">P:</abbr> {{DB::table('participants')->where('id', $primaryId )->first()->phone}}
                                   </address>
                               </td>
                           </tr>

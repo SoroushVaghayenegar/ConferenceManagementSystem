@@ -45,7 +45,7 @@ class HomeController extends Controller
                 $conferences_registered[] = $conference;
             }
         }
-        return view('home', ['conferences' => $conferences_registered,'participants' => $participants]);
+        return view('home', ['conferences' => $conferences_registered,'participants' => $participants,'primaryId'=>""]);
     }else{
         return view('home');
     }
