@@ -60,6 +60,7 @@ class ParticipantController extends Controller
         $conferences = $this->getConferences();
 
         return view('manage_participants', [
+          'current' => $id,
           'conferences' => $conferences['past']->merge($conferences['current']),
           'attendees' => $attendees
         ]);

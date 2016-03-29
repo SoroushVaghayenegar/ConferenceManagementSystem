@@ -12,17 +12,30 @@
 
 <div class="container">
   <div class="panel panel-default">
+    <header class="panel-heading">Participants</header>
     <div class="panel-body">
-      <select id="current_conferences" class="form-control">
-        <option value="#">Select a conference</option>
-        @if (count($conferences) > 0)
-        @foreach ($conferences as $conference)
-        <option value="/conference/{{$conference->id}}/participants">{{$conference->name}}</option>
-        @endforeach
-        @else
-        <option>No conferences available!</option>
-        @endif
-      </select>
+      <div class="row">
+        <span class="h4 col-md-2">
+          <strong>Select a conference</strong>
+        </span>
+
+        <div class="col-md-6">
+          <select id="current_conferences" class="form-control">
+            <option value="#">Select a conference</option>
+            @if (count($conferences) > 0)
+            @foreach ($conferences as $conference)
+            @if ($conference->id == $current)
+            <option value="/conference/{{$conference->id}}/participants" selected>{{$conference->name}}</option>
+            @else
+            <option value="/conference/{{$conference->id}}/participants">{{$conference->name}}</option>
+            @endif
+            @endforeach
+            @else
+            <option>No conferences available!</option>
+            @endif
+          </select>
+        </div>
+      </div>
       <h3 style="color:white; text-align: center"><strong>Participants</strong></h3>
       <table id="participants_table_current" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
