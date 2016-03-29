@@ -43,7 +43,9 @@ class ParticipantController extends Controller
     {
         $conferences = $this->getConferences();
 
-        return view('manage_participants', ['current_conferences' => $conferences['current'], 'past_conferences' => $conferences['past']]);
+        return view('manage_participants', [
+          'conferences' => $conferences['past']->merge($conferences['current'])
+        ]);
     }
 
     public function show($id)
@@ -58,8 +60,7 @@ class ParticipantController extends Controller
         $conferences = $this->getConferences();
 
         return view('manage_participants', [
-          'current_conferences' => $conferences['current'],
-          'past_conferences' => $conferences['past'],
+          'conferences' => $conferences['past']->merge($conferences['current']),
           'attendees' => $attendees
         ]);
     }
