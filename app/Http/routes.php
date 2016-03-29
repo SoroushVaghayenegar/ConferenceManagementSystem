@@ -83,10 +83,13 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/manage_participants', 'ParticipantController@index');
 
     Route::get('/hotel', 'HotelController@index');
+    Route::get('/hotel/{id}', 'HotelController@destroy');
 
     Route::get('/flights', 'FlightController@index');
 
     Route::get('/reports', 'ReportController@index');
+
+    Route::get('/reports/{id}', 'ReportController@getReport');
 
     Route::get('/verify/{verificationCode}','VerificationController@confirm');
 

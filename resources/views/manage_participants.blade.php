@@ -11,6 +11,7 @@
 </div>
 
 <div class="container">
+
   @if (session('approved') || session('unapproved'))
   <div class="panel panel-default">
     <header class="panel-heading">Status</header>
@@ -33,6 +34,7 @@
         <span class="h4 col-md-2">
           <strong>Select a conference</strong>
         </span>
+
 
         <div class="col-md-6">
           <select id="current_conferences" class="form-control">

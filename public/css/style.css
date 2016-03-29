@@ -4975,6 +4975,7 @@ span.customSelect.changed {
         display: block;
     }
 }
+
 /*.table-responsive{
     background-color:#303136;
 }*/
@@ -4994,4 +4995,12 @@ span.customSelect.changed {
 .btn-details{
     background-color: #ff8c1a;
     color: white;
+}
+
+th{
+    text-align: center;
+}
+
+td{
+    text-align: center;
 }

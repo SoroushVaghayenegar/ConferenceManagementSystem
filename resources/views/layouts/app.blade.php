@@ -8,6 +8,9 @@
     <title>@yield('title')</title>
 
 
+
+
+
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -24,16 +27,12 @@
     <!-- font icon -->
     <link href="/css/elegant-icons-style.css" rel="stylesheet" />
     <link href="/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- full calendar css-->
-    <link href="/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-    <link href="/assets/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" />
+    
     <!-- easy pie chart-->
     <link href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="css/owl.carousel.css" type="text/css">
-    <link href="/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    
     <!-- Custom styles -->
-    <link rel="stylesheet" href="css/fullcalendar.css">
+    
     <link href="/css/widgets.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/style-responsive.css" rel="stylesheet" />
@@ -168,18 +167,21 @@
                               <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>
                                   <span>Reports</span>
+
                               </a>
+
                           </li>
+
                           <li class="" id='sidebar-flights'>
                               <a class="" href="{{ URL::to('/flights')}}">
                                   <i class="fa fa-plane"></i>
-                                  <span>Flights</span>
+                                  <span>flights</span>
                               </a>
                           </li>
                           <li class="" id='sidebar-hotel'>
                               <a class="" href="{{ URL::to('/hotel') }}">
                                   <i class="fa fa-bed"></i>
-                                  <span>Hotels</span>
+                                  <span>Hotel</span>
                               </a>
                           </li>
                       @endif
@@ -200,7 +202,7 @@
         </section>
 
     @endif
-	</section>
+</section>
 
-</body>
-</html>
+    </body>
+    </html>

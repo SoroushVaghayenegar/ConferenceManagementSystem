@@ -12,7 +12,7 @@
 <div class="container">
   <div class="panel panel-default" >
         
-        <h1 align="center" style="color:white"><strong>Hotel Rooms</strong></h1>
+        <h1 align="center" ><strong>Hotel Rooms</strong></h1>
 
         <div class="panel-body">
 
@@ -44,7 +44,7 @@
                                   <td>{{$hotel->capacity}}</td>
                                   <td>{{$hotel->conference_id}}</td>
                                   <td>Full</td>
-                                  <td><a href="" class="btn btn-danger" style="width:100%">Remove</a></td>
+                                  <td><a href="{{ URL::to('hotel/'.$hotel->id) }}" class="btn btn-danger" style="width:100%">Remove</a></td>
                               </tr>
                           @endforeach
                       </tbody>

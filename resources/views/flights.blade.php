@@ -12,7 +12,7 @@
 
 <div class="container">
 
-  <div class="panel panel-dark" >
+  <div class="panel panel-default" >
         <ul class="nav nav-tabs nav-justified">
             <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Current Conferences</strong></a></li>
             <li><a data-toggle="tab" href="#pastConferences"><strong>Past Conferences</strong></a></li>

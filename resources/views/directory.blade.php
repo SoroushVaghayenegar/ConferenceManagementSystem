@@ -51,11 +51,7 @@
                                   </td>
                                   <td> 
                                     @if(Auth::user())
-                                      @if (session('joined'))
-                                        <a href="/conference/{{$current_conference->id}}/join" class="btn btn-success">You are registered!</a>
-                                      @else
-                                        <a href="/conference/{{$current_conference->id}}/join" class="btn btn-register">Register</a>
-                                      @endif  
+                                      <a href="/conference/{{$current_conference->id}}/join" class="btn btn-register">Register</a>
                                     @else
                                     <a href="/login" class="btn btn-register">Register</a> 
                                     @endif
