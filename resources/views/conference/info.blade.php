@@ -36,7 +36,7 @@
             <p class="text-left"><strong>Capacity:</strong>    {{$conference->capacity}}</p>
             <p class="text-left"><strong>Start Time:</strong>  {{ date('F d, Y', strtotime($conference->start)) }}</p>
             <p class="text-left"><strong>End Time:</strong>    {{ date('F d, Y', strtotime($conference->end)) }}</p>
-            <a class="btn btn-default" href="javascript:window.history.back()">Back</a>
+            <a class="btn btn-default" href="/directory">Back</a>
             @if(Auth::user())
             @if(!isset($registration))
             <a class="btn btn-danger pull-right" href="/conference/{{$conference->id}}/join">Register</a>
