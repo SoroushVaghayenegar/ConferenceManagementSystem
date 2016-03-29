@@ -29,5 +29,23 @@ class ConferenceTableSeeder extends Seeder
           "end" => "2017-01-05 00:00:00",
           "location" => "Vancouver, BC, Canada"
         ]);
+        DB::table('conferences')->insert([
+          "id" => 3,
+          "name" => "Los Angeles 2016",
+          "description" => "This conference will be held in Los Angeles, California.",
+          "capacity" => 200,
+          "start" => "2016-03-01 00:00:00",
+          "end" => "2016-03-05 00:00:00",
+          "location" => "Los Angeles, CA"
+        ]);
+        DB::table('conferences')->insert([
+          "id" => 4,
+          "name" => "Toronto 2017",
+          "description" => "This conference will be held in Toronto, 2017.",
+          "capacity" => 250,
+          "start" => "2017-03-01 00:00:00",
+          "end" => "2017-03-05 00:00:00",
+          "location" => "Toronto 2017"
+        ]);
     }
 }
