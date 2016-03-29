@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Gate;
 use App\Conference;
+use App\Participant;
 use App\User;
 
 class ParticipantController extends Controller
@@ -65,5 +66,23 @@ class ParticipantController extends Controller
           'conferences' => $conferences['past']->merge($conferences['current']),
           'attendees' => $attendees
         ]);
+    }
+
+    public function approve($conference, $participant_id)
+    {
+        $participant = Participant::findOrFail($participant_id);
+
+        $participant->conferences()->updateExistingPivot($conference, ["approved" => true]);
+
+        return redirect("/conference/$conference/participants")->with('approved', true);
+    }
+
+    public function unapprove($conference, $participant_id)
+    {
+        $participant = Participant::findOrFail($participant_id);
+
+        $participant->conferences()->updateExistingPivot($conference, ["approved" => false]);
+
+        return redirect("/conference/$conference/participants")->with('unapproved', true);
     }
 }

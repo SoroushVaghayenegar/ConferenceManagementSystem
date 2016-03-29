@@ -13,7 +13,8 @@ class Participant extends Model
 
     public function conferences()
     {
-      return $this->belongsToMany('App\Conference')
+      return $this->belongsToMany('App\Conference', 'conference_attendees')
+      ->withPivot('flight', 'arrival_date', 'arrival_time', 'hotel_requested', 'taxi_requested', 'approved')
       ->withTimestamps();
     }
 

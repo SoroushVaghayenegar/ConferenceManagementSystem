@@ -11,6 +11,21 @@
 </div>
 
 <div class="container">
+  @if (session('approved') || session('unapproved'))
+  <div class="panel panel-default">
+    <header class="panel-heading">Status</header>
+    <div class="panel-body">
+      <h4 class="text-center">
+        <i class="fa fa-check"></i>
+        @if (session('approved'))
+        The participant is approved.
+        @elseif (session('unapproved'))
+        The participant is unapproved.
+        @endif
+      </h4>
+    </div>
+  </div>
+  @endif
   <div class="panel panel-default">
     <header class="panel-heading">Participants</header>
     <div class="panel-body">
@@ -46,8 +61,10 @@
             <th>Flight No</th>
             <th>Arrival date</th>
             <th>Arrival time</th>
-            <th>Hotel requested</th>
-            <th>Taxi requested</th>
+            <th>Hotel needed</th>
+            <th>Taxi needed</th>
+            <th>Approved</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -62,6 +79,12 @@
             <td>{{$attendee->arrival_time ? $attendee->arrival_time : "N/A"}}</td>
             <td>{{$attendee->hotel_requested ? "Yes": "No"}}</td>
             <td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
+            <td>{{$attendee->approved? "Yes": "No"}}</td>
+            @if (isset($attendee->approved) && $attendee->approved)
+            <td><button class="btn btn-sm btn-danger" onclick="unapprove({{$attendee->id}})">Unapprove</button></td>
+            @else
+            <td><button class="btn btn-sm btn-default" onclick="approve({{$attendee->id}})">Approve</button></td>
+            @endif
           </tr>
           @endforeach
           @endif
@@ -103,6 +126,22 @@ $('#option_current').click(function(){
 $('#option_past').click(function(){
 
 });
+
+var approve = function (id) {
+  @if (!isset($current))
+  return;
+  @else
+  window.location = "/approve/conference/" + {{$current}} + "/participant/" + id;
+  @endif
+}
+
+var unapprove = function (id) {
+  @if (!isset($current))
+  return;
+  @else
+  window.location = "/unapprove/conference/" + {{$current}} + "/participant/" + id;
+  @endif
+}
 
 </script>
 @endsection
