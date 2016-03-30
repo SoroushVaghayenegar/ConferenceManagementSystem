@@ -30,15 +30,51 @@ class ReportController extends Controller
 
         $past_conferences = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
 
+        $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager){
+
+            $current_conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+            $past_conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                          ->where('end', '<=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+        }
+
         return view('reports', ['current_conferences' => $current_conferences , 'past_conferences' => $past_conferences, 'report' => null]);
         
     }
 
     public function getReport($id){
 
+        $conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(404);
+
         $current_conferences = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
 
         $past_conferences = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
+
+        $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager){
+
+            $current_conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+            $past_conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                          ->where('end', '<=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+        }
 
         $conference = Conference::findOrFail($id);
 

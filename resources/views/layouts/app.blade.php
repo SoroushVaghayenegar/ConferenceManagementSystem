@@ -59,7 +59,10 @@
 
     
     
-
+  <?php
+    if(Auth::check())
+      $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+  ?>
     
     <style>
         body {
@@ -93,7 +96,7 @@
         </div>
         @endif
         <!--logo start-->
-        <a href="{{ URL::to('') }}" class="logo"> Gobind Sarvar<span class="lite">  <strong>CMS<strong> </span></a>
+        <a href="{{ URL::to('') }}" class="logo"> Gobind Sarvar<span class="lite">  <strong>CMS<strong></span></a>
         <!--logo end-->
         <div class="top-nav notification-row">
             <ul class="nav pull-right top-menu">
@@ -167,9 +170,7 @@
                               <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>
                                   <span>Reports</span>
-
                               </a>
-
                           </li>
 
                           <li class="" id='sidebar-flights'>
@@ -185,6 +186,14 @@
                               </a>
                           </li>
                       @endif
+                          @if(Auth::user()->is_admin == 0 && $conference_manager)
+                          <li class="" id='sidebar-reports'>
+                              <a class="" href="{{ URL::to('/reports') }}">
+                                  <i class="icon_piechart"></i>
+                                  <span>Reports</span>
+                              </a>
+                          </li>
+                          @endif
                   </ul>
                   <!-- sidebar menu end-->
               </div>

@@ -1,8 +1,5 @@
 @extends('layouts.app')
 
-<script src="/js/d3.js"></script>
-<script src="/js/d3.min.js"></script>
-
 
 
 @section('title', 'Reports')
