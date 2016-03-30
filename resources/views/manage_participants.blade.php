@@ -13,18 +13,16 @@
 <div class="container">
 
   @if (session('approved') || session('unapproved'))
-  <div class="panel panel-default">
-    <header class="panel-heading">Status</header>
-    <div class="panel-body">
+  <div class="alert alert-success" id="success-alert">
       <h4 class="text-center">
         <i class="fa fa-check"></i>
         @if (session('approved'))
-        The participant is approved.
+        The participant is <strong>approved</strong>.
         @elseif (session('unapproved'))
-        The participant is unapproved.
+        The participant is <strong style="color:red">unapproved</strong>.
         @endif
       </h4>
-    </div>
+    
   </div>
   @endif
   <div class="panel panel-default">
@@ -127,6 +125,11 @@ $('#option_current').click(function(){
 
 $('#option_past').click(function(){
 
+});
+
+
+$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").alert('close');
 });
 
 var approve = function (id) {
