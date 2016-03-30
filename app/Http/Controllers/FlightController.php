@@ -28,8 +28,7 @@ class FlightController extends Controller
     public function getConferences()
     {
         $current = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
-        $past = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
-        return ['current' => $current, 'past' => $past];
+        return ['current' => $current];
     }
 	
     public function index()
@@ -37,7 +36,7 @@ class FlightController extends Controller
         $conferences = $this->getConferences();
         return view('flights', [
           'current' => null,
-          'conferences' => $conferences['past']->merge($conferences['current'])
+          'conferences' => $conferences['current']
         ]);
     }
 
@@ -54,7 +53,7 @@ class FlightController extends Controller
 
         return view('flights', [
           'current' => $id,
-          'conferences' => $conferences['past']->merge($conferences['current']),
+          'conferences' => $conferences['current'],
           'attendees' => $attendees
         ]);
     }
