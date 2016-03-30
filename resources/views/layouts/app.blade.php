@@ -11,12 +11,12 @@
 
 
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/fonts/fonts.css" rel="stylesheet" type="text/css">
+    <link href="/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="" rel="stylesheet" type="text/css">
     <link href="/css/app.css" rel="stylesheet" type="text/css">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <link href="/css/bootstrap2.min.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery.min.js"></script>
 
 
     <!-- Bootstrap CSS -->
@@ -51,11 +51,11 @@
     <script src="/js/scripts.js"></script>
 
     
-<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/dataTables.bootstrap.min.js"></script>
 
 
-<link href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="css/dataTables.bootstrap.min.css" rel="stylesheet" />
 
     
     
@@ -151,7 +151,7 @@
                       </li>
                       @if(Auth::user()->is_admin)
                           <li class="" id='sidebar-manageConferences'>
-                              <a class="" href="{{ URL::to('/create_conference') }}">
+                              <a class="" href="{{ URL::to('/manage_conferences') }}">
                                   <span>Manage conferences</span>
                               </a>
                           </li>
@@ -187,6 +187,12 @@
                           </li>
                       @endif
                           @if(Auth::user()->is_admin == 0 && $conference_manager)
+
+                          <li class="" id='sidebar-manageParticipants'>
+                              <a class="" href="{{ URL::to('/manage_participants') }}">
+                                  <span>Manage Participants</span>
+                              </a>
+                          </li>
                           <li class="" id='sidebar-reports'>
                               <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>

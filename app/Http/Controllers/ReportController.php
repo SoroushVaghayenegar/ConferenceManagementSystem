@@ -32,6 +32,9 @@ class ReportController extends Controller
 
         $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
 
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(404);
+
         if(Auth::user()->is_admin == 0 && $conference_manager){
 
             $current_conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')

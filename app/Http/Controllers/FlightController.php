@@ -10,6 +10,7 @@ use Gate;
 use App\Conference;
 use App\Participant;
 use App\User;
+use Auth;
 
 class FlightController extends Controller
 {
@@ -33,6 +34,10 @@ class FlightController extends Controller
 	
     public function index()
     {
+
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+
         $conferences = $this->getConferences();
         return view('flights', [
           'current' => null,
@@ -42,6 +47,10 @@ class FlightController extends Controller
 
     public function show($id)
     {
+
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+
         // Get attendees list for Conference $id
         $conference = Conference::findOrFail($id);
         $this->checkConferenceManager($conference);

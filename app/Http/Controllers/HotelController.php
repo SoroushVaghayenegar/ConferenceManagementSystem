@@ -8,6 +8,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Conference;
+use Auth;
 
 class HotelController extends Controller
 {
@@ -18,6 +19,9 @@ class HotelController extends Controller
 
     public function index()
     {
+    	if(Auth::user()->is_admin == 0)
+        	abort(404);
+
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
 
@@ -28,12 +32,18 @@ class HotelController extends Controller
 
 		public function showCreate($id)
 		{
+			if(Auth::user()->is_admin == 0)
+        		abort(404);
+
 				$conference = Conference::findOrFail($id);
 				return view('create_hotel', ['conference' => $conference]);
 		}
 
 		public function create($id, Request $request)
 		{
+			if(Auth::user()->is_admin == 0)
+        		abort(404);
+
 				$this->validate($request, [
 					'name' => 'required|max:255',
 					'address' => 'required',
@@ -55,6 +65,9 @@ class HotelController extends Controller
 
 		public function show($id)
 		{
+			if(Auth::user()->is_admin == 0)
+        		abort(404);
+
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
 
@@ -72,6 +85,9 @@ class HotelController extends Controller
 
     public function destroy(Hotel $id)
     {
+        if(Auth::user()->is_admin == 0)
+        	abort(404);
+
         $id->delete();
         return redirect('hotel');
     }

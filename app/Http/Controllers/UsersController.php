@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Auth;
 
 class UsersController extends Controller
 {   
@@ -90,6 +91,9 @@ class UsersController extends Controller
      */
     public function destroy(User $id)
     {
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+        
         $id->delete();
         return redirect('manage_users');
     }

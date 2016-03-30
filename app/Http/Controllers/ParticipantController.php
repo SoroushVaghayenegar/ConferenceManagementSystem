@@ -10,6 +10,7 @@ use Gate;
 use App\Conference;
 use App\Participant;
 use App\User;
+use Auth;
 
 class ParticipantController extends Controller
 {
@@ -42,6 +43,9 @@ class ParticipantController extends Controller
 
     public function index()
     {
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+
         $conferences = $this->getConferences();
 
         return view('manage_participants', [
@@ -52,6 +56,9 @@ class ParticipantController extends Controller
 
     public function show($id)
     {
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+
         // Get attendees list for Conference $id
         $conference = Conference::findOrFail($id);
         $this->checkConferenceManager($conference);
@@ -70,6 +77,9 @@ class ParticipantController extends Controller
 
     public function approve($conference, $participant_id)
     {
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+
         $participant = Participant::findOrFail($participant_id);
 
         $participant->conferences()->updateExistingPivot($conference, ["approved" => true]);
@@ -79,6 +89,9 @@ class ParticipantController extends Controller
 
     public function unapprove($conference, $participant_id)
     {
+        if(Auth::user()->is_admin == 0)
+            abort(404);
+
         $participant = Participant::findOrFail($participant_id);
 
         $participant->conferences()->updateExistingPivot($conference, ["approved" => false]);

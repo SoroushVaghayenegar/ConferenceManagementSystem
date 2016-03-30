@@ -42,11 +42,14 @@ class ConferenceController extends Controller
 
         $conference->managers()->attach($request->managers);
 
-        return redirect('/');
+        return redirect('/manage_conferences');
     }
 
     public function edit($id,Request $request)
     {
+      if(Auth::user()->is_admin == 0)
+        abort(404);
+
     Conference::where('id', $id)
     ->update(
       ['name' => $request->name,
@@ -89,7 +92,7 @@ class ConferenceController extends Controller
     public function delete(Conference $id)
     {
         $id->delete();
-        return redirect('/create_conference');
+        return redirect('/manage_conferences');
     }
 
     public function join($id, Request $request)

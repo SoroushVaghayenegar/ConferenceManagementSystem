@@ -103,7 +103,7 @@ Route::group(['middleware' => 'web'], function () {
   /**
   * Show Conference Dashboard
   */
-  Route::get('create_conference', ['middleware' => 'auth', function() {
+  Route::get('manage_conferences', ['middleware' => 'auth', function() {
     $conferences = Conference::orderBy('created_at', 'asc')->get();
 
     return view('conferences', [
@@ -138,6 +138,9 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/conference/{id}/flights', 'FlightController@show');
   
   Route::get('/conference/{id}/edit', function (Conference $id) {
+    if(Auth::user()->is_admin == 0)
+        abort(404);
+      
     return view('conference.edit', ['conference' => $id]);
   });
 
