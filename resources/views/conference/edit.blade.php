@@ -109,7 +109,7 @@
 					<!-- Add Conference Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-6">
-							<a href="{{ URL::to('create_conference') }}" class="btn btn-default">Back</a>
+							<a href="{{ URL::to('manage_conferences') }}" class="btn btn-default">Back</a>
 							<button type="submit" class="btn btn-info">
 								Save Changes
 							</button>

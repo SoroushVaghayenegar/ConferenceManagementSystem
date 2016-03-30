@@ -28,15 +28,25 @@ class FlightController extends Controller
 	
     public function getConferences()
     {
+
         $current = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
+
+        $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+
+        if(Auth::user()->is_admin == 0 && $conference_manager){
+
+            $current = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+        }
+
         return ['current' => $current];
     }
 	
     public function index()
     {
-
-        if(Auth::user()->is_admin == 0)
-            abort(404);
 
         $conferences = $this->getConferences();
         return view('flights', [
@@ -48,8 +58,6 @@ class FlightController extends Controller
     public function show($id)
     {
 
-        if(Auth::user()->is_admin == 0)
-            abort(404);
 
         // Get attendees list for Conference $id
         $conference = Conference::findOrFail($id);

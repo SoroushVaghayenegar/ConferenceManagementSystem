@@ -54,7 +54,7 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/register/verify', function(){
 
     if(Auth::check())
-     return view('errors.404');
+     abort(404);
     else
       return view('auth.verify');
   });
@@ -103,15 +103,7 @@ Route::group(['middleware' => 'web'], function () {
   /**
   * Show Conference Dashboard
   */
-  Route::get('manage_conferences', ['middleware' => 'auth', function() {
-    $conferences = Conference::orderBy('created_at', 'asc')->get();
-
-    return view('conferences', [
-      'conferences' => $conferences
-      ]);
-
-    //
-  }]);
+  Route::get('manage_conferences', 'ConferenceController@index');
 
   /**
   * Add New Conference
@@ -138,9 +130,9 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/conference/{id}/flights', 'FlightController@show');
   
   Route::get('/conference/{id}/edit', function (Conference $id) {
-    if(Auth::user()->is_admin == 0)
-        abort(404);
-      
+    if (Gate::denies('conf-manager-or-admin', $id)) {
+            abort(403);
+        }
     return view('conference.edit', ['conference' => $id]);
   });
 

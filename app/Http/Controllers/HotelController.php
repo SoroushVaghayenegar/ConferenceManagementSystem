@@ -19,11 +19,28 @@ class HotelController extends Controller
 
     public function index()
     {
-    	if(Auth::user()->is_admin == 0)
-        	abort(404);
+    	$conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(403);
 
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
+
+				$conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+
+		        if(Auth::user()->is_admin == 0 && $conference_manager){
+
+		            $current = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+		                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
+		                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+		            $past = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+		                                          ->where('end', '<=', date('Y-m-d').' 00:00:00')
+		                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+		        }
 
 				$conferences = $past->merge($current);
 
@@ -32,8 +49,13 @@ class HotelController extends Controller
 
 		public function showCreate($id)
 		{
-			if(Auth::user()->is_admin == 0)
-        		abort(404);
+			$conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(403);
 
 				$conference = Conference::findOrFail($id);
 				return view('create_hotel', ['conference' => $conference]);
@@ -41,8 +63,13 @@ class HotelController extends Controller
 
 		public function create($id, Request $request)
 		{
-			if(Auth::user()->is_admin == 0)
-        		abort(404);
+			$conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+        	if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(403);
 
 				$this->validate($request, [
 					'name' => 'required|max:255',
@@ -65,8 +92,13 @@ class HotelController extends Controller
 
 		public function show($id)
 		{
-			if(Auth::user()->is_admin == 0)
-        		abort(404);
+			$conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(403);
 
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
@@ -85,8 +117,13 @@ class HotelController extends Controller
 
     public function destroy(Hotel $id)
     {
-        if(Auth::user()->is_admin == 0)
-        	abort(404);
+        $conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+            abort(403);
 
         $id->delete();
         return redirect('hotel');

@@ -33,7 +33,7 @@ class ReportController extends Controller
         $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
 
         if(Auth::user()->is_admin == 0 && $conference_manager == null)
-            abort(404);
+            abort(403);
 
         if(Auth::user()->is_admin == 0 && $conference_manager){
 
@@ -59,7 +59,7 @@ class ReportController extends Controller
                                 ->get();
 
         if(Auth::user()->is_admin == 0 && $conference_manager == null)
-            abort(404);
+            abort(403);
 
         $current_conferences = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
 

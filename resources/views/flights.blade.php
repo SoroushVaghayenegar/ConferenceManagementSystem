@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<h3 style="color:white; text-align: center"><strong>Participants</strong></h3>
-		<table id="participants_table_current" class="table table-striped table-bordered" data-toggle="tab" href="#table" cellspacing="0" width="100%">
+		<table id="participants_table_current" class="table table-display nowrap table-bordered" data-toggle="tab" href="#table" cellspacing="0" width="100%">
 			<thead>
 			  <tr>
 				<th>Name</th>
@@ -78,11 +78,14 @@
 <script type="text/javascript">
 //  Script for running DataTable -->
 $(function(){
-  $("#participants_table_current").dataTable();
+  $("#participants_table_current").DataTable({
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true
+    } );
 })
-$(function(){
-  $("#participants_table_past").dataTable();
-})
+
 
 // Make the sidebar active
 $(document).ready(function(){

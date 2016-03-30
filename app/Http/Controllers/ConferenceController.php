@@ -11,6 +11,7 @@ use App\User;
 use App\Conference;
 use App\Participant;
 use Auth;
+use DB;
 
 class ConferenceController extends Controller
 {
@@ -19,8 +20,28 @@ class ConferenceController extends Controller
         //$this->middleware('auth');
     }
 
+    public function index(){
+      $conferences = Conference::orderBy('created_at', 'asc')->get();
+
+      $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+      if(Auth::user()->is_admin == 0 && $conference_manager){
+
+            $conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+      }
+
+    return view('conferences', [
+      'conferences' => $conferences
+      ]);
+    }
+
     public function create(Request $request)
     {
+
+        if(Auth::user()->is_admin == 0 )
+            abort(403);
+
         $this->validate($request, [
           'name' => 'required|max:255',
           'description' => 'required',
@@ -47,8 +68,13 @@ class ConferenceController extends Controller
 
     public function edit($id,Request $request)
     {
-      if(Auth::user()->is_admin == 0)
-        abort(404);
+      $conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+        if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
+            abort(403);
 
     Conference::where('id', $id)
     ->update(
@@ -91,6 +117,8 @@ class ConferenceController extends Controller
 
     public function delete(Conference $id)
     {
+        if(Auth::user()->is_admin == 0)
+          abort(403); 
         $id->delete();
         return redirect('/manage_conferences');
     }

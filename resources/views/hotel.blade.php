@@ -111,7 +111,12 @@ $('#conference_selector').on('change', onChangeHandler);
 
 
 $(document).ready(function(){
-  $("#hotel_table").DataTable();
+  $("#hotel_table").DataTable({
+        rowReorder: {
+            selector: 'td:nth-child(2)'
+        },
+        responsive: true
+    } );
 });
 $(document).ready(function(){
   $('.sidebar-menu > li').attr('class','');

@@ -23,6 +23,10 @@ class UsersController extends Controller
      */
     public function index()
     {
+
+        if(Auth::user()->is_admin == 0)
+            abort(403);
+        
         $users = User::orderBy('name', 'asc')->get();
 
         return view('manage_users', ['users' => $users]);
@@ -92,7 +96,7 @@ class UsersController extends Controller
     public function destroy(User $id)
     {
         if(Auth::user()->is_admin == 0)
-            abort(404);
+            abort(403);
         
         $id->delete();
         return redirect('manage_users');

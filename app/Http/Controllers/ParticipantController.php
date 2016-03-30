@@ -38,13 +38,27 @@ class ParticipantController extends Controller
 
         $past = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
 
+        $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+
+        if(Auth::user()->is_admin == 0 && $conference_manager){
+
+            $current = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+            $past = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+                                          ->where('end', '<=', date('Y-m-d').' 00:00:00')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+        }
+
         return ['current' => $current, 'past' => $past];
     }
 
     public function index()
     {
-        if(Auth::user()->is_admin == 0)
-            abort(404);
+        
 
         $conferences = $this->getConferences();
 
@@ -56,8 +70,7 @@ class ParticipantController extends Controller
 
     public function show($id)
     {
-        if(Auth::user()->is_admin == 0)
-            abort(404);
+        
 
         // Get attendees list for Conference $id
         $conference = Conference::findOrFail($id);
@@ -77,8 +90,7 @@ class ParticipantController extends Controller
 
     public function approve($conference, $participant_id)
     {
-        if(Auth::user()->is_admin == 0)
-            abort(404);
+        
 
         $participant = Participant::findOrFail($participant_id);
 
@@ -89,8 +101,7 @@ class ParticipantController extends Controller
 
     public function unapprove($conference, $participant_id)
     {
-        if(Auth::user()->is_admin == 0)
-            abort(404);
+        
 
         $participant = Participant::findOrFail($participant_id);
 
