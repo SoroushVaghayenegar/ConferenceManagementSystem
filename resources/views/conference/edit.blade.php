@@ -11,7 +11,7 @@
 
 <!-- Bootstrap Tags input plugin-->
 <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
-<script src="js/bootstrap-tagsinput.js"></script>
+<script src="/js/bootstrap-tagsinput.js"></script>
 
 <div class="row">
 	<div class="col-lg-12">
@@ -135,7 +135,7 @@ $('#managers').tagsinput({
 	typeahead: {
 		displayKey: 'name',
 		afterSelect: function(val) { this.$element.val(""); },
-		source: function (query) { return $.get('user/autocomplete') }
+		source: function (query) { return $.get('/user/autocomplete') }
 	}
 });
 
