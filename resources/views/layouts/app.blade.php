@@ -12,11 +12,11 @@
 
 
     <link href="/fonts/fonts.css" rel="stylesheet" type="text/css">
-    <link href="/fonts/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="" rel="stylesheet" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="/css/app.css" rel="stylesheet" type="text/css">
-    <link href="/css/bootstrap2.min.css" rel="stylesheet" type="text/css">
-    <script src="/js/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 
     <!-- Bootstrap CSS -->
