@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Gate;
+use App\Conference;
+use App\Participant;
+use App\User;
 
 class FlightController extends Controller
 {
@@ -14,9 +18,6 @@ class FlightController extends Controller
         $this->middleware('auth');
     }
 	
-    /*
-    *  Only admin or conference managers are allowed to access Participants
-    */
     public function checkConferenceManager($conference)
     {
         if (Gate::denies('conf-manager-or-admin', $conference)) {
@@ -24,30 +25,20 @@ class FlightController extends Controller
         }
     }
 	
-    /*
-    *  Get all conferences, past or current
-    *  @return: ['current' => CURRENT_CONFERENCES, 'past' => PAST_CONFERENCES]
-    */
     public function getConferences()
     {
-        $current = DB::table('conferences')->where('end', '>=', date('Y-m-d').' 00:00:00')->get();
-        $past = DB::table('conferences')->where('end', '<=', date('Y-m-d').' 00:00:00')->get();
+        $current = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
+        $past = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
         return ['current' => $current, 'past' => $past];
     }
-	/*
+	
     public function index()
     {
-        $flights = DB::table('conference_attendees')->get();
-
-        return view('flights', ['flights' => $flights]);
-        
-    }
-	*/
-	
-	public function index()
-    {
         $conferences = $this->getConferences();
-        return view('flights', ['current_conferences' => $conferences['current'], 'past_conferences' => $conferences['past']]);
+        return view('flights', [
+          'current' => null,
+          'conferences' => $conferences['past']->merge($conferences['current'])
+        ]);
     }
 
     public function show($id)
@@ -55,14 +46,15 @@ class FlightController extends Controller
         // Get attendees list for Conference $id
         $conference = Conference::findOrFail($id);
         $this->checkConferenceManager($conference);
+
         $attendees = $conference->getAttendees();
 
         // Get all existing and past conferences
         $conferences = $this->getConferences();
 
         return view('flights', [
-          'current_conferences' => $conferences['current'],
-          'past_conferences' => $conferences['past'],
+          'current' => $id,
+          'conferences' => $conferences['past']->merge($conferences['current']),
           'attendees' => $attendees
         ]);
     }

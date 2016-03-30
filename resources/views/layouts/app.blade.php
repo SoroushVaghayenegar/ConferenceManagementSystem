@@ -175,7 +175,7 @@
                           <li class="" id='sidebar-flights'>
                               <a class="" href="{{ URL::to('/flights')}}">
                                   <i class="fa fa-plane"></i>
-                                  <span>flights</span>
+                                  <span>Flights</span>
                               </a>
                           </li>
                           <li class="" id='sidebar-hotel'>
