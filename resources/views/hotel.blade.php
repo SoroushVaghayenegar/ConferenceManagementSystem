@@ -10,6 +10,17 @@
         </div>
 </div>
 <div class="container">
+  @if (session('hotel_added'))
+  <div class="panel panel-default">
+    <header class="panel-heading">Status</header>
+    <div class="panel-body">
+      <h4 class="text-center">
+        <i class="fa fa-check"></i>
+        Hotel added
+      </h4>
+    </div>
+  </div>
+  @endif
   <div class="panel panel-default" >
     <header class="panel-heading">
       Hotel rooms
