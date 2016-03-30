@@ -43,19 +43,16 @@
                                     @foreach($participants as $participant)
                                         @if($conference->attendees()->find($participant->id))
                                             @if($participant->primary_user)
-                                            <?php 
-                                            $primaryId = $participant->id;
-                                            ?>
+                                                <?php 
+                                                $primaryUser = $conference->attendees()->where('participant_id', $participant->id)->first()->pivot;
+                                                ?>
                                             @else
-                                            {{$participant->name}}</br>
+                                                {{$participant->name}}</br>
                                             @endif
                                         @endif
                                     @endforeach
                                 </td>
-                                <?php 
-                                     $primaryUser = DB::table('conference_attendees')->where('participant_id', $primaryId )->first();
-                                 ?>
-                                <td style='color:#00bfff'> {{$primaryUser->flight}}</td>
+                                <td style='color:#00bfff'> {{$primaryUser["flight"]}}</td>
                                 <td>{{$primaryUser->arrival_date}}</td>
                                 <td>{{$primaryUser->arrival_time}}</td>
                                 <td>
@@ -63,7 +60,7 @@
                                       <strong>Hotel Name not implemented</strong><br>
                                       {{ $conference->address }}<br>
                                       {{ $conference->location }}<br>
-                                      <abbr title="Phone">P:</abbr> {{DB::table('participants')->where('id', $primaryId )->first()->phone}}
+                                      <abbr title="Phone">P:</abbr> 123 456 789
                                   </address>
                               </td>
                           </tr>
