@@ -52,7 +52,7 @@
 						<label class="col-md-4 control-label" class="control-label"> Description</label>
 
 						<div class="col-md-6">
-							<textarea rows="4" name="description" id="conference-description" class="form-control"">{{$conference->description}}</textarea>
+							<textarea rows="4" name="description" id="conference-description" class="form-control">{{$conference->description}}</textarea>
 						</div>
 					</div>
 
@@ -109,7 +109,7 @@
 					<!-- Add Conference Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-6">
-							<a href="{{ URL::to('create_conference') }}" class="btn btn-default">Back</a> 
+							<a href="{{ URL::to('create_conference') }}" class="btn btn-default">Back</a>
 							<button type="submit" class="btn btn-info">
 								Save Changes
 							</button>
