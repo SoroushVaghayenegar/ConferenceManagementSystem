@@ -54,7 +54,7 @@
               <label class="col-md-4 control-label" class="control-label"> Title</label>
 
               <div class="col-md-6">
-                <input type="text" name="name" id="conference-name" class="form-control" value="{{ old('name') }}">
+                <input type="text" name="name" id="event-name" class="form-control" value="{{ old('name') }}">
               </div>
             </div>
 
@@ -63,7 +63,7 @@
               <label class="col-md-4 control-label" class="control-label"> Description</label>
 
               <div class="col-md-6">
-                <textarea rows="4" name="description" id="conference-description" class="form-control" value="{{ old('description') }}"></textarea>
+                <textarea rows="4" name="description" id="event-description" class="form-control" value="{{ old('description') }}"></textarea>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
               <label class="col-md-4 control-label" class="control-label"> Capacity</label>
 
               <div class="col-md-6">
-                <input type="text" name="capacity" id="conference-capacity" class="form-control" value="{{ old('capacity') }}" placeholder="optional">
+                <input type="text" name="capacity" id="event-capacity" class="form-control" value="{{ old('capacity') }}" placeholder="optional">
               </div>
             </div>
 
@@ -81,7 +81,7 @@
               <label class="col-md-4 control-label" class="control-label"> Start Date</label>
 
               <div class="col-md-6" id="start-datepicker">
-                <input type="text" name="start" id="conference-start" class="form-control" value="{{ old('start') }}">
+                <input type="text" name="start" id="event-start" class="form-control" value="{{ old('start') }}">
               </div>
             </div>
 
@@ -90,7 +90,7 @@
               <label class="col-md-4 control-label" class="control-label"> End Date</label>
 
               <div class="col-md-6" id="end-datepicker">
-                <input type="text" name="end" id="conference-end" class="form-control" value="{{ old('end') }}">
+                <input type="text" name="end" id="event-end" class="form-control" value="{{ old('end') }}">
               </div>
             </div>
 
@@ -98,14 +98,14 @@
               <label class="col-md-4 control-label" class="control-label"> Location</label>
 
               <div class="col-md-6">
-                <input type="text" name="location" id="conference-location" class="form-control" value="{{ old('location') }}">
+                <input type="text" name="location" id="event-location" class="form-control" value="{{ old('location') }}">
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-md-4 control-label" class="control-label"> Event Facilitators</label>
               <div class="col-md-6">
-                <select multiple id="managers" name="managers[]" data-role="tagsinput"></select>
+                <select multiple id="facilitators" name="facilitators[]" data-role="tagsinput"></select>
               </div>
             </div>
 
@@ -140,7 +140,7 @@ $("#close_panel").click(function(){
 });
 
 
-$('#managers').tagsinput({
+$('#facilitators').tagsinput({
   itemValue: 'id',
   itemText: 'name',
   typeahead: {

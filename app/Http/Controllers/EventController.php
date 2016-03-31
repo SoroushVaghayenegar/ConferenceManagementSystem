@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Conference;
+use App\Event;
 use App\Participant;
 use Auth;
 use DB;
@@ -29,5 +30,39 @@ class EventController extends Controller
       
 
       return view('create_event',['id'=>$id]);
+    }
+
+    public function create($id,Request $request){
+       if(Auth::user()->is_admin == 0 )
+            abort(403);
+
+        $this->validate($request, [
+          'name' => 'required|max:255',
+          'description' => 'required',
+          'capacity' => 'integer|min:0',
+          'start' => 'required|date|date_format:Y/m/d',
+          'end' => 'required|date|date_format:Y/m/d|after:start'
+        ]);
+
+
+        $event = new Event;
+
+        $event->name = $request->name;
+        $event->conference_id = $id;
+        $event->topic = $request->description;
+        $event->capacity = $request->capacity;
+        $event->start = $request->start;
+        $event->end = $request->end;
+        $event->location = $request->location;
+
+        $event->save();
+
+        $event->facilitators()->attach($request->facilitators);
+
+        return redirect('/conference/{{$id}}/eventlist');
+
+
+
+
     }
 }
