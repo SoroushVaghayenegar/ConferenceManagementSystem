@@ -5,21 +5,21 @@
 
 
 @if(Auth::check())
-    @section('content')  
+    @section('content')
  <!-- USER IS LOGGED IN-->
 
-    @if (count($conferences) > 0)         
+    @if (count($conferences) > 0)
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header"><i class="fa fa-home"></i> Home</h3>
             </div>
-        </div>    
+        </div>
 
         <div class="container">
             <div class="panel panel-dark" style='opacity:0.9'>
-                <div class="panel-heading">
-                    <h1 align='center' style='color:black'><strong>Currently registered conferences</strong></h1>
-                </div>
+                <header class="panel-heading">
+                  Registered Conferences
+                </header>
 
                 <div class="panel-body">
                     <table width="100%" class="table" >
@@ -43,7 +43,7 @@
                                     @foreach($participants as $participant)
                                         @if($conference->attendees()->find($participant->id))
                                             @if($participant->primary_user)
-                                                <?php 
+                                                <?php
                                                 $primaryUser = $conference->attendees()->where('participant_id', $participant->id)->first()->pivot;
                                                 ?>
                                             @else
@@ -76,8 +76,8 @@
     @else
         <h1 align="center" style="color:#ff4d4d; font-weight:bold">You are not registered for a conference yet!</h1>
         <h2 align="center" style="color:grey; font-weight:bold">
-            In order to register for a conference <br> go to the "Conferences" tab on the left 
-            <br>or click here <a href="/directory" class="btn btn-info">Conferences</a> 
+            In order to register for a conference <br> go to the "Conferences" tab on the left
+            <br>or click here <a href="/directory" class="btn btn-info">Conferences</a>
         </h2>
 
     @endif
@@ -86,10 +86,10 @@
     @section('content')
     <!-- MAIN PAGE  -  USER HAS NOT LOGGED IN YET -->
     <div id="lss">
-        
+
         <br/>
         <h1 style="text-align: center; color:white"><strong>Welcome to Gobind Sarvar Conference Management System!</strong></h1>
-        
+
         <img src="/img/gs.png" alt="Gobind Sarvar Logo" style="position:relative;width:30%;left:35%;" align="center">
 
         <h3 style="text-align: center;">Don't have an account?</h3>
@@ -98,15 +98,15 @@
         </div>
         <br/>
           <br/>
-          <br/>        
+          <br/>
           <br/>
           <br/><br/>
     </div>
-            
-        
-    
+
+
+
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">    
+            <div class="col-md-10 col-md-offset-1">
                 <h2 style="color: black;"><strong>Check our upcoming events!</strong></h2>
             </div>
         </div>
@@ -115,9 +115,9 @@
                 <ul class="sticky">
                     @foreach($current_conferences as $conference)
                         <li class="notes">
-                            
+
                                 <div class="navbar-header">
-                                    <strong>{{ date('F d, Y', strtotime($conference->start)) }}</strong> 
+                                    <strong>{{ date('F d, Y', strtotime($conference->start)) }}</strong>
                                     to
                                     <strong>{{ date('F d, Y', strtotime($conference->end)) }}</strong>
                                 </div><br/>
@@ -141,4 +141,4 @@
             </div>
         </div>
     @endsection
-@endif 
+@endif
