@@ -7,14 +7,14 @@
 
  <div class="row">
       <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa-globe"></i> Conferences</h3>
+        <h3 class="page-header"><i class="fa fa-globe"></i> Events</h3>
       </div>
     </div>
     
 
   @if(Auth::user()->is_admin)
         <button  class="btn btn-warning"><a href="{{ URL::to('conference/'.$id) }}/create_event"><i class="fa fa-plus"></i>  Create a new event</a></button>
-        <button  class="btn btn-default">  <a href="{{ URL::to('manage_conferences') }}">return to conferences</a></button>
+        <button  class="btn btn-default">  <a href="{{ URL::to('manage_conferences') }}">Return to conferences</a></button>
         </br>
         </br>
       @endif
@@ -49,6 +49,9 @@
                     <td class="table-text">{{ $event->location }}</td>
                     <td>
                       <a href="#" class="btn btn-details">Details</a>
+                    </td>
+                    <td>
+                       <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a> 
                     </td>
                     <td>
                         <a href="/login" class="btn btn-register">Register</a>

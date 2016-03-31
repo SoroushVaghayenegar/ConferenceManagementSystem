@@ -36,7 +36,7 @@
     @if (count($conferences) > 0)
     <div class="panel panel-default">
       <div class="panel-heading">
-        Current Conferences
+        Conferences
       </div>
 
       <div class="panel-body">

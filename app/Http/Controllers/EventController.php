@@ -60,9 +60,38 @@ class EventController extends Controller
         $event->facilitators()->attach($request->facilitators);
 
         return redirect('/conference/{{$id}}/eventlist');
+    }
+
+    public function edit_index($id)
+    {        
+
+      $event = DB::table('events')->where('id' , $id)->first();
+      return view('edit_event',['specic_event'=>$event,'id'=>$id]);
+    }
+
+    public function edit($id,Request $request)
+    { 
+      $conference_manager = DB::table('conference_managers')
+    ->where('user_id' ,'=', Auth::user()->id)
+    ->where('conference_id' , '=', $id)
+    ->get();
+
+    if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
+    abort(403);
 
 
+    DB::table('conference_managers')->where('conference_id' , $id)->delete();
+    $event = Event::where('id', $id);
+    $event->update([
+      'name' => $request->name,
+      'topic' => $request->description,
+      'capacity' => $request->capacity,
+      'start' => $request->start,
+      'end' => $request->end,
+      'location' => $request->location,
+    ]);
 
 
+      return redirect()->back();
     }
 }

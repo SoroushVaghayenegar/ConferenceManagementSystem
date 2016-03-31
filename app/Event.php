@@ -24,7 +24,7 @@ class Event extends Model
     }
 
 
-            public function facilitators()
+    public function facilitators()
     {
       return $this->belongsToMany('App\User', 'event_facilitators');
     }      

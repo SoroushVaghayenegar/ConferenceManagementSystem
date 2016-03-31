@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create event')
+@section('title', 'Edit event')
 
 @section('content')
 
@@ -17,7 +17,7 @@
 
 <div class="row">
   <div class="col-lg-12">
-    <h3 class="page-header"><i class="fa fa-plus"></i> Manage Conferences</h3>
+    <h3 class="page-header"><i class="fa fa-plus"></i> Edit event</h3>
   </div>
 </div>
 
@@ -46,7 +46,7 @@
           @include('common.errors')
 
           <!-- New Conference Form -->
-          <form action="/conference/{{$id}}/create_event" method="POST" class="form-horizontal">
+          <form action="/conference/{{$id}}/edit_event" method="POST" class="form-horizontal">
             {{ csrf_field() }}
 
             <!-- Name -->
@@ -54,7 +54,7 @@
               <label class="col-md-4 control-label" class="control-label"> Title</label>
 
               <div class="col-md-6">
-                <input type="text" name="name" id="event-name" class="form-control" value="{{ old('name') }}">
+                <input type="text" name="name" id="event-name" class="form-control" value="{{ $specic_event->name }}">
               </div>
             </div>
 
@@ -63,7 +63,7 @@
               <label class="col-md-4 control-label" class="control-label"> Description</label>
 
               <div class="col-md-6">
-                <textarea rows="4" name="description" id="event-description" class="form-control" value="{{ old('description') }}"></textarea>
+                <textarea rows="4" name="description" id="event-description" class="form-control" >{{ $specic_event->topic }}</textarea>
               </div>
             </div>
 
@@ -72,7 +72,7 @@
               <label class="col-md-4 control-label" class="control-label"> Capacity</label>
 
               <div class="col-md-6">
-                <input type="text" name="capacity" id="event-capacity" class="form-control" value="{{ old('capacity') }}" placeholder="optional">
+                <input type="text" name="capacity" id="event-capacity" class="form-control" value="{{ $specic_event->capacity }}" placeholder="optional">
               </div>
             </div>
 
@@ -81,7 +81,7 @@
               <label class="col-md-4 control-label" class="control-label"> Start Date</label>
 
               <div class="col-md-6" id="start-datepicker">
-                <input type="text" name="start" id="event-start" class="form-control" value="{{ old('start') }}">
+                <input type="text" name="start" id="event-start" class="form-control" value="{{ $specic_event->start }}">
               </div>
             </div>
 
@@ -90,7 +90,7 @@
               <label class="col-md-4 control-label" class="control-label"> End Date</label>
 
               <div class="col-md-6" id="end-datepicker">
-                <input type="text" name="end" id="event-end" class="form-control" value="{{ old('end') }}">
+                <input type="text" name="end" id="event-end" class="form-control" value="{{ $specic_event->end }}">
               </div>
             </div>
 
@@ -98,7 +98,7 @@
               <label class="col-md-4 control-label" class="control-label"> Location</label>
 
               <div class="col-md-6">
-                <input type="text" name="location" id="event-location" class="form-control" value="{{ old('location') }}">
+                <input type="text" name="location" id="event-location" class="form-control" value="{{ $specic_event->location }}">
               </div>
             </div>
 
@@ -113,8 +113,7 @@
             <div class="form-group">
               <div class="col-sm-offset-3 col-sm-6">
                 <button type="submit" class="btn btn-default">
-                  <i class="fa fa-plus"></i> Create event
-                </button>
+                   Save Changes
               </div>
             </div>
           </form>
@@ -153,7 +152,18 @@ $('#facilitators').tagsinput({
 $(document).ready(function(){
   $('.sidebar-menu > li').attr('class','');
   $('#sidebar-manageConferences').attr('class','active');
+
+  prefillFacilitators();
 })
+
+
+function prefillFacilitators() {
+  @if (isset($specic_event->facilitators))
+  @foreach ($specic_event->facilitators as $facilitator)
+  $('#facilitators').tagsinput('add', {'id': {{$facilitator->id}}, 'name': '{{$facilitator->name}}' });
+  @endforeach
+  @endif
+}
 
 </script>
 
