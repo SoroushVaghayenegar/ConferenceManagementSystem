@@ -11,7 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 
-class LoginController extends Controller 
+class LoginController extends Controller
 {
 
 	public function index()
@@ -39,14 +39,18 @@ class LoginController extends Controller
 				]);
 		}
 
-		$confirmedID = [
-		'email' => Input::get('email'),
-		'password' => Input::get('password'),
-		'verified' => 1
-		];
+		$email = Input::get('email');
+		$password = Input::get('password');
 
-		if (!Auth::attempt($confirmedID))
-		{
+		if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+			return redirect()->back()->withInput($request->only($this->loginUsername(), 'remember'))->withErrors([
+				$this->loginUsername() => $this->getFailedCredentialsMessage(),
+				]);
+		}
+
+		if (!Auth::attempt(['email' => $email, 'password' => $password, 'verified' => 1])) {
+			Auth::logout();
+			
 			return redirect()->back()->withInput($request->only($this->loginUsername(), 'remember'))->withErrors([
 				$this->loginUsername() => $this->getFailedVerificationMessage(),
 				]);
@@ -82,6 +86,11 @@ class LoginController extends Controller
         protected function getFailedVerificationMessage()
         {
         	return 'You have not verified your email address.';
+        }
+
+        protected function getFailedCredentialsMessage()
+        {
+        	return 'Email and password combination does not match our records.';
         }
 
 
