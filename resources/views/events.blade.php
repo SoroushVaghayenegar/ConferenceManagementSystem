@@ -27,7 +27,7 @@
     </ul>
     <div class="tab-content">
       <div id="currentConferences" class="tab-pane fade in active">
-        @if (count($events) > 1)
+        @if (count($events) > 0)
           <div class="panel-body" >
             <table width="100%" class="table">
               <thead>
