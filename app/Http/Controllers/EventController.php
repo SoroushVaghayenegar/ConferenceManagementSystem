@@ -20,6 +20,6 @@ class EventController extends Controller
     {  
       
       $events = DB::table('events')->where('conference_id' , $id);
-      return view('events',['events'=>$events]);
+      return view('events',['events'=>$events,'id'=>$id]);
     }
 }
