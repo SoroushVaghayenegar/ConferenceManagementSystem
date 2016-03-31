@@ -129,12 +129,14 @@ Route::group(['middleware' => 'web'], function () {
   
   Route::get('/conference/{id}/flights', 'FlightController@show');
   
-  Route::get('/conference/{id}/edit', function (Conference $id) {
-    if (Gate::denies('conf-manager-or-admin', $id)) {
-            abort(403);
-        }
-    return view('conference.edit', ['conference' => $id]);
-  });
+  // Route::get('/conference/{id}/edit', function (Conference $id) {
+  //   if (Gate::denies('conf-manager-or-admin', $id)) {
+  //           abort(403);
+  //       }
+  //   return view('conference.edit', ['conference' => $id]);
+  // });
+
+  Route::get('/conference/{id}/edit','ConferenceController@editIndex');
 
   Route::post('/conference/{id}/edit', 'ConferenceController@edit');
 

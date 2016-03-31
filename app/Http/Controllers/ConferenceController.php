@@ -12,6 +12,7 @@ use App\Conference;
 use App\Participant;
 use Auth;
 use DB;
+use Gate;
 
 class ConferenceController extends Controller
 {
@@ -35,6 +36,24 @@ class ConferenceController extends Controller
       'conferences' => $conferences
       ]);
     }
+
+
+    public function editIndex(Conference $id){
+     if (Gate::denies('conf-manager-or-admin', $id)) {
+       abort(403);
+     }
+
+      $conference_managers = $id->managers;
+      $conference_managers_id = [];
+       $conference_managers_name = [];
+      foreach ($conference_managers as $manager) {
+        $conference_managers_id[] = $manager->id;
+        $conference_managers_name[] = DB::table('users')->where('id',$manager->id)->first();
+      }
+
+
+     return view('conference.edit', ['conference' => $id, 'manager_ids'=> $conference_managers_id,'managers' => $conference_managers_name]);
+   }
 
     public function create(Request $request)
     {
@@ -76,8 +95,8 @@ class ConferenceController extends Controller
         if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
             abort(403);
 
-    Conference::where('id', $id)
-    ->update(
+    $conference = Conference::where('id', $id);
+    $conference->update(
       ['name' => $request->name,
       'description' => $request->description,
       'capacity' => $request->capacity,
@@ -86,6 +105,9 @@ class ConferenceController extends Controller
       'location' => $request->location,
       'address' => $request->address
       ]);
+
+    //$conference->managers()->attach($request->managers);
+
     \Session::flash('flash_message','Conference updated.');
     return redirect()->back();
     }

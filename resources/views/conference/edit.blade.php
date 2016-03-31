@@ -98,14 +98,18 @@
 							<input type="text" name="address" id="conference-address" class="form-control" value="{{ $conference->address}}">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label class="col-md-4 control-label" class="control-label"> Managers</label>
 						<div class="col-md-6">
-							<select multiple id="managers" name="managers[]" data-role="tagsinput"></select>
+							<select multiple id="managers" name="managers[]" data-role="tagsinput">
+								@foreach($managers as $name)
+								<option value="{{$name->name}}"></option>
+								@endforeach
+							</select>
 						</div>
-					</div>
 
+					</div>
+					<h1>{{count($manager_ids)}}</h1>
 					<!-- Add Conference Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-6">
