@@ -37,7 +37,10 @@
 
 
         <div class="col-md-6">
+
+
           <select id="current_conferences" class="form-control">
+
             <option value="#">Select a conference</option>
             @if (count($conferences) > 0)
             @foreach ($conferences as $conference)
@@ -51,8 +54,25 @@
             <option>No conferences available!</option>
             @endif
           </select>
+          
+
         </div>
       </div>
+
+      @if (isset($availableCapacity))
+      <div class="row">
+        <span class="h5 col-md-3">
+          <strong>Available seats (Unapproved):</strong>
+        </span>
+          <div class="h4 col-md-1">
+              @if($availableCapacity > 10)
+                <strong class="table-text" style="color:#00e600">{{ $availableCapacity }}</strong>
+              @else
+                <strong class="table-text" style="color:red">{{ $availableCapacity }}</strong>
+              @endif
+          </div>
+      </div>
+      @endif
       <h3 style="color:white; text-align: center"><strong>Participants</strong></h3>
       <table id="participants_table_current" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>

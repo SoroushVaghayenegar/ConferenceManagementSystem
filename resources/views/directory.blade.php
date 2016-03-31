@@ -38,12 +38,12 @@
                   <tr>
                     <td class="table-text">{{ $current_conference->name }}</td>
                     <td class="table-text">{{ $current_conference->capacity }}</td>
-                    @if(($current_conference->availableCapacity/$current_conference->capacity) < 0.2)
-                      <td class="table-text" style="color:#00e600">{{ $current_conference->capacity - $current_conference->availableCapacity }}</td>
+                    @if(($current_conference->approved/$current_conference->capacity) < 0.2)
+                      <td class="table-text" style="color:#00e600">{{ $current_conference->capacity - $current_conference->approved }}</td>
                     @elseif(($current_conference->availableCapacity/$current_conference->capacity) < 0.5)
-                      <td class="table-text" style="color:#ff751a">{{ $current_conference->capacity - $current_conference->availableCapacity }}</td>
+                      <td class="table-text" style="color:#ff751a">{{ $current_conference->capacity - $current_conference->approved }}</td>
                     @else
-                      <td class="table-text" style="color:red">{{ $current_conference->capacity - $current_conference->availableCapacity }}</td>
+                      <td class="table-text" style="color:red">{{ $current_conference->capacity - $current_conference->approved }}</td>
                     @endif
                     <td class="table-text">{{ date('F d, Y', strtotime($current_conference->start)) }}</td>
                     <td class="table-text">{{ date('F d, Y', strtotime($current_conference->end)) }}</td>

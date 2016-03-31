@@ -29,7 +29,7 @@ class DirectoryController extends Controller
 
         foreach ($current_conferences as $conference) {
           $conference->isRegistered = $conference->isRegistered(Auth::user()->id);
-          $conference->availableCapacity = DB::table('conference_attendees')
+          $conference->approved = DB::table('conference_attendees')
                                              ->where('conference_id', '=' , $conference->id)
                                              ->where('approved', '=', 1)
                                              ->count();

@@ -21,21 +21,21 @@
 <div class="container">
 
   <div class="panel panel-default">
-    <header class="panel-heading">Participants</header>
+    
 
     <div class="panel-body">
 
-      <h3>Choose Conference Type:</h3> 
+      <h3><strong>Choose Conference Type:</strong></h3> 
 
   
-    <label class="radio-inline"><input type="radio" name="type" value="current">Current Conferences</label>
-    <label class="radio-inline"><input type="radio" name="type" value="past">Past Conferences</label>
+    <h4><label class="radio-inline"><input type="radio" name="type" value="current">Current Conferences</label>
+    <label class="radio-inline"><input type="radio" name="type" value="past">Past Conferences</label></h4>
     <br/>
     <br/>
 
     <img id="loading" src="/img/loading.gif" style="display:none" align="middle">
       
-      <div id="dropdown" class="row" style="display:none">
+    <div id="dropdown" class="row" style="display:none">
 
         <span class="h4 col-md-2">
           <strong>Select a conference</strong> 
@@ -43,18 +43,18 @@
   
   
 
-  <div class="form-group">
-  <button type="button" class="btn btn-default" id="select_conference_button">Select </button>&nbsp; 
-  
+      
+        <button type="button" class="btn btn-default" id="select_conference_button">Select </button>&nbsp; 
+    
 
-  <div class="col-md-6">
-  <select class="form-control" id="conference_dropdown">
-    <option></option>
-  </select>
-  
-</div>
- </div>
-      </div>
+          <div class="col-md-6">
+            <select class="form-control" id="conference_dropdown">
+              <option></option>
+            </select>
+          </div>
+      
+    </div>
+
  @if($report != null )
  
   <div class="panel panel-default" >
@@ -63,22 +63,40 @@
 
     <button type="button" class="btn btn-default" id="print">Print Report</button>
     <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a data-toggle="tab" href="#chart"><strong>Chart Report</strong></a></li>
+          <li class="active"><a data-toggle="tab" href="#chart"><strong>Conference Chart Report</strong></a></li>
+          @foreach($events as $key=>$event)
+          <li><a data-toggle="tab" href="#{{$event->id}}"><strong>Event {{++$key}}: {{$event->name}}</strong></a></li>
+          @endforeach
           <li><a data-toggle="tab" href="#table"><strong>Table Report</strong></a></li>
         </ul>
         <div class="tab-content">
           <div id="chart" class="tab-pane fade in active">
-            <div class="container1">
+            <div class="conference1">
             </div>
           </br>
-            <div class="container2" >
+            <div class="conference2" >
             </div>
           </div>
+
+          @foreach($events as $key=>$event)
+            <div id="{{$event->id}}" class="tab-pane fade">
+              <div class="event{{$event->id}}">
+
+              </div>
+
+              <div class="event2{{$event->id}}">
+              </div>
+            </div>
+          @endforeach
 
           <div id="table" class="tab-pane fade">
             <div class="panel-body">
               <table id="report_table" class="table table-bordered" border="1" cellspacing="0" width="100%">
                   <thead>
+                      <tr>
+                          <th colspan="14" style="color:#4d4d4d"><h1><strong>Conference Report<strong></h1></th>
+                          
+                      </tr>
                       <tr>
                           <th colspan="7" style="border-right: thick solid gray">Male Count</th>
                           <th colspan="7">Female Count</th>
@@ -131,6 +149,63 @@
                         <td>{{$fifty_to_sixty_female}}</td>
                         <td>{{$older_than_sixty_female}}</td>
                       </tr>
+
+                      @foreach($events as $key=>$event)
+                        <tr style="border-top: 10pt solid black">
+                            <th colspan="14" style="color:#4d4d4d"><h1><strong>Event {{++$key}}: {{$event->name}} Report<strong></h1></th>
+                            
+                        </tr>
+                        <tr>
+                          <th colspan="7" style="border-right: thick solid gray">Male Count</th>
+                          <th colspan="7">Female Count</th>
+                      </tr>
+                      <tr>
+                        <td colspan="7" style="border-right: thick solid gray">{{$event->male_count}}</td>
+                        <td colspan="7">{{$event->female_count}}</td>
+                      </tr>
+                  
+                      
+                      <tr>
+                          <th colspan="14" style="color: #ff4d4d">Grouped By Age</th>
+                      </tr>
+
+                      <tr>
+                        <th>0 - 10</th>
+                        <th>10 - 20</th>
+                        <th>20 - 30</th>
+                        <th>30 - 40</th>
+                        <th>40 - 50</th>
+                        <th>50 - 60</th>
+                        <th style="border-right: thick solid gray"> > 60</th>
+
+                        <th>0 - 10</th>
+                        <th>10 - 20</th>
+                        <th>20 - 30</th>
+                        <th>30 - 40</th>
+                        <th>40 - 50</th>
+                        <th>50 - 60</th>
+                        <th> > 60</th>
+                      </tr>
+                      
+                  
+                      <tr>
+                        <td>{{$event->younger_than_ten_male}}</td>
+                        <td>{{$event->ten_to_twenty_male}}</td> 
+                        <td>{{$event->twenty_to_thirty_male}}</td> 
+                        <td>{{$event->thirty_to_forty_male}}</td>
+                        <td>{{$event->forty_to_fifty_male}}</td>
+                        <td>{{$event->fifty_to_sixty_male}}</td>
+                        <td style="border-right: thick solid gray">{{$event->older_than_sixty_male}}</td>
+
+                        <td>{{$event->younger_than_ten_female}}</td>
+                        <td>{{$event->ten_to_twenty_female}}</td> 
+                        <td>{{$event->twenty_to_thirty_female}}</td> 
+                        <td>{{$event->thirty_to_forty_female}}</td>
+                        <td>{{$event->forty_to_fifty_female}}</td>
+                        <td>{{$event->fifty_to_sixty_female}}</td>
+                        <td>{{$event->older_than_sixty_female}}</td>
+                      </tr>
+                      @endforeach
                   </tbody>
               </table>
           </div>
@@ -192,10 +267,23 @@ $("#select_conference_button").click(function(){
 function printData()
 {
    var table=document.getElementById("table");
+
    var chart=document.getElementById("chart");
    newWin= window.open("");
+
+   newWin.document.write('<h1 style="text-align: center"><strong>Conference Report</strong></h1>');
    newWin.document.write(chart.outerHTML);
    newWin.document.write('<br/> <br/>');
+   @if($report != null )
+     @foreach($events as $key=>$event)
+      var ev{{$key}} = document.getElementById("{{$event->id}}");
+
+      newWin.document.write('<h1 style="text-align: center"><strong>Event: {{$event->name}} Report</strong></h1>');
+      newWin.document.write(ev{{$key}}.outerHTML);
+      newWin.document.write('<br/> <br/>');
+     @endforeach
+  @endif 
+   newWin.document.write('<h1 style="text-align: center"><strong>Table Report</strong></h1>');
    newWin.document.write(table.outerHTML);
    newWin.print();
    newWin.close();
@@ -208,8 +296,121 @@ printData();
 
 
 @if($report != null )
+
+@foreach($events as $key=>$event)
+
 $(function () {
-    $('.container1').highcharts({
+    $('.event{{$event->id}}').highcharts({
+        chart: {
+            type: 'pie',
+            options3d: {
+                enabled: true,
+                alpha: 45,
+                beta: 0
+            }
+        },
+        title: {
+            text: 'Gender Pie chart'
+        },
+        tooltip: {
+            pointFormat: '{series.name} {point.name}: <b>{point.y}</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                depth: 35,
+                dataLabels: {
+                    enabled: true,
+                    format: ' {point.name} <br/> <b>{point.percentage:.1f}%</b>'
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Number of ',
+            data: [
+                ['Male', {{$event->male_count}}],
+                ['Female', {{$event->female_count }}],
+            ]
+        }]
+    });
+});
+
+
+                
+
+
+$(function () {
+    $('.event2{{$event->id}}').highcharts({
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 15,
+                beta: 15,
+                viewDistance: 100,
+                depth: 40
+            }
+        },
+
+        title: {
+            text: 'Number of Participants, grouped by Age'
+        },
+
+        xAxis: {
+            categories: [' < 10', '10 - 20', '20 - 30', '30 - 40', '40 - 50', '50 - 60', '60 >']
+        },
+
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: 'Number of Participants'
+            }
+        },
+
+        tooltip: {
+            headerFormat: '<b>{point.key}</b><br>',
+            pointFormat: '<span style="color:{series.color}">\u25CF</span> {series.name}: {point.y} / {point.stackTotal}'
+        },
+
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                depth: 40
+            }
+        },
+
+        series: [{
+            name: 'Male',
+            data: [{{$event->younger_than_ten_male}},
+                   {{$event->ten_to_twenty_male}},
+                   {{$event->twenty_to_thirty_male }},
+                   {{$event->thirty_to_forty_male }},
+                   {{$event->forty_to_fifty_male }},
+                   {{$event->fifty_to_sixty_male }},
+                   {{$event->older_than_sixty_male}}],
+            stack: 'count'
+        }, {
+            name: 'Female',
+            data: [{{$event->younger_than_ten_female}},
+                   {{$event->ten_to_twenty_female}},
+                   {{$event->twenty_to_thirty_female}},
+                   {{$event->thirty_to_forty_female}},
+                   {{$event->forty_to_fifty_female}},
+                   {{$event->fifty_to_sixty_female}},
+                   {{$event->older_than_sixty_female}}],
+            stack: 'count'
+        }
+        ]
+    });
+});
+
+@endforeach
+
+$(function () {
+    $('.conference1').highcharts({
         chart: {
             type: 'pie',
             options3d: {
@@ -249,7 +450,7 @@ $(function () {
 
 
 $(function () {
-    $('.container2').highcharts({
+    $('.conference2').highcharts({
         chart: {
             type: 'column',
             options3d: {

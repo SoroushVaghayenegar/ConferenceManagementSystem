@@ -8,6 +8,8 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Conference;
+use App\Event;
+
 class ReportController extends Controller
 {
     /**
@@ -80,6 +82,81 @@ class ReportController extends Controller
         }
 
         $conference = Conference::findOrFail($id);
+
+        $events = Event::where('conference_id', '=', $id)->get();
+
+        foreach($events as $event){
+            $participants = DB::table('event_attendees')
+                              ->join('participants', 'event_attendees.participant_id', '=', 'participants.id')
+                              ->where('event_id', '=', $event->id)->get();
+
+                //Gender count
+            $event->male_count = 0 ;
+            $event->female_count = 0;
+
+            //Gender and age count
+
+            // men
+            $event->younger_than_ten_male = 0;
+            $event->ten_to_twenty_male = 0;
+            $event->twenty_to_thirty_male = 0;
+            $event->thirty_to_forty_male = 0;
+            $event->forty_to_fifty_male = 0;
+            $event->fifty_to_sixty_male = 0;
+            $event->older_than_sixty_male = 0;
+
+            //women
+            $event->younger_than_ten_female = 0;
+            $event->ten_to_twenty_female = 0;
+            $event->twenty_to_thirty_female = 0;
+            $event->thirty_to_forty_female = 0;
+            $event->forty_to_fifty_female = 0;
+            $event->fifty_to_sixty_female = 0;
+            $event->older_than_sixty_female = 0;
+
+            foreach ($participants as $participant) {
+                if($participant->gender == "Male"){
+                    $event->male_count++;
+
+                    if($participant->age < 10)
+                        $event->younger_than_ten_male++;
+                    elseif($participant->age >= 10 AND $participant->age < 20)
+                        $event->ten_to_twenty_male++;
+                    elseif($participant->age >= 20 AND $participant->age < 30)
+                        $event->twenty_to_thirty_male++;
+                    elseif($participant->age >= 30 AND $participant->age < 40)
+                        $event->thirty_to_forty_male++;
+                    elseif($participant->age >= 40 AND $participant->age < 50)
+                        $event->forty_to_fifty_male++;
+                    elseif($participant->age >= 50 AND $participant->age < 60)
+                        $event->fifty_to_sixty_male++;
+                    elseif($participant->age >= 60)
+                        $event->older_than_sixty_male++;
+                }
+                    
+                if($participant->gender == "Female"){
+                    $event->female_count++;
+
+                    if($participant->age < 10)
+                        $event->younger_than_ten_female++;
+                    elseif($participant->age >= 10 AND $participant->age < 20)
+                        $event->ten_to_twenty_female++;
+                    elseif($participant->age >= 20 AND $participant->age < 30)
+                        $event->twenty_to_thirty_female++;
+                    elseif($participant->age >= 30 AND $participant->age < 40)
+                        $event->thirty_to_forty_female++;
+                    elseif($participant->age >= 40 AND $participant->age < 50)
+                        $event->forty_to_fifty_female++;
+                    elseif($participant->age >= 50 AND $participant->age < 60)
+                        $event->fifty_to_sixty_female++;
+                    elseif($participant->age >= 60)
+                        $event->older_than_sixty_female++;
+                }
+                    
+
+            }
+
+        }
 
         $participants = DB::table('conference_attendees')
                    ->join('participants', 'conference_attendees.participant_id', '=', 'participants.id')
@@ -159,6 +236,7 @@ class ReportController extends Controller
 
         return view('reports', ['report' => true,
                                 'conference' => $conference,
+                                'events' => $events,
                                 'male_count' => $male_count, 
                                 'female_count' => $female_count,
                                 'younger_than_ten_male' =>$younger_than_ten_male,

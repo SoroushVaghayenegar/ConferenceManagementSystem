@@ -51,7 +51,7 @@ class HomeController extends Controller
 
         $current_conferences = Conference::getCurrentConferences();
         foreach ($current_conferences as $conference) {
-          $conference->availableCapacity = DB::table('conference_attendees')
+          $conference->approved = DB::table('conference_attendees')
                                              ->where('conference_id', '=' , $conference->id)
                                              ->where('approved', '=', 1)
                                              ->count();
