@@ -64,7 +64,7 @@ table tr th { color: #688a7e;}
     padding-top: 10px;
 }
 .lite{
-    color: #00a0df !important;
+    color: #33ccff !important;
 }
 
 /*login page*/
@@ -261,7 +261,7 @@ table tr th { color: #688a7e;}
     width: 180px;
     height: 100%;
     position: fixed;
-    background: #394a59;
+    background-image: url('/background_patterns/s3.png');
 }
 
 .nav-collapse.collapse {
@@ -361,7 +361,15 @@ ul.sidebar-menu li a{
     top: 2px;
 }*/
 ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
-    background: #2e3b46;
+    background:
+    /* top, transparent black, faked with gradient */ 
+    linear-gradient(
+      rgba(0, 0, 0, 0.6), 
+      rgba(0, 0, 0, 0.6)
+    ),
+    /* bottom, image */
+    url('/background_patterns/s3.png');
+}
     color: #fff;
     display: block;
     /*border-radius: 4px;
@@ -530,7 +538,7 @@ ul.sidebar-menu li.active a i {
 a.logo {
     font-size: 22px;
     font-weight: 300;
-    color: #fed189;
+    color: #ffcc00;
     float: left;
     margin-top: 15px;
     text-transform: uppercase;
@@ -875,10 +883,10 @@ div[data-role="editor-toolbar"] {
   border-bottom: none;
   opacity: 0.7;
   text-transform: uppercase;
-  color: white;
+  color: #734d26;
 }
 .page-header i {
-  color: white;
+  color: #734d26;
   margin-right: 10px;
   float: left;
   font-size: 30px;
@@ -1042,8 +1050,7 @@ div[data-role="editor-toolbar"] {
 }
 .dark-bg {
   color : #fff;
-  background : #1a2732;
-  background-color : #1a2732;
+  background-image: url('/background_patterns/s3.png');;
 }
 .facebook-bg {
   color: #fff;
@@ -4940,7 +4947,7 @@ span.customSelect.changed {
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 }
 
-.nav-tabs{
+/*.nav-tabs{
   background-color:#161616;
 }
 .tab-content{
@@ -4967,7 +4974,7 @@ span.customSelect.changed {
 
 .panel-dark{
     background-color: #303136;
-}
+}*/
 
 @media screen and (max-width: 640px) {
     table {

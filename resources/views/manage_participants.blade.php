@@ -97,11 +97,9 @@
 <script>
 //  Script for running DataTable -->
 $(function(){
-  $("#participants_table_current").dataTable();
+  $("#participants_table_current").DataTable();
 })
-$(function(){
-  $("#participants_table_past").dataTable();
-})
+
 
 // Make the sidebar active
 $(document).ready(function(){
