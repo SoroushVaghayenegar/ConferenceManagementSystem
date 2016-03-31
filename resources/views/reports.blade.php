@@ -10,7 +10,6 @@
 
 <script src="/js/highcharts.js"></script>
 <script src="/js/highcharts-3d.js"></script>
-<script src="/js/exporting.js"></script>
 
 
 <div class="row">
@@ -350,7 +349,7 @@ Highcharts.theme = {
       gridLineColor: '#707073',
       labels: {
          style: {
-            color: '#E0E0E3'
+            color: 'black'
          }
       },
       lineColor: '#707073',
@@ -367,7 +366,7 @@ Highcharts.theme = {
       gridLineColor: '#707073',
       labels: {
          style: {
-            color: '#E0E0E3'
+            color: 'black'
          }
       },
       lineColor: '#707073',
@@ -414,10 +413,10 @@ Highcharts.theme = {
    },
    legend: {
       itemStyle: {
-         color: '#E0E0E3'
+         color: 'black'
       },
       itemHoverStyle: {
-         color: '#FFF'
+         color: 'black'
       },
       itemHiddenStyle: {
          color: '#606063'

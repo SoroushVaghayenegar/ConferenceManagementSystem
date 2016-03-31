@@ -77,7 +77,11 @@
     </div>
     @endif
 
-    <div id="create_panel">
+    @if ($errors->isEmpty())
+      <div id="create_panel" style="display:none">
+    @else
+      <div id="create_panel">
+    @endif
       <div class="panel panel-default">
         <div class="panel-heading">
           New Conference

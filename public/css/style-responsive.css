@@ -228,11 +228,16 @@
     #task_notificatoin_bar,#mail_notificatoin_bar,#alert_notificatoin_bar{
         display: none;
     }
+
 }
 
 @media (max-width: 480px) {
 
     .notification-row,.task_notificatoin_bar, .search-row,.knob-charts, .dont-show , .inbox-head .sr-input, .inbox-head .sr-btn{
+        display: block;
+    }
+
+    .username_big{
         display: none;
     }
 

@@ -27,7 +27,6 @@ class ProfileController extends Controller
             $city = $request->city;
             $country = $request->country;
             $date_of_birth = $request->date_of_birth;
-            $phone = $request->phone;
             
 
             User::where('id', $id)

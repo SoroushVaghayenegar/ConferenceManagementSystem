@@ -65,8 +65,8 @@ class ConferenceController extends Controller
           'name' => 'required|max:255',
           'description' => 'required',
           'capacity' => 'integer|min:0',
-          'start' => 'date|date_format:Y/m/d',
-          'end' => 'date|date_format:Y/m/d|after:start'
+          'start' => 'required|date|date_format:Y/m/d',
+          'end' => 'required|date|date_format:Y/m/d|after:start'
         ]);
 
         $conference = new Conference;
