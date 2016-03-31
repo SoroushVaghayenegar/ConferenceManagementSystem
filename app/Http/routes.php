@@ -157,6 +157,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::post('/conference/{id}/edit', 'ConferenceController@edit');
 
+   Route::get('/conference/{id}/eventlist','EventController@eventListIndex');
 
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();

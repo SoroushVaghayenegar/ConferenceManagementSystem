@@ -58,6 +58,9 @@
               <td>
                  <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a> 
               </td>
+              <td>
+                 <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a> 
+              </td>
               <!-- Delete Button -->
               <td>
                 <form action="{{ url('conference/'.$conference->id) }}" method="POST">
