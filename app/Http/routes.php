@@ -84,6 +84,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/hotel', 'HotelController@index');
 
+    Route::get('/conference/{id}/hotels-json', 'HotelController@showJSON');
+
+    Route::get('/conference/{conference}/participant/{participant_id}/assign-hotel/{hotel}', 'HotelController@assignHotel');
+
     Route::get('/conference/{id}/hotels', 'HotelController@show');
 
     Route::get('/conference/{id}/create_hotel', 'HotelController@showCreate');
@@ -133,7 +137,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/conference/{id}/flights', 'FlightController@show');
 
-  
+
   // Route::get('/conference/{id}/edit', function (Conference $id) {
   //   if (Gate::denies('conf-manager-or-admin', $id)) {
   //           abort(403);

@@ -45,12 +45,12 @@ class Conference extends Model
 
     public function getAttendees()
     {
-      $participants = $this->attendees()->get();
+          $participants = $this->attendees()->get();
 
-      foreach ($participants as $participant) {
-        if ($participant->primary_user) {
-          $participant->name = User::findOrFail($participant->user_id)->name;
-        }
+          foreach ($participants as $participant) {
+            if ($participant->primary_user) {
+              $participant->name = User::findOrFail($participant->user_id)->name;
+            }
 
           $participant->flight = $participant->pivot->flight;
     		  $participant->arrival_date = $participant->pivot->arrival_date;
@@ -58,6 +58,8 @@ class Conference extends Model
           $participant->hotel_requested = $participant->pivot->hotel_requested;
           $participant->taxi_requested = $participant->pivot->taxi_requested;
           $participant->approved = $participant->pivot->approved;
+          
+          $participant->hotel = $participant->getHotel($this->id);
       }
 
       return $participants;
