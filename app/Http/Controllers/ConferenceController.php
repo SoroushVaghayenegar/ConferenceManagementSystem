@@ -78,6 +78,8 @@ class ConferenceController extends Controller
         $conference->location = $request->location;
         $conference->address = $request->address;
 
+        $conference->save();
+
 
         $conference->managers()->attach($request->managers);
 
