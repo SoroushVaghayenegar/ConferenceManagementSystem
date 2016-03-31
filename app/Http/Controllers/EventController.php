@@ -97,4 +97,13 @@ class EventController extends Controller
       \Session::flash('flash_message','Event updated.');
       return redirect()->back();
     }
+
+
+
+    public function join_index($id)
+    {        
+
+      //$event = DB::table('events')->where('id' , $id)->first();
+      return view('event_register');
+    }
 }

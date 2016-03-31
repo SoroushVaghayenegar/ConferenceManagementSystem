@@ -53,7 +53,7 @@
                        <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a> 
                     </td>
                     <td>
-                        <a href="/login" class="btn btn-register">Register</a>
+                        <a href="{{ URL::to('conference/'.$event->id) }}/join_event" class="btn btn-register">Register</a>
                     </td>
                   </tr>
                 @endforeach

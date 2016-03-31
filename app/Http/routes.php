@@ -167,6 +167,8 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::post('/conference/{id}/edit_event', 'EventController@edit');
 
+  Route::get('/conference/{id}/join_event', 'EventController@join_index');
+
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();
     $res = [];
