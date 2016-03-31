@@ -127,7 +127,7 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::get('/conference/{id}/participants', 'ParticipantController@show');
 
-  Route::get('/approve/conference/{conference}/participant/{participant_id}', 'ParticipantController@approve');
+  Route::get('/approve/conference/{id}/participant/{participant_id}', 'ParticipantController@approve');
 
   Route::get('/unapprove/conference/{conference}/participant/{participant_id}', 'ParticipantController@unapprove');
 

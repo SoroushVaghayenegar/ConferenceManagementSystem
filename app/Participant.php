@@ -22,4 +22,15 @@ class Participant extends Model
     {
       return $this->belongsToMany('App\Event');
     }
+
+    /*
+    *  If participant is the primary user, then need to get the user's name
+    */
+    public function getName()
+    {
+        if ($this->primary_user)
+          return $this->user->name;
+        else
+          return $this->name;
+    }
 }

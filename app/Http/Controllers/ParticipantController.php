@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use DB;
+use Gate;
+use Auth;
+use Mail;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Gate;
+
 use App\Conference;
 use App\Participant;
 use App\User;
-use Auth;
 
 class ParticipantController extends Controller
 {
@@ -58,7 +62,7 @@ class ParticipantController extends Controller
 
     public function index()
     {
-        
+
 
         $conferences = $this->getConferences();
 
@@ -70,7 +74,7 @@ class ParticipantController extends Controller
 
     public function show($id)
     {
-        
+
 
         // Get attendees list for Conference $id
         $conference = Conference::findOrFail($id);
@@ -88,20 +92,31 @@ class ParticipantController extends Controller
         ]);
     }
 
-    public function approve($conference, $participant_id)
+    public function approve($id, $participant_id)
     {
-        
 
+        $conference = Conference::findOrFail($id);
         $participant = Participant::findOrFail($participant_id);
 
-        $participant->conferences()->updateExistingPivot($conference, ["approved" => true]);
+        $user_email = $participant->user->email;
+        $user_name = $participant->user->name;
 
-        return redirect("/conference/$conference/participants")->with('approved', true);
+        $participant->conferences()->updateExistingPivot($id, ["approved" => true]);
+
+        Mail::send('emails.approve', [
+          'participant' => $participant->getName(),
+          'conference' => $conference->name
+        ], function($message) use ($user_email, $user_name) {
+            $message->to($user_email, $user_name)
+            ->subject('Gobind Sarvar Conferences: Participant approved!');
+        });
+
+        return redirect("/conference/$id/participants")->with('approved', true);
     }
 
     public function unapprove($conference, $participant_id)
     {
-        
+
 
         $participant = Participant::findOrFail($participant_id);
 
