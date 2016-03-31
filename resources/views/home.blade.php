@@ -53,8 +53,8 @@
                                     @endforeach
                                 </td>
                                 <td style='color:#00bfff'> {{$primaryUser["flight"]}}</td>
-                                <td>{{$primaryUser->arrival_date}}</td>
-                                <td>{{$primaryUser->arrival_time}}</td>
+                                <td>{{date('F d, Y', strtotime($primaryUser->arrival_date))}}</td>
+                                <td>{{date('h:i A', strtotime($primaryUser->arrival_time))}}</td>
                                 <td>
                                     <address>
                                       <strong>Hotel Name not implemented</strong><br>
