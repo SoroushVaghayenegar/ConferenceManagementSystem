@@ -22,4 +22,10 @@ class Event extends Model
     {
       return $this->belongsToMany('App\Participant', 'conference_attendees');
     }
+
+
+            public function facilitators()
+    {
+      return $this->belongsToMany('App\User', 'event_facilitators');
+    }      
 }
