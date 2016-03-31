@@ -718,7 +718,7 @@ div[data-role="editor-toolbar"] {
     border-bottom: 1px solid #EBEBEB !important;
     font-size: 12px;
     list-style: none;
-    
+
 }
 
 .dropdown-menu.extended li a {
@@ -4978,27 +4978,22 @@ span.customSelect.changed {
     background-color:#303136;
     
     padding:5px
-}
+}*/
 .nav-tabs > li > a{
   border: medium none;
-  color: grey;
+  color: #b3b3b3;
 }
 .nav-tabs > li > a:hover{
-  background-color: #303136 !important;
-    border: medium none;
-    border-radius: 0;
-    color:#fff;
+    
+    color:black;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:hover{
-    background-color: #303136 !important;
-    color: white;
+    color: black;
 }
 
-.panel-dark{
-    background-color: #303136;
-}*/
+
 
 @media screen and (max-width: 640px) {
     table {
@@ -5037,3 +5032,46 @@ td{
 }
 
 
+#lss{
+    background:
+    /* top, transparent black, faked with gradient */ 
+    linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ),
+    /* bottom, image */
+    url('/img/conference2.jpg');
+
+    background-position: bottom;
+    background-size: 100% ;
+    background-repeat: no-repeat;
+    display: inline-block;
+
+
+}
+
+@media screen and (max-width: 640px) { 
+
+    #lss{
+        height:200px;
+    }
+}
+
+.sticky, .notes{
+  list-style:none;
+
+}
+.sticky{
+  overflow:hidden;
+  padding:3em;
+}
+.notes{
+  text-decoration:none;
+  color:#000;
+  background:white;
+  display:block;
+  margin:1em;
+  float:left;
+  width:20em;
+  padding:1em;
+}
