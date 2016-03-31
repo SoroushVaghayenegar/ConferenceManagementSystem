@@ -66,7 +66,7 @@ class EventController extends Controller
     {        
 
       $event = DB::table('events')->where('id' , $id)->first();
-      return view('edit_event',['specic_event'=>$event,'id'=>$id]);
+      return view('edit_event',['specific_event'=>$event,'id'=>$id]);
     }
 
     public function edit($id,Request $request)
@@ -90,7 +90,11 @@ class EventController extends Controller
       'location' => $request->location,
     ]);
 
+      DB::table('event_facilitators')->where('event_id' , $id)->delete();
+      $event->first()->facilitators()->attach($request->facilitators);
 
+
+      \Session::flash('flash_message','Event updated.');
       return redirect()->back();
     }
 }

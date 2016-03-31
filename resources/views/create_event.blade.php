@@ -27,7 +27,7 @@
     <!-- SHOW IF ONLY USER IS ADMIN -->
    
       @if(Auth::user()->is_admin)
-        <a href="{{ URL::previous() }}" class= "btn btn-primary">back to event list</a>
+        <a href="{{ URL::previous() }}" class= "btn btn-primary">Back</a>
         <br>
         <br>
       @endif

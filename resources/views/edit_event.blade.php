@@ -21,13 +21,17 @@
   </div>
 </div>
 
+@if(Session::has('flash_message'))
+<div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+@endif
+
 <div class="container">
   <div class="col-sm-offset-2 col-sm-8">
     
     <!-- SHOW IF ONLY USER IS ADMIN -->
    
       @if(Auth::user()->is_admin)
-        <a href="{{ URL::previous() }}" class= "btn btn-primary">back to event list</a>
+        <a href="{{ URL::previous() }}" class= "btn btn-primary">Back</a>
         <br>
         <br>
       @endif
@@ -54,7 +58,7 @@
               <label class="col-md-4 control-label" class="control-label"> Title</label>
 
               <div class="col-md-6">
-                <input type="text" name="name" id="event-name" class="form-control" value="{{ $specic_event->name }}">
+                <input type="text" name="name" id="event-name" class="form-control" value="{{ $specific_event->name }}">
               </div>
             </div>
 
@@ -63,7 +67,7 @@
               <label class="col-md-4 control-label" class="control-label"> Description</label>
 
               <div class="col-md-6">
-                <textarea rows="4" name="description" id="event-description" class="form-control" >{{ $specic_event->topic }}</textarea>
+                <textarea rows="4" name="description" id="event-description" class="form-control" >{{ $specific_event->topic }}</textarea>
               </div>
             </div>
 
@@ -72,7 +76,7 @@
               <label class="col-md-4 control-label" class="control-label"> Capacity</label>
 
               <div class="col-md-6">
-                <input type="text" name="capacity" id="event-capacity" class="form-control" value="{{ $specic_event->capacity }}" placeholder="optional">
+                <input type="text" name="capacity" id="event-capacity" class="form-control" value="{{ $specific_event->capacity }}" placeholder="optional">
               </div>
             </div>
 
@@ -81,7 +85,7 @@
               <label class="col-md-4 control-label" class="control-label"> Start Date</label>
 
               <div class="col-md-6" id="start-datepicker">
-                <input type="text" name="start" id="event-start" class="form-control" value="{{ $specic_event->start }}">
+                <input type="text" name="start" id="event-start" class="form-control" value="{{ $specific_event->start }}">
               </div>
             </div>
 
@@ -90,7 +94,7 @@
               <label class="col-md-4 control-label" class="control-label"> End Date</label>
 
               <div class="col-md-6" id="end-datepicker">
-                <input type="text" name="end" id="event-end" class="form-control" value="{{ $specic_event->end }}">
+                <input type="text" name="end" id="event-end" class="form-control" value="{{ $specific_event->end }}">
               </div>
             </div>
 
@@ -98,7 +102,7 @@
               <label class="col-md-4 control-label" class="control-label"> Location</label>
 
               <div class="col-md-6">
-                <input type="text" name="location" id="event-location" class="form-control" value="{{ $specic_event->location }}">
+                <input type="text" name="location" id="event-location" class="form-control" value="{{$specific_event->location }}">
               </div>
             </div>
 
@@ -158,8 +162,8 @@ $(document).ready(function(){
 
 
 function prefillFacilitators() {
-  @if (isset($specic_event->facilitators))
-  @foreach ($specic_event->facilitators as $facilitator)
+  @if (isset($specific_event->facilitators))
+  @foreach ($specific_event->facilitators as $facilitator)
   $('#facilitators').tagsinput('add', {'id': {{$facilitator->id}}, 'name': '{{$facilitator->name}}' });
   @endforeach
   @endif
