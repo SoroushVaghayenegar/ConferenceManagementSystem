@@ -100,7 +100,7 @@ class HotelController extends Controller
 		{
 
 			$conference = Conference::findOrFail($id);
-			$hotels = $conference->hotels()->get();
+			$hotels = $conference->getHotels();
 
 			return $hotels;
 		}

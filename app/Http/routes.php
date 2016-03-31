@@ -96,7 +96,15 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/hotel/{id}', 'HotelController@destroy');
 
+    Route::get('/hotel/{id}/inventory', 'InventoryController@showHotel');
+
+    Route::get('/hotel/{id}/create_inventory', 'InventoryController@showCreate');
+
+    Route::post('/hotel/{id}/create_inventory', 'InventoryController@create');
+
     Route::get('/inventory', 'InventoryController@index');
+
+    Route::get('/inventory/{id}/delete', 'InventoryController@delete');
 
     Route::get('/conference/{id}/inventory', 'InventoryController@show');
 

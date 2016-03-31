@@ -62,12 +62,11 @@
       <table id="hotel_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
-                <th>Room</th>
-                <th>Address</th>
-                <th>type</th>
-                <th>capacity</th>
-                <th>conference</th>
-                <th>Full?</th>
+                <th>Name/Address</th>
+                <th>Room number</th>
+                <th>Room type</th>
+                <th>Occupancy</th>
+                <th>Inventory</th>
                 <th></th>
             </tr>
         </thead>
@@ -75,18 +74,25 @@
           @if(isset($hotels))
           @foreach ($hotels as $hotel)
           <tr>
-              <td>{{$hotel->room}}</td>
               <td>
                 <address>
                   <strong>{{$hotel->name}}</strong><br>
                   {{$hotel->address}}
                 </address>
               </td>
+              <td>{{$hotel->room}}</td>
               <td>{{$hotel->type}}</td>
-              <td>{{$hotel->capacity}}</td>
-              <td>{{$hotel->conference_id}}</td>
-              <td>Full</td>
-              <td><a href="{{ URL::to('hotel/'.$hotel->id) }}" class="btn btn-danger" style="width:100%">Remove</a></td>
+              <td>{{$hotel->remaining}} / {{$hotel->capacity}}</td>
+              <td>
+                <a href='{{ url('/hotel/'.$hotel->id.'/inventory') }}' class="btn btn-default btn-sm">
+                  Inventory
+                </a>
+              </td>
+              <td>
+                <a href="{{ URL::to('hotel/'.$hotel->id) }}" class="btn btn-danger btn-sm">
+                  Remove
+                </a>
+              </td>
           </tr>
           @endforeach
           @endif

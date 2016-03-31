@@ -58,11 +58,22 @@ class Conference extends Model
           $participant->hotel_requested = $participant->pivot->hotel_requested;
           $participant->taxi_requested = $participant->pivot->taxi_requested;
           $participant->approved = $participant->pivot->approved;
-          
+
           $participant->hotel = $participant->getHotel($this->id);
       }
 
       return $participants;
+    }
+
+    public function getHotels()
+    {
+        $hotels = $this->hotels()->get();
+
+        foreach ($hotels as $hotel) {
+          $hotel->remaining = $hotel->getRemainingCapacity();
+        }
+
+        return $hotels;
     }
 
     public function hotels()
