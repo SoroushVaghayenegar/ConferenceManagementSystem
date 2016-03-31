@@ -96,6 +96,7 @@ class ConferenceController extends Controller
         if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
             abort(403);
 
+    DB::table('conference_managers')->where('conference_id' , $id)->delete();
     $conference = Conference::where('id', $id);
     $conference->update(
       ['name' => $request->name,
@@ -107,7 +108,7 @@ class ConferenceController extends Controller
       'address' => $request->address
       ]);
 
-    DB::table('conference_managers')->where('conference_id' , $id)->delete();
+  
 
     if($request->managers != NULL){
     $conference->first()->managers()->attach($request->managers);
