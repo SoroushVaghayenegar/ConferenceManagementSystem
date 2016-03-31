@@ -101,9 +101,9 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" class="control-label"> Managers</label>
 						<div class="col-md-6">
-							<select multiple id="managers" name="managers[]" data-role="tagsinput">
-								@foreach($managers as $name)
-								<option value="{{$name->name}}"></option>
+							<select multiple   id="managers" name="managers[]" data-role="tagsinput">
+								@foreach($managers as $manager)
+								<option value="{{$manager->name}}">{{$manager->name}}</option>
 								@endforeach
 							</select>
 						</div>

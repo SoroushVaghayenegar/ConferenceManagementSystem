@@ -78,7 +78,6 @@ class ConferenceController extends Controller
         $conference->location = $request->location;
         $conference->address = $request->address;
 
-        $conference->save();
 
         $conference->managers()->attach($request->managers);
 
@@ -106,7 +105,11 @@ class ConferenceController extends Controller
       'address' => $request->address
       ]);
 
-    //$conference->managers()->attach($request->managers);
+    DB::table('conference_managers')->where('conference_id' , $id)->delete();
+
+    if($request->managers != NULL){
+    $conference->first()->managers()->attach($request->managers);
+  }
 
     \Session::flash('flash_message','Conference updated.');
     return redirect()->back();
