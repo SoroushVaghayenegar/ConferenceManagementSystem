@@ -38,22 +38,16 @@ class ConferenceController extends Controller
     }
 
 
-    public function editIndex(Conference $id){
-     if (Gate::denies('conf-manager-or-admin', $id)) {
-       abort(403);
-     }
-
-      $conference_managers = $id->managers;
-      $conference_managers_id = [];
-       $conference_managers_name = [];
-      foreach ($conference_managers as $manager) {
-        $conference_managers_id[] = $manager->id;
-        $conference_managers_name[] = DB::table('users')->where('id',$manager->id)->first();
+    public function editIndex($id){
+      if (Gate::denies('conf-manager-or-admin', $id)) {
+        abort(403);
       }
 
+      $conference = Conference::findOrFail($id);
+      $conference->managers = $conference->managers()->get();
 
-     return view('conference.edit', ['conference' => $id, 'manager_ids'=> $conference_managers_id,'managers' => $conference_managers_name]);
-   }
+      return view('conference.edit', ['conference' => $conference]);
+    }
 
     public function create(Request $request)
     {
@@ -108,7 +102,7 @@ class ConferenceController extends Controller
       'address' => $request->address
       ]);
 
-  
+
 
     if($request->managers != NULL){
     $conference->first()->managers()->attach($request->managers);
@@ -119,8 +113,8 @@ class ConferenceController extends Controller
     }
 
     public function show($id)
-    {   
-        if(Auth::user()){
+    {
+      if (Auth::user()) {
         $conference = Conference::findOrFail($id);
         $user = User::find(Auth::user()->id);
 
@@ -134,7 +128,7 @@ class ConferenceController extends Controller
         }
 
         return view('conference.info', $res);
-      }else{
+      } else {
         $conference = Conference::findOrFail($id);
         $res = [
           'conference' => $conference
@@ -146,7 +140,7 @@ class ConferenceController extends Controller
     public function delete(Conference $id)
     {
         if(Auth::user()->is_admin == 0)
-          abort(403); 
+          abort(403);
         $id->delete();
         return redirect('/manage_conferences');
     }
@@ -194,7 +188,7 @@ class ConferenceController extends Controller
 			$arrival_date = null;
 			$arrival_time = null;
 		  }
-		
+
           $this->createAttachedParticipant([
             'name' => $participant['name'],
             'phone' => $participant['phone'],

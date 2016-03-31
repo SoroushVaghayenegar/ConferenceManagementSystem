@@ -101,10 +101,7 @@
 					<div class="form-group">
 						<label class="col-md-4 control-label" class="control-label"> Managers</label>
 						<div class="col-md-6">
-							<select multiple   id="managers" name="managers[]" data-role="tagsinput">
-<!-- 								@foreach($managers as $manager)
-								<option value="{{$manager->name}}">{{$manager->name}}</option>
-								@endforeach -->
+							<select multiple id="managers" name="managers[]" data-role="tagsinput">
 							</select>
 						</div>
 
@@ -146,7 +143,17 @@ $('#managers').tagsinput({
 $(document).ready(function(){
 	$('.sidebar-menu > li').attr('class','');
 	$('#sidebar-manageConferences').attr('class','active');
+
+	prefillManagers();
 })
+
+function prefillManagers() {
+	@if (isset($conference->managers))
+	@foreach ($conference->managers as $manager)
+	$('#managers').tagsinput('add', {'id': {{$manager->id}}, 'name': '{{$manager->name}}' });
+	@endforeach
+	@endif
+}
 
 </script>
 @endsection
