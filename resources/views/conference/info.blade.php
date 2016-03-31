@@ -60,14 +60,17 @@
         <div class="panel-body">
           @foreach ($registration as $index => $participant)
           <p><strong>Participant {{$index+1}}</strong></p>
+          <?php 
+          $user = $conference->attendees()->where('participant_id', $participant->id)->first()->pivot;
+          ?>
             @if($participant['primary_user'])
             <p>Name: {{Auth::user()->name}}</p>
             @else
             <p>Name: {{$participant['name']}}</p>
             @endif
-            <p>Flight: {{$participant['flight']}}</p>
-			<p>Arrival date: {{$participant['arrival_date']}}</p>
-			<p>Arrival time: {{$participant['arrival_time']}}</p>
+            <p>Flight: {{$user['flight']}}</p>
+			<p>Arrival date: {{$user['arrival_date']}}</p>
+			<p>Arrival time: {{$user['arrival_time']}}</p>
             <p>Hotel requested: {{$participant['hotel']?'Yes':'No'}}</p>
             <p>Taxi requested: {{$participant['taxi']?'Yes':'No'}}</p>
           @endforeach
