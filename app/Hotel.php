@@ -22,4 +22,9 @@ class Hotel extends Model
     {
         return $this->hasMany('App\Inventory');
     }
+
+    public function getRemainingCapacity()
+    {
+        return $this->capacity - $this->residents()->get()->count();
+    }
 }

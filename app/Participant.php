@@ -28,6 +28,11 @@ class Participant extends Model
         return $this->belongsToMany('App\Hotel', 'hotel_users');
     }
 
+    public function getHotel($conference_id)
+    {
+        return $this->hotel()->where("conference_id", $conference_id)->first();
+    }
+
     /*
     *  If participant is the primary user, then need to get the user's name
     */

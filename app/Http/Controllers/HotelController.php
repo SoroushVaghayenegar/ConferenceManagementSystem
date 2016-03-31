@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Hotel;
 use DB;
+use Auth;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
+// Models
 use App\Conference;
-use Auth;
+use App\Participant;
+use App\Hotel;
 
 class HotelController extends Controller
 {
@@ -92,28 +96,55 @@ class HotelController extends Controller
 				return redirect("/conference/$id/hotels")->with("hotel_added", true);
 		}
 
+		public function getHotels($id)
+		{
+
+			$conference = Conference::findOrFail($id);
+			$hotels = $conference->hotels()->get();
+
+			return $hotels;
+		}
+
 		public function show($id)
 		{
-			$conference_manager = DB::table('conference_managers')
-                                ->where('user_id' ,'=', Auth::user()->id)
-                                ->where('conference_id' , '=', $id)
-                                ->get();
+				$conference_manager = DB::table('conference_managers')
+			                                ->where('user_id' ,'=', Auth::user()->id)
+			                                ->where('conference_id' , '=', $id)
+			                                ->get();
 
-        if(Auth::user()->is_admin == 0 && $conference_manager == null)
-            abort(403);
+	      if(Auth::user()->is_admin == 0 && $conference_manager == null)
+	          abort(403);
 
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
 
 				$conferences = $past->merge($current);
-
-				$conference = Conference::findOrFail($id);
-				$hotels = $conference->hotels()->get();
+				$hotels = $this->getHotels($id);
 
 				return view('hotel', [
 					'conferences' => $conferences,
 					'hotels' => $hotels,
 					'current' => $id
+				]);
+		}
+
+		public function showJSON($id)
+		{
+				$hotels = $this->getHotels($id);
+				foreach ($hotels as $hotel) {
+					$hotel->remaining = $hotel->getRemainingCapacity();
+				}
+
+				return response()->json($hotels);
+		}
+
+		public function assignHotel($conference, $participant_id, $hotel)
+		{
+				$participant = Participant::findOrFail($participant_id);
+				$participant->hotel()->attach($hotel);
+
+				return redirect("conference/$conference/participants")->with([
+						"hotel_assigned" => true
 				]);
 		}
 
