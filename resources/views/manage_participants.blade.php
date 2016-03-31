@@ -166,6 +166,8 @@ function populateHotels(data, id) {
 
   for (var i = 0; i < data.length; i++) {
     var hotel = data[i];
+    if (hotel.remaining < 1)
+      continue;
     var template = "<tr><td>"+hotel.name+"</td><td>"+hotel.room+
     "</td><td>"+hotel.type+"</td>" + "<td>"+hotel.capacity+"</td><td>"+
     hotel.remaining+"</td><td>"+
