@@ -18,16 +18,16 @@ use Gate;
 class EventController extends Controller
 {
   public function eventListIndex($id)
-    {  
-      
+    {
+
       $events = DB::table('events')->where('conference_id' , $id)->get();
       return view('events',['events'=>$events,'id'=>$id]);
     }
 
 
       public function create_event_index($id)
-    {  
-      
+    {
+
 
       return view('create_event',['id'=>$id]);
     }
@@ -63,14 +63,14 @@ class EventController extends Controller
     }
 
     public function edit_index($id)
-    {        
+    {
 
       $event = DB::table('events')->where('id' , $id)->first();
       return view('edit_event',['specific_event'=>$event,'id'=>$id]);
     }
 
     public function edit($id,Request $request)
-    { 
+    {
       $conference_manager = DB::table('conference_managers')
     ->where('user_id' ,'=', Auth::user()->id)
     ->where('conference_id' , '=', $id)
@@ -96,5 +96,41 @@ class EventController extends Controller
 
       \Session::flash('flash_message','Event updated.');
       return redirect()->back();
+    }
+
+
+
+    public function join_index($id)
+    {
+      $user = Auth::user();
+      $event = Event::findOrFail($id);
+      $conference = $event->conference;
+
+      $attendees = $conference->attendees->where('user_id', $user->id);
+
+      foreach ($attendees as $attendee) {
+        if ($attendee->primary_user)
+          $attendee->name = $attendee->user->name;
+      }
+
+
+      return view('event_register',[
+        'specific_event' => $event,
+        'id' => $id,
+        'participants' => $attendees
+      ]);
+    }
+
+    public function join($id, Request $request)
+    {
+        $event = Event::findOrFail($id);
+
+        $event->attendees()->attach($request->participants);
+
+        $conference = $event->conference;
+
+        return redirect("conference/$conference->id/eventlist")->with([
+          "event_registered" => true
+        ]);
     }
 }

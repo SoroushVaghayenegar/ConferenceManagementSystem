@@ -13,19 +13,17 @@ class Event extends Model
       return $this->belongsTo('App\Conference');
     }
 
-    public function managers()
-    {
-      return $this->belongsToMany('App\User', 'conference_managers');
-    }
-
     public function attendees()
     {
-      return $this->belongsToMany('App\Participant', 'conference_attendees');
+      return $this->belongsToMany('App\Participant', 'event_attendees');
     }
 
 
     public function facilitators()
     {
       return $this->belongsToMany('App\User', 'event_facilitators');
-    }      
+    }
+
+
+
 }

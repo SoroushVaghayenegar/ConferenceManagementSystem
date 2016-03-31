@@ -160,12 +160,16 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/conference/{id}/eventlist','EventController@eventListIndex');
 
   Route::get('/conference/{id}/create_event','EventController@create_event_index');
-  
+
   Route::post('/conference/{id}/create_event', 'EventController@create');
 
   Route::get('/conference/{id}/edit_event', 'EventController@edit_index');
 
   Route::post('/conference/{id}/edit_event', 'EventController@edit');
+
+  Route::get('/conference/{id}/join_event', 'EventController@join_index');
+
+  Route::post('/event/{id}/join_event', 'EventController@join');
 
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();

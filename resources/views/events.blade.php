@@ -10,7 +10,7 @@
         <h3 class="page-header"><i class="fa fa-globe"></i> Events</h3>
       </div>
     </div>
-    
+
 
   @if(Auth::user()->is_admin)
         <button  class="btn btn-warning"><a href="{{ URL::to('conference/'.$id) }}/create_event"><i class="fa fa-plus"></i>  Create a new event</a></button>
@@ -20,6 +20,17 @@
         </br>
 
 <div class="container">
+
+
+  @if (session('event_registered'))
+  <div class="alert alert-success" id="success-alert">
+      <h4 class="text-center">
+        <i class="fa fa-check"></i>
+        You are registered in the event!
+      </h4>
+
+  </div>
+  @endif
   <div class="panel panel-default" >
 
     <ul class="nav nav-tabs nav-justified">
@@ -50,10 +61,10 @@
                     <td class="table-text">{{ date('F d, Y', strtotime($event->end)) }}</td>
                     <td class="table-text">{{ $event->location }}</td>
                     <td>
-                       <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a> 
+                       <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a>
                     </td>
                     <td>
-                        <a href="/login" class="btn btn-register">Register</a>
+                        <a href="{{ URL::to('conference/'.$event->id) }}/join_event" class="btn btn-register">Register</a>
                     </td>
                   </tr>
                 @endforeach
