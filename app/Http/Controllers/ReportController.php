@@ -278,6 +278,7 @@ class ReportController extends Controller
         return view('reports', ['report' => true,
                                 'conference' => $conference,
                                 'events' => $events,
+                                'event_facilitator' => $event_facilitator,
                                 'male_count' => $male_count, 
                                 'female_count' => $female_count,
                                 'younger_than_ten_male' =>$younger_than_ten_male,

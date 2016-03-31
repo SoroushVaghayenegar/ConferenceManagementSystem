@@ -67,9 +67,10 @@
 
 
   <?php
-    if(Auth::check())
+    if(Auth::check()){
       $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
       $event_facilitator = DB::table('event_facilitators')->where('user_id' ,'=', Auth::user()->id)->get();
+    }
   ?>
 
     <style>
