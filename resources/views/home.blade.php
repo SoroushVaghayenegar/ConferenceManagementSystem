@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <table width="100%" class="table">
+                    <table width="100%" class="table" >
                         <thead>
                             <th>Conference Name</th>
                             <th>Start Date</th>
@@ -34,11 +34,11 @@
                             <th>Hotel Room Address & Phone Number</th>
                         </thead>
                         @foreach ($conferences as $conference)
-                        <tbody style='color:#ffa366'>
+                        <tbody style=''>
                             <tr>
                                 <td>{{ $conference->name }}</td>
-                                <td>{{ $conference->start }}</td>
-                                <td>{{ $conference->end }}</td>
+                                <td>{{ date('F d, Y', strtotime($conference->start)) }}</td>
+                                <td>{{ date('F d, Y', strtotime($conference->end)) }}</td>
                                 <td>
                                     @foreach($participants as $participant)
                                         @if($conference->attendees()->find($participant->id))

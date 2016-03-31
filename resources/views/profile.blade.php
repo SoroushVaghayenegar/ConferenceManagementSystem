@@ -26,7 +26,7 @@
                             <strong><span class="username">{{Auth::user()->name}}</span></strong>
                             <input id="profile-image-upload" class="hidden" type="file">               
                             <div  class="follow-ava" >
-                              <img  id="profile_picture" alt="Change Image" src="img/1.jpg" class="img-circle" style="cursor: pointer;">
+                              <img  id="profile_picture" alt="Change Image" src="img/1.jpg" class="img-circle">
                             </div>
                             <!-- <h6>Administrator</h6>  -->                             
                           </div>
@@ -100,9 +100,7 @@
                                           <div class="bio-row">
                                             <p><span><strong>Email </span>:</strong>&nbsp; {{Auth::user()->email}}</p>
                                           </div>
-                                          <div class="bio-row">
-                                            <p><span><strong>Phone </span>:</strong> </p>
-                                          </div>
+                                          
                                         </div>
                                       </div>
                                     </section>
@@ -161,12 +159,7 @@
                                               
                                             </div>
                                           </div>
-                                          <div class="form-group">
-                                            <label class="col-lg-2 control-label"><strong>phone</strong></label>
-                                            <div class="col-lg-6">
-                                              <input type="text" class="form-control" id="mobile" placeholder=" ">
-                                            </div>
-                                          </div>
+                                    
               
 
                                           <div class="form-group">
@@ -190,12 +183,6 @@
 <script>
 $('#date_of_birth-datepicker input').datepicker({ startView: 2});
 
-$(function() {
-    $('#profile_picture').on('click', function() {
-        $('#profile-image-upload').click();
-    });
-
-});
 
 </script>
 <!--

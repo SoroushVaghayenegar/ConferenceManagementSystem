@@ -369,6 +369,7 @@ ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
     ),
     /* bottom, image */
     url('/background_patterns/s3.png');
+    font-weight: bold;
 }
     color: #fff;
     display: block;
@@ -837,7 +838,7 @@ div[data-role="editor-toolbar"] {
     padding-right: 10px
 }
 
-.top-nav .username {
+.top-nav .username_big {
     font-size: 13px;
     color: #bdbdbd;
 }
@@ -5013,6 +5014,3 @@ td{
 }
 
 
-#create_panel{
-    display:none;
-}

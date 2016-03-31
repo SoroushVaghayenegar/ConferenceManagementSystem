@@ -75,7 +75,7 @@
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-image: url('/background_patterns/30.png');
+            background-image: url('/background_patterns/11.png');
         }
 
         button .fa {
@@ -114,13 +114,13 @@
                             <span class="profile-ava">
                                 <img alt="" src="/img/avatar.png">
                             </span>
-                            <strong><span class="username">{{{Auth::user()->name}}}</span></strong>
+                            <strong><span class="username_big">{{{Auth::user()->name}}}</span></strong>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
                             <div class="log-arrow-up"></div>
                             <li class="eborder-top">
-                                <a href="{{ URL::to('/profile') }}"><i class="icon_profile"></i> My Profile</a>
+                                <a href="{{ URL::to('/profile') }}"><strong><i class="icon_profile"></i> My Profile</strong></a>
                             </li>
 
                             <li>

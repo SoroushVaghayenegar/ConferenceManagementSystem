@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<h3 style="color:white; text-align: center"><strong>Participants</strong></h3>
-		<table id="participants_table_current" class="table table-display nowrap table-bordered" data-toggle="tab" href="#table" cellspacing="0" width="100%">
+		<table id="participants_table_current" class="table table-display nowrap table-bordered" border="1" data-toggle="tab" href="#table" cellspacing="0" width="100%">
 			<thead>
 			  <tr>
 				<th>Name</th>
@@ -60,8 +60,8 @@
 			  <tr>
 				<td>{{$attendee->name}}</td>
 				<td>{{$attendee->flight ? $attendee->flight : "N/A"}}</td>
-				<td>{{$attendee->arrival_date ? $attendee->arrival_date : "N/A"}}</td>
-				<td>{{$attendee->arrival_time ? $attendee->arrival_time : "N/A"}}</td>
+				<td>{{$attendee->arrival_date ? date('F d, Y', strtotime($attendee->arrival_date)) : "N/A"}}</td>
+            	<td>{{$attendee->arrival_time ? date('h:i A', strtotime($attendee->arrival_time)) : "N/A"}}</td>
 				<td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
 				<td>{{$attendee->approved? "Yes": "No"}}</td>
 			  </tr>
