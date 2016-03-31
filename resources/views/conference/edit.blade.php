@@ -109,7 +109,7 @@
 						</div>
 
 					</div>
-					<h1>{{count($manager_ids)}}</h1>
+
 					<!-- Add Conference Button -->
 					<div class="form-group">
 						<div class="col-sm-offset-3 col-sm-6">
