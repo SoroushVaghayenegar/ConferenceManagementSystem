@@ -196,7 +196,7 @@
                                   <span>Hotels</span>
                               </a>
                           </li>
-                          <li class="" id='sidebar-inventory'>
+                          <li class="" id='sidebar-inventories'>
                               <a class="" href="{{ URL::to('/inventory') }}">
                                   <i class="fa fa-archive"></i>
                                   <span>Inventory</span>
