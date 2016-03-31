@@ -18,7 +18,7 @@
           <p class="text-left"><strong>Description:</strong>  {{$specific_event->topic}} <strong>Capacity:</strong>  {{$specific_event->capacity}}</p>
           <p class="text-left"><strong>Start:</strong>   {{date('F d, Y', strtotime($specific_event->start))}} <strong>End:</strong>    {{date('F d, Y', strtotime($specific_event->end))}}</p>
 
-          <form action="/conference/{{$specific_event->id}}/join_event" method="POST" class="form-horizontal">
+          <form action="/event/{{$specific_event->id}}/join_event" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <p class="text-center">
               <strong>Register</strong>
@@ -30,7 +30,7 @@
             <p class="text-left">
               <label>
                 @foreach ($participants as $participant)
-                <input type="checkbox" name="registree" value="{{$participant->id}}" style="margin-right: 5px">{{$participant->name}}</input>
+                <input type="checkbox" name="participants[]" value="{{$participant->id}}" style="margin-right: 5px">{{$participant->name}}</input>
                 @endforeach
               </label>
             </p>

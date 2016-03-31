@@ -120,4 +120,17 @@ class EventController extends Controller
         'participants' => $attendees
       ]);
     }
+
+    public function join($id, Request $request)
+    {
+        $event = Event::findOrFail($id);
+
+        $event->attendees()->attach($request->participants);
+
+        $conference = $event->conference;
+
+        return redirect("conference/$conference->id/eventlist")->with([
+          "event_registered" => true
+        ]);
+    }
 }
