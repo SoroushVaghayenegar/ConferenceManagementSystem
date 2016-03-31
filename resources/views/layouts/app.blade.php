@@ -67,8 +67,10 @@
 
 
   <?php
-    if(Auth::check())
+    if(Auth::check()){
       $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+      $event_facilitator = DB::table('event_facilitators')->where('user_id' ,'=', Auth::user()->id)->get();
+    }
   ?>
 
     <style>
@@ -200,6 +202,14 @@
                               <a class="" href="{{ URL::to('/inventory') }}">
                                   <i class="fa fa-archive"></i>
                                   <span>Inventory</span>
+                              </a>
+                          </li>
+                      @endif
+                      @if($event_facilitator)
+                          <li class="" id='sidebar-reports'>
+                              <a class="" href="{{ URL::to('/reports') }}">
+                                  <i class="icon_piechart"></i>
+                                  <span>Reports</span>
                               </a>
                           </li>
                       @endif

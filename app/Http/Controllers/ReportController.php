@@ -34,9 +34,26 @@ class ReportController extends Controller
 
         $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
 
-        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+        $event_facilitator = DB::table('event_facilitators')->where('user_id' ,'=', Auth::user()->id)->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null && $event_facilitator == null)
             abort(403);
 
+
+        if(Auth::user()->is_admin == 0 && $event_facilitator){
+            $current_conferences = Conference::join('events', 'conferences.id', '=', 'events.conference_id')
+                                             ->join('event_facilitators', 'events.id', '=','event_facilitators.event_id')
+                                             ->where('conferences.end', '>=', date('Y-m-d').' 00:00:00')
+                                             ->select('conferences.*')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+            $past_conferences = Conference::join('events', 'conferences.id', '=', 'events.conference_id')
+                                             ->join('event_facilitators', 'events.id', '=','event_facilitators.event_id')
+                                             ->where('conferences.end', '<=', date('Y-m-d').' 00:00:00')
+                                             ->select('conferences.*')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+        }
+            
         if(Auth::user()->is_admin == 0 && $conference_manager){
 
             $current_conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
@@ -60,7 +77,9 @@ class ReportController extends Controller
                                 ->where('conference_id' , '=', $id)
                                 ->get();
 
-        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+        $event_facilitator = DB::table('event_facilitators')->where('user_id' ,'=', Auth::user()->id)->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null && $event_facilitator == null)
             abort(403);
 
         $current_conferences = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
@@ -68,6 +87,21 @@ class ReportController extends Controller
         $past_conferences = Conference::where('end', '<=', date('Y-m-d').' 00:00:00')->get();
 
         $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+
+        if(Auth::user()->is_admin == 0 && $event_facilitator){
+            $current_conferences = Conference::join('events', 'conferences.id', '=', 'events.conference_id')
+                                             ->join('event_facilitators', 'events.id', '=','event_facilitators.event_id')
+                                             ->where('conferences.end', '>=', date('Y-m-d').' 00:00:00')
+                                             ->select('conferences.*')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+            $past_conferences = Conference::join('events', 'conferences.id', '=', 'events.conference_id')
+                                             ->join('event_facilitators', 'events.id', '=','event_facilitators.event_id')
+                                             ->where('conferences.end', '<=', date('Y-m-d').' 00:00:00')
+                                             ->select('conferences.*')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+        }
 
         if(Auth::user()->is_admin == 0 && $conference_manager){
 
@@ -84,6 +118,13 @@ class ReportController extends Controller
         $conference = Conference::findOrFail($id);
 
         $events = Event::where('conference_id', '=', $id)->get();
+
+        if($event_facilitator){
+            $events = Event::join('event_facilitators', 'events.id', '=', 'event_facilitators.event_id')
+                           ->where('conference_id', '=', $id)
+                           ->where('user_id' ,'=', Auth::user()->id)
+                           ->select('events.*')->get();
+        }
 
         foreach($events as $event){
             $participants = DB::table('event_attendees')
@@ -237,6 +278,7 @@ class ReportController extends Controller
         return view('reports', ['report' => true,
                                 'conference' => $conference,
                                 'events' => $events,
+                                'event_facilitator' => $event_facilitator,
                                 'male_count' => $male_count, 
                                 'female_count' => $female_count,
                                 'younger_than_ten_male' =>$younger_than_ten_male,
