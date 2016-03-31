@@ -20,7 +20,7 @@
         <div class="panel-body">
 
   				@include('common.errors')
-          
+
   				<form action='{{ url("conference/$conference->id/create_hotel") }}' method="POST" class="form-horizontal">
   					{{ csrf_field() }}
 
@@ -36,7 +36,15 @@
   						<label class="col-md-4 control-label" class="control-label"> Hotel name</label>
 
   						<div class="col-md-6">
-  							<input type="text" name="name" class="form-control"></input>
+  							<input type="text" name="name" class="form-control" value="{{old('name')}}"></input>
+  						</div>
+  					</div>
+
+            <div class="form-group">
+  						<label class="col-md-4 control-label" class="control-label"> Room number</label>
+
+  						<div class="col-md-6">
+  							<input type="text" name="room" class="form-control"></input>
   						</div>
   					</div>
 
@@ -44,7 +52,7 @@
   						<label class="col-md-4 control-label" class="control-label"> Address</label>
 
   						<div class="col-md-6">
-  							<textarea name="address" class="form-control"></textarea>
+  							<textarea name="address" class="form-control" value="{{old('address')}}"></textarea>
   						</div>
   					</div>
 
@@ -52,7 +60,7 @@
   						<label class="col-md-4 control-label" class="control-label"> Room Type</label>
 
   						<div class="col-md-6">
-  							<input type="text" name="type" class="form-control"></input>
+  							<input type="text" name="type" class="form-control" value="{{old('type')}}"></input>
   						</div>
   					</div>
 
@@ -60,7 +68,7 @@
   						<label class="col-md-4 control-label" class="control-label"> Room Capacity</label>
 
   						<div class="col-md-6">
-  							<input type="text" name="capacity" class="form-control"></input>
+  							<input type="text" name="capacity" class="form-control" value="{{old('capacity')}}"></input>
   						</div>
   					</div>
 

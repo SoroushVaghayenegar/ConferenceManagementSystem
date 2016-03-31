@@ -44,9 +44,10 @@ class CreateConferencesTable extends Migration
             $table->integer('conference_id')->unsigned()->default(0);
             $table->foreign('conference_id')->references('id')->on('conferences')->onDelete('cascade');
             $table->string('name');
+            $table->string('room');
             $table->string('type');
-            $table->integer('capacity');
             $table->text('address');
+            $table->integer('capacity');
             $table->timestamps();
         });
 

@@ -75,12 +75,11 @@
           @if(isset($hotels))
           @foreach ($hotels as $hotel)
           <tr>
-              <td>ROOM NUMBER</td>
+              <td>{{$hotel->room}}</td>
               <td>
                 <address>
                   <strong>{{$hotel->name}}</strong><br>
                   {{$hotel->address}}
-                  <abbr title="Phone">P:</abbr> (123) 456-7890
                 </address>
               </td>
               <td>{{$hotel->type}}</td>

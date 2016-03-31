@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
-    public $fillable = ['name', 'type', 'capacity'];
+    public $fillable = ['name', 'type', 'capacity', 'room'];
 
     public function conference()
     {

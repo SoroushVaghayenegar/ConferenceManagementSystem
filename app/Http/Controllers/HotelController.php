@@ -73,6 +73,7 @@ class HotelController extends Controller
 
 				$this->validate($request, [
 					'name' => 'required|max:255',
+					'room' => 'required',
 					'address' => 'required',
 					'type' => 'required',
 					'capacity' => 'required|integer|min:1'
@@ -80,6 +81,7 @@ class HotelController extends Controller
 
 				$hotel = new Hotel;
 				$hotel->name = $request->name;
+				$hotel->room = $request->room;
 				$hotel->address = $request->address;
 				$hotel->type = $request->type;
 				$hotel->capacity = $request->capacity;
