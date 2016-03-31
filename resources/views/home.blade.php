@@ -31,7 +31,6 @@
                             <th>Flight No</th>
                             <th>Arrival date</th>
                             <th>Arrival time</th>
-                            <th>Hotel Room Address & Phone Number</th>
                         </thead>
                         @foreach ($conferences as $conference)
                         <tbody style=''>
@@ -55,14 +54,6 @@
                                 <td style='color:#00bfff'> {{$primaryUser["flight"]}}</td>
                                 <td>{{date('F d, Y', strtotime($primaryUser->arrival_date))}}</td>
                                 <td>{{date('h:i A', strtotime($primaryUser->arrival_time))}}</td>
-                                <td>
-                                    <address>
-                                      <strong>Hotel Name not implemented</strong><br>
-                                      {{ $conference->address }}<br>
-                                      {{ $conference->location }}<br>
-                                      <abbr title="Phone">P:</abbr> 123 456 789
-                                  </address>
-                              </td>
                           </tr>
                       </tbody>
                       @endforeach
