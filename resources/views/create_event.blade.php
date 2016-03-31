@@ -27,68 +27,17 @@
     <!-- SHOW IF ONLY USER IS ADMIN -->
    
       @if(Auth::user()->is_admin)
-        <button id="create_new_button" class="btn btn-primary"><i class="fa fa-plus"></i>  Create a new conference</button>
-        </br>
-        </br>
+        <button id="create_new_button" class="btn btn-default">back to event list</button>
+        <br>
+        <br>
       @endif
 
 
-    <!-- Current Conferences -->
-    @if (count($conferences) > 0)
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Current Conferences
-      </div>
 
-      <div class="panel-body">
-        <table class="table table-striped conference-table">
-          <thead>
-            <th>Conference</th>
-            <th></th>
-            <th></th>
-          </thead>
-          <tbody>
-            @foreach ($conferences as $conference)
-            <tr>
-              <!-- Name -->
-              <td class="table-text">
-                <div>{{ $conference->name }}</div>
-              </td>
 
-              <!-- Edit button -->
-              <td>
-                 <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a> 
-              </td>
-              <td>
-                 <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a> 
-              </td>
-              <!-- Delete Button -->
-              <td>
-                <form action="{{ url('conference/'.$conference->id) }}" method="POST">
-                  {!! csrf_field() !!}
-                  {!! method_field('DELETE') !!}
-
-                  <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i> Delete
-                  </button>
-                </form>
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
-      </div>
-    </div>
-    @endif
-
-    @if ($errors->isEmpty())
-      <div id="create_panel" style="display:none">
-    @else
-      <div id="create_panel">
-    @endif
       <div class="panel panel-default">
         <div class="panel-heading">
-          New Conference
+          New Event
           <button type="button" id="close_panel" class="close" data-dismiss="">x</button>
         </div>
  
@@ -172,7 +121,7 @@
             <div class="form-group">
               <div class="col-sm-offset-3 col-sm-6">
                 <button type="submit" class="btn btn-default">
-                  <i class="fa fa-plus"></i>Add Conference
+                  <i class="fa fa-plus"></i>Event
                 </button>
               </div>
             </div>
@@ -182,7 +131,6 @@
     </div>
   </div>
 
-</div>
 
 
 

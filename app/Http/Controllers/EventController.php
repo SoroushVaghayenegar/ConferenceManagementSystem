@@ -22,4 +22,12 @@ class EventController extends Controller
       $events = DB::table('events')->where('conference_id' , $id);
       return view('events',['events'=>$events,'id'=>$id]);
     }
+
+
+      public function create_event_index($id)
+    {  
+      
+
+      return view('create_event',['id'=>$id]);
+    }
 }
