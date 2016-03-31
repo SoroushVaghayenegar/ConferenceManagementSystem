@@ -33,10 +33,11 @@
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Gender</th>
                   <th>Phone number</th>
                   <th>Flight number</th>
-				  <th>Arrival date</th>
-				  <th>Arrival time</th>
+				          <th>Arrival date</th>
+				          <th>Arrival time</th>
                   <th>Hotel needed</th>
                   <th>Taxi needed</th>
                 </tr>
@@ -46,7 +47,10 @@
                   <td>
                     <input type="text" class="form-control" value="{{Auth::user()->name}}" disabled="true"></input>
                   </td>
-                  <th>
+                  <td>
+                    <input type="text" class="form-control" value="{{Auth::user()->gender}}" disabled="true"></input>
+                  </td>
+                  <td>
                     <input type="text" class="form-control" name="primary[phone]"></input>
                   </td>
                   <td>
@@ -95,6 +99,7 @@
                 <thead>
                   <tr>
                     <th>Name</th>
+                    <th>Gender</th>
                     <th>Phone number</th>
                     <th>Flight number</th>
 					<th>Arrival date</th>
@@ -109,7 +114,15 @@
                     <td>
                       <input type="text" class="form-control" name="participant[0][name]"></input>
                     </td>
-                    <th>
+                    <td>
+                      <div class="input-group date">
+                        <select class="form-control" name="participant[0][gender]">
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td>
                       <input type="text" class="form-control" name="participant[0][phone]"></input>
                     </td>
                     <td>
@@ -123,7 +136,7 @@
                     <td>
                       <input type="text" class="form-control" name="participant[0][arrival_time]"></input>
                     </td>
-                    <th>
+                    <td>
                       <input type="checkbox" name="participant[0][hotel]"></input>
                     </td>
                     <td>
@@ -150,11 +163,13 @@ var count = 1;
 function participantTemplate(i) {
   return "<tr id='participants_row"+i+"'>\
   <td><input type='text' class='form-control' name='participant["+i+"][name]'></input></td>\
-  <th><input type='text' class='form-control' name='participant["+i+"][phone]'></input></td> \
+  <div class='input-group date'><td><select class='form-control' name='participant["+i+"][gender]'>\
+  <option value='Male'>Male</option><option value='Female'>Female</option></select></div></td>\
+  <td><input type='text' class='form-control' name='participant["+i+"][phone]'></input></td> \
   <td><input type='text' class='form-control' name='participant["+i+"][flight]'></input></td> \
   <td><div id='arrival_date-datepicker'><input type='text' class='form-control' name='participant["+i+"][arrival_date]'></input></div></td> \
   <td><input type='text' class='form-control' name='participant["+i+"][arrival_time]'></input></td> \
-  <th><input type='checkbox' name='participant["+i+"][hotel]'></input></td> \
+  <td><input type='checkbox' name='participant["+i+"][hotel]'></input></td> \
   <td><input type='checkbox' name='participant["+i+"][taxi]'></input></td> \
   <td><a onclick='removeParticipant("+i+")'><i class='fa fa-times'></i></a></td></tr>";
 }

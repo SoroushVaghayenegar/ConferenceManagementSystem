@@ -158,6 +158,7 @@ class ConferenceController extends Controller
 
     $this->createAttachedParticipant([
       'user_id' => Auth::user()->id,
+      'gender' => Auth::user()->gender,
       'phone' => $request->primary['phone'],
       'flight' => $request->primary['flight'],
       'arrival_date' => $request->primary['arrival_date'],
@@ -189,9 +190,10 @@ class ConferenceController extends Controller
         $arrival_date = null;
         $arrival_time = null;
       }
-
+      
       $this->createAttachedParticipant([
         'name' => $participant['name'],
+        'gender' => $participant['gender'],
         'phone' => $participant['phone'],
         'flight' => $flight,
         'arrival_date' => $arrival_date,
@@ -216,6 +218,7 @@ class ConferenceController extends Controller
     $participant->primary_user = $primary;
     if (!$primary)
     $participant->name = $fields['name'];
+    $participant->gender = $fields['gender'];
     $participant->phone = $fields['phone'];
     $participant->user_id = $fields['user_id'];
     $participant->save();

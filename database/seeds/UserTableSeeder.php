@@ -21,13 +21,26 @@ class UserTableSeeder extends Seeder
           'is_admin' => true,
           'verified' => true
         ]);
+
+        DB::table('users')->insert([
+          'name' => 'user2',
+          'email' => 'user2@email.com',
+          'date_of_birth' => '01/01/1990',
+          'city' => 'Vancouver',
+          'country' => 'Canada',
+          'password' => bcrypt('password'),
+          'is_admin' => false,
+          'verified' => true
+        ]);
+
         DB::table('users')->insert([
           'name' => 'Gobind Sarvar',
           'email' => 'user@email.com',
           'date_of_birth' => '01/01/1990',
           'city' => 'Vancouver',
           'country' => 'Canada',
-          'password' => bcrypt('password')
+          'password' => bcrypt('password'),
+          'verified' => true
         ]);
         $users = $this->randomUsers();
         foreach ($users as $user) {
