@@ -13,7 +13,7 @@
 
 <!-- Bootstrap Tags input plugin-->
 <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
-<script src="js/bootstrap-tagsinput.js"></script>
+<script src="/js/bootstrap-tagsinput.js"></script>
 
 <div class="row">
   <div class="col-lg-12">
@@ -46,7 +46,7 @@
           @include('common.errors')
 
           <!-- New Conference Form -->
-          <form action="/conference" method="POST" class="form-horizontal">
+          <form action="/conference/{{$id}}/create_event" method="POST" class="form-horizontal">
             {{ csrf_field() }}
 
             <!-- Name -->
@@ -103,15 +103,7 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-4 control-label" class="control-label"> Address</label>
-
-              <div class="col-md-6">
-                <input type="text" name="address" id="conference-address" class="form-control" value="{{ old('address') }}">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-4 control-label" class="control-label"> Managers</label>
+              <label class="col-md-4 control-label" class="control-label"> Event Facilitators</label>
               <div class="col-md-6">
                 <select multiple id="managers" name="managers[]" data-role="tagsinput"></select>
               </div>
@@ -121,7 +113,7 @@
             <div class="form-group">
               <div class="col-sm-offset-3 col-sm-6">
                 <button type="submit" class="btn btn-default">
-                  <i class="fa fa-plus"></i>Event
+                  <i class="fa fa-plus"></i> Create event
                 </button>
               </div>
             </div>
@@ -132,7 +124,38 @@
   </div>
 
 
+<script>
+$('#start-datepicker input').datepicker({ format: "yyyy/mm/dd" });
+$('#end-datepicker input').datepicker({ format: "yyyy/mm/dd" });
 
+$("#create_new_button").click(function(){
+  $("#create_panel").stop(true).fadeIn({
+        duration: 2000,
+        queue: false
+    }).css('display', 'none').slideDown(2000);
+});
+
+$("#close_panel").click(function(){
+  $("#create_panel").fadeTo(500, 500).slideUp(500, function(){});
+});
+
+
+$('#managers').tagsinput({
+  itemValue: 'id',
+  itemText: 'name',
+  typeahead: {
+    displayKey: 'name',
+    afterSelect: function(val) { this.$element.val(""); },
+    source: function (query) { return $.get('/user/autocomplete') }
+  }
+});
+
+$(document).ready(function(){
+  $('.sidebar-menu > li').attr('class','');
+  $('#sidebar-manageConferences').attr('class','active');
+})
+
+</script>
 
 
 
