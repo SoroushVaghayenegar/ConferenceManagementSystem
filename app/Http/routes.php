@@ -169,4 +169,12 @@ Route::group(['middleware' => 'web'], function () {
 
     return response()->json($res);
   });
+
+  // Notification routes
+
+  Route::get('/notification', 'NotificationController@index');
+
+  Route::get('/notification/conference/{id}', 'NotificationController@indexConference');
+
+  Route::post('/notification/conference/{id}', 'NotificationController@send');
 });

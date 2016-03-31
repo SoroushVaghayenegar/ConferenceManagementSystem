@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class Conference extends Model
 {
     public $fillable = ['name', 'description', 'capacity', 'start', 'end', 'location'];
@@ -41,6 +43,18 @@ class Conference extends Model
         return $this->belongsToMany('App\Participant', 'conference_attendees', 'conference_id', 'participant_id')
         ->withPivot('flight', 'arrival_date', 'arrival_time', 'hotel_requested', 'taxi_requested', 'approved')
         ->withTimestamps();
+    }
+
+    public function getUsers()
+    {
+        $attendees = $this->attendees;
+        $users_id = [];
+
+        foreach ($attendees as $attendee) {
+          $users_id[$attendee->user_id] = true;
+        }
+
+        return User::find(array_keys($users_id));
     }
 
     public function getAttendees()

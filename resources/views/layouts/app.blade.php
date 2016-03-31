@@ -204,6 +204,12 @@
                                   <span>Inventory</span>
                               </a>
                           </li>
+                          <li id='sidebar-notification'>
+                              <a class="" href="{{ URL::to('/notification') }}">
+                                  <i class="fa fa-envelope"></i>
+                                  <span>Notification</span>
+                              </a>
+                          </li>
                       @endif
                       @if($event_facilitator)
                           <li class="" id='sidebar-reports'>
