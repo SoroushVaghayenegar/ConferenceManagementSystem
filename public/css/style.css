@@ -261,7 +261,14 @@ table tr th { color: #688a7e;}
     width: 180px;
     height: 100%;
     position: fixed;
-    background-image: url('/background_patterns/s3.png');
+    background:
+    /* top, transparent black, faked with gradient */ 
+    linear-gradient(
+      rgba(0, 0, 0, 0.6), 
+      rgba(0, 0, 0, 0.6)
+    ),
+    /* bottom, image */
+    url('/background_patterns/11.png');
 }
 
 .nav-collapse.collapse {
@@ -364,8 +371,8 @@ ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:fo
     background:
     /* top, transparent black, faked with gradient */ 
     linear-gradient(
-      rgba(0, 0, 0, 0.6), 
-      rgba(0, 0, 0, 0.6)
+      rgba(0, 0, 0, 0.9), 
+      rgba(0, 0, 0, 0.9)
     ),
     /* bottom, image */
     url('/background_patterns/s3.png');
@@ -618,6 +625,14 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     border: none !important;
     border-radius: 4px;
     -webkit-border-radius: 4px;
+    background:
+    /* top, transparent black, faked with gradient */ 
+    linear-gradient(
+      rgba(0, 0, 0, 0.6), 
+      rgba(0, 0, 0, 0.6)
+    ),
+    /* bottom, image */
+    url('/background_patterns/11.png');
 }
 .navbar-form{
     padding: 0px;
@@ -703,6 +718,7 @@ div[data-role="editor-toolbar"] {
     border-bottom: 1px solid #EBEBEB !important;
     font-size: 12px;
     list-style: none;
+    
 }
 
 .dropdown-menu.extended li a {
@@ -1051,7 +1067,14 @@ div[data-role="editor-toolbar"] {
 }
 .dark-bg {
   color : #fff;
-  background-image: url('/background_patterns/s3.png');;
+  background:
+    /* top, transparent black, faked with gradient */ 
+    linear-gradient(
+      rgba(0, 0, 0, 0.8), 
+      rgba(0, 0, 0, 0.8)
+    ),
+    /* bottom, image */
+    url('/background_patterns/11.png');
 }
 .facebook-bg {
   color: #fff;
