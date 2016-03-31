@@ -22,7 +22,7 @@
         The participant is <strong style="color:red">unapproved</strong>.
         @endif
       </h4>
-    
+
   </div>
   @endif
   <div class="panel panel-default">
@@ -59,7 +59,6 @@
             <th>Age</th>
             <th>Phone No</th>
             <th>Flight No</th>
-            <th>Arrival date</th>
             <th>Arrival time</th>
             <th>Hotel needed</th>
             <th>Taxi needed</th>
@@ -75,8 +74,8 @@
             <td>{{$attendee->age}}</td>
             <td>{{$attendee->phone}}</td>
             <td>{{$attendee->flight ? $attendee->flight : "N/A"}}</td>
-            <td>{{$attendee->arrival_date ? $attendee->arrival_date : "N/A"}}</td>
-            <td>{{$attendee->arrival_time ? $attendee->arrival_time : "N/A"}}</td>
+            <td>{{$attendee->arrival_date ? $attendee->arrival_date : "N/A"}}<br>
+              {{$attendee->arrival_time ? $attendee->arrival_time : "N/A"}}</td>
             <td>{{$attendee->hotel_requested ? "Yes": "No"}}</td>
             <td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
             <td>{{$attendee->approved? "Yes": "No"}}</td>
