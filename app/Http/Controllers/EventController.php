@@ -59,7 +59,7 @@ class EventController extends Controller
 
         $event->facilitators()->attach($request->facilitators);
 
-        return redirect('/manage_conferences');
+        return redirect("/conference/$event->conference_id/eventlist");
     }
 
     public function edit_index($id)
