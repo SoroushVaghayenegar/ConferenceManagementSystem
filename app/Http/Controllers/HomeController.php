@@ -12,53 +12,53 @@ use DB;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //$this->middleware('auth');
-    }
+  /**
+  * Create a new controller instance.
+  *
+  * @return void
+  */
+  public function __construct()
+  {
+    //$this->middleware('auth');
+  }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {   
-        if(Auth::user()){
-            $conferences = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
-            $conferences_registered = [];
-            $user = User::find(Auth::user()->id);
+  /**
+  * Show the application dashboard.
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function index()
+  {
+    if (Auth::user()) {
+      $conferences = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
+      $conferences_registered = [];
+      $user = User::find(Auth::user()->id);
 
-            $participants = $user->participants;
-            $participant_id = [];
-            foreach ($participants as $participant){
-              $participant_id[] = $participant->id;
-          }
+      $participants = $user->participants;
+      $participant_id = [];
+      foreach ($participants as $participant){
+        $participant_id[] = $participant->id;
+      }
 
-          foreach ($conferences as $conference){
-             $registration = $conference->attendees()->find($participant_id);
-             if(count($registration) > 0){
-                $conferences_registered[] = $conference;
-            }
+      foreach ($conferences as $conference){
+        $registration = $conference->attendees()->find($participant_id);
+        if (count($registration) > 0) {
+          $conferences_registered[] = $conference;
         }
-        return view('home', ['conferences' => $conferences_registered,'participants' => $participants]);
-    }else{
+      }
+      return view('home', ['conferences' => $conferences_registered,'participants' => $participants]);
+    } else {
 
-        $current_conferences = Conference::getCurrentConferences();
-        foreach ($current_conferences as $conference) {
-          $conference->approved = DB::table('conference_attendees')
-                                             ->where('conference_id', '=' , $conference->id)
-                                             ->where('approved', '=', 1)
-                                             ->count();
+      $current_conferences = Conference::getCurrentConferences();
+      foreach ($current_conferences as $conference) {
+        $conference->approved = DB::table('conference_attendees')
+        ->where('conference_id', '=' , $conference->id)
+        ->where('approved', '=', 1)
+        ->count();
 
-        }
+      }
 
-        return view('home', ['current_conferences' => $current_conferences]);
+      return view('home', ['current_conferences' => $current_conferences]);
     }
-}
+  }
 }
