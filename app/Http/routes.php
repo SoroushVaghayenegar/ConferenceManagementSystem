@@ -92,6 +92,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/hotel/{id}', 'HotelController@destroy');
 
+    Route::get('/inventory', 'InventoryController@index');
+
+    Route::get('/conference/{id}/inventory', 'InventoryController@show');
+
     Route::get('/flights', 'FlightController@index');
 
     Route::get('/reports', 'ReportController@index');
@@ -126,9 +130,9 @@ Route::group(['middleware' => 'web'], function () {
   Route::get('/approve/conference/{conference}/participant/{participant_id}', 'ParticipantController@approve');
 
   Route::get('/unapprove/conference/{conference}/participant/{participant_id}', 'ParticipantController@unapprove');
-  
+
   Route::get('/conference/{id}/flights', 'FlightController@show');
-  
+
   Route::get('/conference/{id}/edit', function (Conference $id) {
     if (Gate::denies('conf-manager-or-admin', $id)) {
             abort(403);

@@ -17,4 +17,9 @@ class Hotel extends Model
     {
         return $this->belongsToMany('App\Participant', 'hotel_users');
     }
+
+    public function inventory()
+    {
+        return $this->hasMany('App\Inventory');
+    }
 }

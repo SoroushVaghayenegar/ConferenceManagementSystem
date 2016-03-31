@@ -67,4 +67,9 @@ class Conference extends Model
     {
         return $this->hasMany('App\Hotel');
     }
+
+    public function inventory()
+    {
+        return $this->hasManyThrough('App\Inventory', 'App\Hotel');
+    }
 }

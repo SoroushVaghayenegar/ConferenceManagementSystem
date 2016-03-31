@@ -27,19 +27,19 @@
     <!-- font icon -->
     <link href="/css/elegant-icons-style.css" rel="stylesheet" />
     <link href="/css/font-awesome.min.css" rel="stylesheet" />
-    
+
     <!-- easy pie chart-->
     <link href="/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-    
+
     <!-- Custom styles -->
-    
+
     <link href="/css/widgets.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/style-responsive.css" rel="stylesheet" />
     <link href="/css/xcharts.min.css" rel=" stylesheet">
     <link href="/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
 
-    
+
 
     <!-- javascripts -->
     <!-- bootstrap -->
@@ -50,7 +50,7 @@
     <!--custome script for all page-->
     <script src="/js/scripts.js"></script>
 
-    
+
 <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js"></script>
 
@@ -64,13 +64,13 @@
 <script src="https://cdn.datatables.net/rowreorder/1.1.1/js/dataTables.rowReorder.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
 
-    
-    
+
+
   <?php
     if(Auth::check())
       $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
   ?>
-    
+
     <style>
         body {
             font-family: 'Raleway';
@@ -193,7 +193,13 @@
                           <li class="" id='sidebar-hotel'>
                               <a class="" href="{{ URL::to('/hotel') }}">
                                   <i class="fa fa-bed"></i>
-                                  <span>Hotel</span>
+                                  <span>Hotels</span>
+                              </a>
+                          </li>
+                          <li class="" id='sidebar-inventory'>
+                              <a class="" href="{{ URL::to('/inventory') }}">
+                                  <i class="fa fa-archive"></i>
+                                  <span>Inventory</span>
                               </a>
                           </li>
                       @endif
