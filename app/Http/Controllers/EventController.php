@@ -18,16 +18,16 @@ use Gate;
 class EventController extends Controller
 {
   public function eventListIndex($id)
-    {  
-      
+    {
+
       $events = DB::table('events')->where('conference_id' , $id)->get();
       return view('events',['events'=>$events,'id'=>$id]);
     }
 
 
       public function create_event_index($id)
-    {  
-      
+    {
+
 
       return view('create_event',['id'=>$id]);
     }
@@ -63,14 +63,14 @@ class EventController extends Controller
     }
 
     public function edit_index($id)
-    {        
+    {
 
       $event = DB::table('events')->where('id' , $id)->first();
       return view('edit_event',['specific_event'=>$event,'id'=>$id]);
     }
 
     public function edit($id,Request $request)
-    { 
+    {
       $conference_manager = DB::table('conference_managers')
     ->where('user_id' ,'=', Auth::user()->id)
     ->where('conference_id' , '=', $id)
@@ -101,28 +101,23 @@ class EventController extends Controller
 
 
     public function join_index($id)
-    {        
-      $event = DB::table('events')->where('id' , $id)->first();
-      //$event = DB::table('events')->where('id' , $id)->first();
+    {
       $user = Auth::user();
-      $participants = DB::table('users')->where('id' , $user->id)->get();
       $event = Event::findOrFail($id);
       $conference = $event->conference;
 
-      $conference->attendees()->where('user_id', Auth::user()->id);
+      $attendees = $conference->attendees->where('user_id', $user->id);
 
-      $user_group = $user->participants()->where('conference_id',$id);
-      return response()->json($conference->attendees->where('user_id', Auth::user()->id));
-      foreach($participants as $participant)
-      {
-        if(DB::table('conference_attendees')->where('participant_id' , $id)->where('conference_id' , $event->conference_id)->first())
-        {
-          // $user_group[] = 
-        }
-
-
+      foreach ($attendees as $attendee) {
+        if ($attendee->primary_user)
+          $attendee->name = $attendee->user->name;
       }
 
-      return view('event_register',['specific_event'=>$event,'id'=>$id]);
+
+      return view('event_register',[
+        'specific_event' => $event,
+        'id' => $id,
+        'participants' => $attendees
+      ]);
     }
 }

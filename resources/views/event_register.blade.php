@@ -29,12 +29,13 @@
 
             <p class="text-left">
               <label>
-                <input type="checkbox" name="registree" style="margin-right: 5px"></input>
-                All participants are travelling on the same flight with me
+                @foreach ($participants as $participant)
+                <input type="checkbox" name="registree" value="{{$participant->id}}" style="margin-right: 5px">{{$participant->name}}</input>
+                @endforeach
               </label>
             </p>
               <button type="submit" class="btn btn-default pull-right">Submit</button>
-            
+
           </form>
         </div>
       </div>
