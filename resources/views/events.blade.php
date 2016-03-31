@@ -7,16 +7,17 @@
 
  <div class="row">
       <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa-globe"></i> Conferences</h3>
+        <h3 class="page-header"><i class="fa fa-globe"></i> Events</h3>
       </div>
     </div>
     
 
   @if(Auth::user()->is_admin)
-        <button id="create_new_button" class="btn btn-primary"><i class="fa fa-plus"></i>  Create a new event</button>
-        </br>
-        </br>
+        <button  class="btn btn-warning"><a href="{{ URL::to('conference/'.$id) }}/create_event"><i class="fa fa-plus"></i>  Create a new event</a></button>
       @endif
+        <button  class="btn btn-default">  <a href="{{ URL::to('directory') }}">Return to conferences</a></button>
+        </br>
+        </br>
 
 <div class="container">
   <div class="panel panel-default" >
@@ -26,11 +27,12 @@
     </ul>
     <div class="tab-content">
       <div id="currentConferences" class="tab-pane fade in active">
-        @if (count($events) > 1)
+        @if (count($events) > 0)
           <div class="panel-body" >
             <table width="100%" class="table">
               <thead>
                 <th>Name</th>
+                <th>Description</th>
                 <th>Capacity</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -42,12 +44,13 @@
                 @foreach ($events as $event)
                   <tr>
                     <td class="table-text">{{ $event->name }}</td>
+                    <td class="table-text">{{ $event->topic }}</td>
                     <td class="table-text">{{ $event->capacity }}</td>
                     <td class="table-text">{{ date('F d, Y', strtotime($event->start)) }}</td>
                     <td class="table-text">{{ date('F d, Y', strtotime($event->end)) }}</td>
                     <td class="table-text">{{ $event->location }}</td>
                     <td>
-                      <a href="#" class="btn btn-details">Details</a>
+                       <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a> 
                     </td>
                     <td>
                         <a href="/login" class="btn btn-register">Register</a>
