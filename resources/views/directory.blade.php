@@ -52,6 +52,9 @@
                       <a href="{{ URL::to('conference/'.$current_conference->id) }}" class="btn btn-details">Details</a>
                     </td>
                     <td>
+                     <a href="{{ URL::to('conference/'.$current_conference->id) }}/eventlist" class="btn btn-success">Event List</a> 
+                   </td>
+                    <td>
                       @if(Auth::user())
                         @if($current_conference->isRegistered)
                         <a href="/conference/{{$current_conference->id}}/join" class="btn btn-success" disabled>
