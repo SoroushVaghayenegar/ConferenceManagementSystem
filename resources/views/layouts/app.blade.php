@@ -75,7 +75,7 @@
         body {
             font-family: 'Raleway';
             margin-top: 25px;
-            background-image: url('/background_patterns/23.png');
+            background-image: url('/background_patterns/30.png');
         }
 
         button .fa {
@@ -103,7 +103,7 @@
         </div>
         @endif
         <!--logo start-->
-        <a href="{{ URL::to('') }}" class="logo"> Gobind Sarvar<span class="lite">  <strong>CMS<strong></span></a>
+        <a href="{{ URL::to('') }}" class="logo"> <strong>Gobind </strong><span class="lite">  <strong>sarvar </strong></span></a>
         <!--logo end-->
         <div class="top-nav notification-row">
             <ul class="nav pull-right top-menu">

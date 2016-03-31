@@ -21,24 +21,44 @@
 
 <div class="container">
 
-  <h3>Choose Conference Type:</h3>
+  <div class="panel panel-default">
+    <header class="panel-heading">Participants</header>
+
+    <div class="panel-body">
+
+      <h3>Choose Conference Type:</h3> 
 
   
     <label class="radio-inline"><input type="radio" name="type" value="current">Current Conferences</label>
     <label class="radio-inline"><input type="radio" name="type" value="past">Past Conferences</label>
+    <br/>
+    <br/>
+
+    <img id="loading" src="/img/loading.gif" style="display:none" align="middle">
+      
+      <div id="dropdown" class="row" style="display:none">
+
+        <span class="h4 col-md-2">
+          <strong>Select a conference</strong> 
+        </span>
+  
   
 
   <div class="form-group">
-  <label for="sel1">Select Conference:</label>
+  <button type="button" class="btn btn-default" id="select_conference_button">Select </button>&nbsp; 
+  
+
+  <div class="col-md-6">
   <select class="form-control" id="conference_dropdown">
     <option></option>
   </select>
-  <button type="button" class="btn btn-default" id="select_conference_button">Select</button>
+  
 </div>
- 
+ </div>
+      </div>
  @if($report != null )
- <div class="container">
-  <div class="panel panel-dark" >
+ 
+  <div class="panel panel-default" >
 
     <h2 align='center' ><strong>{{$conference->name}}</strong></h2>
 
@@ -61,13 +81,13 @@
               <table id="report_table" class="table table-bordered" border="1" cellspacing="0" width="100%">
                   <thead>
                       <tr>
-                          <th colspan="7" style="border-right: thick solid white">Male Count</th>
+                          <th colspan="7" style="border-right: thick solid gray">Male Count</th>
                           <th colspan="7">Female Count</th>
                       </tr>
                   </thead>
                   <tbody>
                       <tr>
-                        <td colspan="7" style="border-right: thick solid white">{{$male_count}}</td>
+                        <td colspan="7" style="border-right: thick solid gray">{{$male_count}}</td>
                         <td colspan="7">{{$female_count}}</td>
                       </tr>
                   
@@ -83,7 +103,7 @@
                         <th>30 - 40</th>
                         <th>40 - 50</th>
                         <th>50 - 60</th>
-                        <th style="border-right: thick solid white"> > 60</th>
+                        <th style="border-right: thick solid gray"> > 60</th>
 
                         <th>0 - 10</th>
                         <th>10 - 20</th>
@@ -102,7 +122,7 @@
                         <td>{{$thirty_to_forty_male}}</td>
                         <td>{{$forty_to_fifty_male}}</td>
                         <td>{{$fifty_to_sixty_male}}</td>
-                        <td style="border-right: thick solid white">{{$older_than_sixty_male}}</td>
+                        <td style="border-right: thick solid gray">{{$older_than_sixty_male}}</td>
 
                         <td>{{$younger_than_ten_female}}</td>
                         <td>{{$ten_to_twenty_female}}</td> 
@@ -118,10 +138,12 @@
           </div>
         </div>
       </div>
-    </div>
+    
+
   @endif
   
-  
+  </div>
+</div>
   
     
 </div>
@@ -132,6 +154,9 @@
 <script type="text/javascript">
 
 $("input[name='type']").change(function(){
+    document.getElementById("loading").style.display = "block";
+    $("#dropdown").fadeOut("fast");
+
     if ($(this).val() === 'current') {
       $.ajax({
             url: '/reports',
@@ -155,7 +180,9 @@ $("input[name='type']").change(function(){
               @endforeach
             }
       });
-    } 
+    }
+    document.getElementById("loading").style.display = "none";
+    $("#dropdown").fadeIn("slow");
 });
 
 $("#select_conference_button").click(function(){
@@ -300,13 +327,7 @@ Highcharts.createElement('link', {
 Highcharts.theme = {
    colors: ["#0099ff", "#ff33cc"],
    chart: {
-      backgroundColor: {
-         linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
-         stops: [
-            [0, '#303136'],
-            [1, '#3e3e40']
-         ]
-      },
+      
       style: {
          fontFamily: "'Unica One', sans-serif"
       },
@@ -314,7 +335,7 @@ Highcharts.theme = {
    },
    title: {
       style: {
-         color: '#E0E0E3',
+         color: 'black',
          textTransform: 'uppercase',
          fontSize: '30px'
       }
@@ -369,11 +390,17 @@ Highcharts.theme = {
    plotOptions: {
       series: {
          dataLabels: {
-            color: '#B0B0B3'
+            color: 'black',
+            style: {
+         color: '#F0F0F0',
+         fontSize: '15px'
+      }
+
          },
          marker: {
             lineColor: '#333'
-         }
+         },
+
       },
       boxplot: {
          fillColor: '#505053'
