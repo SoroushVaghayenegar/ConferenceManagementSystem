@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Participant;
 use Auth;
+use DB;
 
 class HomeController extends Controller
 {
@@ -47,7 +48,17 @@ class HomeController extends Controller
         }
         return view('home', ['conferences' => $conferences_registered,'participants' => $participants]);
     }else{
-        return view('home');
+
+        $current_conferences = Conference::getCurrentConferences();
+        foreach ($current_conferences as $conference) {
+          $conference->availableCapacity = DB::table('conference_attendees')
+                                             ->where('conference_id', '=' , $conference->id)
+                                             ->where('approved', '=', 1)
+                                             ->count();
+
+        }
+
+        return view('home', ['current_conferences' => $current_conferences]);
     }
 }
 }
