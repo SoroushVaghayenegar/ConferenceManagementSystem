@@ -58,7 +58,7 @@
         </div> --}}
       </div>
 
-      <table id="hotel_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+      <table id="inventories_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -95,7 +95,7 @@ $('#conference_selector').on('change', onChangeHandler);
 
 
 $(document).ready(function(){
-  $("#hotel_table").DataTable({
+  $("#inventories_table").DataTable({
         rowReorder: {
             selector: 'td:nth-child(2)'
         },
@@ -104,7 +104,7 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
   $('.sidebar-menu > li').attr('class','');
-  $('#sidebar-hotel').attr('class','active');
+  $('#sidebar-inventories').attr('class','active');
 })
 
 </script>
