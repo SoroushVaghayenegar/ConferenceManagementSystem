@@ -80,7 +80,6 @@ class EventController extends Controller
     abort(403);
 
 
-    DB::table('conference_managers')->where('conference_id' , $id)->delete();
     $event = Event::where('id', $id);
     $event->update([
       'name' => $request->name,
