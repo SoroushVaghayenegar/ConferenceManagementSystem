@@ -32,6 +32,7 @@
             <table width="100%" class="table">
               <thead>
                 <th>Name</th>
+                <th>Description</th>
                 <th>Capacity</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -43,13 +44,11 @@
                 @foreach ($events as $event)
                   <tr>
                     <td class="table-text">{{ $event->name }}</td>
+                    <td class="table-text">{{ $event->topic }}</td>
                     <td class="table-text">{{ $event->capacity }}</td>
                     <td class="table-text">{{ date('F d, Y', strtotime($event->start)) }}</td>
                     <td class="table-text">{{ date('F d, Y', strtotime($event->end)) }}</td>
                     <td class="table-text">{{ $event->location }}</td>
-                    <td>
-                      <a href="#" class="btn btn-details">Details</a>
-                    </td>
                     <td>
                        <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a> 
                     </td>
