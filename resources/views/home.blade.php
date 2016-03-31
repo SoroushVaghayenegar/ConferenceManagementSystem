@@ -74,7 +74,12 @@
           </div>
       </div>
     @else
-        <h2 align="center" style="color:#ff4d4d">No Current Conferences!</h2>
+        <h1 align="center" style="color:#ff4d4d; font-weight:bold">You are not registered for a conference yet!</h1>
+        <h2 align="center" style="color:grey; font-weight:bold">
+            In order to register for a conference <br> go to the "Conferences" tab on the left 
+            <br>or click here <a href="/directory" class="btn btn-info">Conferences</a> 
+        </h2>
+
     @endif
     @endsection
 @else
@@ -120,12 +125,12 @@
                                 <p>{{$conference->description}}</p>
 
                                 <p> Available Seats
-                                    @if(($conference->availableCapacity/$conference->capacity) < 0.2)
-                                      <strong style="color:#00e600">{{ $conference->capacity - $conference->availableCapacity }}</strong>
+                                    @if(($conference->approved/$conference->capacity) < 0.2)
+                                      <strong style="color:#00e600">{{ $conference->capacity - $conference->approved }}</strong>
                                     @elseif(($conference->availableCapacity/$conference->capacity) < 0.5)
-                                      <strong style="color:#ff751a">{{ $conference->capacity - $conference->availableCapacity }}</strong>
+                                      <strong style="color:#ff751a">{{ $conference->capacity - $conference->approved }}</strong>
                                     @else
-                                      <strong style="color:red">{{ $conference->capacity - $conference->availableCapacity }}</strong>
+                                      <strong style="color:#ff0000">{{ $conference->capacity - $conference->approved }}</strong>
                                     @endif
                                 </p>
 

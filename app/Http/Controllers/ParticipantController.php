@@ -57,6 +57,7 @@ class ParticipantController extends Controller
 
         }
 
+
         return ['current' => $current, 'past' => $past];
     }
 
@@ -82,13 +83,22 @@ class ParticipantController extends Controller
 
         $attendees = $conference->getAttendees();
 
+        
+        $approved = DB::table('conference_attendees')
+                                ->where('conference_id', '=' , $id)
+                                ->where('approved', '=', 1)
+                                ->count();
+
+        $availableCapacity = $conference->capacity - $approved;
+
         // Get all existing and past conferences
         $conferences = $this->getConferences();
 
         return view('manage_participants', [
           'current' => $id,
           'conferences' => $conferences['past']->merge($conferences['current']),
-          'attendees' => $attendees
+          'attendees' => $attendees,
+          'availableCapacity' => $availableCapacity
         ]);
     }
 
