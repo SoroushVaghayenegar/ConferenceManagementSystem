@@ -102,8 +102,27 @@ class EventController extends Controller
 
     public function join_index($id)
     {        
-
+      $event = DB::table('events')->where('id' , $id)->first();
       //$event = DB::table('events')->where('id' , $id)->first();
-      return view('event_register');
+      $user = Auth::user();
+      $participants = DB::table('users')->where('id' , $user->id)->get();
+      $event = Event::findOrFail($id);
+      $conference = $event->conference;
+
+      $conference->attendees()->where('user_id', Auth::user()->id);
+
+      $user_group = $user->participants()->where('conference_id',$id);
+      return response()->json($conference->attendees->where('user_id', Auth::user()->id));
+      foreach($participants as $participant)
+      {
+        if(DB::table('conference_attendees')->where('participant_id' , $id)->where('conference_id' , $event->conference_id)->first())
+        {
+          // $user_group[] = 
+        }
+
+
+      }
+
+      return view('event_register',['specific_event'=>$event,'id'=>$id]);
     }
 }
