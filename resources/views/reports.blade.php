@@ -274,15 +274,15 @@ function printData()
    newWin.document.write('<h1 style="text-align: center"><strong>Conference Report</strong></h1>');
    newWin.document.write(chart.outerHTML);
    newWin.document.write('<br/> <br/>');
+   @if($report != null )
+     @foreach($events as $key=>$event)
+      var ev{{$key}} = document.getElementById("{{$event->id}}");
 
-   @foreach($events as $key=>$event)
-    var ev{{$key}} = document.getElementById("{{$event->id}}");
-
-    newWin.document.write('<h1 style="text-align: center"><strong>Event: {{$event->name}} Report</strong></h1>');
-    newWin.document.write(ev{{$key}}.outerHTML);
-    newWin.document.write('<br/> <br/>');
-   @endforeach
-
+      newWin.document.write('<h1 style="text-align: center"><strong>Event: {{$event->name}} Report</strong></h1>');
+      newWin.document.write(ev{{$key}}.outerHTML);
+      newWin.document.write('<br/> <br/>');
+     @endforeach
+  @endif 
    newWin.document.write('<h1 style="text-align: center"><strong>Table Report</strong></h1>');
    newWin.document.write(table.outerHTML);
    newWin.print();
