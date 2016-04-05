@@ -112,6 +112,10 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/reports', 'ReportController@index');
 
+    Route::get('/logs', 'LogsController@index');
+
+    Route::get('/logs/{type}', 'LogsController@getType');
+
     Route::get('/reports/{id}', 'ReportController@getReport');
 
     Route::get('/verify/{verificationCode}','VerificationController@confirm');

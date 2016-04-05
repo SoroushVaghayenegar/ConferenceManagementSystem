@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Conference;
 use App\Hotel;
 use App\Inventory;
+use App\Log;
 
 class InventoryController extends Controller
 {
@@ -62,6 +63,8 @@ class InventoryController extends Controller
 
         $inventory->delete();
 
+        Log::createLog("Delete Inventory", "deleted inventory: $inventory->name (quantity: $inventory->quantity) for $hotel->name  (room number: $hotel->room)");
+
         return redirect("/hotel/$hotel->id/inventory")->with([
             'inventory_deleted' => true
         ]);
@@ -84,6 +87,8 @@ class InventoryController extends Controller
         // attaching to Hotel
         $hotel = Hotel::findOrFail($id);
         $hotel->inventory()->save($inventory);
+
+        Log::createLog("Create Inventory", "created inventory: $inventory->name (quantity: $inventory->quantity) for $hotel->name  (room number: $hotel->room)");
 
         return redirect("/hotel/$id/inventory")->with([
             'inventory_added' => true

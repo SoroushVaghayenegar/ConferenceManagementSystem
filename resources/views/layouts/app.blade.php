@@ -161,7 +161,7 @@
                       @if(Auth::user()->is_admin || $conference_manager)
                           <li class="" id='sidebar-manageConferences'>
                               <a class="" href="{{ URL::to('/manage_conferences') }}">
-                                  <span>Manage conferences</span>
+                                  <span>Manage Conferences</span>
                               </a>
                           </li>
                           <li class="" id='sidebar-manageParticipants'>
@@ -210,6 +210,15 @@
                                   <span>Notification</span>
                               </a>
                           </li>
+                      @endif
+                      @if(Auth::user()->is_admin)
+                          <li class="" id='sidebar-logs'>
+                              <a class="" href="{{ URL::to('/logs') }}">
+                                    <i class="fa fa-file-text"></i>
+                                  <span>System Logs</span>
+                              </a>
+                          </li>
+
                       @endif
                       @if($event_facilitator)
                           <li class="" id='sidebar-reports'>

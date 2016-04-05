@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Conference;
 use App\Participant;
+use App\Log;
 use Auth;
 use DB;
 use Gate;
@@ -78,6 +79,8 @@ class ConferenceController extends Controller
 
     $conference->managers()->attach($request->managers);
 
+    Log::createLog("Create Conference", "created conference: $conference->name");
+
     return redirect('/manage_conferences');
   }
 
@@ -103,11 +106,14 @@ class ConferenceController extends Controller
       'address' => $request->address
     ]);
 
-
+    $conferencename = $conference->first()->name;
+    Log::createLog("Edit Conference", "edited conference: $conferencename");
 
     if($request->managers != NULL){
       $conference->first()->managers()->attach($request->managers);
     }
+
+
 
     \Session::flash('flash_message','Conference updated.');
     return redirect()->back();
@@ -140,9 +146,15 @@ class ConferenceController extends Controller
 
   public function delete(Conference $id)
   {
+    
+
     if(Auth::user()->is_admin == 0)
     abort(403);
     $id->delete();
+
+
+    Log::createLog("Delete Conference", "deleted conference: $id->name");
+
     return redirect('/manage_conferences');
   }
 

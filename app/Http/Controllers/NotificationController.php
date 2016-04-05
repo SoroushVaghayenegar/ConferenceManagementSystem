@@ -8,6 +8,7 @@ use Auth;
 use App\Http\Requests;
 
 use App\Conference;
+use App\Log;
 use Mail;
 
 class NotificationController extends Controller
@@ -69,6 +70,8 @@ class NotificationController extends Controller
             ->subject('Notification from Gobind Sarvar Conferences');
           });
         }
+
+        Log::createLog("Send Notification", "sent an email notification to all attendees of conference: $conference->name ");
 
         return redirect("/notification/conference/$id")->with([
           "notification_sent" => true

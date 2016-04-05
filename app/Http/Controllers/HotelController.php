@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Conference;
 use App\Participant;
 use App\Hotel;
+use App\Log;
 
 class HotelController extends Controller
 {
@@ -93,6 +94,8 @@ class HotelController extends Controller
 				$conference = Conference::findOrFail($id);
 				$conference->hotels()->save($hotel);
 
+				Log::createLog("Create Hotel", "created hotel: $hotel->name  (room number: $hotel->room)");
+
 				return redirect("/conference/$id/hotels")->with("hotel_added", true);
 		}
 
@@ -143,6 +146,12 @@ class HotelController extends Controller
 				$participant = Participant::findOrFail($participant_id);
 				$participant->hotel()->attach($hotel);
 
+				$hotelName = Hotel::findOrFail($hotel)->name;
+				$hotelRoomNumber = Hotel::findOrFail($hotel)->room;
+				$participantName = $participant->name;
+				$conferenceName = Conference::findOrFail($conference)->name;
+				Log::createLog("Assign Hotel", "assigned hotel: $hotelName  (room number: $hotelRoomNumber) to $participantName for conference: $conferenceName");
+
 				return redirect("conference/$conference/participants")->with([
 						"hotel_assigned" => true
 				]);
@@ -159,6 +168,9 @@ class HotelController extends Controller
             abort(403);
 
         $id->delete();
+
+        Log::createLog("delete Hotel", "deleted hotel: $id->name  (room number: $id->room)");
+
         return redirect('hotel');
     }
 }

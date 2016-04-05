@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Conference;
 use App\Participant;
 use App\User;
+use App\Log;
 
 class ParticipantController extends Controller
 {
@@ -121,16 +122,22 @@ class ParticipantController extends Controller
             ->subject('Gobind Sarvar Conferences: Participant approved!');
         });
 
+        $conferencename = $conference->name;
+        Log::createLog("Managing Participants","approved $participant->name for $conferencename conference");
+
         return redirect("/conference/$id/participants")->with('approved', true);
     }
 
     public function unapprove($conference, $participant_id)
     {
 
+        $conferencename = Conference::findOrFail($conference)->name;
 
         $participant = Participant::findOrFail($participant_id);
 
         $participant->conferences()->updateExistingPivot($conference, ["approved" => false]);
+
+        Log::createLog("Managing Participants","unapproved $participant->name for $conferencename conference");
 
         return redirect("/conference/$conference/participants")->with('unapproved', true);
     }

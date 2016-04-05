@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Log;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -99,6 +100,9 @@ class UsersController extends Controller
             abort(403);
         
         $id->delete();
+
+        Log::createLog("Delete User", "deleted user: $id->name ($id->email)");
+
         return redirect('manage_users');
     }
 }
