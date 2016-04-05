@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 
 class UsersController extends Controller
-{   
+{
 
     public function __construct()
     {
@@ -27,7 +27,7 @@ class UsersController extends Controller
 
         if(Auth::user()->is_admin == 0)
             abort(403);
-        
+
         $users = User::orderBy('name', 'asc')->get();
 
         return view('manage_users', ['users' => $users]);
@@ -98,11 +98,36 @@ class UsersController extends Controller
     {
         if(Auth::user()->is_admin == 0)
             abort(403);
-        
+
         $id->delete();
 
         Log::createLog("Delete User", "deleted user: $id->name ($id->email)");
 
         return redirect('manage_users');
     }
+
+    public function set_admin(User $id)
+    {
+        $id->is_admin = true;
+        $id->save();
+
+        return redirect('manage_users')->with([
+          "set_admin" => true
+        ]);
+    }
+
+    public function set_user(User $id)
+    {
+        if (Auth::user()->id == $id->id)
+          return redirect('manage_users')->with([
+            "cannot_set_self" => true
+          ]);
+        $id->is_admin = false;
+        $id->save();
+
+        return redirect('manage_users')->with([
+          "set_user" => true
+        ]);
+    }
+
 }

@@ -186,6 +186,10 @@ Route::group(['middleware' => 'web'], function () {
     return response()->json($res);
   });
 
+  Route::get('/user/{id}/set_admin', 'UsersController@set_admin');
+
+  Route::get('/user/{id}/set_user', 'UsersController@set_user');
+
   // Notification routes
 
   Route::get('/notification', 'NotificationController@index');

@@ -4,7 +4,7 @@
 
 
 
-@section('content')           
+@section('content')
 <!--overview start-->
 <div class="row">
     <div class="col-lg-12">
@@ -14,6 +14,25 @@
 
 
 <div class="container">
+  @if (session('cannot_set_self') || session('set_user') || session('set_admin'))
+  <div class="panel panel-default">
+    <header class="panel-heading">Status</header>
+    <div class="panel-body">
+      <h4 class="text-center">
+        @if (session("cannot_set_self"))
+        <i class="fa fa-exclamation"></i>
+        You cannot set your own admin privileges.
+        @elseif (session('set_user'))
+        <i class="fa fa-check"></i>
+        User set as Normal User.
+        @elseif (session('set_admin'))
+        <i class="fa fa-check"></i>
+        User set as Admin User.
+        @endif
+      </h4>
+    </div>
+  </div>
+  @endif
     <div class="panel panel-default" >
 
         <h1 align='center' ><strong>Users</strong></h1>
@@ -43,7 +62,14 @@
                             <td>{{$user->country}}</td>
                             <td>{{$user->gender}}</td>
                             <td>{{$user->id}}</td>
-                            <td>{{$user->is_admin ? "Admin": "Normal User"}}</td>
+                            <td>
+                              {{$user->is_admin ? "Admin": "Normal User"}}<br>
+                              @if (!$user->is_admin)
+                              <a class="btn btn-sm btn-link" href='{{url("user/$user->id/set_admin")}}'>Set as admin</a>
+                              @else
+                              <a class="btn btn-sm btn-link" href='{{url("user/$user->id/set_user")}}'>Set as user</a>
+                              @endif
+                            </td>
                             <td><a href="{{ URL::to('manage_users/'.$user->id) }}" class="btn btn-danger" style="width:100%">Remove</a></td>
                         </tr>
                     @endforeach
@@ -52,7 +78,7 @@
         </div>
     </div>
 </div>
-        
+
 <!-- Script for running DataTable -->
         <script>
 
@@ -64,7 +90,7 @@
                 responsive: true
             } );
         } );
-          
+
           $(document).ready(function(){
             $('.sidebar-menu > li').attr('class','');
             $('#sidebar-manageUsers').attr('class','active');
