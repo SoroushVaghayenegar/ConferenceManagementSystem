@@ -53,14 +53,16 @@
               <td class="table-text">
                 <div>{{ $conference->name }}</div>
               </td>
-
+              @if($event_facilitator == null)
               <!-- Edit button -->
               <td>
                  <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a> 
               </td>
+              @endif
               <td>
                  <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a> 
               </td>
+              @if($event_facilitator == null)
               <!-- Delete Button -->
               <td>
                 <form action="{{ url('conference/'.$conference->id) }}" method="POST">
@@ -72,6 +74,7 @@
                   </button>
                 </form>
               </td>
+              @endif
             </tr>
             @endforeach
           </tbody>

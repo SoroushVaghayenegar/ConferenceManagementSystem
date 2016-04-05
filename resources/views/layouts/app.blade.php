@@ -221,6 +221,13 @@
 
                       @endif
                       @if($event_facilitator)
+
+                          <li class="" id='sidebar-manageConferences'>
+                              <a class="" href="{{ URL::to('/manage_conferences') }}">
+                                  <span>Manage Events</span>
+                              </a>
+                          </li>
+
                           <li class="" id='sidebar-reports'>
                               <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>

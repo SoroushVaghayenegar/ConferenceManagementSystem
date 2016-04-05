@@ -27,14 +27,24 @@ class ConferenceController extends Controller
 
     $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
 
+    $event_facilitator = DB::table('event_facilitators')->where('user_id' ,'=', Auth::user()->id)->get();
+
     if(Auth::user()->is_admin == 0 && $conference_manager){
 
       $conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
       ->where('user_id' ,'=', Auth::user()->id)->get();
     }
 
+    if($event_facilitator){
+      $conferences = Conference::join('events', 'conferences.id', '=', 'events.conference_id')
+                                             ->join('event_facilitators', 'events.id', '=','event_facilitators.event_id')
+                                             ->select('conferences.*')
+                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+    }
+
     return view('conferences', [
-      'conferences' => $conferences
+      'conferences' => $conferences,
+      'event_facilitator' => $event_facilitator
     ]);
   }
 
@@ -202,7 +212,7 @@ class ConferenceController extends Controller
         $arrival_date = null;
         $arrival_time = null;
       }
-      
+
       $this->createAttachedParticipant([
         'name' => $participant['name'],
         'gender' => $participant['gender'],
