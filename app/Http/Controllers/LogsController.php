@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Log;
 use App\User;
+use Auth;
 
 class LogsController extends Controller
 {
@@ -18,6 +19,9 @@ class LogsController extends Controller
 
 
   	public function getType($type){
+
+  		if (!Auth::user()->is_admin)
+          abort(403);
 
   		$logs = Log::where('type', '=', $type)->orderBy('created_at', 'desc')->get();
 
@@ -35,6 +39,10 @@ class LogsController extends Controller
   	}
   	
   	public function index(){
+
+  		if (!Auth::user()->is_admin)
+          abort(403);
+
 
   		$logs = Log::orderBy('created_at', 'desc')->get();
 
