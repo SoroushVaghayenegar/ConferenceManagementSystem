@@ -22,7 +22,7 @@ class ConferenceController extends Controller
     //$this->middleware('auth');
   }
 
-  public function index(){
+  public function index() {
     $conferences = Conference::orderBy('created_at', 'asc')->get();
 
     $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
@@ -156,7 +156,7 @@ class ConferenceController extends Controller
 
   public function delete(Conference $id)
   {
-    
+
 
     if(Auth::user()->is_admin == 0)
     abort(403);

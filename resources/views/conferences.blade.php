@@ -22,9 +22,9 @@
 
 <div class="container">
   <div class="col-sm-offset-2 col-sm-8">
-    
+
     <!-- SHOW IF ONLY USER IS ADMIN -->
-   
+
       @if(Auth::user()->is_admin)
         <button id="create_new_button" class="btn btn-primary"><i class="fa fa-plus"></i>  Create a new conference</button>
         </br>
@@ -42,9 +42,7 @@
       <div class="panel-body">
         <table class="table table-striped conference-table">
           <thead>
-            <th>Conference</th>
-            <th></th>
-            <th></th>
+            <th colspan="5">Conference</th>
           </thead>
           <tbody>
             @foreach ($conferences as $conference)
@@ -56,11 +54,17 @@
               @if($event_facilitator == null)
               <!-- Edit button -->
               <td>
-                 <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a> 
+                 <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a>
               </td>
               @endif
               <td>
-                 <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a> 
+                 <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a>
+              </td>
+              <td>
+                <a href='{{ url("conference/$conference->id/participants") }}' class="btn btn-default">
+                  <i class="fa fa-user"></i>
+                  Participants
+                </a>
               </td>
               @if($event_facilitator == null)
               <!-- Delete Button -->
@@ -93,7 +97,7 @@
           New Conference
           <button type="button" id="close_panel" class="close" data-dismiss="">x</button>
         </div>
- 
+
         <div class="panel-body">
           <!-- Display Validation Errors -->
           @include('common.errors')
