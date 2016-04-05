@@ -157,7 +157,7 @@ class HotelController extends Controller
 				]);
 		}
 
-    public function destroy(Hotel $id)
+    public function destroy($id)
     {
         $conference_manager = DB::table('conference_managers')
                                 ->where('user_id' ,'=', Auth::user()->id)
@@ -167,10 +167,16 @@ class HotelController extends Controller
         if(Auth::user()->is_admin == 0 && $conference_manager == null)
             abort(403);
 
-        $id->delete();
+				$hotel = Hotel::findOrFail($id);
 
-        Log::createLog("delete Hotel", "deleted hotel: $id->name  (room number: $id->room)");
+				$conference_id = $hotel->conference->id;
 
-        return redirect('hotel');
+        Log::createLog("delete Hotel", "deleted hotel: $hotel->name  (room number: $hotel->room)");
+
+        $hotel->delete();
+
+        return redirect("conference/$conference_id/hotels")->with([
+					'hotel_removed' => true
+				]);
     }
 }

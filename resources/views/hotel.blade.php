@@ -10,13 +10,17 @@
         </div>
 </div>
 <div class="container">
-  @if (session('hotel_added'))
+  @if (session('hotel_added') || session('hotel_removed'))
   <div class="panel panel-default">
     <header class="panel-heading">Status</header>
     <div class="panel-body">
       <h4 class="text-center">
         <i class="fa fa-check"></i>
+        @if (session("hotel_added"))
         Hotel added
+        @elseif (session('hotel_removed'))
+        Hotel removed
+        @endif
       </h4>
     </div>
   </div>
