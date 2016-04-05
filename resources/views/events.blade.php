@@ -64,7 +64,21 @@
                        <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a>
                     </td>
                     <td>
-                        <a href="{{ URL::to('conference/'.$event->id) }}/join_event" class="btn btn-register">Register</a>
+                     @if(Auth::user())
+                        @if($event->conference->isRegistered(Auth::user()->id))
+                          @if($event->isRegistered(Auth::user()->id))
+                            <a href="{{ URL::to('conference/'.$event->id) }}/join_event" class="btn btn-success disabled">
+                            <i class="fa fa-check"></i>Registered
+                            </a>
+                          @else
+                             <a href="{{ URL::to('conference/'.$event->id) }}/join_event" class="btn btn-register">Register</a>
+                          @endif
+                        @else
+                          <a href="{{ URL::to('conference/'.$event->id) }}/join_event" class="btn btn-danger disabled">
+                            Not registered in conference
+                          </a>  
+                        @endif
+                      @endif 
                     </td>
                   </tr>
                 @endforeach

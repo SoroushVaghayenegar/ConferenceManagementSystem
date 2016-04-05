@@ -20,7 +20,7 @@ class EventController extends Controller
   public function eventListIndex($id)
     {
 
-      $events = DB::table('events')->where('conference_id' , $id)->get();
+      $events = Event::where('conference_id' , $id)->get();
       return view('events',['events'=>$events,'id'=>$id]);
     }
 
