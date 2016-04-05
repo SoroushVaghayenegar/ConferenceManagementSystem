@@ -41,7 +41,7 @@
                 @endif
               @endforeach
             @else
-              <option>No Log types available!</option>
+              <option value="">No Log types available!</option>
             @endif
           </select>
           
