@@ -18,124 +18,137 @@ use Gate;
 class EventController extends Controller
 {
   public function eventListIndex($id)
-    {
+  {
 
-      $events = Event::where('conference_id' , $id)->get();
-      return view('events',['events'=>$events,'id'=>$id]);
-    }
-
-
-      public function create_event_index($id)
-    {
+    $events = Event::where('conference_id' , $id)->get();
+    return view('events',['events'=>$events,'id'=>$id]);
+  }
 
 
-      return view('create_event',['id'=>$id]);
-    }
-
-    public function create($id,Request $request){
-       if(Auth::user()->is_admin == 0 )
-            abort(403);
-
-          $conference = Conference::findOrFail($id);
-          $begin =  $conference->start;
-          $end =  $conference->end;
+  public function create_event_index($id)
+  {
 
 
-        $this->validate($request, [
-          'name' => 'required|max:255',
-          'description' => 'required',
-          'capacity' => 'integer|min:0',
-          'start' => 'required|date|date_format:Y/m/d|after:'.$begin.'|before:'.$end,
-          'end' => 'required|date|date_format:Y/m/d|after:start|before:'.$end
-        ]);
+    return view('create_event',['id'=>$id]);
+  }
 
-
-        $event = new Event;
-
-        $event->name = $request->name;
-        $event->conference_id = $id;
-        $event->topic = $request->description;
-        $event->capacity = $request->capacity;
-        $event->start = $request->start;
-        $event->end = $request->end;
-        $event->location = $request->location;
-
-        $event->save();
-
-        $event->facilitators()->attach($request->facilitators);
-
-        return redirect("/conference/$event->conference_id/eventlist");
-    }
-
-    public function edit_index($id)
-    {
-
-      $event = DB::table('events')->where('id' , $id)->first();
-      return view('edit_event',['specific_event'=>$event,'id'=>$id]);
-    }
-
-    public function edit($id,Request $request)
-    {
-      $conference_manager = DB::table('conference_managers')
-    ->where('user_id' ,'=', Auth::user()->id)
-    ->where('conference_id' , '=', $id)
-    ->get();
-
-    if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
+  public function create($id,Request $request){
+   if(Auth::user()->is_admin == 0 )
     abort(403);
 
+  $conference = Conference::findOrFail($id);
+  $begin =  $conference->start;
+  $end =  $conference->end;
 
-    $event = Event::where('id', $id);
-    $event->update([
-      'name' => $request->name,
-      'topic' => $request->description,
-      'capacity' => $request->capacity,
-      'start' => $request->start,
-      'end' => $request->end,
-      'location' => $request->location,
+
+  $this->validate($request, [
+    'name' => 'required|max:255',
+    'description' => 'required',
+    'capacity' => 'integer|min:0',
+    'start' => 'required|date|date_format:Y/m/d|after:'.$begin.'|before:'.$end,
+    'end' => 'required|date|date_format:Y/m/d|after:start|before:'.$end
     ]);
 
-      DB::table('event_facilitators')->where('event_id' , $id)->delete();
-      $event->first()->facilitators()->attach($request->facilitators);
+
+  $event = new Event;
+
+  $event->name = $request->name;
+  $event->conference_id = $id;
+  $event->topic = $request->description;
+  $event->capacity = $request->capacity;
+  $event->start = $request->start;
+  $event->end = $request->end;
+  $event->location = $request->location;
+
+  $event->save();
+
+  $event->facilitators()->attach($request->facilitators);
+
+  return redirect("/conference/$event->conference_id/eventlist");
+}
+
+public function edit_index($id)
+{
+
+  $event = DB::table('events')->where('id' , $id)->first();
+  return view('edit_event',['specific_event'=>$event,'id'=>$id]);
+}
+
+public function edit($id,Request $request)
+{
+  $conference_manager = DB::table('conference_managers')
+  ->where('user_id' ,'=', Auth::user()->id)
+  ->where('conference_id' , '=', $id)
+  ->get();
+
+  if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
+    abort(403);
+
+  $event = Event::findOrFail($id);
+
+  $conference = Conference::findOrFail($event->conference_id);
+  $begin =  $conference->start;
+  $end =  $conference->end;
 
 
-      \Session::flash('flash_message','Event updated.');
-      return redirect()->back();
-    }
+  $this->validate($request, [
+    'name' => 'required|max:255',
+    'description' => 'required',
+    'capacity' => 'integer|min:0',
+    'start' => 'required|date|date_format:Y/m/d|after:'.$begin.'|before:'.$end,
+    'end' => 'required|date|date_format:Y/m/d|after:start|before:'.$end
+    ]);
+
+  $event->update([
+    'name' => $request->name,
+    'topic' => $request->description,
+    'capacity' => $request->capacity,
+    'start' => $request->start,
+    'end' => $request->end,
+    'location' => $request->location,
+    ]);
+
+  DB::table('event_facilitators')->where('event_id' , $id)->delete();
+  $event->first()->facilitators()->attach($request->facilitators);
+
+
+  \Session::flash('flash_message','Event updated.');
+  return redirect()->back();
+}
 
 
 
-    public function join_index($id)
-    {
-      $user = Auth::user();
-      $event = Event::findOrFail($id);
-      $conference = $event->conference;
+public function join_index($id)
+{
+  $user = Auth::user();
+  $event = Event::findOrFail($id);
+  $conference = $event->conference;
 
-      $attendees = $conference->attendees->where('user_id', $user->id);
+  $attendees = $conference->attendees->where('user_id', $user->id);
 
-      foreach ($attendees as $attendee) {
-        if ($attendee->primary_user)
-          $attendee->name = $attendee->user->name;
-      }
+  foreach ($attendees as $attendee) {
+    if ($attendee->primary_user)
+      $attendee->name = $attendee->user->name;
+  }
 
 
-      return view('event_register',[
-        'specific_event' => $event,
-        'id' => $id,
-        'participants' => $attendees
-      ]);
-    }
+  return view('event_register',[
+    'specific_event' => $event,
+    'id' => $id,
+    'participants' => $attendees
+    ]);
+}
 
-    public function join($id, Request $request)
-    {
-        $event = Event::findOrFail($id);
+public function join($id, Request $request)
+{
+  $event = Event::findOrFail($id);
 
-        $event->attendees()->attach($request->participants);
+  $event->attendees()->attach($request->participants);
 
-        $conference = $event->conference;
+  $conference = $event->conference;
 
-        return redirect("conference/$conference->id/eventlist")->with([
-          "event_registered" => true
-        ]);
-    }
+  return redirect("conference/$conference->id/eventlist")->with([
+    "event_registered" => true
+    ]);
+}
 }
