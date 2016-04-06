@@ -36,12 +36,17 @@ class EventController extends Controller
        if(Auth::user()->is_admin == 0 )
             abort(403);
 
+          $conference = Conference::findOrFail($id);
+          $begin =  $conference->start;
+          $end =  $conference->end;
+
+
         $this->validate($request, [
           'name' => 'required|max:255',
           'description' => 'required',
           'capacity' => 'integer|min:0',
-          'start' => 'required|date|date_format:Y/m/d',
-          'end' => 'required|date|date_format:Y/m/d|after:start'
+          'start' => 'required|date|date_format:Y/m/d|after:'.$begin.'|before:'.$end,
+          'end' => 'required|date|date_format:Y/m/d|after:start|before:'.$end
         ]);
 
 

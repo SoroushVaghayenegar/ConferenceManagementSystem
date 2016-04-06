@@ -13,6 +13,7 @@
 
 use App\Conference;
 use App\User;
+use App\Event;
 use Illuminate\Http\Request;
 
 /*
