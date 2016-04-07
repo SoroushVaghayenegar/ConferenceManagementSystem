@@ -32,14 +32,14 @@ class ConferenceController extends Controller
     if(Auth::user()->is_admin == 0 && $conference_manager){
 
       $conferences = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
-      ->where('user_id' ,'=', Auth::user()->id)->orderBy('start', 'desc')->get();
+      ->where('user_id' ,'=', Auth::user()->id)->orderBy('start', 'desc')->distinct()->get();
     }
 
     if(Auth::user()->is_admin == 0 && $event_facilitator ){
       $conferences = Conference::join('events', 'conferences.id', '=', 'events.conference_id')
                                              ->join('event_facilitators', 'events.id', '=','event_facilitators.event_id')
                                              ->select('conferences.*')
-                                             ->where('user_id' ,'=', Auth::user()->id)->orderBy('start', 'desc')->get();
+                                             ->where('user_id' ,'=', Auth::user()->id)->orderBy('start', 'desc')->distinct()->get();
     }
 
     return view('conferences', [

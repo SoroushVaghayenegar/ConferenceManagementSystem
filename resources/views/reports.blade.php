@@ -68,23 +68,40 @@
     <button type="button" class="btn btn-print" id="print" >Print Report</button></h2>
 
     <ul class="nav nav-tabs nav-justified">
-          <li class="active"><a data-toggle="tab" href="#chart"><strong>Conference Chart Report</strong></a></li>
+          @if(!$event_facilitator)
+            <li class="active"><a data-toggle="tab" href="#chart"><strong>Conference Chart Report</strong></a></li>
+          @endif
           @foreach($events as $key=>$event)
-          <li><a data-toggle="tab" href="#{{$event->id}}"><strong>Event {{++$key}}: {{$event->name}}</strong></a></li>
+            @if($event_facilitator)
+              @if($key == 0)
+                <li class="active"><a data-toggle="tab" href="#{{$event->id}}"><strong>Event {{++$key}}: {{$event->name}}</strong></a></li>
+              @else
+                <li><a data-toggle="tab" href="#{{$event->id}}"><strong>Event {{++$key}}: {{$event->name}}</strong></a></li>
+              @endif
+            @endif
           @endforeach
           <li><a data-toggle="tab" href="#table"><strong>Table Report</strong></a></li>
         </ul>
         <div class="tab-content">
-          <div id="chart" class="tab-pane fade in active">
-            <div class="conference1">
+          @if(!$event_facilitator)
+            <div id="chart" class="tab-pane fade in active">
+              <div class="conference1">
+              </div>
+            </br>
+              <div class="conference2" >
+              </div>
             </div>
-          </br>
-            <div class="conference2" >
-            </div>
-          </div>
+          @endif
+
 
           @foreach($events as $key=>$event)
-            <div id="{{$event->id}}" class="tab-pane fade">
+            @if($event_facilitator)
+              @if($key == 0)
+                <div id="{{$event->id}}" class="tab-pane fade in active">
+              @else
+                <div id="{{$event->id}}" class="tab-pane fade">
+              @endif
+            @endif
               <div class="event{{$event->id}}">
 
               </div>
@@ -428,6 +445,8 @@ $(function () {
 
 @endforeach
 
+@if(!$event_facilitator)
+
 $(function () {
     $('.conference1').highcharts({
         chart: {
@@ -535,7 +554,7 @@ $(function () {
 });
 
 
-
+@endif
 // Load the fonts
 Highcharts.createElement('link', {
    href: '//fonts.googleapis.com/css?family=Unica+One',

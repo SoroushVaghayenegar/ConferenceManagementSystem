@@ -65,7 +65,7 @@
               <td>
                  <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a>
               </td>
-              @if(isset($conference_manager) || Auth::user()->is_admin)
+              @if($conference_manager || Auth::user()->is_admin)
                 <td>
                   <a href='{{ url("conference/$conference->id/participants") }}' class="btn btn-default" style="background-color:#9966ff">
                     <i class="fa fa-user"></i>
