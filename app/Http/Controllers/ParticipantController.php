@@ -65,6 +65,8 @@ class ParticipantController extends Controller
     public function index()
     {
 
+        if(!Auth::user()->is_admin)
+            abort(403);
 
         $conferences = $this->getConferences();
 
@@ -97,6 +99,7 @@ class ParticipantController extends Controller
 
         return view('manage_participants', [
           'current' => $id,
+          'conferenceName' => $conference->name,
           'conferences' => $conferences['past']->merge($conferences['current']),
           'attendees' => $attendees,
           'availableCapacity' => $availableCapacity

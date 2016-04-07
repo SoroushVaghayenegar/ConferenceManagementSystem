@@ -20,48 +20,53 @@
 
 <div class="container">
 
+  <a href="{{ URL::to('manage_conferences') }}" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
+
   <div class="panel panel-default">
     
-
+@if(Auth::user()->is_admin)
     <div class="panel-body">
-
-      <h3><strong>Choose Conference Type:</strong></h3> 
-
-  
-    <h4><label class="radio-inline"><input type="radio" name="type" value="current">Current Conferences</label>
-    <label class="radio-inline"><input type="radio" name="type" value="past">Past Conferences</label></h4>
-    <br/>
-    <br/>
-
-    <img id="loading" src="/img/loading.gif" style="display:none" align="middle">
       
-    <div id="dropdown" class="row" style="display:none">
+        <h3><strong>Choose Conference Type:</strong></h3> 
 
-        <span class="h4 col-md-2">
-          <strong>Select a conference</strong> 
-        </span>
-  
-  
-
-      
-        <button type="button" class="btn btn-default" id="select_conference_button">Select </button>&nbsp; 
     
+        <h4><label class="radio-inline"><input type="radio" name="type" value="current">Current Conferences</label>
+        <label class="radio-inline"><input type="radio" name="type" value="past">Past Conferences</label></h4>
+        <br/>
+        <br/>
 
-          <div class="col-md-6">
-            <select class="form-control" id="conference_dropdown">
-              <option></option>
-            </select>
-          </div>
+        <img id="loading" src="/img/loading.gif" style="display:none" align="middle">
+          
+        <div id="dropdown" class="row" style="display:none">
+
+            <span class="h4 col-md-2">
+              <strong>Select a conference</strong> 
+            </span>
       
-    </div>
+      
+
+          
+            <button type="button" class="btn btn-default" id="select_conference_button">Select </button>&nbsp; 
+        
+
+              <div class="col-md-6">
+                <select class="form-control" id="conference_dropdown">
+                  <option></option>
+                </select>
+              </div>
+          
+        </div>
+      @endif
+
 
  @if($report != null )
  
   <div class="panel panel-default" >
 
     <h2 align='center' ><strong>{{$conference->name}}</strong></h2>
+    <h2 align='right'>
+    <button type="button" class="btn btn-print" id="print" >Print Report</button></h2>
 
-    <button type="button" class="btn btn-default" id="print">Print Report</button>
     <ul class="nav nav-tabs nav-justified">
           <li class="active"><a data-toggle="tab" href="#chart"><strong>Conference Chart Report</strong></a></li>
           @foreach($events as $key=>$event)
@@ -226,6 +231,20 @@
 
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+
+  
+  var oldURL = document.referrer.split("/").pop();
+  if(oldURL == "manage_conferences")
+    document.getElementById("back").style.visibility = "visible" ;
+  
+  @if(!Auth::user()->is_admin)
+    document.getElementById("back").style.visibility = "visible" ;
+  @endif
+
+})
+
 
 $("input[name='type']").change(function(){
     document.getElementById("loading").style.display = "block";

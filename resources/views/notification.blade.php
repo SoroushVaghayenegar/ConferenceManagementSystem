@@ -21,45 +21,53 @@
     </div>
   </div>
   @endif
-  <div class="panel panel-default" >
-    <header class="panel-heading">
-      Notification
-    </header>
 
-    <div class="panel-body">
-      <div class="row">
-        <span class="h4 col-md-2">
-          <strong>Select a conference</strong>
-        </span>
+  <a href="{{ URL::to('manage_conferences') }}" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
+  @if(Auth::user()->is_admin)
+    <div class="panel panel-default" >
+      <header class="panel-heading">
+        Notification
+      </header>
 
-        <div class="col-md-6">
-          <select id="conference_selector" class="form-control">
-            <option value="#">Select a conference</option>
-            @if (count($conferences) > 0)
-            @foreach ($conferences as $conference)
-            @if (isset($current) && $conference->id == $current)
-            <option value="/notification/conference/{{$conference->id}}" selected>{{$conference->name}}</option>
+      <div class="panel-body">
+        <div class="row">
+          <span class="h4 col-md-2">
+            <strong>Select a conference</strong>
+          </span>
+
+          <div class="col-md-6">
+            <select id="conference_selector" class="form-control">
+              <option value="#">Select a conference</option>
+              @if (count($conferences) > 0)
+              @foreach ($conferences as $conference)
+              @if (isset($current) && $conference->id == $current)
+              <option value="/notification/conference/{{$conference->id}}" selected>{{$conference->name}}</option>
+              @else
+              <option value="/notification/conference/{{$conference->id}}">{{$conference->name}}</option>
+              @endif
+              @endforeach
+              @else
+              <option>No conferences available!</option>
+              @endif
+            </select>
+          </div>
+
+          {{-- <div class="col-md-2">
+            @if (isset($current))
+            <button class="btn btn-primary" onclick="window.location.href = '/conference/{{$current}}/create_hotel'">Create hotel</button>
             @else
-            <option value="/notification/conference/{{$conference->id}}">{{$conference->name}}</option>
+            <button class="btn btn-primary" disabled>Select a conference</button>
             @endif
-            @endforeach
-            @else
-            <option>No conferences available!</option>
-            @endif
-          </select>
+          </div> --}}
         </div>
-
-        {{-- <div class="col-md-2">
-          @if (isset($current))
-          <button class="btn btn-primary" onclick="window.location.href = '/conference/{{$current}}/create_hotel'">Create hotel</button>
-          @else
-          <button class="btn btn-primary" disabled>Select a conference</button>
-          @endif
-        </div> --}}
       </div>
     </div>
-  </div>
-
+  @endif
+  
+  @if(!Auth::user()->is_admin)
+    <h1 align='center'> <strong>{{$conferenceName}}</strong></h1>
+  @endif
+  
   @if (isset($current))
   <div class="panel panel-default" >
     <header class="panel-heading">
@@ -123,6 +131,16 @@ $('#conference_selector').on('change', onChangeHandler);
 $(document).ready(function(){
   $('.sidebar-menu > li').attr('class','');
   $('#sidebar-notification').attr('class','active');
+
+  
+  var oldURL = document.referrer.split("/").pop();
+  if(oldURL == "manage_conferences")
+    document.getElementById("back").style.visibility = "visible" ;
+  
+  @if(!Auth::user()->is_admin)
+    document.getElementById("back").style.visibility = "visible" ;
+  @endif
+
 })
 
 </script>

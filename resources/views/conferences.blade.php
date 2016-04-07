@@ -44,16 +44,16 @@
           <thead>
             <th>Conference</th>
             <th>Date</th>
-            <th colspan="5"></th>
+            <th colspan="8"></th>
           </thead>
           <tbody>
             @foreach ($conferences as $conference)
             <tr>
               <!-- Name -->
-              <td class="table-text">
+              <td>
                 <div>{{ $conference->name }}</div>
               </td>
-              <td class="table-text">
+              <td >
                 {{ date('F d, Y', strtotime($conference->start)) }}
               </td>
               @if($event_facilitator == null || Auth::user()->is_admin)
@@ -65,19 +65,39 @@
               <td>
                  <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a>
               </td>
+              @if(isset($conference_manager) || Auth::user()->is_admin)
+                <td>
+                  <a href='{{ url("conference/$conference->id/participants") }}' class="btn btn-default" style="background-color:#9966ff">
+                    <i class="fa fa-user"></i>
+                    Participants
+                  </a>
+                </td>
+                <td>
+                  <a href='{{ url("conference/$conference->id/flights") }}' class="btn btn-default" style="background-color:#9966ff">
+                    <i class="fa fa-plane"></i>
+                    Flights
+                  </a>
+                </td>
+                <td>
+                  <a href='{{ url("conference/$conference->id/hotels") }}' class="btn btn-default" style="background-color:#9966ff">
+                    <i class="fa fa-bed"></i>
+                    Hotels
+                  </a>
+                </td>
+                <td>
+                  <a href='{{ url("notification/conference/$conference->id") }}' class="btn btn-default" style="background-color:#e6ac00">
+                    <i class="fa fa-envelope"></i>
+                    Send Notification
+                  </a>
+                </td>
+              @endif
               <td>
-                <a href='{{ url("conference/$conference->id/participants") }}' class="btn btn-default" style="background-color:#9966ff">
-                  <i class="fa fa-user"></i>
-                  Participants
-                </a>
-              </td>
-              <td>
-                <a href='{{ url("notification/conference/$conference->id") }}' class="btn btn-default" style="background-color:#e6ac00">
-                  <i class="fa fa-envelope"></i>
-                  Send Notification
-                </a>
-              </td>
-              @if($event_facilitator == null || Auth::user()->is_admin)
+                  <a href='{{ url("reports/$conference->id") }}' class="btn btn-default" style="background-color:#a6a6a6">
+                    <i class="icon_piechart"></i>
+                    Report
+                  </a>
+                </td>
+              @if(Auth::user()->is_admin)
               <!-- Delete Button -->
               <td>
                 <form action="{{ url('conference/'.$conference->id) }}" method="POST">

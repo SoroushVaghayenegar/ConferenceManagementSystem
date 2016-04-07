@@ -44,6 +44,7 @@ class ConferenceController extends Controller
 
     return view('conferences', [
       'conferences' => $conferences,
+      'conference_manager' => $conference_manager,
       'event_facilitator' => $event_facilitator
     ]);
   }
@@ -51,9 +52,13 @@ class ConferenceController extends Controller
 
   public function editIndex($id)
   {
-    if (Gate::denies('conf-manager-or-admin', $id)) {
-      abort(403);
-    }
+    $conference_manager = DB::table('conference_managers')
+    ->where('user_id' ,'=', Auth::user()->id)
+    ->where('conference_id' , '=', $id)
+    ->get();
+
+    if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
+    abort(403);
 
     $conference = Conference::findOrFail($id);
     $conference->managers = $conference->managers()->get();
@@ -167,8 +172,8 @@ class ConferenceController extends Controller
   {
 
 
-    if(Auth::user()->is_admin == 0)
-    abort(403);
+    if(!Auth::user()->is_admin)
+      abort(403);
     $id->delete();
 
 

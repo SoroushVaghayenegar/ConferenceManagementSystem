@@ -13,10 +13,7 @@
 
 <div class="container">
 
-@if(!Auth::user()->is_admin)
-  <a href="javascript: history.go(-1)" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
-@endif
-
+<a href="{{ URL::to('manage_conferences') }}" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
 
   @if (session('approved') || session('unapproved') || session("hotel_assigned"))
   <div class="alert alert-success" id="success-alert">
@@ -36,35 +33,41 @@
   <div class="panel panel-default">
     <header class="panel-heading">Participants</header>
     <div class="panel-body">
-      <div class="row">
-        <span class="h4 col-md-2">
-          <strong>Select a conference</strong>
-        </span>
-		<button type="button" class="btn btn-default" id="print">Print Participants List</button>
+      @if(Auth::user()->is_admin)
+        <div class="row">
+          <span class="h4 col-md-2">
+            <strong>Select a conference</strong>
+          </span>
 
 
-        <div class="col-md-6">
+          <div class="col-md-6">
 
 
-          <select id="current_conferences" class="form-control">
+            <select id="current_conferences" class="form-control">
 
-            <option value="#">Select a conference</option>
-            @if (count($conferences) > 0)
-            @foreach ($conferences as $conference)
-            @if ($conference->id == $current)
-            <option value="/conference/{{$conference->id}}/participants" selected>{{$conference->name}}</option>
-            @else
-            <option value="/conference/{{$conference->id}}/participants">{{$conference->name}}</option>
-            @endif
-            @endforeach
-            @else
-            <option>No conferences available!</option>
-            @endif
-          </select>
-          
+              <option value="#">Select a conference</option>
+              @if (count($conferences) > 0)
+              @foreach ($conferences as $conference)
+              @if ($conference->id == $current)
+              <option value="/conference/{{$conference->id}}/participants" selected>{{$conference->name}}</option>
+              @else
+              <option value="/conference/{{$conference->id}}/participants">{{$conference->name}}</option>
+              @endif
+              @endforeach
+              @else
+              <option>No conferences available!</option>
+              @endif
+            </select>
+            
 
+          </div>
         </div>
-      </div>
+
+      @endif
+
+      @if(!Auth::user()->is_admin)
+        <h1 align='center'> <strong>{{$conferenceName}}</strong></h1>
+      @endif
 
       @if (isset($availableCapacity))
       <div class="row">
@@ -168,15 +171,16 @@
 
 
 <script>
+$(document).ready(function(){
+  var oldURL = document.referrer.split("/").pop();
+  if(oldURL == "manage_conferences")
+    document.getElementById("back").style.visibility = "visible" ;
 
-@if(!Auth::user()->is_admin)
-  $(document).ready(function(){
-    var oldURL = document.referrer.split("/").pop();
-    if(oldURL == "manage_conferences")
-      document.getElementById("back").style.visibility = "visible" ;
-    
-  });
-@endif
+  @if(!Auth::user()->is_admin)
+    document.getElementById("back").style.visibility = "visible" ;
+  @endif
+  
+});
 //  Script for running DataTable -->
 $(function(){
   $("#participants_table_current").DataTable();
@@ -266,18 +270,5 @@ var unapprove = function (id) {
   @endif
 }
 
-function printData()
-{
-   var table=document.getElementById("participants_table_current");
-   newWin= window.open("");
-   newWin.document.write(table.outerHTML);
-   newWin.print();
-   newWin.close();
-}
-
-$('#print').on('click',function(){
-printData();
-})
 </script>
-
 @endsection

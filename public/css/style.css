@@ -5031,10 +5031,16 @@ span.customSelect.changed {
     color: white;
 }
 
+.btn-print{
+    background-color: #00cc00;
+    color: white;
+}
+
 .btn-backToC{
     background-color: #999999;
     visibility: hidden;
     color: white;
+    margin-bottom: 2px;
 }
 
 th{
@@ -5091,3 +5097,6 @@ td{
 }
 
 
+.btn{
+    font-weight: 500;
+}

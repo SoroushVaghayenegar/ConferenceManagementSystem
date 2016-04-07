@@ -21,9 +21,8 @@ class NotificationController extends Controller
 
     public function index()
     {
-        $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
 
-        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+        if(!Auth::user()->is_admin)
           abort(403);
 
         $current_conferences = Conference::getCurrentConferences();
@@ -47,6 +46,7 @@ class NotificationController extends Controller
 
         return view('notification', [
           'conferences' => $conferences,
+          'conferenceName' => $conference->name,
           'current' => $id
         ]);
     }

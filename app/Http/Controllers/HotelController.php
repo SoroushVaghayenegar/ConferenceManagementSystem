@@ -24,28 +24,14 @@ class HotelController extends Controller
 
     public function index()
     {
-    	$conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+    	
 
-        if(Auth::user()->is_admin == 0 && $conference_manager == null)
+        if(!Auth::user()->is_admin)
             abort(403);
 
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
 
-				$conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
-
-
-		        if(Auth::user()->is_admin == 0 && $conference_manager){
-
-		            $current = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
-		                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
-		                                             ->where('user_id' ,'=', Auth::user()->id)->get();
-
-		            $past = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
-		                                          ->where('end', '<=', date('Y-m-d').' 00:00:00')
-		                                             ->where('user_id' ,'=', Auth::user()->id)->get();
-
-		        }
 
 				$conferences = $past->merge($current);
 
@@ -118,15 +104,30 @@ class HotelController extends Controller
 	      if(Auth::user()->is_admin == 0 && $conference_manager == null)
 	          abort(403);
 
+
 				$current = Conference::getCurrentConferences();
 				$past = Conference::getPastConferences();
 
+				if(Auth::user()->is_admin == 0 && $conference_manager){
+
+		            $current = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+		                                             ->where('end', '>=', date('Y-m-d').' 00:00:00')
+		                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+		            $past = Conference::join('conference_managers', 'conferences.id', '=', 'conference_managers.conference_id')
+		                                          ->where('end', '<=', date('Y-m-d').' 00:00:00')
+		                                             ->where('user_id' ,'=', Auth::user()->id)->get();
+
+		        }
+
+		        $conference = Conference::findOrFail($id);
 				$conferences = $past->merge($current);
 				$hotels = $this->getHotels($id);
 
 				return view('hotel', [
 					'conferences' => $conferences,
 					'hotels' => $hotels,
+					'conferenceName' => $conference->name,
 					'current' => $id
 				]);
 		}

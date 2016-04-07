@@ -10,11 +10,15 @@ use App\Conference;
 use App\Hotel;
 use App\Inventory;
 use App\Log;
+use Auth;
 
 class InventoryController extends Controller
 {
     public function index()
     {
+        if(!Auth::user()->is_admin)
+            abort(403);
+
         $current_conferences = Conference::getCurrentConferences();
         $past_conferences = Conference::getPastConferences();
 

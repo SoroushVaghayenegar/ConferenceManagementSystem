@@ -25,43 +25,54 @@
     </div>
   </div>
   @endif
+
+  <a href="{{ URL::to('manage_conferences') }}" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
+  
   <div class="panel panel-default" >
     <header class="panel-heading">
       Hotel rooms
     </header>
 
     <div class="panel-body">
-      <div class="row">
-        <span class="h4 col-md-2">
-          <strong>Select a conference</strong>
-        </span>
+      @if(Auth::user()->is_admin)
+        <div class="row">
+          <span class="h4 col-md-2">
+            <strong>Select a conference</strong>
+          </span>
 
-        <div class="col-md-6">
-          <select id="conference_selector" class="form-control">
-            <option value="#">Select a conference</option>
-            @if (count($conferences) > 0)
-            @foreach ($conferences as $conference)
-            @if (isset($current) && $conference->id == $current)
-            <option value="/conference/{{$conference->id}}/hotels" selected>{{$conference->name}}</option>
+          <div class="col-md-6">
+            <select id="conference_selector" class="form-control">
+              <option value="#">Select a conference</option>
+              @if (count($conferences) > 0)
+              @foreach ($conferences as $conference)
+              @if (isset($current) && $conference->id == $current)
+              <option value="/conference/{{$conference->id}}/hotels" selected>{{$conference->name}}</option>
+              @else
+              <option value="/conference/{{$conference->id}}/hotels">{{$conference->name}}</option>
+              @endif
+              @endforeach
+              @else
+              <option>No conferences available!</option>
+              @endif
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            @if (isset($current))
+            <button class="btn btn-primary" onclick="window.location.href = '/conference/{{$current}}/create_hotel'">Create hotel</button>
             @else
-            <option value="/conference/{{$conference->id}}/hotels">{{$conference->name}}</option>
+            <button class="btn btn-primary" disabled>Select a conference</button>
             @endif
-            @endforeach
-            @else
-            <option>No conferences available!</option>
-            @endif
-          </select>
+          </div>
         </div>
+      @else
+        @if (isset($current))
+        
+            <h1 align='center'> <strong>{{$conferenceName}}</strong></h1>
 
-        <div class="col-md-2">
-          @if (isset($current))
-          <button class="btn btn-primary" onclick="window.location.href = '/conference/{{$current}}/create_hotel'">Create hotel</button>
-          @else
-          <button class="btn btn-primary" disabled>Select a conference</button>
-          @endif
-        </div>
-      </div>
-
+            <button class="btn btn-primary" onclick="window.location.href = '/conference/{{$current}}/create_hotel'">Create hotel</button>
+        @endif   
+      @endif
 
       <table id="hotel_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <thead>
@@ -108,6 +119,17 @@
 
 <!-- Script for running DataTable -->
 <script>
+$(document).ready(function(){
+  var oldURL = document.referrer.split("/").pop();
+  if(oldURL == "manage_conferences")
+    document.getElementById("back").style.visibility = "visible" ;
+
+  @if(!Auth::user()->is_admin)
+    document.getElementById("back").style.visibility = "visible" ;
+  @endif
+  
+});
+
 var onChangeHandler = function () {
   var url = $(this).val(); // get selected value
   if (url) { // require a URL

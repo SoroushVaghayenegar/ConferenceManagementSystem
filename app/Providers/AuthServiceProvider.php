@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-
+use App\Conference;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 

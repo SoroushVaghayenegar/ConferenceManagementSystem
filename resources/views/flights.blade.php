@@ -17,9 +17,12 @@
 
 <div class="container">
 
+	<a href="{{ URL::to('manage_conferences') }}" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
+
   <div class="panel panel-default">
 	<header class="panel-heading">Flights</header>
 	<div class="panel-body">
+	@if(Auth::user()->is_admin)	
 	  <div class="row">
 			<span class="h4 col-md-2">
 			  <strong>Select a conference</strong>
@@ -42,6 +45,12 @@
 			  </select>
 			</div>
 		</div>
+	@else
+
+    	<h1 align='center'> <strong>{{$conferenceName}}</strong></h1>
+      
+		<button type="button" class="btn btn-print" id="print">Print Report</button>
+	@endif
 		<h3 style="color:white; text-align: center"><strong>Participants</strong></h3>
 		<table id="participants_table_current" class="table table-display nowrap table-bordered" border="1" data-toggle="tab" href="#table" cellspacing="0" width="100%">
 			<thead>
@@ -91,6 +100,16 @@ $(function(){
 $(document).ready(function(){
   $('.sidebar-menu > li').attr('class','');
   $('#sidebar-flights').attr('class','active');
+
+  
+  var oldURL = document.referrer.split("/").pop();
+  if(oldURL == "manage_conferences")
+    document.getElementById("back").style.visibility = "visible" ;
+  
+  @if(!Auth::user()->is_admin)
+    document.getElementById("back").style.visibility = "visible" ;
+  @endif
+
 })
 
 var onChangeHandler = function () {

@@ -170,13 +170,15 @@
                                   <span>Manage Conferences</span>
                               </a>
                           </li>
+                      @endif
+                      @if(Auth::user()->is_admin)
                           <li class="" id='sidebar-manageParticipants'>
                               <a class="" href="{{ URL::to('/manage_participants') }}">
                                   <span>Manage Participants</span>
                               </a>
                           </li>
 
-                          @if(Auth::user()->is_admin)
+                          
                           <li class="" id='sidebar-manageUsers'>
                               <a class="" href="{{ URL::to('/manage_users') }}">
                                     <i class="fa fa-user"></i>
@@ -184,7 +186,7 @@
                               </a>
                           </li>
 
-                          @endif
+                          
                           <li class="" id='sidebar-reports'>
                               <a class="" href="{{ URL::to('/reports') }}">
                                   <i class="icon_piechart"></i>
@@ -224,8 +226,8 @@
                                   <span>Notification</span>
                               </a>
                           </li>
-                      @endif
-                      @if(Auth::user()->is_admin)
+                      
+                      
                           <li class="" id='sidebar-logs'>
                               <a class="" href="{{ URL::to('/logs') }}">
                                     <i class="fa fa-file-text"></i>
@@ -239,13 +241,6 @@
                           <li class="" id='sidebar-manageConferences'>
                               <a class="" href="{{ URL::to('/manage_conferences') }}">
                                   <span>Manage Events</span>
-                              </a>
-                          </li>
-
-                          <li class="" id='sidebar-reports'>
-                              <a class="" href="{{ URL::to('/reports') }}">
-                                  <i class="icon_piechart"></i>
-                                  <span>Reports</span>
                               </a>
                           </li>
                       @endif

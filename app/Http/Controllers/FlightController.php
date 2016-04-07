@@ -47,6 +47,8 @@ class FlightController extends Controller
 	
     public function index()
     {
+        if(!Auth::user()->is_admin)
+            abort(403);
 
         $conferences = $this->getConferences();
         return view('flights', [
@@ -70,6 +72,7 @@ class FlightController extends Controller
 
         return view('flights', [
           'current' => $id,
+          'conferenceName' => $conference->name,
           'conferences' => $conferences['current'],
           'attendees' => $attendees
         ]);
