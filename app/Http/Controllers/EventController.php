@@ -45,8 +45,8 @@ class EventController extends Controller
     'name' => 'required|max:255',
     'description' => 'required',
     'capacity' => 'integer|min:0',
-    'start' => 'required|date|date_format:Y/m/d|after:'.$begin.'|before:'.$end,
-    'end' => 'required|date|date_format:Y/m/d|after:start|before:'.$end
+    'start' => 'required|date|date_format:Y/m/d H:i:s|after:'.$begin.'|before:'.$end,
+    'end' => 'required|date|date_format:Y/m/d H:i:s|after:start|before:'.$end
     ]);
 
 
@@ -95,8 +95,8 @@ public function edit($id,Request $request)
     'name' => 'required|max:255',
     'description' => 'required',
     'capacity' => 'integer|min:0',
-    'start' => 'required|date|date_format:Y/m/d|after:'.$begin.'|before:'.$end,
-    'end' => 'required|date|date_format:Y/m/d|after:start|before:'.$end
+    'start' => 'required|date|date_format:Y/m/d H:i:s|after:'.$begin.'|before:'.$end,
+    'end' => 'required|date|date_format:Y/m/d H:i:s|after:start|before:'.$end
     ]);
 
   $event->update([

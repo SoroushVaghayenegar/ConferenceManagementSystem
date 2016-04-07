@@ -126,8 +126,12 @@
 
 
 <script>
-$('#start-datepicker input').datetimepicker();
-$('#end-datepicker input').datetimepicker();
+$('#start-datepicker input').datetimepicker({
+  format: 'YYYY/MM/D hh:mm:ss'
+});
+$('#end-datepicker input').datetimepicker({
+   format: 'YYYY/MM/D hh:mm:ss'
+});
 
 $("#create_new_button").click(function(){
   $("#create_panel").stop(true).fadeIn({
