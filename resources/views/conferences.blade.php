@@ -231,7 +231,7 @@ $('#end-datepicker input').datetimepicker({
 
 $("#create_new_button").click(function(){
   $("#create_panel").stop(true).fadeIn({
-        duration: 1000,
+        duration: 2000,
         queue: false
     }).css('display', 'none').slideDown(1000);
   $('html, body').animate({ scrollTop: $('#create_panel').offset().top }, 'slow');
