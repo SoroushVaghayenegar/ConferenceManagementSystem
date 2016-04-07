@@ -147,12 +147,18 @@ class ConferenceController extends Controller
   {
     if (Auth::user()) {
       $conference = Conference::findOrFail($id);
+      if($conference)
       $user = User::find(Auth::user()->id);
 
+      if($conference->end <= date('Y-m-d').' 00:00:00')
+        $is_past = true;
+      else
+        $is_past = null;
       // get registration details if user has joined
       $registration = $this->getRegistration($conference, $user);
       $res = [
-        'conference' => $conference
+        'conference' => $conference,
+        'is_past' => $is_past
       ];
       if (count($registration) > 0) {
         $res['registration'] = $registration;

@@ -100,17 +100,17 @@
 @else
     @section('content')
     <!-- MAIN PAGE  -  USER HAS NOT LOGGED IN YET -->
-    <div id="welcome">
+    <div id="welcome" style="text-align:center;">
 
         <br/>
         <h1 style="text-align: center; color:white"><strong>Welcome to Gobind Sarvar Conference Management System!</strong></h1>
 
-        <img src="/img/gs.png" alt="Gobind Sarvar Logo" style="position:relative;width:30%;left:35%;" align="center">
+        <img src="/img/gs.png" alt="Gobind Sarvar Logo" style="position:relative;width:30%;" align="center">
 
         <h3 style="text-align: center;">Don't have an account?</h3>
-        <div class="col-md-6 col-md-offset-5">
+        
             <a href="{{ URL::to('register') }}" class="btn btn-success" ><h4>Create a new account!</h4></a>
-        </div>
+        
         <br/>
           <br/>
           <br/>
