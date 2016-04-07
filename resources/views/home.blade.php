@@ -140,9 +140,9 @@
                                 <p>{{$conference->description}}</p>
 
                                 <p> Available Seats
-                                    @if(($conference->approved/$conference->capacity) < 0.2)
+                                    @if(($conference->approved/($conference->capacity+1)) < 0.2)
                                       <strong style="color:#00e600">{{ $conference->capacity - $conference->approved }}</strong>
-                                    @elseif(($conference->availableCapacity/$conference->capacity) < 0.5)
+                                    @elseif(($conference->availableCapacity/($conference->capacity+1)) < 0.5)
                                       <strong style="color:#ff751a">{{ $conference->capacity - $conference->approved }}</strong>
                                     @else
                                       <strong style="color:#ff0000">{{ $conference->capacity - $conference->approved }}</strong>
