@@ -127,10 +127,10 @@
 
 <script>
 $('#start-datepicker input').datetimepicker({
-  format: 'YYYY/MM/D hh:mm:ss'
+  format: 'YYYY/MM/D HH:mm:ss'
 });
 $('#end-datepicker input').datetimepicker({
-   format: 'YYYY/MM/D hh:mm:ss'
+   format: 'YYYY/MM/D HH:mm:ss'
 });
 
 $("#create_new_button").click(function(){

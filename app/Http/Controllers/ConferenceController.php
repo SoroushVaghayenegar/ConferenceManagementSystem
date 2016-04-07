@@ -71,8 +71,8 @@ class ConferenceController extends Controller
       'name' => 'required|max:255',
       'description' => 'required',
       'capacity' => 'integer|min:0',
-      'start' => 'required|date|date_format:Y/m/d',
-      'end' => 'required|date|date_format:Y/m/d|after:start'
+      'start' => 'required|date|date_format:Y/m/d H:i:s',
+      'end' => 'required|date|date_format:Y/m/d H:i:s|after:start'
     ]);
 
     $conference = new Conference;
@@ -103,6 +103,15 @@ class ConferenceController extends Controller
 
     if(Auth::user()->is_admin == 0 AND $conference_manager == NULL)
     abort(403);
+
+
+      $this->validate($request, [
+      'name' => 'required|max:255',
+      'description' => 'required',
+      'capacity' => 'integer|min:0',
+      'start' => 'required|date|date_format:Y/m/d H:i:s',
+      'end' => 'required|date|date_format:Y/m/d H:i:s|after:start'
+    ]);
 
     DB::table('conference_managers')->where('conference_id' , $id)->delete();
     $conference = Conference::where('id', $id);
