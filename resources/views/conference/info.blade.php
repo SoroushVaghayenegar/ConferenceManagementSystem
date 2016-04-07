@@ -43,7 +43,11 @@
             @endif
             @if(Auth::user())
             @if(!isset($registration))
-            <a class="btn btn-danger pull-right" href="/conference/{{$conference->id}}/join">Register</a>
+              @if(isset($is_past))
+                <a class="btn btn-default pull-right" href="/conference/{{$conference->id}}/join" disabled>Register</a>
+              @else
+                <a class="btn btn-danger pull-right" href="/conference/{{$conference->id}}/join">Register</a>
+              @endif
             @endif
             @endif
         </div>

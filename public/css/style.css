@@ -2470,12 +2470,10 @@ ul.ft-link li a i {
 .profile-widget {
     color: #fff;
     text-align: center;
+
 }
 
-/*profile-widget image bg*/
-.profile-widget-img{
-    background: url('../img/backgrounds/bg-11-small.jpg') no-repeat !important;
-}
+
 .profile-nav .profile-widget-img .bg-layer {
     background: rgba(0,0,0,0.5) !important;
 }
@@ -3412,7 +3410,14 @@ ul.inbox-pagination li {
 }
 /*profile-widget color bg*/
 .profile-widget-info{
-    background: #324c57 !important;
+    background:
+    /* top, transparent black, faked with gradient */
+    linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    /* bottom, image */
+    url('/background_patterns/11.png');
 }
 .profile-widget-success{
     background: #4cd964 !important;
@@ -3904,7 +3909,14 @@ ul.amounts li {
 }
 
 .tab-bg-info {
-    background: #324c57;
+    background:
+    /* top, transparent black, faked with gradient */
+    linear-gradient(
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.7)
+    ),
+    /* bottom, image */
+    url('/background_patterns/11.png');
 
     border-bottom: none;
 }

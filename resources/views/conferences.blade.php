@@ -234,6 +234,7 @@ $("#create_new_button").click(function(){
         duration: 1000,
         queue: false
     }).css('display', 'none').slideDown(1000);
+  $('html, body').animate({ scrollTop: $('#create_panel').offset().top }, 'slow');
 });
 
 $("#close_panel").click(function(){
