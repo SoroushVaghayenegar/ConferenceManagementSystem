@@ -9,6 +9,7 @@ use App\Http\Requests;
 
 use App\Conference;
 use App\Log;
+use DB;
 use Mail;
 
 class NotificationController extends Controller
@@ -20,7 +21,9 @@ class NotificationController extends Controller
 
     public function index()
     {
-        if (Auth::user()->is_admin == 0)
+        $conference_manager = DB::table('conference_managers')->where('user_id' ,'=', Auth::user()->id)->get();
+
+        if(Auth::user()->is_admin == 0 && $conference_manager == null)
           abort(403);
 
         $current_conferences = Conference::getCurrentConferences();

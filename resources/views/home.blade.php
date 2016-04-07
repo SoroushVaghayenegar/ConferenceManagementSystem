@@ -76,7 +76,7 @@
 @else
     @section('content')
     <!-- MAIN PAGE  -  USER HAS NOT LOGGED IN YET -->
-    <div id="lss">
+    <div id="welcome">
 
         <br/>
         <h1 style="text-align: center; color:white"><strong>Welcome to Gobind Sarvar Conference Management System!</strong></h1>

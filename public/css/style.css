@@ -294,7 +294,14 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #394a59;
+    background:
+    /* top, transparent black, faked with gradient */
+    linear-gradient(
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.8)
+    ),
+    /* bottom, image */
+    url('/background_patterns/11.png');
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -5024,6 +5031,12 @@ span.customSelect.changed {
     color: white;
 }
 
+.btn-backToC{
+    background-color: #999999;
+    visibility: hidden;
+    color: white;
+}
+
 th{
     text-align: center;
 }
@@ -5033,7 +5046,7 @@ td{
 }
 
 
-#lss{
+#welcome{
     background:
     /* top, transparent black, faked with gradient */
     linear-gradient(
@@ -5053,7 +5066,7 @@ td{
 
 @media screen and (max-width: 640px) {
 
-    #lss{
+    #welcome{
         height:200px;
     }
 }
@@ -5076,3 +5089,5 @@ td{
   width:20em;
   padding:1em;
 }
+
+

@@ -191,23 +191,31 @@
                                   <span>Reports</span>
                               </a>
                           </li>
-
+                          <li class="sub-menu">
+                              <a href="javascript:;" class="">
+                                  <i class="fa fa-h-square"></i>
+                                  <span>Manage Hotels</span>
+                                  <span class="menu-arrow arrow_carrot-right"></span>
+                              </a>
+                              <ul class="sub">
+                                  <li class="" id='sidebar-hotel'>
+                                      <a class="" href="{{ URL::to('/hotel') }}">
+                                          <i class="fa fa-bed"></i>
+                                          <span>Hotels</span>
+                                      </a>
+                                  </li>                          
+                                  <li class="" id='sidebar-inventories'>
+                                      <a class="" href="{{ URL::to('/inventory') }}">
+                                          <i class="fa fa-archive"></i>
+                                          <span>Inventory</span>
+                                      </a>
+                                  </li>
+                              </ul>
+                          </li>
                           <li class="" id='sidebar-flights'>
                               <a class="" href="{{ URL::to('/flights')}}">
                                   <i class="fa fa-plane"></i>
                                   <span>Flights</span>
-                              </a>
-                          </li>
-                          <li class="" id='sidebar-hotel'>
-                              <a class="" href="{{ URL::to('/hotel') }}">
-                                  <i class="fa fa-bed"></i>
-                                  <span>Hotels</span>
-                              </a>
-                          </li>
-                          <li class="" id='sidebar-inventories'>
-                              <a class="" href="{{ URL::to('/inventory') }}">
-                                  <i class="fa fa-archive"></i>
-                                  <span>Inventory</span>
                               </a>
                           </li>
                           <li id='sidebar-notification'>

@@ -15,7 +15,7 @@
   @if(Auth::user()->is_admin)
         <button  class="btn btn-warning"><a href="{{ URL::to('conference/'.$id) }}/create_event"><i class="fa fa-plus"></i>  Create a new event</a></button>
       @endif
-        <button  class="btn btn-default">  <a href="{{ URL::to('directory') }}">Return to conferences</a></button>
+        <button  class="btn btn-default">  <a href="{{ URL::to('manage_conferences') }}">Return to conferences</a></button>
         </br>
         </br>
 

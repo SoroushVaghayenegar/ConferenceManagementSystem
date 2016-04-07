@@ -10,7 +10,13 @@
   </div>
 </div>
 
+
 <div class="container">
+
+@if(!Auth::user()->is_admin)
+  <a href="javascript: history.go(-1)" id="back" class="btn btn-backToC"><i class="fa fa-arrow-left"></i>  Go back to Conferences</a>
+@endif
+
 
   @if (session('approved') || session('unapproved') || session("hotel_assigned"))
   <div class="alert alert-success" id="success-alert">
@@ -162,6 +168,15 @@
 
 
 <script>
+
+@if(!Auth::user()->is_admin)
+  $(document).ready(function(){
+    var oldURL = document.referrer.split("/").pop();
+    if(oldURL == "manage_conferences")
+      document.getElementById("back").style.visibility = "visible" ;
+    
+  });
+@endif
 //  Script for running DataTable -->
 $(function(){
   $("#participants_table_current").DataTable();

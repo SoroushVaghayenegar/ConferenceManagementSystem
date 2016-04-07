@@ -21,7 +21,7 @@
 </div>
 
 <div class="container">
-  <div class="col-sm-offset-2 col-sm-8">
+ 
 
     <!-- SHOW IF ONLY USER IS ADMIN -->
 
@@ -42,7 +42,9 @@
       <div class="panel-body">
         <table class="table table-striped conference-table">
           <thead>
-            <th colspan="5">Conference</th>
+            <th>Conference</th>
+            <th>Date</th>
+            <th colspan="5"></th>
           </thead>
           <tbody>
             @foreach ($conferences as $conference)
@@ -51,7 +53,10 @@
               <td class="table-text">
                 <div>{{ $conference->name }}</div>
               </td>
-              @if($event_facilitator == null)
+              <td class="table-text">
+                {{ date('F d, Y', strtotime($conference->start)) }}
+              </td>
+              @if($event_facilitator == null || Auth::user()->is_admin)
               <!-- Edit button -->
               <td>
                  <a href="{{ URL::to('conference/'.$conference->id) }}/edit" class="btn btn-info">Edit</a>
@@ -61,12 +66,18 @@
                  <a href="{{ URL::to('conference/'.$conference->id) }}/eventlist" class="btn btn-success">Event List</a>
               </td>
               <td>
-                <a href='{{ url("conference/$conference->id/participants") }}' class="btn btn-default">
+                <a href='{{ url("conference/$conference->id/participants") }}' class="btn btn-default" style="background-color:#9966ff">
                   <i class="fa fa-user"></i>
                   Participants
                 </a>
               </td>
-              @if($event_facilitator == null)
+              <td>
+                <a href='{{ url("notification/conference/$conference->id") }}' class="btn btn-default" style="background-color:#e6ac00">
+                  <i class="fa fa-envelope"></i>
+                  Send Notification
+                </a>
+              </td>
+              @if($event_facilitator == null || Auth::user()->is_admin)
               <!-- Delete Button -->
               <td>
                 <form action="{{ url('conference/'.$conference->id) }}" method="POST">
@@ -189,6 +200,7 @@
   </div>
 
 </div>
+
 <script>
 $('#start-datepicker input').datetimepicker({
   format: 'YYYY/MM/D HH:mm:ss'
@@ -199,13 +211,13 @@ $('#end-datepicker input').datetimepicker({
 
 $("#create_new_button").click(function(){
   $("#create_panel").stop(true).fadeIn({
-        duration: 2000,
+        duration: 1000,
         queue: false
-    }).css('display', 'none').slideDown(2000);
+    }).css('display', 'none').slideDown(1000);
 });
 
 $("#close_panel").click(function(){
-  $("#create_panel").fadeTo(500, 500).slideUp(500, function(){});
+  $("#create_panel").fadeTo(100, 500).slideUp(500, function(){});
 });
 
 
