@@ -70,7 +70,7 @@ class EventController extends Controller
 public function edit_index($id)
 {
 
-  $event = DB::table('events')->where('id' , $id)->first();
+  $event = Event::findOrFail($id);
   return view('edit_event',['specific_event'=>$event,'id'=>$id]);
 }
 
