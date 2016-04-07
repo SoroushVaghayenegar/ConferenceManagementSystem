@@ -7,10 +7,7 @@
 
     <title>@yield('title')</title>
 
-
-
-
-
+     
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -63,6 +60,15 @@
 
 <script src="https://cdn.datatables.net/rowreorder/1.1.1/js/dataTables.rowReorder.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.0.2/js/dataTables.responsive.min.js"></script>
+
+
+<!--Bootstrap datetimepicker plugin-->
+<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/moment/min/moment.min.js"></script>
+<script type="text/javascript" src="/assets/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/assets/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="/assets/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/assets/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
 
 
 
