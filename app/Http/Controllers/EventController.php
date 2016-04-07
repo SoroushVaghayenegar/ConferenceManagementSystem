@@ -20,9 +20,9 @@ class EventController extends Controller
 {
   public function eventListIndex($id)
   {
-
+    $conference = Conference::findOrFail($id);
     $events = Event::where('conference_id' , $id)->get();
-    return view('events',['events'=>$events,'id'=>$id]);
+    return view('events',['events'=>$events,'id'=>$id,'conference'=>$conference]);
   }
 
 

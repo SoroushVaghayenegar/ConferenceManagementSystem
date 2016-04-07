@@ -34,7 +34,7 @@
   <div class="panel panel-default" >
 
     <ul class="nav nav-tabs nav-justified">
-      <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>Events</strong></a></li>
+      <li class="active"><a data-toggle="tab" href="#currentConferences"><strong>{{$conference->name}}&nbspEvents</strong></a></li>
     </ul>
     <div class="tab-content">
       <div id="currentConferences" class="tab-pane fade in active">
