@@ -33,7 +33,7 @@
   </div>
   @endif
   <div class="panel panel-default">
-    <header class="panel-heading">Participants</header>
+    <header class="panel-heading">Event Participants</header>
     <div class="panel-body">
       <div class="row">
         <span class="h4 col-md-4">

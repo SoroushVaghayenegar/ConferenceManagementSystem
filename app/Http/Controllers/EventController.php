@@ -157,8 +157,9 @@ public function participants($id)
    $event = Event::findOrFail($id);
    $participants = $event->attendees;
    $availableCapacity = $event->capacity - count($participants);
+   $conference_attendees = $event->getAttendees();
 
 
-return view('event_participants',['attendees'=>$participants,'availableCapacity'=>$availableCapacity,'event'=>$event]);
+return view('event_participants',['attendees'=>$conference_attendees,'availableCapacity'=>$availableCapacity,'event'=>$event]);
 }
 }
