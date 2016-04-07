@@ -176,6 +176,8 @@ Route::group(['middleware' => 'web'], function () {
 
   Route::post('/event/{id}/join_event', 'EventController@join');
 
+  Route::delete('/event/{id}','EventController@delete');
+
   Route::get('/user/autocomplete', function (Request $request) {
     $users = User::get();
     $res = [];

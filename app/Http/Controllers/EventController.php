@@ -12,6 +12,7 @@ use App\Conference;
 use App\Event;
 use App\Participant;
 use Auth;
+use App\Log;
 use DB;
 use Gate;
 
@@ -151,4 +152,19 @@ public function join($id, Request $request)
     "event_registered" => true
     ]);
 }
+
+
+public function delete(Event $id)
+  {
+
+
+    if(!Auth::user()->is_admin)
+      abort(403);
+    $id->delete();
+
+
+    Log::createLog("Delete Event", "deleted event: $id->name");
+
+    return redirect()->back();
+  }
 }
