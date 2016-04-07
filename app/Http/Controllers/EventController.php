@@ -155,7 +155,7 @@ public function participants($id)
 {
 
    $event = Event::findOrFail($id);
-   $participants = $event->attendees();
+   $participants = $event->attendees;
    $availableCapacity = $event->capacity - count($participants);
 
 

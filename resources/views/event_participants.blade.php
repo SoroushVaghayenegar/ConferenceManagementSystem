@@ -36,8 +36,8 @@
     <header class="panel-heading">Participants</header>
     <div class="panel-body">
       <div class="row">
-        <span class="h4 col-md-2">
-          <strong>Select a conference</strong>
+        <span class="h4 col-md-4">
+          <h2><strong>{{$event->name}}</strong></h2>
         </span>
 		<button type="button" class="btn btn-default" id="print">Print Participants List</button>
 
@@ -51,7 +51,7 @@
       @if (isset($availableCapacity))
       <div class="row">
         <span class="h5 col-md-3">
-          <strong>Available seats (Unapproved):</strong>
+          <strong>Available seats:</strong>
         </span>
           <div class="h4 col-md-1">
               @if($availableCapacity > 10)
@@ -149,6 +149,118 @@
 </div>
 
 
+<script>
+
+@if(!Auth::user()->is_admin)
+  $(document).ready(function(){
+    var oldURL = document.referrer.split("/").pop();
+    if(oldURL == "manage_conferences")
+      document.getElementById("back").style.visibility = "visible" ;
+    
+  });
+@endif
+//  Script for running DataTable -->
+$(function(){
+  $("#participants_table_current").DataTable();
+})
+
+$('#modal').on('show.bs.modal', function (e) {
+  @if (!isset($current))
+  return;
+  @else
+  var url = "/conference/" + {{$current}} + "/hotels-json"
+  @endif
+
+  var participantId = $(e.relatedTarget).data('participant');
+
+  $.getJSON(url, function (data, status, xhr) {
+    populateHotels(data, participantId);
+  });
+})
+
+function populateHotels(data, id) {
+  // First empty the table
+  $("#hotel-list").empty();
+
+  for (var i = 0; i < data.length; i++) {
+    var hotel = data[i];
+    if (hotel.remaining < 1)
+      continue;
+    var template = "<tr><td>"+hotel.name+"</td><td>"+hotel.room+
+    "</td><td>"+hotel.type+"</td>" + "<td>"+hotel.capacity+"</td><td>"+
+    hotel.remaining+"</td><td>"+
+    "<button class='btn btn-default btn-sm' onclick='selectHotel("+hotel.id+","+id+")'>Select</button></td></tr>";
+
+    $("#hotel-list").prepend(template);
+  }
+}
+
+function selectHotel(id, participant) {
+  @if (!isset($current))
+  return;
+  @else
+  window.location = "/conference/" + {{$current}} + "/participant/" + participant + "/assign-hotel/" + id;
+  @endif
+}
+
+// Make the sidebar active
+$(document).ready(function(){
+  $('.sidebar-menu > li').attr('class','');
+  $('#sidebar-manageParticipants').attr('class','active');
+})
+
+var onChangeHandler = function () {
+  var url = $(this).val(); // get selected value
+  if (url) { // require a URL
+    window.location = url; // redirect
+  }
+  return false;
+}
+$('#past_conferences').on('change', onChangeHandler);
+$('#current_conferences').on('change', onChangeHandler);
+
+$('#option_current').click(function(){
+
+});
+
+$('#option_past').click(function(){
+
+});
+
+
+$("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+    $("#success-alert").alert('close');
+});
+
+var approve = function (id) {
+  @if (!isset($current))
+  return;
+  @else
+  window.location = "/approve/conference/" + {{$current}} + "/participant/" + id;
+  @endif
+}
+
+var unapprove = function (id) {
+  @if (!isset($current))
+  return;
+  @else
+  window.location = "/unapprove/conference/" + {{$current}} + "/participant/" + id;
+  @endif
+}
+
+function printData()
+{
+   var table=document.getElementById("participants_table_current");
+   newWin= window.open("");
+   newWin.document.write(table.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('#print').on('click',function(){
+printData();
+})
+</script>
 
 
 
