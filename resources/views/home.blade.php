@@ -29,7 +29,7 @@
                             <th>End Date</th>
                             <th>Companions</th>
                             <th>Flight No</th>
-                            <th>Hotel</th>
+                            <th>Hotel Info(Room/Address)</th>
                             <th>Arrival date</th>
                             <th>Arrival time</th>
                         </thead>
@@ -61,6 +61,8 @@
                                 foreach($conference_hotels as $hotel){
                                     if($hotel_users->where('id',$hotel->id)->where('participant_id',$primaryUser->id)){
                                         $current_hotel = $hotel->name;
+                                        $current_room = $hotel->room;
+                                        $hotel_address = $hotel->address;
                                     }
                                 }
 
@@ -68,10 +70,12 @@
                             else
                                     {
                                         $current_hotel = NULL;
+                                        $current_room = NULL;
+                                        $hotel_address=NULL;
                                     }
                                 ?>
-                                <td style='color:#00bfff'> {{$primaryUser["flight"]}}</td>
-                                <td style='color:#00bfff'> {{$current_hotel}}</td>
+                                <td > {{$primaryUser["flight"]}}</td>
+                                <td > {{$current_hotel}} <br> {{$current_room}} <br>{{$hotel_address}}</td>
                                 <td>{{date('F d, Y', strtotime($primaryUser->arrival_date))}}</td>
                                 <td>{{date('h:i A', strtotime($primaryUser->arrival_time))}}</td>
                           </tr>
