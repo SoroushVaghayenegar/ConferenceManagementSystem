@@ -124,9 +124,10 @@
   </div>
 
 
+
 <script>
-$('#start-datepicker input').datepicker({ format: "yyyy/mm/dd" });
-$('#end-datepicker input').datepicker({ format: "yyyy/mm/dd" });
+$('#start-datepicker input').datetimepicker();
+$('#end-datepicker input').datetimepicker();
 
 $("#create_new_button").click(function(){
   $("#create_panel").stop(true).fadeIn({
