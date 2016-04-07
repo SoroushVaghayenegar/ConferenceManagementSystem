@@ -34,6 +34,7 @@
         <span class="h4 col-md-2">
           <strong>Select a conference</strong>
         </span>
+		<button type="button" class="btn btn-default" id="print">Print Participants List</button>
 
 
         <div class="col-md-6">
@@ -250,5 +251,18 @@ var unapprove = function (id) {
   @endif
 }
 
+function printData()
+{
+   var table=document.getElementById("participants_table_current");
+   newWin= window.open("");
+   newWin.document.write(table.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('#print').on('click',function(){
+printData();
+})
 </script>
+
 @endsection
