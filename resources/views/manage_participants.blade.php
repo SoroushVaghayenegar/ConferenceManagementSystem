@@ -185,7 +185,12 @@ $(document).ready(function(){
 });
 //  Script for running DataTable -->
 $(function(){
-  $("#participants_table_current").DataTable();
+  $("#participants_table_current").DataTable({
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                responsive: true
+            } );
 })
 
 $('#modal').on('show.bs.modal', function (e) {

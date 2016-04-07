@@ -82,7 +82,11 @@
 //  Script for running DataTable -->
 $(function(){
   $("#logs_table").DataTable({
-        "order": [[ 2, "desc" ]]
+        "order": [[ 2, "desc" ]],
+        rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+        responsive: true
     } );
 })
 

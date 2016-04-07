@@ -29,7 +29,7 @@
 
               <p class="text-left"><strong>Enter your information:</strong></p>
 
-              <table class="table">
+              <table id="join_table" class="table">
                 <thead>
                   <tr>
                     <th>Name</th>

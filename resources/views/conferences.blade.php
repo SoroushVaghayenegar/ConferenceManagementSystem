@@ -40,7 +40,7 @@
       </div>
 
       <div class="panel-body">
-        <table class="table table-striped conference-table">
+        <table id="manage_table" class="table table-striped conference-table">
           <thead>
             <th>Conference</th>
             <th>Date</th>
