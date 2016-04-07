@@ -36,6 +36,7 @@
                     <th>Gender</th>
                     <th>Phone number</th>
                     <th>Flight number</th>
+                    <th>Special Request?</th>
                     <th>Arrival date</th>
                     <th>Arrival time</th>
                     <th>Hotel needed</th>
@@ -56,6 +57,10 @@
                     <td>
                       <input type="text" id="primary_flight" class="form-control" name="primary[flight]"></input>
                     </td>
+                    <td>
+                      <input type="text" id="request" class="form-control" name="primary[request]"></input>
+                    </td>
+
                     <td>
                       <div id="arrival_date-datepicker">
                         <input type="text" class="form-control" name="primary[arrival_date]"></input>
