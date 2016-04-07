@@ -121,6 +121,8 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::get('/verify/{verificationCode}','VerificationController@confirm');
 
+     Route::get('/event/{id}/participants', 'EventController@participants');
+
   /**
   * Show Conference Dashboard
   */

@@ -64,6 +64,12 @@
                        <a href="{{ URL::to('conference/'.$event->id) }}/edit_event" class="btn btn-default">Edit event</a>
                     </td>
                     <td>
+                      <a href="{{ URL::to('event/'.$event->id) }}/participants" class="btn btn-default" style="background-color:#9966ff">
+                        <i class="fa fa-user"></i>
+                        Participants
+                      </a>
+                    </td>
+                    <td>
                      @if(Auth::user())
                         @if($event->conference->isRegistered(Auth::user()->id))
                           @if($event->isRegistered(Auth::user()->id))

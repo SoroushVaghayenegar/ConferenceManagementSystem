@@ -151,4 +151,14 @@ public function join($id, Request $request)
     "event_registered" => true
     ]);
 }
+public function participants($id)
+{
+
+   $event = Event::findOrFail($id);
+   $participants = $event->attendees();
+   $availableCapacity = $event->capacity - count($participants);
+
+
+return view('event_participants',['attendees'=>$participants,'availableCapacity'=>$availableCapacity,'event'=>$event]);
+}
 }
