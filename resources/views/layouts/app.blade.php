@@ -234,7 +234,7 @@
                           </li>
 
                       @endif
-                      @if($event_facilitator)
+                      @if($event_facilitator && !Auth::user()->is_admin)
 
                           <li class="" id='sidebar-manageConferences'>
                               <a class="" href="{{ URL::to('/manage_conferences') }}">
