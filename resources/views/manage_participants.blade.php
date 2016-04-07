@@ -99,7 +99,7 @@
           @if (isset($attendees))
           @foreach ($attendees as $attendee)
           <tr>
-            <td>{{$attendee->event_id}}</td>
+            <td>{{$attendee->name}}</td>
             <td>{{$attendee->age}}</td>
             <td>{{$attendee->phone}}</td>
             <td>{{$attendee->flight ? $attendee->flight : "N/A"}}</td>

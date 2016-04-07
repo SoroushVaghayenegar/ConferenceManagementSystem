@@ -35,7 +35,13 @@ class Event extends Model
      public function getAttendees()
     {
           $event_participants = $this->attendees()->get();
-          $participants = Conference::findOrFail($this->conference_id)->attendees;
+          $conference_participants = Conference::findOrFail($this->conference_id)->attendees;
+          $participants = [];
+
+          foreach ($event_participants as $event_participant) {
+                    $participants[] = $conference_participants->where("participant_id", $event_participant->participant_id)->get();
+          }
+
 
           foreach ($participants as $participant) {
             if ($participant->primary_user) {
