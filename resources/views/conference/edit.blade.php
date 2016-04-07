@@ -61,7 +61,7 @@
 						<label class="col-md-4 control-label" class="control-label"> Capacity</label>
 
 						<div class="col-md-6">
-							<input type="text" name="capacity" id="conference-capacity" class="form-control" value="{{$conference->capacity}}" placeholder="optional">
+							<input type="text" name="capacity" id="conference-capacity" class="form-control" value="{{$conference->capacity}}" placeholder="optional - must be at least 1">
 						</div>
 					</div>
 

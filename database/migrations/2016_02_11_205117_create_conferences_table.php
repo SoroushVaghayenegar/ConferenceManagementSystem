@@ -17,7 +17,7 @@ class CreateConferencesTable extends Migration
 
             $table->string('name');
             $table->text('description');
-            $table->integer('capacity')->nullable();
+            $table->integer('capacity')->nullable()->default(1);
             $table->dateTime('start')->nullable();
             $table->dateTime('end')->nullable();
             $table->text('location')->nullable();
@@ -33,7 +33,7 @@ class CreateConferencesTable extends Migration
             $table->string('name')->default('');
             $table->string('location')->default('');
             $table->text('topic')->default('');
-            $table->string('capacity')->default('');
+            $table->string('capacity')->default(1);
             $table->dateTime('start');
             $table->dateTime('end');
             $table->timestamps();
@@ -47,7 +47,7 @@ class CreateConferencesTable extends Migration
             $table->string('room');
             $table->string('type');
             $table->text('address');
-            $table->integer('capacity');
+            $table->integer('capacity')->default(1);;
             $table->timestamps();
         });
 
