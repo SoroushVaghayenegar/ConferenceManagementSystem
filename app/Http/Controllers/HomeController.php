@@ -33,6 +33,8 @@ class HomeController extends Controller
       $conferences = Conference::where('end', '>=', date('Y-m-d').' 00:00:00')->get();
       $conferences_registered = [];
       $user = User::find(Auth::user()->id);
+      $hotels = DB::table('hotels');
+      $hotel_users =  DB::table('hotel_users');
 
       $participants = $user->participants;
       $participant_id = [];
@@ -46,7 +48,8 @@ class HomeController extends Controller
           $conferences_registered[] = $conference;
         }
       }
-      return view('home', ['conferences' => $conferences_registered,'participants' => $participants]);
+      return view('home', ['conferences' => $conferences_registered,'participants' => $participants,
+        'hotels' => $hotels,'hotel_users' => $hotel_users]);
     } else {
 
       $current_conferences = Conference::getCurrentConferences();

@@ -29,6 +29,7 @@
                             <th>End Date</th>
                             <th>Companions</th>
                             <th>Flight No</th>
+                            <th>Hotel</th>
                             <th>Arrival date</th>
                             <th>Arrival time</th>
                         </thead>
@@ -51,7 +52,26 @@
                                         @endif
                                     @endforeach
                                 </td>
+                                <?php
+                                $conference_hotels = $hotels->where('conference_id',$conference->id)->get();
+                                $current_hotel =";";
+
+                                if(count($conference_hotels)>0){
+
+                                foreach($conference_hotels as $hotel){
+                                    if($hotel_users->where('id',$hotel->id)->where('participant_id',$primaryUser->id)){
+                                        $current_hotel = $hotel->name;
+                                    }
+                                }
+
+                            }
+                            else
+                                    {
+                                        $current_hotel = NULL;
+                                    }
+                                ?>
                                 <td style='color:#00bfff'> {{$primaryUser["flight"]}}</td>
+                                <td style='color:#00bfff'> {{$current_hotel}}</td>
                                 <td>{{date('F d, Y', strtotime($primaryUser->arrival_date))}}</td>
                                 <td>{{date('h:i A', strtotime($primaryUser->arrival_time))}}</td>
                           </tr>
