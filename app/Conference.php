@@ -41,7 +41,7 @@ class Conference extends Model
     public function attendees()
     {
         return $this->belongsToMany('App\Participant', 'conference_attendees', 'conference_id', 'participant_id')
-        ->withPivot('request', 'flight', 'arrival_date', 'arrival_time', 'hotel_requested', 'taxi_requested', 'approved')
+        ->withPivot('sprequest', 'flight', 'arrival_date', 'arrival_time', 'hotel_requested', 'taxi_requested', 'approved')
         ->withTimestamps();
     }
 
@@ -69,7 +69,7 @@ class Conference extends Model
 
           $participant->flight = $participant->pivot->flight;
 
-          $participant->request = $participant->pivot->request;
+          $participant->sprequest = $participant->pivot->sprequest;
     		  $participant->arrival_date = $participant->pivot->arrival_date;
     		  $participant->arrival_time = $participant->pivot->arrival_time;
           $participant->hotel_requested = $participant->pivot->hotel_requested;

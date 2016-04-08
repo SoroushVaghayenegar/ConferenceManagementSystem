@@ -58,7 +58,7 @@
                       <input type="text" id="primary_flight" class="form-control" name="primary[flight]"></input>
                     </td>
                     <td>
-                      <input type="text" id="request" class="form-control" name="primary[request]"></input>
+                      <input type="text" id="sprequest" class="form-control" name="primary[sprequest]"></input>
                     </td>
 
                     <td>

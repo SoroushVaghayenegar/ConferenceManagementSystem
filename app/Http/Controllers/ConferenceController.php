@@ -203,7 +203,7 @@ class ConferenceController extends Controller
       'gender' => Auth::user()->gender,
       'phone' => $request->primary['phone'],
       'flight' => $request->primary['flight'],
-      'request' => $request->primary['request'],
+      'sprequest' => $request->primary['sprequest'],
       'arrival_date' => $request->primary['arrival_date'],
       'arrival_time' => $request->primary['arrival_time'],
       'hotel_requested' => $hotel,
@@ -239,7 +239,7 @@ class ConferenceController extends Controller
         'gender' => $participant['gender'],
         'phone' => $participant['phone'],
         'flight' => $flight,
-        'request' => $request,
+        'sprequest' => $sprequest,
         'arrival_date' => $arrival_date,
         'arrival_time' => $arrival_time,
         'user_id' => Auth::user()->id,
@@ -271,7 +271,7 @@ class ConferenceController extends Controller
       "hotel_requested" => $fields['hotel_requested'],
       "taxi_requested" => $fields['taxi_requested'],
       "flight" => $fields['flight'],
-      "request" => $fields['request'],
+      "sprequest" => $fields['sprequest'],
       "arrival_date" => $fields['arrival_date'],
       "arrival_time" => $fields['arrival_time']
     ]);
