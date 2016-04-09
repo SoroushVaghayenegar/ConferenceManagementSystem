@@ -157,8 +157,9 @@ public function participants($id)
    $event = Event::findOrFail($id);
    $participants = $event->attendees;
    $availableCapacity = $event->capacity - count($participants);
-   $event_attendees = $event->attendees;
-   $conference_attendees= Conference::findOrFail($event->conference_id)->attendees;
+   $event_attendees = DB::table('event_attendees')->where("event_id",$event->id)->get();
+   $conference_attendees= Conference::findOrFail($event->conference_id)->getAttendees();
+   //dd($conference_attendees);
 
   // $conference_attendees = $event->getAttendees();
 

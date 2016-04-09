@@ -69,10 +69,6 @@
             <th>Name</th>
             <th>Age</th>
             <th>Phone No</th>
-            <th>Flight No</th>
-            <th>Arrival time</th>
-            <th>Hotel needed</th>
-            <th>Taxi needed</th>
             <th>Approved</th>
             <th>Hotel room</th>
           </tr>
@@ -80,29 +76,29 @@
         <tbody>
           @if (isset($attendees))
           @foreach ($attendees as $attendee)
+          <?php
+ 
+          $participant = $conference_attendees->where('id',$attendee->participant_id)->first();
+      
+          ?>
           <tr>
-            <td>{{$attendee->name}}</td>
-            <td>{{$attendee->age}}</td>
-            <td>{{$attendee->phone}}</td>
-            <td>{{$attendee->flight ? $attendee->flight : "N/A"}}</td>
-            <td>{{$attendee->arrival_date ? date('F d, Y', strtotime($attendee->arrival_date)) : "N/A"}}<br>
-            {{$attendee->arrival_time ? date('h:i A', strtotime($attendee->arrival_time)) : "N/A"}}</td>
-            <td>{{$attendee->hotel_requested ? "Yes": "No"}}</td>
-            <td>{{$attendee->taxi_requested ? "Yes": "No"}}</td>
-            <td>{{$attendee->approved? "Yes": "No"}}
-              @if (isset($attendee->approved) && $attendee->approved)
-              <button class="btn btn-sm btn-danger" onclick="unapprove({{$attendee->id}})">Unapprove</button>
+            <td>{{$participant->name}}</td>
+            <td>{{$participant->age}}</td>
+            <td>{{$participant->phone}}</td>
+            <td>{{$participant->approved? "Yes": "No"}}
+              @if (isset($participant->approved) && $participant->approved)
+              <button class="btn btn-sm btn-danger" onclick="unapprove({{$participant->id}})">Unapprove</button>
               @else
-              <button class="btn btn-sm btn-default" onclick="approve({{$attendee->id}})">Approve</button>
+              <button class="btn btn-sm btn-default" onclick="approve({{$participant->id}})">Approve</button>
               @endif
             </td>
             <td>
-              @if (isset($attendee->hotel))
-              <strong>{{$attendee->hotel->name}}</strong>
+              @if (isset($participant->hotel))
+              <strong>{{$participant->hotel->name}}</strong>
               <br>
-              Room {{$attendee->hotel->room}}
+              Room {{$participant->hotel->room}}
               @else
-              <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal" data-participant="{{$attendee->id}}">Assign</a>
+              <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#modal" data-participant="{{$participant->id}}">Assign</a>
               @endif
             </td>
           </tr>
