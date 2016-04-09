@@ -194,6 +194,7 @@ class ConferenceController extends Controller
     $conference = Conference::findOrFail($id);
     $hotel = isset($request->primary['hotel']) && $request->primary['hotel'] == 'on';
     $taxi = isset($request->primary['taxi']) && $request->primary['taxi'] == 'on';
+    $sprequest = $request->primary['sprequest'];
 
     $same_flight = isset($request->primary['same_flight']) && $request->primary['same_flight'] == 'on';
     $same_hotel = isset($request->primary['same_hotel']) && $request->primary['same_hotel'] == 'on';
@@ -209,6 +210,7 @@ class ConferenceController extends Controller
       'hotel_requested' => $hotel,
       'taxi_requested' => $taxi
     ], $conference, true);
+
 
     // create participants for other users in group
     foreach ($request->participant as $participant) {
@@ -232,6 +234,12 @@ class ConferenceController extends Controller
         $flight = null;
         $arrival_date = null;
         $arrival_time = null;
+      }
+      if (isset($participant['sprequest'])) {
+        $sprequest = $participant['sprequest'];
+      }
+      else{
+        $sprequest = "";
       }
 
       $this->createAttachedParticipant([

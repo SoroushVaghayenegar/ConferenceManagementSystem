@@ -107,6 +107,7 @@
                       <th>Gender</th>
                       <th>Phone number</th>
                       <th>Flight number</th>
+                      <th>Special Request?</th>
                       <th>Arrival date</th>
                       <th>Arrival time</th>
                       <th>Hotel needed</th>
@@ -133,6 +134,9 @@
                       <td>
                         <input type="text" class="form-control participant_flight" name="participant[0][flight]"></input>
                       </td>
+                      <td>
+                      <input type="text" id="sprequest" class="form-control" name="participant[0][sprequest]"></input>
+                    </td>
                       <td>
                         <div id="arrival_date-datepicker">
                           <input type="text" class="form-control" name="participant[0][arrival_date]"></input>
