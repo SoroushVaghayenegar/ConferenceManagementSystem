@@ -178,6 +178,7 @@
     <option value='Male'>Male</option><option value='Female'>Female</option></select></div></td>\
     <td><input type='text' class='form-control' name='participant["+i+"][phone]'></input></td> \
     <td><input type='text' class='form-control participant_flight' name='participant["+i+"][flight]'></input></td> \
+    <td><input type='text' id='sprequest' class='form-control' name='participant["+i+"][sprequest]''></input></td> \
     <td><div id='arrival_date-datepicker'><input type='text' class='form-control' name='participant["+i+"][arrival_date]'></input></div></td> \
     <td><input type='text' class='form-control' name='participant["+i+"][arrival_time]'></input></td> \
     <td><input type='checkbox' name='participant["+i+"][hotel]'></input></td> \
