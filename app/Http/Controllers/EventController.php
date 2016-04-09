@@ -164,7 +164,7 @@ public function participants($id)
   // $conference_attendees = $event->getAttendees();
 
 
-return view('event_participants',['attendees'=>$event_attendees,'availableCapacity'=>$availableCapacity,'event'=>$event,'conference_attendees'
+return view('event_participants',['event' => $event,'attendees'=>$event_attendees,'availableCapacity'=>$availableCapacity,'event'=>$event,'conference_attendees'
  =>$conference_attendees]);
 }
 }
