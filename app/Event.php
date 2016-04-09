@@ -33,5 +33,4 @@ class Event extends Model
     }
 
 
-
 }

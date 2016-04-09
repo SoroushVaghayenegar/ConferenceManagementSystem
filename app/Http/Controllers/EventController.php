@@ -154,6 +154,7 @@ public function join($id, Request $request)
 }
 
 
+
 public function delete(Event $id)
   {
 
@@ -167,4 +168,22 @@ public function delete(Event $id)
 
     return redirect()->back();
   }
+
+  public function participants($id)
+  {
+
+   $event = Event::findOrFail($id);
+   $participants = $event->attendees;
+   $availableCapacity = $event->capacity - count($participants);
+   $event_attendees = DB::table('event_attendees')->where("event_id",$event->id)->get();
+   $conference_attendees= Conference::findOrFail($event->conference_id)->getAttendees();
+   //dd($conference_attendees);
+
+  // $conference_attendees = $event->getAttendees();
+
+
+   return view('event_participants',['event' => $event,'attendees'=>$event_attendees,'availableCapacity'=>$availableCapacity,'event'=>$event,'conference_attendees'
+     =>$conference_attendees]);
+ }
+
 }
