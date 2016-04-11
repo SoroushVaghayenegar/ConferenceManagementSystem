@@ -20,8 +20,28 @@ class EventController extends Controller
 {
   public function eventListIndex($id)
   {
+    
+    $conference_manager = DB::table('conference_managers')
+                                ->where('user_id' ,'=', Auth::user()->id)
+                                ->where('conference_id' , '=', $id)
+                                ->get();
+
+    $event_facilitator = DB::table('event_facilitators')->where('user_id' ,'=', Auth::user()->id)->get();
+
+    if(Auth::user()->is_admin == 0 && $conference_manager == null && $event_facilitator == null)
+        abort(403);
+
     $conference = Conference::findOrFail($id);
     $events = Event::where('conference_id' , $id)->get();
+
+
+    if($event_facilitator){
+            $events = Event::join('event_facilitators', 'events.id', '=', 'event_facilitators.event_id')
+                           ->where('conference_id', '=', $id)
+                           ->where('user_id' ,'=', Auth::user()->id)
+                           ->select('events.*')->get();
+        }
+
     return view('events',['events'=>$events,'id'=>$id,'conference'=>$conference]);
   }
 

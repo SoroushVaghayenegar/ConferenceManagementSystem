@@ -72,8 +72,8 @@
             <li class="active"><a data-toggle="tab" href="#chart"><strong>Conference Chart Report</strong></a></li>
           @endif
           @foreach($events as $key=>$event)
-            @if($event_facilitator)
-              @if($key == 0)
+            @if($event_facilitator || $conference_manager || Auth::user()->is_admin)
+              @if($key == 0 && empty($conference_manager) && Auth::user()->is_admin == 0)
                 <li class="active"><a data-toggle="tab" href="#{{$event->id}}"><strong>Event {{++$key}}: {{$event->name}}</strong></a></li>
               @else
                 <li><a data-toggle="tab" href="#{{$event->id}}"><strong>Event {{++$key}}: {{$event->name}}</strong></a></li>
@@ -95,26 +95,27 @@
 
 
           @foreach($events as $key=>$event)
-            @if($event_facilitator)
-              @if($key == 0)
+              @if($key == 0 && empty($conference_manager) && Auth::user()->is_admin == 0)
                 <div id="{{$event->id}}" class="tab-pane fade in active">
               @else
                 <div id="{{$event->id}}" class="tab-pane fade">
               @endif
-            @endif
+            
               <div class="event{{$event->id}}">
 
               </div>
 
               <div class="event2{{$event->id}}">
               </div>
-            </div>
+              </div>
           @endforeach
 
           <div id="table" class="tab-pane fade">
             <div class="panel-body">
               <table id="report_table" class="table table-bordered" border="1" cellspacing="0" width="100%">
                   <thead>
+
+                    @if($conference_manager || Auth::user()->is_admin == 1)
                       <tr>
                           <th colspan="14" style="color:#4d4d4d"><h1><strong>Conference Report<strong></h1></th>
                           
@@ -123,8 +124,10 @@
                           <th colspan="7" style="border-right: thick solid gray">Male Count</th>
                           <th colspan="7">Female Count</th>
                       </tr>
+                    @endif
                   </thead>
                   <tbody>
+                    @if($conference_manager || Auth::user()->is_admin == 1)
                       <tr>
                         <td colspan="7" style="border-right: thick solid gray">{{$male_count}}</td>
                         <td colspan="7">{{$female_count}}</td>
@@ -171,9 +174,11 @@
                         <td>{{$fifty_to_sixty_female}}</td>
                         <td>{{$older_than_sixty_female}}</td>
                       </tr>
-
+                    @endif
                       @foreach($events as $key=>$event)
+                      @if($conference_manager || Auth::user()->is_admin == 1)
                         <tr style="border-top: 10pt solid black">
+                      @endif
                             <th colspan="14" style="color:#4d4d4d"><h1><strong>Event {{++$key}}: {{$event->name}} Report<strong></h1></th>
                             
                         </tr>
